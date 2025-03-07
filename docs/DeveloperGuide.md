@@ -189,7 +189,7 @@ Step 4. The user now decides that adding the person was a mistake, and decides t
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial HireHive state, then there are no previous HireHive states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -208,7 +208,7 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone HireHive states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
@@ -260,7 +260,9 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user**: HR and recruitment manager for a small company
+
+**User profile**:
 
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
@@ -268,50 +270,101 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: help the HR manager to effortlessly manage job candidates, interview notes, recruitment status and past communications in one place at a glance, simplifying recruitment with an intuitive, organized, and scalable solution.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​    | I want to …​                 | So that I can…​                                                     |
+|--------|------------|------------------------------|---------------------------------------------------------------------|
+| `* * *` | HR manager | look at the information of the interviewees       | so that I can review their qualifications for the role              |
+| `* * *` | HR manager | be able to add a new applicant’s information and contact details             | I can keep track of potential candidates.                           |
+| `* * *` | HR manager | delete the information of an applicant              | I know which applicants do not qualify for an interview.            |
+| `* * *` | HR manager | be able to tag candidates with custom labels such as “Shortlisted” or “Rejected”      | I can send out information more easily.                             |
+| `* * *` | HR manager | be able to tag applicants based on their stages of application (into applicants/candidates/interviewees) | I know their progress in the interviews.                            |
+| `* * *` | HR manager | save my candidate's information into my local storage         | I can access it again in the future                                 |
+| `* *`  | HR manager | be able to sort the interviewees based on the date of their interview       | it is more convenient for me to keep track of who I am interviewing |
+| `* *`  | HR manager | be able to add interview notes to an interviewee profile        | I can keep track of my opinions of them                             |
+| `* *`  | HR manager | be able to search for an interviewee’s name        | I can quickly find their contact details                            |
+| `* *`  | HR manager | be able to see a list of all potential applicants        | I can get an overview of how many candidates are applying           |
+| `* *`  | HR manager | sort candidates by their custom labels/tags       | I can group them together and send them the correct information.    |
+| `* *`  | HR manager | receive reminders for upcoming interviews     | I never miss a scheduled interview                                  |
+| `*`    | HR manager | attach resumes and cover letters to each applicant’s profile     | I can quickly review their qualifications.                          |
+| `*`    | HR manager | be able to automatically schedule interviews on applicants’ available timings   | I am less likely to make mistakes during arrangement                |
+| `*` | HR manager | filter the applicants based on certain characteristics | I can efficiently decide who qualifies for an interview             |
+| `* *` | HR manager | be able to see the count of applicants by the respective stages of application | I can fill the job vacancies adequately. |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `HireHive` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01: - Add a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  HireHive shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  HireHive deletes the person
+1. User requests to add a person
+2. HireHive displays the added person
+3. HireHive adds the person
+
+    Use case ends.
+
+**Extensions**
+* 1a. The user input is invalid
+  * 1a1. HireHive shows an error message
+
+    Use case restarts from step 1.
+
+**Use case: UC02 - List all persons**
+
+**MSS**
+1. User requests to list persons
+2. HireHive shows a list of persons
+
+    Use case ends.
+
+**Extensions**
+* 1a. The list is empty
+    * 1a1. HireHive shows an error message
+        
+        Use case ends.
+
+**Use case: UC03 - Delete a person**
+
+**MSS**
+
+1.  User requests to <ins>list persons (UC02)</ins>.
+2. User requests to delete a specific person in the list
+3. HireHive deletes the person
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 3a. The given index is invalid.
 
-  Use case ends.
+    * 3a1. HireHive shows an error message.
+
+      Use case resumes at step 1.
+
+
+**Use case: UC04 - Tag a person**
+
+**MSS**
+
+1. User requests to <ins>list persons (UC02)</ins>.
+2. User requests to tag a person with a number of tags.
+3. HireHive tags the person with the tags
+    Use case ends.
+
+**Extensions**
 
 * 3a. The given index is invalid.
 
     * 3a1. HireHive shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 *{More to be added}*
 
@@ -320,13 +373,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4. Operations by the system should return responses in under 2 seconds.
+5. Data should be backed up or stored in alternative formats, in the event that the default format which the data is loaded from becomes corrupted.
+6. Data must be saved immediately upon change to ensure data persistence.  
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Applicants**: Anyone who submits an application to the company
+* **Candidates**: Applicants who are potentially qualified for the job
+* **Interviewees**: Candidates that accept an interview offer
+* **Offered**: Interviewees that receive job offers
+* **Rejected**: Interviewees that did not receive job offers
 
 --------------------------------------------------------------------------------------------------------------------
 
