@@ -320,13 +320,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4. Operations by the system should return responses in under 2 seconds.
+5. Data should be backed up or stored in alternative formats, in the event that the default format which the data is loaded from becomes corrupted.
+6. Data must be saved immediately upon change to ensure data persistence.  
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Applicants**: Anyone who submits an application to the company
+* **Candidates**: Applicants who are potentially qualified for the job
+* **Interviewees**: Candidates that accept an interview offer
+* **Offered**: Interviewees that receive job offers
+* **Rejected**: Interviewees that did not receive job offers
 
 --------------------------------------------------------------------------------------------------------------------
 
