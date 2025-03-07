@@ -288,30 +288,73 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `HireHive` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01: - Add a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add a person
+2. HireHive displays the added person
+3. HireHive adds the person
+
+    Use case ends.
+
+**Extensions**
+* 1a. The user input is invalid
+  * 1a1. HireHive shows an error message
+
+    Use case restarts from step 1.
+
+**Use case: UC02 - List all persons**
+
+**MSS**
+1. User requests to list persons
+2. HireHive shows a list of persons
+
+    Use case ends.
+
+**Extensions**
+* 1a. The list is empty
+    * 1a1. HireHive shows an error message
+        
+        Use case ends.
+
+**Use case: UC03 - Delete a person**
+
+**MSS**
+
+1.  User requests to <ins>list persons (UC02)</ins>.
+2. User requests to delete a specific person in the list
+3. HireHive deletes the person
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 3a. The given index is invalid.
 
-  Use case ends.
+    * 3a1. HireHive shows an error message.
+
+      Use case resumes at step 1.
+
+
+**Use case: UC04 - Tag a person**
+
+**MSS**
+
+1. User requests to <ins>list persons (UC02)</ins>.
+2. User requests to tag a person with a number of tags.
+3. HireHive tags the person with the tags
+    Use case ends.
+
+**Extensions**
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. HireHive shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 *{More to be added}*
 
