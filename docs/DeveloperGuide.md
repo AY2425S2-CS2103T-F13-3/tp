@@ -328,6 +328,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Applicants**: Anyone who submits an application to the company
+* **Candidates**: Applicants who are potentially qualified for the job
+* **Interviewees**: Candidates that accept an interview offer
+* **Offered**: Interviewees that receive job offers
+* **Rejected**: Interviewees that did not receive job offers
 
 --------------------------------------------------------------------------------------------------------------------
 
