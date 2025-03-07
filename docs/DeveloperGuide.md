@@ -260,7 +260,9 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user**: HR and recruitment manager for a small company
+
+**User profile**:
 
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
@@ -268,23 +270,31 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: help the HR manager to effortlessly manage job candidates, interview notes, recruitment status and past communications in one place at a glance, simplifying recruitment with an intuitive, organized, and scalable solution.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​    | I want to …​                 | So that I can…​                                                     |
+|--------|------------|------------------------------|---------------------------------------------------------------------|
+| `* * *` | HR manager | look at the information of the interviewees       | so that I can review their qualifications for the role              |
+| `* * *` | HR manager | be able to add a new applicant’s information and contact details             | I can keep track of potential candidates.                           |
+| `* * *` | HR manager | delete the information of an applicant              | I know which applicants do not qualify for an interview.            |
+| `* * *` | HR manager | be able to tag candidates with custom labels such as “Shortlisted” or “Rejected”      | I can send out information more easily.                             |
+| `* * *` | HR manager | be able to tag applicants based on their stages of application (into applicants/candidates/interviewees) | I know their progress in the interviews.                            |
+| `* * *` | HR manager | save my candidate's information into my local storage         | I can access it again in the future                                 |
+| `* *`  | HR manager | be able to sort the interviewees based on the date of their interview       | it is more convenient for me to keep track of who I am interviewing |
+| `* *`  | HR manager | be able to add interview notes to an interviewee profile        | I can keep track of my opinions of them                             |
+| `* *`  | HR manager | be able to search for an interviewee’s name        | I can quickly find their contact details                            |
+| `* *`  | HR manager | be able to see a list of all potential applicants        | I can get an overview of how many candidates are applying           |
+| `* *`  | HR manager | sort candidates by their custom labels/tags       | I can group them together and send them the correct information.    |
+| `* *`  | HR manager | receive reminders for upcoming interviews     | I never miss a scheduled interview                                  |
+| `*`    | HR manager | attach resumes and cover letters to each applicant’s profile     | I can quickly review their qualifications.                          |
+| `*`    | HR manager | be able to automatically schedule interviews on applicants’ available timings   | I am less likely to make mistakes during arrangement                |
+| `*` | HR manager | filter the applicants based on certain characteristics | I can efficiently decide who qualifies for an interview             |
+| `* *` | HR manager | be able to see the count of applicants by the respective stages of application | I can fill the job vacancies adequately. |
 
 ### Use cases
 
