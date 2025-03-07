@@ -9,15 +9,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Lam Yun Hong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/m0destly.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/m0destly)]
 
-* Role: Project Advisor
+* Role: Team Member
+* Responsibilities: Help the team
 
 ### Jane Doe
 
