@@ -9,6 +9,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Wong Zenwei
+
+<img src="images/zeotheburrito.png" width="200px">
+
+[[github](https://github.com/zeotheburrito)]
+[[portfolio](team/zeotheburrito.md)]
+
+* Role: Project Advisor
+
 ### Lam Yun Hong
 
 <img src="images/m0destly.png" width="200px">
@@ -19,24 +28,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Member
 * Responsibilities: Help the team
 
-### Jane Doe
+### Natalie Ong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nat-ong555.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/nat-ong555)] [[portfolio](team/nat-ong555.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Data, Documentation
 
 ### Jean Doe
 
@@ -48,12 +47,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Caleb Cherng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ditzchann.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ditzchann)]
+[[portfolio](team/ditzchann.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Testing, Code Quality
