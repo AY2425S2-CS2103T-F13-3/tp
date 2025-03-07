@@ -29,14 +29,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Natalie Ong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nat-ong555.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/nat-ong555)] [[portfolio](team/nat-ong555.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Data, Documentation
 
 ### Jean Doe
 
