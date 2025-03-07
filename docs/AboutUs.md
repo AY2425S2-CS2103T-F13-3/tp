@@ -14,6 +14,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/m0destly.png" width="200px">
 
 [[github](https://github.com/m0destly)]
+[[portfolio](team/m0destly.md)]
 
 * Role: Team Member
 * Responsibilities: Help the team
