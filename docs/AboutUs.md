@@ -18,15 +18,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Lam Yun Hong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/m0destly.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/m0destly)]
+[[portfolio](team/m0destly.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Team Member
+* Responsibilities: Help the team
 
 ### Natalie Ong
 
