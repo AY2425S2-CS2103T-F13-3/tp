@@ -16,6 +16,9 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.AddressBook;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -116,6 +119,8 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
+        loadAddressBookMessage();
+
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
@@ -176,7 +181,7 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser() + "\nSuccess: Applicant data has been saved.");
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -189,8 +194,22 @@ public class MainWindow extends UiPart<Stage> {
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            resultDisplay.setFeedbackToUser(e.getMessage() + "\nError: Unable to save applicant data. Please try again.");
             throw e;
+        }
+    }
+
+    private void loadAddressBookMessage() {
+        ReadOnlyAddressBook currentAddressBook = logic.getAddressBook();
+        // Data file could not be read, loads empty AddressBook instead
+        if (currentAddressBook.equals(new AddressBook())) {
+            resultDisplay.setFeedbackToUser("Error: Unable to load applicant data. Invalid data format in saved file.");
+        // Data file does not exist, load sample AddressBook instead
+        } else if (currentAddressBook.equals(SampleDataUtil.getSampleAddressBook())) {
+            resultDisplay.setFeedbackToUser("Success: Sample applicant data has been loaded successfully.");
+        } else {
+            // Data file loaded successfully
+            resultDisplay.setFeedbackToUser("Success: Applicant data has been loaded successfully.");
         }
     }
 }
