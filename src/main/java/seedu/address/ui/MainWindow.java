@@ -181,7 +181,8 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser() + "\nSuccess: Applicant data has been saved.");
+            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser()
+                    + "\nSuccess: Applicant data has been saved.");
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -194,7 +195,8 @@ public class MainWindow extends UiPart<Stage> {
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage() + "\nError: Unable to save applicant data. Please try again.");
+            resultDisplay.setFeedbackToUser(e.getMessage()
+                    + "\nError: Unable to save applicant data. Please try again.");
             throw e;
         }
     }
