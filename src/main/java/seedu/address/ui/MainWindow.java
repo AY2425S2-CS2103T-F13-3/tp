@@ -199,6 +199,9 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Displays status of addressBook in the results box in the GUI upon loading.
+     */
     private void loadAddressBookMessage() {
         ReadOnlyAddressBook currentAddressBook = logic.getAddressBook();
         // Data file could not be read, loads empty AddressBook instead
