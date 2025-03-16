@@ -108,6 +108,14 @@ public class EditCommand extends Command {
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRole, updatedTags);
     }
 
+    protected Index getIndex() {
+        return index;
+    }
+
+    protected EditPersonDescriptor getEditPersonDescriptor() {
+        return editPersonDescriptor;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

@@ -144,6 +144,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void tagPerson(Person target, Person taggedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setPerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
