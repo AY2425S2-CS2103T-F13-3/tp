@@ -25,11 +25,12 @@ public class Person {
     private final Address address;
     private final Role role;
     private final Set<Tag> tags = new HashSet<>();
+    private final Remark remark;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Role role, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Role role, Set<Tag> tags, Remark remark) {
         requireAllNonNull(name, phone, email, address, role, tags);
         this.name = name;
         this.phone = phone;
@@ -37,6 +38,7 @@ public class Person {
         this.address = address;
         this.role = role;
         this.tags.addAll(tags);
+        this.remark = remark;
     }
 
     public Name getName() {
@@ -57,6 +59,10 @@ public class Person {
 
     public Role getRole() {
         return role;
+    }
+
+    public Remark getRemark() {
+        return remark;
     }
 
     /**
@@ -101,7 +107,8 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && role.equals(otherPerson.role)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && remark.equals(otherPerson.remark);
     }
 
     @Override
@@ -119,6 +126,7 @@ public class Person {
                 .add("address", address)
                 .add("role", role)
                 .add("tags", tags)
+                .add("remark", remark)
                 .toString();
     }
 
