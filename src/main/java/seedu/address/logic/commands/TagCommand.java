@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-
 import seedu.address.commons.core.index.Index;
 
 /**
