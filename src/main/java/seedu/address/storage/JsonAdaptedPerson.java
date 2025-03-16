@@ -32,6 +32,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String role;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String remark;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -39,12 +40,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("role") String role, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("role") String role, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("remark") String remark) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.role = role;
+        this.remark = remark;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -59,6 +62,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         role = source.getRole().fullRole;
+        remark = source.getRemark().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -114,7 +118,10 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
         }
         final Role modelRole = new Role(role);
-        final Remark modelRemark = new Remark("");
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        }
+        final Remark modelRemark = new Remark(remark);
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelTags, modelRemark);
