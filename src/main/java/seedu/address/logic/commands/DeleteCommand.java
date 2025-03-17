@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a person identified using its displayed index from the address book.
  */
 public class DeleteCommand extends Command {
 
@@ -27,17 +27,33 @@ public class DeleteCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Creates DeleteCommand to remove a person at the specified index
+     * @param targetIndex the index of the person to be deleted
+     */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
+    /**
+     * Executes the delete command to remove a contact from the address book
+     * @param model {@code Model} which the command should operate on.
+     * @return A {@code CommandResult} containing success message
+     * @throws CommandException if provided index is out of bounds
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (lastShownList.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(lastShownList.size() == 1
+                    ? Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX
+                    : String.format(Messages.MESSAGE_INDEX_OUT_OF_BOUNDS, lastShownList.size()));
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
