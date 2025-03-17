@@ -16,8 +16,6 @@ import hirehive.address.logic.LogicManager;
 import hirehive.address.model.util.SampleDataUtil;
 import hirehive.address.ui.Ui;
 import hirehive.address.ui.UiManager;
-import javafx.application.Application;
-import javafx.stage.Stage;
 import hirehive.address.model.AddressBook;
 import hirehive.address.model.Model;
 import hirehive.address.model.ModelManager;
@@ -31,6 +29,8 @@ import hirehive.address.storage.Storage;
 import hirehive.address.storage.StorageManager;
 import hirehive.address.storage.UserPrefsStorage;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
 /**
  * Runs the application.
  */
