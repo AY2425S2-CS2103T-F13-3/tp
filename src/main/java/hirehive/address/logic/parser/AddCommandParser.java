@@ -13,13 +13,13 @@ import java.util.stream.Stream;
 
 import hirehive.address.logic.commands.AddCommand;
 import hirehive.address.logic.parser.exceptions.ParseException;
-import hirehive.address.model.tag.Tag;
 import hirehive.address.model.person.Address;
 import hirehive.address.model.person.Email;
 import hirehive.address.model.person.Name;
 import hirehive.address.model.person.Person;
 import hirehive.address.model.person.Phone;
 import hirehive.address.model.person.Role;
+import hirehive.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object

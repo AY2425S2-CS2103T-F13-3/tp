@@ -13,22 +13,21 @@ import hirehive.address.commons.util.ConfigUtil;
 import hirehive.address.commons.util.StringUtil;
 import hirehive.address.logic.Logic;
 import hirehive.address.logic.LogicManager;
-import hirehive.address.model.util.SampleDataUtil;
-import hirehive.address.ui.Ui;
-import hirehive.address.ui.UiManager;
 import hirehive.address.model.AddressBook;
 import hirehive.address.model.Model;
 import hirehive.address.model.ModelManager;
 import hirehive.address.model.ReadOnlyAddressBook;
 import hirehive.address.model.ReadOnlyUserPrefs;
 import hirehive.address.model.UserPrefs;
+import hirehive.address.model.util.SampleDataUtil;
 import hirehive.address.storage.AddressBookStorage;
 import hirehive.address.storage.JsonAddressBookStorage;
 import hirehive.address.storage.JsonUserPrefsStorage;
 import hirehive.address.storage.Storage;
 import hirehive.address.storage.StorageManager;
 import hirehive.address.storage.UserPrefsStorage;
-
+import hirehive.address.ui.Ui;
+import hirehive.address.ui.UiManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
 /**

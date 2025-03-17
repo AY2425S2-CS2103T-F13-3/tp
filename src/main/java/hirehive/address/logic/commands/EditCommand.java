@@ -1,12 +1,12 @@
 package hirehive.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -18,16 +18,16 @@ import java.util.Set;
 import hirehive.address.commons.core.index.Index;
 import hirehive.address.commons.util.CollectionUtil;
 import hirehive.address.commons.util.ToStringBuilder;
+import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.exceptions.CommandException;
 import hirehive.address.model.Model;
-import hirehive.address.model.tag.Tag;
-import hirehive.address.logic.Messages;
 import hirehive.address.model.person.Address;
 import hirehive.address.model.person.Email;
 import hirehive.address.model.person.Name;
 import hirehive.address.model.person.Person;
 import hirehive.address.model.person.Phone;
 import hirehive.address.model.person.Role;
+import hirehive.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.

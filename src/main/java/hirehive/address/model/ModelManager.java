@@ -1,7 +1,6 @@
 package hirehive.address.model;
 
 import static java.util.Objects.requireNonNull;
-import static hirehive.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;

@@ -1,9 +1,9 @@
 package hirehive.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import hirehive.address.commons.util.AppUtil;
 
-import static java.util.Objects.requireNonNull;
-import static hirehive.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's email in the address book.

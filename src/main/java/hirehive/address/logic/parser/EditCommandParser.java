@@ -1,6 +1,5 @@
 package hirehive.address.logic.parser;
 
-import static java.util.Objects.requireNonNull;
 import static hirehive.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -8,6 +7,7 @@ import static hirehive.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -16,8 +16,9 @@ import java.util.Set;
 
 import hirehive.address.commons.core.index.Index;
 import hirehive.address.logic.commands.EditCommand;
-import hirehive.address.model.tag.Tag;
 import hirehive.address.logic.parser.exceptions.ParseException;
+import hirehive.address.model.tag.Tag;
+
 
 /**
  * Parses input arguments and creates a new EditCommand object

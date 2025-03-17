@@ -1,7 +1,7 @@
 package hirehive.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static hirehive.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static java.util.Objects.requireNonNull;
 
 import hirehive.address.model.Model;
 

@@ -2,6 +2,7 @@ package hirehive.address.ui;
 
 import java.util.logging.Logger;
 
+import hirehive.address.MainApp;
 import hirehive.address.commons.core.LogsCenter;
 import hirehive.address.commons.util.StringUtil;
 import hirehive.address.logic.Logic;
@@ -10,7 +11,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import hirehive.address.MainApp;
 
 /**
  * The manager of the UI component.

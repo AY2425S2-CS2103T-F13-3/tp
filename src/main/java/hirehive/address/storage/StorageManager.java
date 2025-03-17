@@ -5,8 +5,8 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-import hirehive.address.commons.exceptions.DataLoadingException;
 import hirehive.address.commons.core.LogsCenter;
+import hirehive.address.commons.exceptions.DataLoadingException;
 import hirehive.address.model.ReadOnlyAddressBook;
 import hirehive.address.model.ReadOnlyUserPrefs;
 import hirehive.address.model.UserPrefs;

@@ -1,7 +1,5 @@
 package hirehive.address.model.person;
 
-import static hirehive.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;

@@ -1,9 +1,8 @@
 package hirehive.address.model.tag;
 
-import hirehive.address.commons.util.AppUtil;
-
 import static java.util.Objects.requireNonNull;
-import static hirehive.address.commons.util.AppUtil.checkArgument;
+
+import hirehive.address.commons.util.AppUtil;
 
 /**
  * Represents a Tag in the address book.

@@ -4,13 +4,13 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import hirehive.address.model.person.Address;
-import hirehive.address.model.person.Email;
-import hirehive.address.model.person.Person;
-import hirehive.address.model.person.Phone;
 import hirehive.address.model.AddressBook;
 import hirehive.address.model.ReadOnlyAddressBook;
+import hirehive.address.model.person.Address;
+import hirehive.address.model.person.Email;
 import hirehive.address.model.person.Name;
+import hirehive.address.model.person.Person;
+import hirehive.address.model.person.Phone;
 import hirehive.address.model.person.Role;
 import hirehive.address.model.tag.Tag;
 

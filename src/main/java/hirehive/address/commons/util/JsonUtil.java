@@ -1,8 +1,5 @@
 package hirehive.address.commons.util;
 
-import hirehive.address.commons.exceptions.DataLoadingException;
-import hirehive.address.commons.core.LogsCenter;
-
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
@@ -22,6 +19,9 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.deser.std.FromStringDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
+import hirehive.address.commons.core.LogsCenter;
+import hirehive.address.commons.exceptions.DataLoadingException;
 
 /**
  * Converts a Java object instance to JSON and vice versa

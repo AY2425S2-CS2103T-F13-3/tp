@@ -8,13 +8,13 @@ import java.util.Set;
 
 import hirehive.address.commons.core.index.Index;
 import hirehive.address.commons.util.StringUtil;
+import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.person.Address;
 import hirehive.address.model.person.Email;
 import hirehive.address.model.person.Name;
 import hirehive.address.model.person.Phone;
-import hirehive.address.model.tag.Tag;
-import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.person.Role;
+import hirehive.address.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.

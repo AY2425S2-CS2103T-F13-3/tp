@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.logic.Messages;
+import hirehive.address.logic.parser.exceptions.ParseException;
 
 /**
  * Stores mapping of prefixes to their respective arguments.

@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
-import hirehive.address.commons.exceptions.DataLoadingException;
 import hirehive.address.commons.core.Config;
+import hirehive.address.commons.exceptions.DataLoadingException;
 
 /**
  * A class for accessing the Config File.

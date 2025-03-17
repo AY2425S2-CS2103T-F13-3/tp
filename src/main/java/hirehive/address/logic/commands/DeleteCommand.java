@@ -6,10 +6,11 @@ import java.util.List;
 
 import hirehive.address.commons.core.index.Index;
 import hirehive.address.commons.util.ToStringBuilder;
+import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.exceptions.CommandException;
 import hirehive.address.model.Model;
 import hirehive.address.model.person.Person;
-import hirehive.address.logic.Messages;
+
 
 /**
  * Deletes a person identified using it's displayed index from the address book.

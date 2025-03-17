@@ -3,9 +3,9 @@ package hirehive.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import hirehive.address.commons.util.ToStringBuilder;
+import hirehive.address.logic.Messages;
 import hirehive.address.model.Model;
 import hirehive.address.model.person.NameContainsKeywordsPredicate;
-import hirehive.address.logic.Messages;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.

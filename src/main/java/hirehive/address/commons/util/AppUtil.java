@@ -1,11 +1,9 @@
 package hirehive.address.commons.util;
 
-import hirehive.address.MainApp;
-
 import static java.util.Objects.requireNonNull;
 
+import hirehive.address.MainApp;
 import javafx.scene.image.Image;
-
 
 /**
  * A container for App specific utility functions
