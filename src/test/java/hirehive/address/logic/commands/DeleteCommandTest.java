@@ -41,10 +41,15 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+        int listSize = model.getFilteredPersonList().size();
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        String expectedMessage = listSize == 0
+                ? Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX
+                : String.format(Messages.MESSAGE_INDEX_OUT_OF_BOUNDS, listSize);
+
+        assertCommandFailure(deleteCommand, model, expectedMessage);
     }
 
     @Test
