@@ -1,12 +1,14 @@
 package hirehive.address.logic.commands;
 
+import static hirehive.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static hirehive.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import java.util.Arrays;
 import java.util.Collections;
+
+import org.junit.jupiter.api.Test;
 
 import hirehive.address.logic.Messages;
 import hirehive.address.model.Model;
@@ -14,7 +16,6 @@ import hirehive.address.model.ModelManager;
 import hirehive.address.model.UserPrefs;
 import hirehive.address.model.person.NameContainsKeywordsPredicate;
 import hirehive.address.testutil.TypicalPersons;
-import org.junit.jupiter.api.Test;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.

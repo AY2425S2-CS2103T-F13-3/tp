@@ -1,18 +1,18 @@
 package hirehive.address.logic.parser;
 
+import org.junit.jupiter.api.Test;
+
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.AddCommand;
 import hirehive.address.logic.commands.CommandTestUtil;
-import hirehive.address.model.tag.Tag;
-import hirehive.address.testutil.PersonBuilder;
-import hirehive.address.testutil.TypicalPersons;
-import org.junit.jupiter.api.Test;
-
 import hirehive.address.model.person.Address;
 import hirehive.address.model.person.Email;
 import hirehive.address.model.person.Name;
 import hirehive.address.model.person.Person;
 import hirehive.address.model.person.Phone;
+import hirehive.address.model.tag.Tag;
+import hirehive.address.testutil.PersonBuilder;
+import hirehive.address.testutil.TypicalPersons;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();

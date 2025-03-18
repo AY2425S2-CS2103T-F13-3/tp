@@ -3,14 +3,14 @@ package hirehive.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import hirehive.address.model.tag.Tag;
-import hirehive.address.model.util.SampleDataUtil;
 import hirehive.address.model.person.Address;
 import hirehive.address.model.person.Email;
 import hirehive.address.model.person.Name;
 import hirehive.address.model.person.Person;
 import hirehive.address.model.person.Phone;
 import hirehive.address.model.person.Role;
+import hirehive.address.model.tag.Tag;
+import hirehive.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.

@@ -1,21 +1,22 @@
 package hirehive.address.model;
 
+import static hirehive.address.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static hirehive.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import hirehive.address.commons.core.GuiSettings;
 import hirehive.address.model.person.NameContainsKeywordsPredicate;
 import hirehive.address.testutil.AddressBookBuilder;
 import hirehive.address.testutil.Assert;
 import hirehive.address.testutil.TypicalPersons;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public class ModelManagerTest {
 

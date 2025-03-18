@@ -1,11 +1,15 @@
 package hirehive.address.logic;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static hirehive.address.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import hirehive.address.logic.commands.AddCommand;
 import hirehive.address.logic.commands.CommandResult;
@@ -24,9 +28,6 @@ import hirehive.address.storage.StorageManager;
 import hirehive.address.testutil.Assert;
 import hirehive.address.testutil.PersonBuilder;
 import hirehive.address.testutil.TypicalPersons;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");

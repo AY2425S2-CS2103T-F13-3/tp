@@ -1,20 +1,16 @@
 package hirehive.address.logic.parser;
 
+import static hirehive.address.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static hirehive.address.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import hirehive.address.logic.Messages;
-import hirehive.address.logic.parser.exceptions.ParseException;
-import hirehive.address.model.person.NameContainsKeywordsPredicate;
-import hirehive.address.model.person.Person;
-import hirehive.address.testutil.*;
 import org.junit.jupiter.api.Test;
 
+import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.AddCommand;
 import hirehive.address.logic.commands.ClearCommand;
 import hirehive.address.logic.commands.DeleteCommand;
@@ -23,6 +19,10 @@ import hirehive.address.logic.commands.ExitCommand;
 import hirehive.address.logic.commands.FindCommand;
 import hirehive.address.logic.commands.HelpCommand;
 import hirehive.address.logic.commands.ListCommand;
+import hirehive.address.logic.parser.exceptions.ParseException;
+import hirehive.address.model.person.NameContainsKeywordsPredicate;
+import hirehive.address.model.person.Person;
+import hirehive.address.testutil.*;
 import hirehive.address.testutil.EditPersonDescriptorBuilder;
 import hirehive.address.testutil.PersonBuilder;
 import hirehive.address.testutil.PersonUtil;

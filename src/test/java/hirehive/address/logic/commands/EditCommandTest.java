@@ -1,8 +1,5 @@
 package hirehive.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static hirehive.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static hirehive.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -11,6 +8,11 @@ import static hirehive.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static hirehive.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static hirehive.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static hirehive.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
 
 import hirehive.address.commons.core.index.Index;
 import hirehive.address.logic.Messages;
@@ -23,7 +25,6 @@ import hirehive.address.testutil.EditPersonDescriptorBuilder;
 import hirehive.address.testutil.PersonBuilder;
 import hirehive.address.testutil.TypicalIndexes;
 import hirehive.address.testutil.TypicalPersons;
-import org.junit.jupiter.api.Test;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.

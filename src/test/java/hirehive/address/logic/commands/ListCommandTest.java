@@ -3,13 +3,14 @@ package hirehive.address.logic.commands;
 import static hirehive.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static hirehive.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import hirehive.address.model.Model;
 import hirehive.address.model.ModelManager;
 import hirehive.address.model.UserPrefs;
 import hirehive.address.testutil.TypicalIndexes;
 import hirehive.address.testutil.TypicalPersons;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.

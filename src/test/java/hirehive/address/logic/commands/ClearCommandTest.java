@@ -2,12 +2,13 @@ package hirehive.address.logic.commands;
 
 import static hirehive.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
+import org.junit.jupiter.api.Test;
+
 import hirehive.address.model.AddressBook;
 import hirehive.address.model.Model;
 import hirehive.address.model.ModelManager;
 import hirehive.address.model.UserPrefs;
 import hirehive.address.testutil.TypicalPersons;
-import org.junit.jupiter.api.Test;
 
 public class ClearCommandTest {
 

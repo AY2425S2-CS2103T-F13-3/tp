@@ -5,13 +5,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import hirehive.address.logic.commands.EditCommand;
-import hirehive.address.model.tag.Tag;
 import hirehive.address.model.person.Address;
 import hirehive.address.model.person.Email;
 import hirehive.address.model.person.Name;
 import hirehive.address.model.person.Person;
 import hirehive.address.model.person.Phone;
 import hirehive.address.model.person.Role;
+import hirehive.address.model.tag.Tag;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.

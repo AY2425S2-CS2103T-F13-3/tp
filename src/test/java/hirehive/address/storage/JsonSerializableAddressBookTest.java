@@ -1,17 +1,18 @@
 package hirehive.address.storage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static hirehive.address.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import org.junit.jupiter.api.Test;
 
 import hirehive.address.commons.exceptions.IllegalValueException;
 import hirehive.address.commons.util.JsonUtil;
 import hirehive.address.model.AddressBook;
 import hirehive.address.testutil.Assert;
 import hirehive.address.testutil.TypicalPersons;
-import org.junit.jupiter.api.Test;
 
 public class JsonSerializableAddressBookTest {
 

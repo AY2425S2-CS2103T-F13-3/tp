@@ -5,14 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.nio.file.Path;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
 import hirehive.address.commons.core.GuiSettings;
 import hirehive.address.model.AddressBook;
 import hirehive.address.model.ReadOnlyAddressBook;
 import hirehive.address.model.UserPrefs;
 import hirehive.address.testutil.TypicalPersons;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
 public class StorageManagerTest {
 

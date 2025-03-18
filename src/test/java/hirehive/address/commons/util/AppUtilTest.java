@@ -1,10 +1,11 @@
 package hirehive.address.commons.util;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static hirehive.address.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import org.junit.jupiter.api.Test;
 
 import hirehive.address.testutil.Assert;
-import org.junit.jupiter.api.Test;
 
 public class AppUtilTest {
 

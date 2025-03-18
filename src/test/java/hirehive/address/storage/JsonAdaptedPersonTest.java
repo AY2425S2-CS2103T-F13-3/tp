@@ -1,23 +1,23 @@
 package hirehive.address.storage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static hirehive.address.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import hirehive.address.commons.exceptions.IllegalValueException;
-import hirehive.address.testutil.Assert;
-import hirehive.address.testutil.TypicalPersons;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import hirehive.address.commons.exceptions.IllegalValueException;
 import hirehive.address.model.person.Address;
 import hirehive.address.model.person.Email;
 import hirehive.address.model.person.Name;
 import hirehive.address.model.person.Phone;
 import hirehive.address.model.person.Role;
+import hirehive.address.testutil.Assert;
+import hirehive.address.testutil.TypicalPersons;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";

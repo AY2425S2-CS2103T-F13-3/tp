@@ -2,9 +2,10 @@ package hirehive.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Assertions;
+
 import hirehive.address.logic.commands.Command;
 import hirehive.address.logic.parser.exceptions.ParseException;
-import org.junit.jupiter.api.Assertions;
 
 /**
  * Contains helper methods for testing command parsers.

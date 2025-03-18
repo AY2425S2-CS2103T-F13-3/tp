@@ -1,17 +1,17 @@
 package hirehive.address.ui;
 
+import static hirehive.address.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static hirehive.address.testutil.Assert.assertThrows;
 
 import java.net.URL;
 import java.nio.file.Path;
 
-import hirehive.address.MainApp;
-import hirehive.address.testutil.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import hirehive.address.MainApp;
+import hirehive.address.testutil.Assert;
 import javafx.fxml.FXML;
 
 public class UiPartTest {

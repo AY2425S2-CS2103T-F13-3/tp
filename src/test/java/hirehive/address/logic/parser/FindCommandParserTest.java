@@ -2,10 +2,11 @@ package hirehive.address.logic.parser;
 
 import java.util.Arrays;
 
+import org.junit.jupiter.api.Test;
+
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.FindCommand;
 import hirehive.address.model.person.NameContainsKeywordsPredicate;
-import org.junit.jupiter.api.Test;
 
 public class FindCommandParserTest {
 

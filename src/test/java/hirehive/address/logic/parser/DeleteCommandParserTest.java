@@ -1,9 +1,10 @@
 package hirehive.address.logic.parser;
 
+import org.junit.jupiter.api.Test;
+
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.DeleteCommand;
 import hirehive.address.testutil.TypicalIndexes;
-import org.junit.jupiter.api.Test;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations

@@ -1,13 +1,16 @@
 package hirehive.address.logic.parser;
 
+import static hirehive.address.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static hirehive.address.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.person.Address;
@@ -17,8 +20,6 @@ import hirehive.address.model.person.Phone;
 import hirehive.address.model.tag.Tag;
 import hirehive.address.testutil.Assert;
 import hirehive.address.testutil.TypicalIndexes;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";

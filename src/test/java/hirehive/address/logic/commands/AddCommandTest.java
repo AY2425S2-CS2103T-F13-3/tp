@@ -1,15 +1,17 @@
 package hirehive.address.logic.commands;
 
+import static hirehive.address.testutil.Assert.assertThrows;
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static hirehive.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
+
+import org.junit.jupiter.api.Test;
 
 import hirehive.address.commons.core.GuiSettings;
 import hirehive.address.logic.Messages;
@@ -22,8 +24,6 @@ import hirehive.address.model.person.Person;
 import hirehive.address.testutil.Assert;
 import hirehive.address.testutil.PersonBuilder;
 import hirehive.address.testutil.TypicalPersons;
-import org.junit.jupiter.api.Test;
-
 import javafx.collections.ObservableList;
 
 public class AddCommandTest {

@@ -1,5 +1,7 @@
 package hirehive.address.logic.parser;
 
+import org.junit.jupiter.api.Test;
+
 import hirehive.address.commons.core.index.Index;
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.CommandTestUtil;
@@ -11,7 +13,6 @@ import hirehive.address.model.person.Phone;
 import hirehive.address.model.tag.Tag;
 import hirehive.address.testutil.EditPersonDescriptorBuilder;
 import hirehive.address.testutil.TypicalIndexes;
-import org.junit.jupiter.api.Test;
 
 public class EditCommandParserTest {
 

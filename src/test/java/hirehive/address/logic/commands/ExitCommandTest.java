@@ -2,9 +2,10 @@ package hirehive.address.logic.commands;
 
 import static hirehive.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
+import org.junit.jupiter.api.Test;
+
 import hirehive.address.model.Model;
 import hirehive.address.model.ModelManager;
-import org.junit.jupiter.api.Test;
 
 public class ExitCommandTest {
     private Model model = new ModelManager();

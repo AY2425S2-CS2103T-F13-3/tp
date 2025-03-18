@@ -1,8 +1,5 @@
 package hirehive.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static hirehive.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static hirehive.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
@@ -11,9 +8,13 @@ import static hirehive.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
 
 import hirehive.address.testutil.EditPersonDescriptorBuilder;
-import org.junit.jupiter.api.Test;
 
 public class EditPersonDescriptorTest {
 

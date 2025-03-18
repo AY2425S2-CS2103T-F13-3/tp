@@ -1,24 +1,24 @@
 package hirehive.address.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static hirehive.address.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.jupiter.api.Test;
+
 import hirehive.address.model.person.Person;
 import hirehive.address.model.person.exceptions.DuplicatePersonException;
 import hirehive.address.testutil.Assert;
 import hirehive.address.testutil.PersonBuilder;
 import hirehive.address.testutil.TypicalPersons;
-import org.junit.jupiter.api.Test;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

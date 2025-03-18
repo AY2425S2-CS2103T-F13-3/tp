@@ -2,8 +2,9 @@ package hirehive.address.model;
 
 import static hirehive.address.testutil.Assert.assertThrows;
 
-import hirehive.address.testutil.Assert;
 import org.junit.jupiter.api.Test;
+
+import hirehive.address.testutil.Assert;
 
 public class UserPrefsTest {
 

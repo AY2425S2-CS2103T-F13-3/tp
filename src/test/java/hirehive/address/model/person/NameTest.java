@@ -1,11 +1,12 @@
 package hirehive.address.model.person;
 
+import static hirehive.address.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static hirehive.address.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 import hirehive.address.testutil.Assert;
-import org.junit.jupiter.api.Test;
 
 public class NameTest {
 

@@ -1,8 +1,8 @@
 package hirehive.address.commons.util;
 
+import static hirehive.address.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static hirehive.address.testutil.Assert.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -10,11 +10,12 @@ import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.logging.Level;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
 import hirehive.address.commons.core.Config;
 import hirehive.address.commons.exceptions.DataLoadingException;
 import hirehive.address.testutil.Assert;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
 public class ConfigUtilTest {
 
