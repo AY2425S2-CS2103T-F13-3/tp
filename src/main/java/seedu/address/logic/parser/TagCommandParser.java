@@ -2,8 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
@@ -12,7 +14,9 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.TagCommand;
+import seedu.address.logic.commands.queries.NameQuery;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,24 +33,21 @@ public class TagCommandParser implements Parser<TagCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(
-                        args, PREFIX_TAG);
-        Index index;
+                        args, PREFIX_NAME, PREFIX_TAG);
 
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE), pe);
+        if (argMultimap.getValue(PREFIX_NAME).isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         }
+
+        String[] nameKeywords = argMultimap.getValue(PREFIX_NAME).get().split("\\s+");
+        NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(TagCommand.MESSAGE_NOT_EDITED);
-        }
-
-        return new TagCommand(index, editPersonDescriptor);
+        return new TagCommand(nameQuery, editPersonDescriptor);
     }
 
     /**
