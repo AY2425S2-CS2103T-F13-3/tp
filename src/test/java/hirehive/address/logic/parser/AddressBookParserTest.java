@@ -22,8 +22,9 @@ import hirehive.address.logic.commands.ListCommand;
 import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.person.NameContainsKeywordsPredicate;
 import hirehive.address.model.person.Person;
-import hirehive.address.testutil.*;
+import hirehive.address.testutil.Assert;
 import hirehive.address.testutil.EditPersonDescriptorBuilder;
+import hirehive.address.testutil.TypicalIndexes;
 import hirehive.address.testutil.PersonBuilder;
 import hirehive.address.testutil.PersonUtil;
 
