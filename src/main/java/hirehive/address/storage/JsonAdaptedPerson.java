@@ -13,6 +13,7 @@ import hirehive.address.commons.exceptions.IllegalValueException;
 import hirehive.address.model.person.Address;
 import hirehive.address.model.person.Email;
 import hirehive.address.model.person.Name;
+import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
 import hirehive.address.model.person.Phone;
 import hirehive.address.model.person.Role;
@@ -31,6 +32,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String role;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String note;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -38,7 +40,8 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("role") String role, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("role") String role, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("note") String note) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -47,6 +50,7 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.note = note;
     }
 
     /**
@@ -61,6 +65,7 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        note = source.getNotes().value;
     }
 
     /**
@@ -115,6 +120,15 @@ class JsonAdaptedPerson {
         final Role modelRole = new Role(role);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+
+        if (note == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName()));
+        }
+        if (!Note.isValidNote(note)) {
+            throw new IllegalValueException(Note.MESSAGE_CONSTRAINTS);
+        }
+        final Note modelNote = new Note(note);
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelTags);
     }
 

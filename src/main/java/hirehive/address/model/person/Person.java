@@ -11,7 +11,7 @@ import hirehive.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present, field values are validated, immutable.
  */
 public class Person {
 
@@ -24,9 +24,10 @@ public class Person {
     private final Address address;
     private final Role role;
     private final Set<Tag> tags = new HashSet<>();
+    private final Note note;
 
     /**
-     * Every field must be present and not null.
+     * Person constructor for add command where note is empty by default.
      */
     public Person(Name name, Phone phone, Email email, Address address, Role role, Set<Tag> tags) {
         CollectionUtil.requireAllNonNull(name, phone, email, address, role, tags);
@@ -36,6 +37,21 @@ public class Person {
         this.address = address;
         this.role = role;
         this.tags.addAll(tags);
+        this.note = new Note("");
+    }
+
+    /**
+     * Every field must be present.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Role role, Set<Tag> tags, Note note) {
+        CollectionUtil.requireAllNonNull(name, phone, email, address, role, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.role = role;
+        this.tags.addAll(tags);
+        this.note = note;
     }
 
     public Name getName() {
@@ -56,6 +72,10 @@ public class Person {
 
     public Role getRole() {
         return role;
+    }
+
+    public Note getNotes() {
+        return note;
     }
 
     /**
@@ -100,13 +120,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && role.equals(otherPerson.role)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && note.equals(otherPerson.note);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, role, tags);
+        return Objects.hash(name, phone, email, address, role, tags, note);
     }
 
     @Override
