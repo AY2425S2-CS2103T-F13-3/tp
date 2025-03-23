@@ -5,7 +5,6 @@ import static hirehive.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_ROLE;
-
 import static java.util.Objects.requireNonNull;
 
 import hirehive.address.commons.util.ToStringBuilder;
