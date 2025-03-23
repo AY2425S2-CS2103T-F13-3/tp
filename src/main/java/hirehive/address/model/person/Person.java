@@ -38,6 +38,10 @@ public class Person {
         this.tags.addAll(tags);
     }
 
+    public static Person createDefaultPerson(Name name, Phone phone, Email email, Address address, Role role) {
+        return new Person(name, phone, email, address, role, Set.of(Tag.getDefaultTag()));
+    }
+
     public Name getName() {
         return name;
     }
