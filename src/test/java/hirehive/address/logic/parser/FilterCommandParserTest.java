@@ -1,12 +1,11 @@
 package hirehive.address.logic.parser;
 
+import org.junit.jupiter.api.Test;
+
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.FilterCommand;
 import hirehive.address.model.person.PersonContainsTagPredicate;
 import hirehive.address.model.tag.Tag;
-import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
 
 public class FilterCommandParserTest {
     private FilterCommandParser parser = new FilterCommandParser();
