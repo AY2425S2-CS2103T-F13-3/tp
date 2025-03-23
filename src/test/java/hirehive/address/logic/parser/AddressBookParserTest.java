@@ -16,12 +16,15 @@ import hirehive.address.logic.commands.ClearCommand;
 import hirehive.address.logic.commands.DeleteCommand;
 import hirehive.address.logic.commands.EditCommand;
 import hirehive.address.logic.commands.ExitCommand;
+import hirehive.address.logic.commands.FilterCommand;
 import hirehive.address.logic.commands.FindCommand;
 import hirehive.address.logic.commands.HelpCommand;
 import hirehive.address.logic.commands.ListCommand;
 import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.person.NameContainsKeywordsPredicate;
 import hirehive.address.model.person.Person;
+import hirehive.address.model.person.PersonContainsTagPredicate;
+import hirehive.address.model.tag.Tag;
 import hirehive.address.testutil.Assert;
 import hirehive.address.testutil.EditPersonDescriptorBuilder;
 import hirehive.address.testutil.PersonBuilder;
@@ -76,6 +79,13 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_filter() throws Exception {
+        String tag = "foo";
+        FilterCommand command = (FilterCommand) parser.parseCommand(FilterCommand.COMMAND_WORD + " t/ " + tag);
+        assertEquals(new FilterCommand(new PersonContainsTagPredicate(new Tag(tag))), command);
+    }
+
+    @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
@@ -86,6 +96,7 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
+
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
