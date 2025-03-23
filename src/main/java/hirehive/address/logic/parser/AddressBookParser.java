@@ -74,7 +74,7 @@ public class AddressBookParser {
             return new HelpCommand();
 
         case FilterCommand.COMMAND_WORD:
-            return new FilterCommand();
+            return new FilterCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
