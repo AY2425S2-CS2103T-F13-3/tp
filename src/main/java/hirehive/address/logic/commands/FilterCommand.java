@@ -2,9 +2,11 @@ package hirehive.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import hirehive.address.commons.util.ToStringBuilder;
+import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.exceptions.CommandException;
 import hirehive.address.model.Model;
-import hirehive.address.model.tag.Tag;
+import hirehive.address.model.person.PersonContainsTagPredicate;
 
 public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
@@ -15,17 +17,39 @@ public class FilterCommand extends Command {
             + "Parameters: t/ TAG\n"
             + "Example: " + COMMAND_WORD + " applicant";
 
-    private final Tag tag;
+    private final PersonContainsTagPredicate predicate;
 
-    public FilterCommand(Tag tag) {
-        requireNonNull(tag);
-        this.tag = tag;
+    public FilterCommand(PersonContainsTagPredicate predicate) {
+        this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(
-                String.format(MESSAGE_ARGUMENTS, tag));
+        requireNonNull(model);
+        model.updateFilteredPersonList(predicate);
+        return new CommandResult(
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof FilterCommand)) {
+            return false;
+        }
+
+        FilterCommand otherFilterCommand = (FilterCommand) other;
+        return predicate.equals(otherFilterCommand.predicate);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("predicate", predicate)
+                .toString();
+    }
 }

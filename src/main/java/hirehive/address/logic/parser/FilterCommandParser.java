@@ -9,6 +9,7 @@ import hirehive.address.commons.exceptions.IllegalValueException;
 import hirehive.address.logic.commands.FilterCommand;
 import hirehive.address.logic.commands.TagCommand;
 import hirehive.address.logic.parser.exceptions.ParseException;
+import hirehive.address.model.person.PersonContainsTagPredicate;
 import hirehive.address.model.tag.Tag;
 
 
@@ -23,7 +24,7 @@ public class FilterCommandParser implements Parser<FilterCommand>{
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
         tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get());
-        return new FilterCommand(tag);
+        return new FilterCommand(new PersonContainsTagPredicate(tag));
     }
 
 }
