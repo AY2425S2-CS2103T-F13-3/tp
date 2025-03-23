@@ -4,6 +4,9 @@ import hirehive.address.logic.commands.AddCommand;
 import hirehive.address.logic.parser.CliSyntax;
 import hirehive.address.model.person.Person;
 
+/**
+ * A utility class for Default Person.
+ */
 public class DefaultPersonUtil {
 
     /**
