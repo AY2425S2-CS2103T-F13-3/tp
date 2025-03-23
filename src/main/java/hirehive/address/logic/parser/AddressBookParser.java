@@ -19,7 +19,6 @@ import hirehive.address.logic.commands.FindCommand;
 import hirehive.address.logic.commands.HelpCommand;
 import hirehive.address.logic.commands.ListCommand;
 import hirehive.address.logic.commands.TagCommand;
-
 import hirehive.address.logic.parser.exceptions.ParseException;
 
 

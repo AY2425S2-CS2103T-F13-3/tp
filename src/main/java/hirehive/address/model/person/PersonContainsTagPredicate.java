@@ -1,8 +1,9 @@
 package hirehive.address.model.person;
 
+import java.util.function.Predicate;
+
 import hirehive.address.commons.util.ToStringBuilder;
 import hirehive.address.model.tag.Tag;
-import java.util.function.Predicate;
 
 /**
  * Tests that a {@code Person}'s {@code Tag}s matches the given Tag.

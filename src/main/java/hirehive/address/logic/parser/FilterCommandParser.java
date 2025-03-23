@@ -1,7 +1,7 @@
 package hirehive.address.logic.parser;
 
-import static hirehive.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static hirehive.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static hirehive.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
 
 import hirehive.address.logic.commands.FilterCommand;
