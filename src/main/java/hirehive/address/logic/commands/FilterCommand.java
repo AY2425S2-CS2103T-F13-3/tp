@@ -8,6 +8,10 @@ import hirehive.address.logic.commands.exceptions.CommandException;
 import hirehive.address.model.Model;
 import hirehive.address.model.person.PersonContainsTagPredicate;
 
+/**
+ * Finds and lists all persons in address book whose tags contain any of the argument tags.
+ * Tag matching is case insensitive.
+ */
 public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
     public static final String NOT_IMPLEMENTED_TEXT = "Command not implemented yet";
