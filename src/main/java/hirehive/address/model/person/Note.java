@@ -6,7 +6,7 @@ import hirehive.address.commons.util.AppUtil;
 
 /**
  * Represents a Person's note in the address book.
- * Guarantees: immutable
+ * Guarantees: immutable; is valid as declared in {@link #isValidNote(String)}
  */
 public class Note {
 

@@ -6,6 +6,7 @@ import java.util.Set;
 import hirehive.address.model.person.Address;
 import hirehive.address.model.person.Email;
 import hirehive.address.model.person.Name;
+import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
 import hirehive.address.model.person.Phone;
 import hirehive.address.model.person.Role;
@@ -22,6 +23,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_ROLE = "Software Engineer";
+    public static final String DEFAULT_NOTE = "ENFP personality, no disabilities";
 
     private Name name;
     private Phone phone;
@@ -29,6 +31,7 @@ public class PersonBuilder {
     private Address address;
     private Role role;
     private Set<Tag> tags;
+    private Note note;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -40,6 +43,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         role = new Role(DEFAULT_ROLE);
         tags = new HashSet<>();
+        note = new Note(DEFAULT_NOTE);
     }
 
     /**
@@ -52,6 +56,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         role = personToCopy.getRole();
         tags = new HashSet<>(personToCopy.getTags());
+        note = personToCopy.getNote();
     }
 
     /**
@@ -102,8 +107,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Note} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withNote(String note) {
+        this.note = new Note(note);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, role, tags);
+        return new Person(name, phone, email, address, role, tags, note);
     }
 
 }

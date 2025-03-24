@@ -65,7 +65,7 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        note = source.getNotes().value;
+        note = source.getNote().value;
     }
 
     /**
@@ -129,7 +129,7 @@ class JsonAdaptedPerson {
         }
         final Note modelNote = new Note(note);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelTags, modelNote);
     }
 
 }

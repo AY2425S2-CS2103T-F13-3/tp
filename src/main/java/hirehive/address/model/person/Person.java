@@ -27,7 +27,7 @@ public class Person {
     private final Note note;
 
     /**
-     * Person constructor for add command where note is empty by default.
+     * Person constructor where note is empty by default.
      */
     public Person(Name name, Phone phone, Email email, Address address, Role role, Set<Tag> tags) {
         CollectionUtil.requireAllNonNull(name, phone, email, address, role, tags);
@@ -44,7 +44,7 @@ public class Person {
      * Every field must be present.
      */
     public Person(Name name, Phone phone, Email email, Address address, Role role, Set<Tag> tags, Note note) {
-        CollectionUtil.requireAllNonNull(name, phone, email, address, role, tags);
+        CollectionUtil.requireAllNonNull(name, phone, email, address, role, tags, note);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -74,7 +74,7 @@ public class Person {
         return role;
     }
 
-    public Note getNotes() {
+    public Note getNote() {
         return note;
     }
 
@@ -139,6 +139,7 @@ public class Person {
                 .add("address", address)
                 .add("role", role)
                 .add("tags", tags)
+                .add("note", note)
                 .toString();
     }
 

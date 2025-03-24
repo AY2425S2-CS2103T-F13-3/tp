@@ -3,6 +3,7 @@ package hirehive.address.logic.commands;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static hirehive.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -47,6 +48,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_ROLE + "ROLE]"
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_NOTE + "NOTE]"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -104,7 +106,7 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Role updatedRole = editPersonDescriptor.getRole().orElse(personToEdit.getRole());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNotes());
+        Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRole, updatedTags,
                 updatedNote);
@@ -272,6 +274,7 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("role", role)
                     .add("tags", tags)
+                    .add("note", note)
                     .toString();
         }
     }
