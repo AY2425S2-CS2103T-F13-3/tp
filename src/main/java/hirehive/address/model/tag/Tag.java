@@ -12,7 +12,7 @@ public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
-    public static final String DEFAULT_TAG = "applicant";
+    public static final String DEFAULT_TAG = "Applicant";
 
     public final String tagName;
 
