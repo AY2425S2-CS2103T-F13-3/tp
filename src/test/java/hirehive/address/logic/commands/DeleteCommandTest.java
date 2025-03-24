@@ -2,19 +2,25 @@ package hirehive.address.logic.commands;
 
 import static hirehive.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static hirehive.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static hirehive.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import hirehive.address.commons.core.index.Index;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.Collections;
+
+import hirehive.address.logic.commands.queries.NameQuery;
 import hirehive.address.logic.Messages;
+import hirehive.address.logic.commands.exceptions.CommandException;
 import hirehive.address.model.Model;
 import hirehive.address.model.ModelManager;
 import hirehive.address.model.UserPrefs;
 import hirehive.address.model.person.Person;
+import hirehive.address.model.person.NameContainsKeywordsPredicate;
 import hirehive.address.testutil.TypicalIndexes;
 import hirehive.address.testutil.TypicalPersons;
 
@@ -29,7 +35,12 @@ public class DeleteCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON);
+        String nameToDelete = personToDelete.getName().fullName;
+
+        List<String> nameKeywords = Arrays.asList(nameToDelete.split("\\s+"));
+        System.out.println(nameKeywords);
+        NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nameKeywords));
+        DeleteCommand deleteCommand = new DeleteCommand(nameQuery);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
@@ -41,58 +52,27 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        int listSize = model.getFilteredPersonList().size();
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+    public void execute_nonexistentName_throwsCommandException() {
+        List<String> nonexistentKeywords = List.of("Nonexistent");
+        NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nonexistentKeywords));
+        DeleteCommand deleteCommand = new DeleteCommand(nameQuery);
 
-        String expectedMessage = listSize == 0
-                ? Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX
-                : String.format(Messages.MESSAGE_INDEX_OUT_OF_BOUNDS, listSize);
-
-        assertCommandFailure(deleteCommand, model, expectedMessage);
-    }
-
-    @Test
-    public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
-
-        Person personToDelete = model.getFilteredPersonList().get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON);
-
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDelete));
-
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
-        showNoPerson(expectedModel);
-
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
-
-        Index outOfBoundIndex = TypicalIndexes.INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
-
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
-
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertThrows(CommandException.class, () -> deleteCommand.execute(model));
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(TypicalIndexes.INDEX_SECOND_PERSON);
+        NameQuery firstQuery = new NameQuery(new NameContainsKeywordsPredicate(Collections.singletonList("Alice")));
+        NameQuery secondQuery = new NameQuery(new NameContainsKeywordsPredicate(Collections.singletonList("Bob")));
+
+        DeleteCommand deleteFirstCommand = new DeleteCommand(firstQuery);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(secondQuery);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(firstQuery);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -103,14 +83,6 @@ public class DeleteCommandTest {
 
         // different person -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
-    }
-
-    @Test
-    public void toStringMethod() {
-        Index targetIndex = Index.fromOneBased(1);
-        DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
-        assertEquals(expected, deleteCommand.toString());
     }
 
     /**

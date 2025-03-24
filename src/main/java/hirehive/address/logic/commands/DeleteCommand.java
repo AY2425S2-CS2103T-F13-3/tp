@@ -3,6 +3,7 @@ package hirehive.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.queries.NameQuery;
@@ -46,16 +47,16 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
 
         Person personToDelete;
         try {
             personToDelete = query.query(model);
         } catch (QueryException qe) {
-            throw new CommandException(qe.getMessage());
+            throw new CommandException(Messages.MESSAGE_NO_SUCH_PERSON);
         }
 
         model.deletePerson(personToDelete);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
