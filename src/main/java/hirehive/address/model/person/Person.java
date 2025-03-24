@@ -76,7 +76,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().fullName.equalsIgnoreCase(this.getName().fullName);
+                && otherPerson.getName().equals(getName());
     }
 
     /**
@@ -95,7 +95,7 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.fullName.equalsIgnoreCase(otherPerson.name.fullName)
+        return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
