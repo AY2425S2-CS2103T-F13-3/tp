@@ -1,5 +1,6 @@
 package hirehive.address.testutil;
 
+import static hirehive.address.logic.commands.CommandTestUtil.DEFAULT_TAG_APPLICANT;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
@@ -10,8 +11,6 @@ import static hirehive.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_ROLE_AMY;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
-import static hirehive.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static hirehive.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,16 +27,16 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withRole("Software Engineer")
-            .withTags("friends").build();
+            .withTags("friends").withTags("Applicant").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432").withRole("Software Engineer")
-            .withTags("owesMoney", "friends").build();
+            .withTags("Applicant").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withRole("Software Engineer").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withRole("Software Engineer")
-            .withTags("friends").build();
+            .withTags("Applicant").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("94822243")
             .withEmail("werner@example.com").withAddress("michegan ave").withRole("Software Engineer").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("94824273")
@@ -54,10 +53,10 @@ public class TypicalPersons {
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withRole(VALID_ROLE_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
+            .withTags(DEFAULT_TAG_APPLICANT).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withRole(VALID_ROLE_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .withTags(DEFAULT_TAG_APPLICANT).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

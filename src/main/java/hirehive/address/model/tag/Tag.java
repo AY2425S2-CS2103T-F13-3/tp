@@ -12,6 +12,7 @@ public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String DEFAULT_TAG = "Applicant";
 
     public final String tagName;
 
@@ -31,6 +32,13 @@ public class Tag {
      */
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns a default tag for new persons.
+     */
+    public static Tag getDefaultTag() {
+        return new Tag(DEFAULT_TAG);
     }
 
     @Override

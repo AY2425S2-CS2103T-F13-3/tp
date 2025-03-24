@@ -23,6 +23,8 @@ import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.person.NameContainsKeywordsPredicate;
 import hirehive.address.model.person.Person;
 import hirehive.address.testutil.Assert;
+import hirehive.address.testutil.DefaultPersonBuilder;
+import hirehive.address.testutil.DefaultPersonUtil;
 import hirehive.address.testutil.EditPersonDescriptorBuilder;
 import hirehive.address.testutil.PersonBuilder;
 import hirehive.address.testutil.PersonUtil;
@@ -34,8 +36,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
+        Person person = new DefaultPersonBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(DefaultPersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
     }
 
