@@ -59,12 +59,12 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + CliSyntax.PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_ROLE_DESC = " " + CliSyntax.PREFIX_ROLE + "Developer&"; // '&' not allowed in names
     public static final String INVALID_TAG_DESC = " " + CliSyntax.PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    public static final String INVALID_NOTE_DESC = " " + CliSyntax.PREFIX_NOTE + "Lorem ipsum dolor sit amet, " +
-            "consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque " +
-            "penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, " +
-            "pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, " +
-            "aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. " +
-            "Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus"; // >500 chars not allowed for notes
+    public static final String INVALID_NOTE_DESC = " " + CliSyntax.PREFIX_NOTE + "Lorem ipsum dolor sit amet, "
+            + "consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque "
+            + "penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, "
+            + "pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, "
+            + "aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. "
+            + "Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus"; // >500 chars not allowed for notes
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

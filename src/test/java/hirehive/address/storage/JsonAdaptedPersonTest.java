@@ -27,12 +27,12 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_ROLE = "@developer";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_NOTE = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean" +
-            " commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes," +
-            " nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla" +
-            " consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim" +
-            " justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium." +
-            " Integer tincidunt. Cras dapibus";
+    private static final String INVALID_NOTE = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean"
+            + " commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,"
+            + " nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla"
+            + " consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim"
+            + " justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium."
+            + " Integer tincidunt. Cras dapibus";
 
     private static final String VALID_NAME = TypicalPersons.BENSON.getName().toString();
     private static final String VALID_PHONE = TypicalPersons.BENSON.getPhone().toString();
