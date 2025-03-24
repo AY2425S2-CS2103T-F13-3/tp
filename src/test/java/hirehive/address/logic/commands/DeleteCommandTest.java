@@ -2,27 +2,27 @@ package hirehive.address.logic.commands;
 
 import static hirehive.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static hirehive.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Arrays;
-import java.util.Collections;
-
-import hirehive.address.logic.commands.queries.NameQuery;
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.exceptions.CommandException;
+import hirehive.address.logic.commands.queries.NameQuery;
 import hirehive.address.model.Model;
 import hirehive.address.model.ModelManager;
 import hirehive.address.model.UserPrefs;
-import hirehive.address.model.person.Person;
 import hirehive.address.model.person.NameContainsKeywordsPredicate;
+import hirehive.address.model.person.Person;
 import hirehive.address.testutil.TypicalIndexes;
 import hirehive.address.testutil.TypicalPersons;
+
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
