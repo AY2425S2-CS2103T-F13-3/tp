@@ -2,12 +2,10 @@ package hirehive.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.List;
-
-import hirehive.address.commons.core.index.Index;
-import hirehive.address.commons.util.ToStringBuilder;
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.exceptions.CommandException;
+import hirehive.address.logic.commands.queries.NameQuery;
+import hirehive.address.logic.commands.queries.exceptions.QueryException;
 import hirehive.address.model.Model;
 import hirehive.address.model.person.Person;
 
@@ -20,20 +18,21 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the person identified by the name used in the displayed person list.\n"
+            + "Parameters: NAME\n"
+            + "Example: " + COMMAND_WORD + " n/john doe";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
-    private final Index targetIndex;
+    private final NameQuery query;
 
     /**
      * Creates DeleteCommand to remove a person at the specified index
-     * @param targetIndex the index of the person to be deleted
+     * @param query the name of the person to be deleted
      */
-    public DeleteCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    public DeleteCommand(NameQuery query) {
+        requireNonNull(query);
+        this.query = query;
     }
 
     /**
@@ -45,20 +44,16 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (lastShownList.isEmpty()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        Person personToDelete;
+        try {
+            personToDelete = query.query(model);
+        } catch (QueryException qe) {
+            throw new CommandException(Messages.MESSAGE_NO_SUCH_PERSON);
         }
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(lastShownList.size() == 1
-                    ? Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX
-                    : String.format(Messages.MESSAGE_INDEX_OUT_OF_BOUNDS, lastShownList.size()));
-        }
-
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
@@ -74,13 +69,7 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        return query.equals(otherDeleteCommand.query);
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
-                .toString();
-    }
 }
