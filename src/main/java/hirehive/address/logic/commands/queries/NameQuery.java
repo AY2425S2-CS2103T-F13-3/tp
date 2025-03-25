@@ -21,12 +21,12 @@ public class NameQuery extends Query<Person> {
     }
 
     @Override
-    public Person query(Model model) throws QueryException {
+    public List<Person> query(Model model) throws QueryException {
         model.updateFilteredPersonList(this.predicate);
         List<Person> filteredList = model.getFilteredPersonList();
         if (filteredList.isEmpty()) {
             throw new QueryException(MESSAGE_NO_SUCH_PERSON);
         }
-        return filteredList.get(0);
+        return filteredList;
     }
 }

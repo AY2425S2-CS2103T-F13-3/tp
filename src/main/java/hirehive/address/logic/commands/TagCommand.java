@@ -1,10 +1,12 @@
 package hirehive.address.logic.commands;
 
+import static hirehive.address.logic.Messages.MESSAGE_MULTIPLE_PEOPLE_QUERIED;
 import static hirehive.address.logic.commands.EditCommand.createEditedPerson;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static hirehive.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static java.util.Objects.requireNonNull;
+
+import java.util.List;
 
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -48,17 +50,20 @@ public class TagCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Person personToTag;
+        List<Person> personToTag;
         try {
             personToTag = query.query(model);
         } catch (QueryException qe) {
             throw new CommandException(qe.getMessage());
         }
 
-        Person taggedPerson = createEditedPerson(personToTag, editPersonDescriptor);
+        if (personToTag.size() > 1) {
+            throw new CommandException(MESSAGE_MULTIPLE_PEOPLE_QUERIED);
+        }
 
-        model.setPerson(personToTag, taggedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        Person taggedPerson = createEditedPerson(personToTag.get(0), editPersonDescriptor);
+
+        model.setPerson(personToTag.get(0), taggedPerson);
         return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, Messages.format(taggedPerson)));
     }
 
