@@ -38,6 +38,10 @@ public class Person {
         this.tags.addAll(tags);
     }
 
+    public static Person createDefaultPerson(Name name, Phone phone, Email email, Address address, Role role) {
+        return new Person(name, phone, email, address, role, Set.of(Tag.getDefaultTag()));
+    }
+
     public Name getName() {
         return name;
     }
@@ -67,7 +71,7 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the same name, regardless of whether it is in upper/lower case.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
