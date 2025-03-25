@@ -3,6 +3,7 @@ package hirehive.address.logic.commands;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static hirehive.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static java.util.Objects.requireNonNull;
@@ -12,7 +13,6 @@ import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.exceptions.CommandException;
 import hirehive.address.model.Model;
 import hirehive.address.model.person.Person;
-
 
 
 /**
@@ -34,14 +34,13 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_ROLE + "Software Engineer ";
+            + PREFIX_ROLE + "Software Engineer "
+            + PREFIX_NOTE + "27 years old";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Person toAdd;
-
-
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
