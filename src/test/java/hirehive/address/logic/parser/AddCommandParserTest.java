@@ -171,7 +171,7 @@ public class AddCommandParserTest {
 
         // invalid note
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB
-                + CommandTestUtil.ROLE_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.TAG_DESC_FRIEND + CommandTestUtil.INVALID_NOTE_DESC, Note.MESSAGE_CONSTRAINTS);
+                + CommandTestUtil.ROLE_DESC_BOB + CommandTestUtil.INVALID_NOTE_DESC, Note.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.INVALID_NAME_DESC + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.INVALID_ADDRESS_DESC
