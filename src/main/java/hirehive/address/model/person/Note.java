@@ -11,6 +11,7 @@ import hirehive.address.commons.util.AppUtil;
 public class Note {
 
     public static final String MESSAGE_CONSTRAINTS = "Notes can take any values, but are limited to 500 characters";
+    public static final String DEFAULT_NOTE = "";
 
     public final String value;
 

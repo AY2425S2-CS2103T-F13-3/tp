@@ -6,7 +6,7 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "role": "Software Engineer",
-    "tags" : [ "friends" ],
+    "tags" : [ "Applicant" ],
     "note" : "Shy"
   }, {
     "name" : "Benson Meier",
@@ -14,7 +14,7 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "role": "Software Engineer",
-    "tags" : [ "owesMoney", "friends" ],
+    "tags" : [ "Applicant" ],
     "note" : "6 foot tall"
   }, {
     "name" : "Carl Kurz",
@@ -30,7 +30,7 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "role": "Software Engineer",
-    "tags" : [ "friends" ],
+    "tags" : [ "Applicant" ],
     "note" : "Funny"
   }, {
     "name" : "Elle Meyer",

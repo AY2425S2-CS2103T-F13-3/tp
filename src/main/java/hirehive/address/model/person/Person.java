@@ -27,20 +27,6 @@ public class Person {
     private final Note note;
 
     /**
-     * Person constructor where note is empty by default.
-     */
-    public Person(Name name, Phone phone, Email email, Address address, Role role, Set<Tag> tags) {
-        CollectionUtil.requireAllNonNull(name, phone, email, address, role, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.role = role;
-        this.tags.addAll(tags);
-        this.note = new Note("");
-    }
-
-    /**
      * Every field must be present.
      */
     public Person(Name name, Phone phone, Email email, Address address, Role role, Set<Tag> tags, Note note) {
@@ -52,6 +38,14 @@ public class Person {
         this.role = role;
         this.tags.addAll(tags);
         this.note = note;
+    }
+
+    public static Person createDefaultPerson(Name name, Phone phone, Email email, Address address, Role role) {
+        return new Person(name, phone, email, address, role, Set.of(Tag.getDefaultTag()), new Note(Note.DEFAULT_NOTE));
+    }
+
+    public static Person addDefaultPersonWithNote(Name name, Phone phone, Email email, Address address, Role role, Note note) {
+        return new Person(name, phone, email, address, role, Set.of(Tag.getDefaultTag()), note);
     }
 
     public Name getName() {
@@ -87,7 +81,7 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the same name, regardless of whether it is in upper/lower case.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {

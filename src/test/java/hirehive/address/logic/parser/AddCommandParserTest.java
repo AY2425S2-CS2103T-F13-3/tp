@@ -11,6 +11,7 @@ import hirehive.address.model.person.Name;
 import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
 import hirehive.address.model.person.Phone;
+import hirehive.address.model.person.Role;
 import hirehive.address.model.tag.Tag;
 import hirehive.address.testutil.PersonBuilder;
 import hirehive.address.testutil.TypicalPersons;
@@ -20,20 +21,12 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(TypicalPersons.BOB).withTags(CommandTestUtil.VALID_TAG_FRIEND).build();
+        Person expectedPerson = new PersonBuilder(TypicalPersons.BOB).build();
 
         // whitespace only preamble
-        CommandParserTestUtil.assertParseSuccess(parser, CommandTestUtil.PREAMBLE_WHITESPACE + CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
-                + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.ROLE_DESC_BOB + CommandTestUtil.TAG_DESC_FRIEND + CommandTestUtil.NOTE_DESC_BOB, new AddCommand(expectedPerson));
-
-
-        // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(TypicalPersons.BOB).withTags(CommandTestUtil.VALID_TAG_FRIEND, CommandTestUtil.VALID_TAG_HUSBAND)
-                .build();
-        CommandParserTestUtil.assertParseSuccess(parser,
-                CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.ROLE_DESC_BOB
-                        + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.TAG_DESC_FRIEND + CommandTestUtil.NOTE_DESC_BOB,
-                new AddCommand(expectedPersonMultipleTags));
+        CommandParserTestUtil.assertParseSuccess(parser, CommandTestUtil.PREAMBLE_WHITESPACE
+                + CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
+                + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.ROLE_DESC_BOB, new AddCommand(expectedPerson));
     }
 
     @Test
@@ -117,13 +110,13 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Person expectedPerson = new PersonBuilder(TypicalPersons.AMY).withTags().build();
+        Person expectedPerson = new PersonBuilder(TypicalPersons.AMY).build();
         CommandParserTestUtil.assertParseSuccess(parser, CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.PHONE_DESC_AMY + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY
                 + CommandTestUtil.ROLE_DESC_AMY + CommandTestUtil.NOTE_DESC_AMY,
                 new AddCommand(expectedPerson));
 
         // no notes
-        expectedPerson = new PersonBuilder(TypicalPersons.BOB).withTags().build();
+        expectedPerson = new PersonBuilder(TypicalPersons.BOB).build();
         CommandParserTestUtil.assertParseSuccess(parser, CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB
                         + CommandTestUtil.ROLE_DESC_BOB,
                 new AddCommand(expectedPerson));
@@ -158,23 +151,23 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.INVALID_NAME_DESC + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB
-                + CommandTestUtil.ROLE_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+                + CommandTestUtil.ROLE_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.DEFAULT_TAG_APPLICANT, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.INVALID_PHONE_DESC + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB
-                + CommandTestUtil.ROLE_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
+                + CommandTestUtil.ROLE_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.DEFAULT_TAG_APPLICANT, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.INVALID_EMAIL_DESC + CommandTestUtil.ADDRESS_DESC_BOB
-                + CommandTestUtil.ROLE_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
+                + CommandTestUtil.ROLE_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.DEFAULT_TAG_APPLICANT, Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.INVALID_ADDRESS_DESC
-                + CommandTestUtil.ROLE_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
+                + CommandTestUtil.ROLE_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.DEFAULT_TAG_APPLICANT, Address.MESSAGE_CONSTRAINTS);
 
-        // invalid tag
+        // tag was incorrectly given
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB
-                + CommandTestUtil.ROLE_DESC_BOB + CommandTestUtil.INVALID_TAG_DESC + CommandTestUtil.VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
+                + CommandTestUtil.ROLE_DESC_BOB + CommandTestUtil.INVALID_TAG_DESC + CommandTestUtil.VALID_TAG_FRIEND, Role.MESSAGE_CONSTRAINTS);
 
         // invalid note
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB
