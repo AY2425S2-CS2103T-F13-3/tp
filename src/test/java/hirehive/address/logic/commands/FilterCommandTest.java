@@ -65,12 +65,12 @@ public class FilterCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        PersonContainsTagPredicate predicate = preparePredicate("applicant");
+        PersonContainsTagPredicate predicate = preparePredicate("Rejected");
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(TypicalPersons.ALICE, TypicalPersons.CARL,
-                TypicalPersons.GEORGE), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(TypicalPersons.BENSON, TypicalPersons.ELLE,
+                TypicalPersons.FIONA), model.getFilteredPersonList());
     }
 
     private PersonContainsTagPredicate preparePredicate(String userInput) {
