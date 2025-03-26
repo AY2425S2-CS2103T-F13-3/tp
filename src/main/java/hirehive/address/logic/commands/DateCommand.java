@@ -23,16 +23,15 @@ public class DateCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "John " + PREFIX_TAG + "example";
 
     public static final String MESSAGE_TAG_PERSON_SUCCESS = "Added date: %1$s";
-
-    private final NameQuery query;
-    private final EditCommand.EditPersonDescriptor editPersonDescriptor;
+    public static final String MESSAGE_NOT_IMPLEMENTED_YET =
+            "Date command not implemented yet";
 
     public DateCommand() {
     }
 
     @Override
-    public CommandResult execute(Model model) {
-        return new CommandResult("Hello from model");
+    public CommandResult execute(Model model) throws CommandException {
+        throw new CommandException(MESSAGE_NOT_IMPLEMENTED_YET);
     }
 
 }
