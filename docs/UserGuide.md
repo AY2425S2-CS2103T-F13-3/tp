@@ -194,8 +194,8 @@ Deletes the specified person from HireHive.
 
 Format: `delete n/NAME`
 
-* Deletes the person with the specified name.
-* A person will only be deleted if the full name given is an exact match to the name in the list (case-insensitive).
+* Deletes the person if the given name partially matches **exactly one person** in the list (case-insensitive).
+* If multiple matches are found, a list of all matching names will be displayed. The user must then enter the **full name** of the person they want to delete.
 
 Examples:
 * `delete n/John Doe` deletes John Doe's contact from HireHive
