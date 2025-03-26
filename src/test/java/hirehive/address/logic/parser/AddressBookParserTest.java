@@ -20,6 +20,7 @@ import hirehive.address.logic.commands.FilterCommand;
 import hirehive.address.logic.commands.FindCommand;
 import hirehive.address.logic.commands.HelpCommand;
 import hirehive.address.logic.commands.ListCommand;
+import hirehive.address.logic.commands.queries.NameQuery;
 import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.person.NameContainsKeywordsPredicate;
 import hirehive.address.model.person.Person;
@@ -32,6 +33,7 @@ import hirehive.address.testutil.EditPersonDescriptorBuilder;
 import hirehive.address.testutil.PersonBuilder;
 import hirehive.address.testutil.PersonUtil;
 import hirehive.address.testutil.TypicalIndexes;
+import hirehive.address.testutil.TypicalPersons;
 
 public class AddressBookParserTest {
 
@@ -52,9 +54,16 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
+        String nameToDelete = TypicalPersons.ALICE.getName().fullName;
+
+        DeleteCommand expectedCommand = new DeleteCommand(
+                new NameQuery(new NameContainsKeywordsPredicate(Arrays.asList(nameToDelete.split("\\s+"))))
+        );
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + TypicalIndexes.INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + "n/" + nameToDelete
+        );
+
+        assertEquals(expectedCommand, command);
     }
 
     @Test
