@@ -6,23 +6,23 @@ title: User Guide
 HireHive is an **all-in-one desktop application** designed to streamline recruitment for small businesses and hiring managers, **combining the efficiency of a Command Line Interface (CLI) with the ease of a Graphical User Interface (GUI)**. It simplifies tracking candidates, organizing interview notes, and managing hiring stages—all in one centralized platform. With **fast keyboard-driven commands**, HireHive lets you complete tasks quicker than traditional GUI apps, so you can focus less on administrative work and more on finding the best talent.
 
 - [Quick start](#quick-start-)
+- [Command Summary](#command-summary)
 - [Features](#features-)
   - [Viewing help: `help`](#viewing-help--help)
   - [Adding a person: `add`](#adding-a-person-add)
-  - Listing all persons: `list`
-  - Editing a person: `edit`
-  - Tagging a person: `tag`
-  - Filter persons by tag: `filter`
-  - Locating persons by name `find`
-  - Deleting a person: `delete`
-  - Clearing all entries: `clear`
-  - Exiting the program: `exit`
-  - Saving that data
-  - Editing the data file
-- Glossary
-- FAQ
-- Known Issues
-- Command Summary
+  - [Listing all persons: `list`](#listing-all-persons--list)
+  - [Editing a person: `edit`](#editing-a-person--edit)
+  - [Tagging a person: `tag`](#tagging-a-person--tag)
+  - [Filter persons by tag: `filter`](#filter-persons-by-tag--filter)
+  - [Locating persons by name `find`](#locating-persons-by-name-find)
+  - [Deleting a person: `delete`](#deleting-a-person--delete)
+  - [Clearing all entries: `clear`](#clearing-all-entries--clear)
+  - [Exiting the program: `exit`](#exiting-the-program--exit)
+  - [Saving the data](#saving-the-data)
+  - [Editing the data file](#editing-the-data-file)
+- [Glossary](#glossary)
+- [FAQ](#faq)
+- [Known Issues](#known-issues)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -59,6 +59,24 @@ HireHive is an **all-in-one desktop application** designed to streamline recruit
   * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Command summary
+
+Action | Format, Examples
+--------|------------------
+**Help** | `help`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [i/INFO]` <br> e.g., `add n/James Ho p/87654321 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/software engineer intern i/26 years old`
+**List** | `list`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Tag** |
+**Filter** |
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Delete** | `delete NAME`<br> e.g., `delete n/John Doe`
+**Clear** | `clear`
+**Exit** | `exit`
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -212,6 +230,11 @@ Furthermore, certain edits can cause HireHive to behave in unexpected ways (e.g.
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Glossary
+
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -226,17 +249,3 @@ Furthermore, certain edits can cause HireHive to behave in unexpected ways (e.g.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
-
-Action | Format, Examples
---------|------------------
-**Help** | `help`
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [i/INFO]` <br> e.g., `add n/James Ho p/87654321 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/software engineer intern i/26 years old`
-**List** | `list`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Tag** |
-**Filter** |
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Delete** | `delete NAME`<br> e.g., `delete n/John Doe`
-**Clear** | `clear`
-**Exit** | `exit`
