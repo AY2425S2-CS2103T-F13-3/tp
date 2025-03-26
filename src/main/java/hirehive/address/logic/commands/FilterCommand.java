@@ -31,8 +31,13 @@ public class FilterCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+        String message;
+        if (!model.getFilteredPersonList().isEmpty()) {
+            message = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size());
+        } else {
+            message = Messages.MESSAGE_NO_SUCH_PERSON;
+        }
+        return new CommandResult(message);
     }
 
     @Override
