@@ -4,7 +4,6 @@ import static hirehive.address.logic.Messages.MESSAGE_MULTIPLE_PEOPLE_QUERIED;
 import static hirehive.address.logic.commands.EditCommand.createEditedPerson;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static hirehive.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;

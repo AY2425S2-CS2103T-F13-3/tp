@@ -39,8 +39,8 @@ public class TagCommandParser implements Parser<TagCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = argMultimap.getValue(PREFIX_NAME).get().split("\\s+");
-        NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        String nameKeywords = argMultimap.getValue(PREFIX_NAME).get();
+        NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nameKeywords));
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
