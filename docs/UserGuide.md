@@ -163,9 +163,15 @@ Examples:
 
 ### Tagging a person : `tag`
 
-Changes or adds the tags of an existing application in HireHive.
+Changes or adds tags to the specified person from HireHive. 
 
-Format: 
+Format: `tag n/NAME t/TAG`
+
+* Tags a person if the given name partially matches **exactly one person** in the list (case-insensitive).
+* If multiple matches are found, a list of all matching names will be displayed. The user must then enter the **full name** of the person they want to delete.
+
+Examples:
+* `tag n/John Doe t/Applicant` will tag John Doe as "Applicant" in HireHive
 
 ### Filter persons by tag : `filter`
 
