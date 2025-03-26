@@ -33,23 +33,22 @@ public class TypicalPersons {
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432").withRole("Software Engineer")
-            .withTags("Applicant").withNote("6 foot tall").build();
+            .withTags("Rejected").withNote("6 foot tall").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withRole("Software Engineer")
-            .withNote("Only 18 years old").build();
+            .withTags("Applicant").withNote("Only 18 years old").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withRole("Software Engineer")
             .withTags("Applicant").withNote("Funny").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("94822243")
             .withEmail("werner@example.com").withAddress("michegan ave").withRole("Software Engineer")
-            .withNote("Cheerful").build();
+            .withTags("Rejected").withNote("Cheerful").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("94824273")
             .withEmail("lydia@example.com").withAddress("little tokyo").withRole("Software Engineer")
-            .withNote("Scary").build();
+            .withTags("Rejected").withNote("Scary").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("94824421")
             .withEmail("anna@example.com").withAddress("4th street").withRole("Software Engineer")
-            .withNote("Fat").build();
-
+            .withTags("Applicant").withNote("Fat").build();
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("84824246")
             .withEmail("stefan@example.com").withAddress("little india").withRole("Software Engineer")
