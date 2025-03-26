@@ -140,7 +140,7 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in HireHive.
+Shows a list of all applicants in HireHive.
 
 Format: `list`
 
@@ -163,12 +163,18 @@ Examples:
 
 ### Tagging a person : `tag`
 
-Changes or adds the tags of an existing application in HireHive. 
+Changes or adds the tags of an existing application in HireHive.
 
 Format: 
 
 ### Filter persons by tag : `filter`
 
+Shows a list of all applicants with a certain tag in HireHive.
+
+Format: `filter t/TAG`
+
+* The search is case-insensitive. e.g `applicant` will match `Applicant`
+* Only full words will be matched e.g. `Reject` will not match `Rejected`
 
 ### Locating persons by name: `find`
 
