@@ -2,45 +2,55 @@
 layout: page
 title: User Guide
 ---
+# User Guide
+HireHive is an **all-in-one desktop application** designed to streamline recruitment for small businesses and hiring managers, **combining the efficiency of a Command Line Interface (CLI) with the ease of a Graphical User Interface (GUI)**. It simplifies tracking candidates, organizing interview notes, and managing hiring stages—all in one centralized platform. With **fast keyboard-driven commands**, HireHive lets you complete tasks quicker than traditional GUI apps, so you can focus less on administrative work and more on finding the best talent.
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
-
-* Table of Contents
-{:toc}
+- [Quick start](#quick-start)
+- [Features](#features)
+- Glossary
+- FAQ
+- Known Issues
+- Command Summary
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
 
+## Quick start 
 1. Ensure you have Java `17` or above installed in your Computer.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+   - **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S2-CS2103T-F13-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for HireHive.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar hirehive.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/Ui-2.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all applicants.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/intern`: Adds an applicant named `John Doe` to HireHive, with his relevant information
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete n/John Doe` : Deletes the applicant `John Doe` from the current list.
+   
+  * `edit 3 n/Josef` : Edits the name of the 3rd applicant in the list to Josef
 
-   * `clear` : Deletes all contacts.
+  * `find John Doe`: Searches for John Doe in the current list.
 
-   * `exit` : Exits the app.
+  * `tag n/John Doe t/interviewee` : Tags John Doe with the 'interviewee' tag
+
+  * `clear` : Deletes all contacts.
+
+  * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Features 
 
 <div markdown="block" class="alert alert-info">
 
@@ -50,10 +60,10 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [i/INFO]` can be used as `n/John Doe i/27 years old` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/interviewee`, `t/shortlisted` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -66,7 +76,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
