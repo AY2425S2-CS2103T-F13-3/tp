@@ -1,8 +1,21 @@
 ---
 layout: page
 title: User Guide
+nav_order: 1
+
 ---
 # User Guide
+{: .no_toc }
+
+## Table of Contents
+{: .no_toc }
+
+{::options toc_levels="1,2,3" /}
+* TOC  
+  {:toc}
+---
+# User Guide
+
 HireHive is an **all-in-one desktop application** designed to streamline recruitment for small businesses and hiring managers, **combining the efficiency of a Command Line Interface (CLI) with the ease of a Graphical User Interface (GUI)**. It simplifies tracking candidates, organizing interview notes, and managing hiring stages—all in one centralized platform. With **fast keyboard-driven commands**, HireHive lets you complete tasks quicker than traditional GUI apps, so you can focus less on administrative work and more on finding the best talent.
 
 - [Quick start](#quick-start-)
