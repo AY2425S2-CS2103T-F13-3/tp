@@ -57,7 +57,7 @@ public class AddressBookParserTest {
         String nameToDelete = TypicalPersons.ALICE.getName().fullName;
 
         DeleteCommand expectedCommand = new DeleteCommand(
-                new NameQuery(new NameContainsKeywordsPredicate(Arrays.asList(nameToDelete.split("\\s+"))))
+                new NameQuery(new NameContainsKeywordsPredicate(nameToDelete))
         );
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + "n/" + nameToDelete
