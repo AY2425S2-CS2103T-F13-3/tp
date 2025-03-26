@@ -9,6 +9,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+/**
+ * Controller for the note page.
+ */
 public class NoteWindow extends UiPart<Stage> {
 
     public static final String EMPTY_NOTE = "No note currently.";
@@ -19,22 +22,36 @@ public class NoteWindow extends UiPart<Stage> {
     @FXML
     private Label note;
 
+    /**
+     * Creates a new NoteWindow.
+     * @param root Stage to use as the root of the NoteWindow.
+     */
     public NoteWindow(Stage root) {
         super(FXML, root);
         note.setText(EMPTY_NOTE);
     }
 
+    /**
+     * Creates a new NoteWindow.
+     */
     public NoteWindow() {
         this(new Stage());
     }
 
-    // How to update this window continuously
-    // singletonObservableList? use model to update
+    /**
+     * Sets the note in the NoteWindow.
+     * @param logic from the MainWindow.
+     */
     public void setNote(Logic logic) {
+        // How to update this window continuously
+        // singletonObservableList? use model to update
         Note newNote = logic.getPersonNote();
         note.setText(newNote.value);
     }
 
+    /**
+     * Shows the NoteWindow.
+     */
     public void show() {
         logger.fine("Showing note page.");
         getRoot().show();
@@ -42,14 +59,14 @@ public class NoteWindow extends UiPart<Stage> {
     }
 
     /**
-     * Returns true if the help window is currently being shown.
+     * Returns true if the note window is currently being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
     /**
-     * Hides the help window.
+     * Hides the note window.
      */
     public void hide() {
         note.setText(EMPTY_NOTE);
@@ -57,7 +74,7 @@ public class NoteWindow extends UiPart<Stage> {
     }
 
     /**
-     * Focuses on the help window.
+     * Focuses on the note window.
      */
     public void focus() {
         getRoot().requestFocus();
