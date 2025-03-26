@@ -1,19 +1,9 @@
 ---
 layout: page
 title: User Guide
-nav_order: 1
 
 ---
-# User Guide
-{: .no_toc }
 
-## Table of Contents
-{: .no_toc }
-
-{::options toc_levels="1,2,3" /}
-* TOC  
-  {:toc}
----
 # User Guide
 
 HireHive is an **all-in-one desktop application** designed to streamline recruitment for small businesses and hiring managers, **combining the efficiency of a Command Line Interface (CLI) with the ease of a Graphical User Interface (GUI)**. It simplifies tracking candidates, organizing interview notes, and managing hiring stages—all in one centralized platform. With **fast keyboard-driven commands**, HireHive lets you complete tasks quicker than traditional GUI apps, so you can focus less on administrative work and more on finding the best talent.
@@ -33,7 +23,6 @@ HireHive is an **all-in-one desktop application** designed to streamline recruit
   - [Exiting the program: `exit`](#exiting-the-program--exit)
   - [Saving the data](#saving-the-data)
   - [Editing the data file](#editing-the-data-file)
-- [Glossary](#glossary)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 
@@ -97,7 +86,7 @@ Action | Format, Examples
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the command format:**<br>
+**:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -239,11 +228,6 @@ HireHive data are saved automatically as a JSON file `[JAR file location]/data/a
 If your changes to the data file makes its format invalid, HireHive will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause HireHive to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
-
-
---------------------------------------------------------------------------------------------------------------------
-
-## Glossary
 
 
 --------------------------------------------------------------------------------------------------------------------
