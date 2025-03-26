@@ -2,6 +2,8 @@ package hirehive.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.exceptions.CommandException;
 import hirehive.address.logic.commands.queries.NameQuery;
