@@ -1,5 +1,6 @@
 package hirehive.address.logic.commands.queries;
 
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.List;
 
