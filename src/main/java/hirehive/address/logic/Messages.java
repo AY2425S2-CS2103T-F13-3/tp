@@ -22,6 +22,10 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_NO_SUCH_PERSON = "No such person exists.";
 
+    public static final String MESSAGE_MULTIPLE_PEOPLE_QUERIED = "There are multiple contacts containing the given name."
+            + "\n Please enter the full name of the person";
+
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
