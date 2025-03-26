@@ -3,6 +3,7 @@ package hirehive.address.logic.commands.queries;
 import static hirehive.address.logic.Messages.MESSAGE_NO_SUCH_PERSON;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 import hirehive.address.logic.commands.queries.exceptions.QueryException;
@@ -28,5 +29,17 @@ public class NameQuery extends Query<Person> {
             throw new QueryException(MESSAGE_NO_SUCH_PERSON);
         }
         return filteredList.get(0);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null || getClass() != other.getClass()) {
+            return false;
+        }
+        NameQuery nameQuery = (NameQuery) other;
+        return Objects.equals(this.predicate, nameQuery.predicate);
     }
 }

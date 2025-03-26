@@ -1,6 +1,7 @@
 package hirehive.address.model.person;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 import hirehive.address.commons.util.StringUtil;

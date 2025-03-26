@@ -24,22 +24,28 @@ public class Person {
     private final Address address;
     private final Role role;
     private final Set<Tag> tags = new HashSet<>();
+    private final Note note;
 
     /**
-     * Every field must be present and not null.
+     * Every field must be present.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Role role, Set<Tag> tags) {
-        CollectionUtil.requireAllNonNull(name, phone, email, address, role, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Role role, Set<Tag> tags, Note note) {
+        CollectionUtil.requireAllNonNull(name, phone, email, address, role, tags, note);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.role = role;
         this.tags.addAll(tags);
+        this.note = note;
     }
 
     public static Person createDefaultPerson(Name name, Phone phone, Email email, Address address, Role role) {
-        return new Person(name, phone, email, address, role, Set.of(Tag.getDefaultTag()));
+        return new Person(name, phone, email, address, role, Set.of(Tag.getDefaultTag()), new Note(Note.DEFAULT_NOTE));
+    }
+
+    public static Person addDefaultPersonWithNote(Name name, Phone phone, Email email, Address address, Role role, Note note) {
+        return new Person(name, phone, email, address, role, Set.of(Tag.getDefaultTag()), note);
     }
 
     public Name getName() {
@@ -60,6 +66,10 @@ public class Person {
 
     public Role getRole() {
         return role;
+    }
+
+    public Note getNote() {
+        return note;
     }
 
     /**
@@ -104,13 +114,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && role.equals(otherPerson.role)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && note.equals(otherPerson.note);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, role, tags);
+        return Objects.hash(name, phone, email, address, role, tags, note);
     }
 
     @Override
@@ -122,6 +133,7 @@ public class Person {
                 .add("address", address)
                 .add("role", role)
                 .add("tags", tags)
+                .add("note", note)
                 .toString();
     }
 

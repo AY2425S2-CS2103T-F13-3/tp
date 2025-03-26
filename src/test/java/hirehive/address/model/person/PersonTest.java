@@ -3,6 +3,7 @@ package hirehive.address.model.person;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static hirehive.address.logic.commands.CommandTestUtil.VALID_NOTE_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -36,7 +37,8 @@ public class PersonTest {
 
         // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(TypicalPersons.ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withRole(VALID_ROLE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withAddress(VALID_ADDRESS_BOB).withRole(VALID_ROLE_BOB).withTags(VALID_TAG_HUSBAND).withNote(VALID_NOTE_BOB)
+                .build();
         Assertions.assertTrue(TypicalPersons.ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -90,13 +92,17 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(TypicalPersons.ALICE).withTags(VALID_TAG_HUSBAND).build();
         Assertions.assertFalse(TypicalPersons.ALICE.equals(editedAlice));
+
+        // different note -> returns false
+        editedAlice = new PersonBuilder(TypicalPersons.ALICE).withNote(VALID_NOTE_BOB).build();
+        Assertions.assertFalse(TypicalPersons.ALICE.equals(editedAlice));
     }
 
     @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + TypicalPersons.ALICE.getName() + ", phone=" + TypicalPersons.ALICE.getPhone()
                 + ", email=" + TypicalPersons.ALICE.getEmail() + ", address=" + TypicalPersons.ALICE.getAddress() + ", role=" + TypicalPersons.ALICE.getRole()
-                + ", tags=" + TypicalPersons.ALICE.getTags() + "}";
+                + ", tags=" + TypicalPersons.ALICE.getTags() + ", note=" + TypicalPersons.ALICE.getNote() + "}";
         Assertions.assertEquals(expected, TypicalPersons.ALICE.toString());
     }
 }

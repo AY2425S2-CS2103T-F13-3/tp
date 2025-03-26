@@ -1,10 +1,16 @@
 package hirehive.address.logic.parser;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 import org.junit.jupiter.api.Test;
 
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.DeleteCommand;
+import hirehive.address.logic.commands.queries.NameQuery;
+import hirehive.address.model.person.NameContainsKeywordsPredicate;
 import hirehive.address.testutil.TypicalIndexes;
+import hirehive.address.testutil.TypicalPersons;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -19,11 +25,16 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        CommandParserTestUtil.assertParseSuccess(parser, "1", new DeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON));
+        DeleteCommand expectedCommand = new DeleteCommand(
+                new NameQuery(new NameContainsKeywordsPredicate(Arrays.asList("Alice")))
+        );
+
+        CommandParserTestUtil.assertParseSuccess(parser, "delete n/Alice", expectedCommand);
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        CommandParserTestUtil.assertParseFailure(parser, "a", String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        CommandParserTestUtil.assertParseFailure(parser, "",
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 }
