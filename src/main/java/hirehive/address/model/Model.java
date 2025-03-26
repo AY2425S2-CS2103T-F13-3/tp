@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import hirehive.address.commons.core.GuiSettings;
+import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
 import javafx.collections.ObservableList;
 
@@ -84,4 +85,8 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    void updatePersonNote(Person person);
+
+    Note getPersonNote();
 }

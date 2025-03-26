@@ -1,0 +1,7 @@
+#note {
+    -fx-text-fill: white;
+}
+
+#noteContainer {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
