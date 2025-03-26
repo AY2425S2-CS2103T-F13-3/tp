@@ -1,6 +1,7 @@
 package hirehive.address.logic.commands.queries;
 
 import java.util.function.Predicate;
+import java.util.List;
 
 import hirehive.address.logic.commands.queries.exceptions.QueryException;
 import hirehive.address.model.Model;
@@ -25,5 +26,5 @@ public abstract class Query<T> {
      * @return queried result from using the predicate
      * @throws QueryException If an error occurs during query.
      */
-    public abstract T query(Model model) throws QueryException;
+    public abstract List<T> query(Model model) throws QueryException;
 }
