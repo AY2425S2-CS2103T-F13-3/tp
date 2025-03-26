@@ -4,6 +4,7 @@ import static hirehive.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static hirehive.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -16,6 +17,7 @@ import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.person.Address;
 import hirehive.address.model.person.Email;
 import hirehive.address.model.person.Name;
+import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
 import hirehive.address.model.person.Phone;
 import hirehive.address.model.person.Role;
@@ -34,22 +36,26 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(
-                        args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_ROLE, PREFIX_TAG);
+                        args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_ROLE, PREFIX_NOTE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROLE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_ROLE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_ROLE,
+                PREFIX_NOTE);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, role, tagList);
+        Person person = Person.createDefaultPerson(name, phone, email, address, role);
+        if (argMultimap.getValue(PREFIX_NOTE).isPresent()) {
+            Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get());
+            person = Person.addDefaultPersonWithNote(name, phone, email, address, role, note);
+        }
 
         return new AddCommand(person);
     }

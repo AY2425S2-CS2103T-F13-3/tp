@@ -25,6 +25,7 @@ public class Messages {
     public static final String MESSAGE_MULTIPLE_PEOPLE_QUERIED = "There are multiple contacts containing the given name."
             + "\n Please enter the full name of the person";
 
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */

@@ -3,6 +3,7 @@ package hirehive.address.logic.commands;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static hirehive.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -24,6 +25,7 @@ import hirehive.address.model.Model;
 import hirehive.address.model.person.Address;
 import hirehive.address.model.person.Email;
 import hirehive.address.model.person.Name;
+import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
 import hirehive.address.model.person.Phone;
 import hirehive.address.model.person.Role;
@@ -46,6 +48,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_ROLE + "ROLE]"
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_NOTE + "NOTE]"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -103,8 +106,10 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Role updatedRole = editPersonDescriptor.getRole().orElse(personToEdit.getRole());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRole, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRole, updatedTags,
+                updatedNote);
     }
 
     protected Index getIndex() {
@@ -150,6 +155,7 @@ public class EditCommand extends Command {
         private Address address;
         private Role role;
         private Set<Tag> tags;
+        private Note note;
 
         public EditPersonDescriptor() {}
 
@@ -164,13 +170,14 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setRole(toCopy.role);
             setTags(toCopy.tags);
+            setNote(toCopy.note);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, note);
         }
 
         public void setName(Name name) {
@@ -213,6 +220,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(role);
         }
 
+        public void setNote(Note note) {
+            this.note = note;
+        }
+
+        public Optional<Note> getNote() {
+            return Optional.ofNullable(note);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -246,7 +261,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(note, otherEditPersonDescriptor.note);
         }
 
         @Override
@@ -258,6 +274,7 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("role", role)
                     .add("tags", tags)
+                    .add("note", note)
                     .toString();
         }
     }

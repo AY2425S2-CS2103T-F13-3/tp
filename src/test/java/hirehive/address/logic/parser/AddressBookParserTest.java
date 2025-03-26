@@ -16,17 +16,24 @@ import hirehive.address.logic.commands.ClearCommand;
 import hirehive.address.logic.commands.DeleteCommand;
 import hirehive.address.logic.commands.EditCommand;
 import hirehive.address.logic.commands.ExitCommand;
+import hirehive.address.logic.commands.FilterCommand;
 import hirehive.address.logic.commands.FindCommand;
 import hirehive.address.logic.commands.HelpCommand;
 import hirehive.address.logic.commands.ListCommand;
+import hirehive.address.logic.commands.queries.NameQuery;
 import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.person.NameContainsKeywordsPredicate;
 import hirehive.address.model.person.Person;
+import hirehive.address.model.person.PersonContainsTagPredicate;
+import hirehive.address.model.tag.Tag;
 import hirehive.address.testutil.Assert;
+import hirehive.address.testutil.DefaultPersonBuilder;
+import hirehive.address.testutil.DefaultPersonUtil;
 import hirehive.address.testutil.EditPersonDescriptorBuilder;
 import hirehive.address.testutil.PersonBuilder;
 import hirehive.address.testutil.PersonUtil;
 import hirehive.address.testutil.TypicalIndexes;
+import hirehive.address.testutil.TypicalPersons;
 
 public class AddressBookParserTest {
 
@@ -34,8 +41,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
+        Person person = new DefaultPersonBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(DefaultPersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
     }
 
@@ -47,9 +54,16 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
+        String nameToDelete = TypicalPersons.ALICE.getName().fullName;
+
+        DeleteCommand expectedCommand = new DeleteCommand(
+                new NameQuery(new NameContainsKeywordsPredicate(Arrays.asList(nameToDelete.split("\\s+"))))
+        );
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + TypicalIndexes.INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + "n/" + nameToDelete
+        );
+
+        assertEquals(expectedCommand, command);
     }
 
     @Test
@@ -76,6 +90,13 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_filter() throws Exception {
+        String tag = "foo";
+        FilterCommand command = (FilterCommand) parser.parseCommand(FilterCommand.COMMAND_WORD + " t/ " + tag);
+        assertEquals(new FilterCommand(new PersonContainsTagPredicate(new Tag(tag))), command);
+    }
+
+    @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
@@ -86,6 +107,7 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
+
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
