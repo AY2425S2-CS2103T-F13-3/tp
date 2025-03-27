@@ -119,6 +119,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code InterviewDate} of the {@code Person} that we are building.
+     */
     public PersonBuilder withDate(String date) {
         this.date = new InterviewDate(date);
         return this;
