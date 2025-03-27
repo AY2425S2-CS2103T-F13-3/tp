@@ -91,9 +91,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_filter() throws Exception {
-        String tag = "foo";
+        String tag = "Applicant";
         FilterCommand command = (FilterCommand) parser.parseCommand(FilterCommand.COMMAND_WORD + " t/ " + tag);
-        assertEquals(new FilterCommand(new PersonContainsTagPredicate(new Tag(tag))), command);
+        assertEquals(new FilterCommand(new PersonContainsTagPredicate(ParserUtil.parseTag(tag))), command);
     }
 
     @Test
