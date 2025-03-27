@@ -3,7 +3,6 @@ package hirehive.address.model.util;
 import java.util.HashSet;
 import java.util.Set;
 
-import hirehive.address.commons.exceptions.IllegalValueException;
 import hirehive.address.logic.parser.ParserUtil;
 import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.AddressBook;
