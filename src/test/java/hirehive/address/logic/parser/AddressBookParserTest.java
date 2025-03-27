@@ -57,7 +57,7 @@ public class AddressBookParserTest {
         String nameToDelete = TypicalPersons.ALICE.getName().fullName;
 
         DeleteCommand expectedCommand = new DeleteCommand(
-                new NameQuery(new NameContainsKeywordsPredicate(Arrays.asList(nameToDelete.split("\\s+"))))
+                new NameQuery(new NameContainsKeywordsPredicate(nameToDelete))
         );
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + "n/" + nameToDelete
@@ -83,9 +83,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        String keywords = "foo bar baz";
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+                FindCommand.COMMAND_WORD + " " + keywords);
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 

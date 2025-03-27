@@ -37,9 +37,7 @@ public class DeleteCommandTest {
         Person personToDelete = model.getFilteredPersonList().get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
         String nameToDelete = personToDelete.getName().fullName;
 
-        List<String> nameKeywords = Arrays.asList(nameToDelete.split("\\s+"));
-        System.out.println(nameKeywords);
-        NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nameKeywords));
+        NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nameToDelete));
         DeleteCommand deleteCommand = new DeleteCommand(nameQuery);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
@@ -53,7 +51,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_nonexistentName_throwsCommandException() {
-        List<String> nonexistentKeywords = List.of("Nonexistent");
+        String nonexistentKeywords = "Nonexistent";
         NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nonexistentKeywords));
         DeleteCommand deleteCommand = new DeleteCommand(nameQuery);
 
@@ -62,8 +60,8 @@ public class DeleteCommandTest {
 
     @Test
     public void equals() {
-        NameQuery firstQuery = new NameQuery(new NameContainsKeywordsPredicate(Collections.singletonList("Alice")));
-        NameQuery secondQuery = new NameQuery(new NameContainsKeywordsPredicate(Collections.singletonList("Bob")));
+        NameQuery firstQuery = new NameQuery(new NameContainsKeywordsPredicate("Alice"));
+        NameQuery secondQuery = new NameQuery(new NameContainsKeywordsPredicate("Bob"));
 
         DeleteCommand deleteFirstCommand = new DeleteCommand(firstQuery);
         DeleteCommand deleteSecondCommand = new DeleteCommand(secondQuery);
