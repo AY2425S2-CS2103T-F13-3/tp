@@ -3,6 +3,7 @@ package hirehive.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -165,7 +166,7 @@ public class ParserUtil {
         requireNonNull(date);
         String trimmedDate = date.trim();
         if (!InterviewDate.isValidDate(trimmedDate)) {
-            throw new ParseException(Note.MESSAGE_CONSTRAINTS);
+            throw new ParseException(InterviewDate.MESSAGE_CONSTRAINTS);
         }
         return new InterviewDate(trimmedDate);
     }

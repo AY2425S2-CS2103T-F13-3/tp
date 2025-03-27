@@ -8,6 +8,7 @@ import hirehive.address.logic.commands.CommandTestUtil;
 import hirehive.address.logic.commands.EditCommand;
 import hirehive.address.model.person.Address;
 import hirehive.address.model.person.Email;
+import hirehive.address.model.person.InterviewDate;
 import hirehive.address.model.person.Name;
 import hirehive.address.model.person.Phone;
 import hirehive.address.model.tag.Tag;
@@ -57,6 +58,7 @@ public class EditCommandParserTest {
         CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
         CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
         CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
+        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_DATE_DESC, InterviewDate.MESSAGE_CONSTRAINTS); // invalid date
 
         // invalid phone followed by valid email
         CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_PHONE_DESC + CommandTestUtil.EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
@@ -76,11 +78,12 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = TypicalIndexes.INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND
-                + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.TAG_DESC_FRIEND;
+                + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY + CommandTestUtil.NAME_DESC_AMY
+                + CommandTestUtil.TAG_DESC_FRIEND + CommandTestUtil.DATE_DESC_BOB;
 
         EditCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_AMY)
                 .withPhone(CommandTestUtil.VALID_PHONE_BOB).withEmail(CommandTestUtil.VALID_EMAIL_AMY).withAddress(CommandTestUtil.VALID_ADDRESS_AMY)
-                .withTags(CommandTestUtil.VALID_TAG_HUSBAND, CommandTestUtil.VALID_TAG_FRIEND).build();
+                .withTags(CommandTestUtil.VALID_TAG_HUSBAND, CommandTestUtil.VALID_TAG_FRIEND).withDate(CommandTestUtil.VALID_DATE_BOB).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
@@ -128,6 +131,12 @@ public class EditCommandParserTest {
         // tags
         userInput = targetIndex.getOneBased() + CommandTestUtil.TAG_DESC_FRIEND;
         descriptor = new EditPersonDescriptorBuilder().withTags(CommandTestUtil.VALID_TAG_FRIEND).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
+
+        // dates
+        userInput = targetIndex.getOneBased() + CommandTestUtil.DATE_DESC_BOB;
+        descriptor = new EditPersonDescriptorBuilder().withDate(CommandTestUtil.VALID_DATE_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
     }
