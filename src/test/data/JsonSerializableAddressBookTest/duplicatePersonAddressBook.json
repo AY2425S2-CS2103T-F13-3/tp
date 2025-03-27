@@ -6,7 +6,8 @@
     "address": "123, Jurong West Ave 6, #08-111",
     "role": "Software Engineer",
     "tags": [ "applicant" ],
-    "note" : ""
+    "note" : "",
+    "date" : ""
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
