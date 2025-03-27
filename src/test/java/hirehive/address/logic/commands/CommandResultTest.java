@@ -50,6 +50,7 @@ public class CommandResultTest {
 
         // different exit value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true).hashCode());
+
     }
 
     @Test
@@ -59,5 +60,29 @@ public class CommandResultTest {
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
                 + ", exit=" + commandResult.isExit() + "}";
         assertEquals(expected, commandResult.toString());
+    }
+
+    @Test
+    public void isList() {
+        CommandResult commandResult1 = new CommandResult(ListCommand.MESSAGE_SUCCESS);
+        CommandResult commandResult2 = new CommandResult("Not list");
+
+        // is a list command result -> return true
+        assertTrue(commandResult1.isList());
+
+        // not a list command result -> return false
+        assertFalse(commandResult2.isList());
+    }
+
+    @Test
+    public void isFind() {
+        CommandResult commandResult1 = new CommandResult("2 persons listed!");
+        CommandResult commandResult2 = new CommandResult("Not find command");
+
+        // is a find command result -> return true
+        assertTrue(commandResult1.isFind());
+
+        // not a find command result -> return false
+        assertFalse(commandResult2.isFind());
     }
 }

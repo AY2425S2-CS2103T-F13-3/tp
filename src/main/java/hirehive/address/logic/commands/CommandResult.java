@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import hirehive.address.commons.util.ToStringBuilder;
+import hirehive.address.logic.Messages;
 
 /**
  * Represents the result of a command execution.
@@ -46,6 +47,14 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isList() {
+        return feedbackToUser.equals(ListCommand.MESSAGE_SUCCESS);
+    }
+
+    public boolean isFind() {
+        return feedbackToUser.endsWith(" persons listed!");
     }
 
     @Override
