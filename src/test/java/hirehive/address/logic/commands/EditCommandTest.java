@@ -180,6 +180,21 @@ public class EditCommandTest {
     }
 
     @Test
+    public void equals_differentRole_returnsFalse() {
+        EditCommand.EditPersonDescriptor descriptorWithRole1 = new EditPersonDescriptorBuilder()
+                .withName(VALID_NAME_BOB)
+                .withRole("Software Engineer") // Role 1
+                .build();
+
+        EditCommand.EditPersonDescriptor descriptorWithRole2 = new EditPersonDescriptorBuilder()
+                .withName(VALID_NAME_BOB)
+                .withRole("Project Manager") // Different Role
+                .build();
+
+        assertFalse(descriptorWithRole1.equals(descriptorWithRole2));
+    }
+
+    @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
         EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
