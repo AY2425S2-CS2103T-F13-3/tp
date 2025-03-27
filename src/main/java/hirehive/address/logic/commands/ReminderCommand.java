@@ -11,7 +11,7 @@ import hirehive.address.model.person.UpcomingInterviewPredicate;
 public class ReminderCommand extends Command {
     public static final String COMMAND_WORD = "remind";
     public static final String NOT_IMPLEMENTED_TEXT = "Command not implemented yet";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all persons with an upcoming interview"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all persons with an upcoming interview "
             + "within the given amount of days and displays them as a list with index numbers.\n"
             + "Parameters: DAYS\n"
             + "Example: " + COMMAND_WORD + " 3";
