@@ -1,6 +1,7 @@
 package hirehive.address.logic.commands;
 
 import static hirehive.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static hirehive.address.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -11,6 +12,8 @@ import java.util.Collections;
 import org.junit.jupiter.api.Test;
 
 import hirehive.address.logic.Messages;
+import hirehive.address.logic.parser.ParserUtil;
+import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.Model;
 import hirehive.address.model.ModelManager;
 import hirehive.address.model.UserPrefs;
@@ -28,9 +31,9 @@ public class FilterCommandTest {
     @Test
     public void equals() {
         PersonContainsTagPredicate firstPredicate =
-                new PersonContainsTagPredicate(new Tag("first"));
+                new PersonContainsTagPredicate(Tag.APPLICANT);
         PersonContainsTagPredicate secondPredicate =
-                new PersonContainsTagPredicate(new Tag("second"));
+                new PersonContainsTagPredicate(Tag.CANDIDATE);
 
         FilterCommand filterFirstCommand = new FilterCommand(firstPredicate);
         FilterCommand filterSecondCommand = new FilterCommand(secondPredicate);
@@ -53,17 +56,12 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = Messages.MESSAGE_NO_SUCH_PERSON;
-        PersonContainsTagPredicate predicate = preparePredicate("test");
-        FilterCommand command = new FilterCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    public void execute_zeroKeywords_throwsParseException() {
+        assertThrows(ParseException.class, () -> preparePredicate("test"));
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
+    public void execute_multipleKeywords_multiplePersonsFound() throws ParseException {
         String expectedMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         PersonContainsTagPredicate predicate = preparePredicate("Rejected");
         FilterCommand command = new FilterCommand(predicate);
@@ -73,7 +71,7 @@ public class FilterCommandTest {
                 TypicalPersons.FIONA), model.getFilteredPersonList());
     }
 
-    private PersonContainsTagPredicate preparePredicate(String userInput) {
-        return new PersonContainsTagPredicate(new Tag(userInput));
+    private PersonContainsTagPredicate preparePredicate(String userInput) throws ParseException {
+        return new PersonContainsTagPredicate(ParserUtil.parseTag(userInput));
     }
 }

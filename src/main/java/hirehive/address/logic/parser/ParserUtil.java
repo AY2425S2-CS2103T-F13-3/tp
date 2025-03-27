@@ -122,11 +122,21 @@ public class ParserUtil {
      */
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
+        String adjustedTag = tag.trim().toLowerCase();
+        switch (adjustedTag) {
+        case "applicant":
+            return Tag.APPLICANT;
+        case "candidate":
+            return Tag.CANDIDATE;
+        case "interviewee":
+            return Tag.INTERVIEWEE;
+        case "offered":
+            return Tag.OFFERED;
+        case "rejected":
+            return Tag.REJECTED;
+        default:
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
     }
 
     /**

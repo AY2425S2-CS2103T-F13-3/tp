@@ -8,7 +8,7 @@ import static hirehive.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_NOTE_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
-import static hirehive.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static hirehive.address.logic.commands.CommandTestUtil.VALID_TAG_CANDIDATE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -56,7 +56,7 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withRole(VALID_ROLE_BOB).build();
 
         // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_CANDIDATE).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different note -> returns false
