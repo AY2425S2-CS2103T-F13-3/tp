@@ -74,7 +74,8 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getAddress().orElse(null) + ", role="
                 + editPersonDescriptor.getRole().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + ", note="
-                + editPersonDescriptor.getNote().orElse(null) + "}";
+                + editPersonDescriptor.getNote().orElse(null) + ", interviewDate="
+                + editPersonDescriptor.getDate().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }

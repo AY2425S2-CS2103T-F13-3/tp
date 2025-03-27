@@ -38,6 +38,7 @@ public class CommandTestUtil {
     public static final String DEFAULT_TAG_APPLICANT = "Applicant";
     public static final String VALID_NOTE_AMY = "30 years old";
     public static final String VALID_NOTE_BOB = "";
+    public static final String VALID_DATE_BOB = "01/01/2025";
 
     public static final String NAME_DESC_AMY = " " + CliSyntax.PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + CliSyntax.PREFIX_NAME + VALID_NAME_BOB;
@@ -54,6 +55,8 @@ public class CommandTestUtil {
     public static final String NOTE_DESC_AMY = " " + CliSyntax.PREFIX_NOTE + VALID_NOTE_AMY;
     public static final String NOTE_DESC_BOB = " " + CliSyntax.PREFIX_NOTE + VALID_NOTE_BOB;
 
+    public static final String DATE_DESC_BOB = " " + CliSyntax.PREFIX_DATE + VALID_DATE_BOB;
+
     public static final String INVALID_NAME_DESC = " " + CliSyntax.PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + CliSyntax.PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + CliSyntax.PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -66,7 +69,7 @@ public class CommandTestUtil {
             + "pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, "
             + "aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. "
             + "Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus"; // >500 chars not allowed for notes
-
+    public static final String INVALID_DATE_DESC = " " + CliSyntax.PREFIX_DATE + "01012025";
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 

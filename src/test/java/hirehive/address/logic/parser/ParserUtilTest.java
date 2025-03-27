@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.person.Address;
 import hirehive.address.model.person.Email;
+import hirehive.address.model.person.InterviewDate;
 import hirehive.address.model.person.Name;
 import hirehive.address.model.person.Phone;
 import hirehive.address.model.tag.Tag;
@@ -27,14 +28,14 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
-
+    private static final String INVALID_DATE = "01012004";
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "91234467";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-
+    private static final String VALID_DATE = "01/01/2004";
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
@@ -193,5 +194,28 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseDate_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseDate(null));
+    }
+
+    @Test
+    public void parseDate_validValueWithoutWhitespace_returnsDate() throws Exception {
+        InterviewDate expectedDate = new InterviewDate(VALID_DATE);
+        assertEquals(expectedDate, ParserUtil.parseDate(VALID_DATE));
+    }
+
+    @Test
+    public void parseDate_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
+        String dateWithWhiteSpace = WHITESPACE + VALID_DATE + WHITESPACE;
+        InterviewDate expectedDate = new InterviewDate(VALID_DATE);
+        assertEquals(expectedDate, ParserUtil.parseDate(dateWithWhiteSpace));
+    }
+
+    @Test
+    public void parseDate_invalidValue_throwsParseException() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE));
     }
 }
