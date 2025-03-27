@@ -61,6 +61,13 @@ public class StringUtil {
         }
     }
 
+    /**
+     * Returns true if {@code s} represents a 0 or positive integer
+     * e.g. 0, 1, 2, 3, ..., {@code Integer.MAX_VALUE} <br>
+     * Will return false for any other non-null string input
+     * e.g. empty string, "-1", "+1", and " 2 " (untrimmed), "3 0" (contains whitespace), "1 a" (contains letters)
+     * @throws NullPointerException if {@code s} is null.
+     */
     public static boolean isPositiveInteger(String s) {
         requireNonNull(s);
 

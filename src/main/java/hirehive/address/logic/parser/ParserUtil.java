@@ -40,6 +40,11 @@ public class ParserUtil {
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
+    /**
+     * Parses {@code days} into an {@code int} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified days are invalid (not positive integer)
+     */
     public static int parseDays(String days) throws ParseException {
         String trimmedDays = days.trim();
         if (!StringUtil.isPositiveInteger(trimmedDays)) {

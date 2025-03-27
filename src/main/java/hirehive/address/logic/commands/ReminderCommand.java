@@ -8,6 +8,10 @@ import hirehive.address.logic.commands.exceptions.CommandException;
 import hirehive.address.model.Model;
 import hirehive.address.model.person.UpcomingInterviewPredicate;
 
+/**
+ * Finds and lists all persons in address book whose interviews are coming up within a number of days.
+ * Filter is start and end date-inclusive.
+ */
 public class ReminderCommand extends Command {
     public static final String COMMAND_WORD = "remind";
     public static final String NOT_IMPLEMENTED_TEXT = "Command not implemented yet";

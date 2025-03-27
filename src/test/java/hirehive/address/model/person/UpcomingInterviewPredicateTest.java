@@ -63,5 +63,9 @@ public class UpcomingInterviewPredicateTest {
         // Date is within range before the current date
         predicate = new UpcomingInterviewPredicate(5, TEST_CURRENT_DAY);
         assertFalse(predicate.test(new PersonBuilder().withDate("31/12/2025").build()));
+
+        // No interview date
+        predicate = new UpcomingInterviewPredicate(5, TEST_CURRENT_DAY);
+        assertFalse(predicate.test(new PersonBuilder().build()));
     }
 }
