@@ -56,6 +56,14 @@ public class CommandResult {
         return showNote;
     }
 
+    public boolean isList() {
+        return feedbackToUser.equals(ListCommand.MESSAGE_SUCCESS);
+    }
+
+    public boolean isFind() {
+        return feedbackToUser.endsWith(" persons listed!");
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

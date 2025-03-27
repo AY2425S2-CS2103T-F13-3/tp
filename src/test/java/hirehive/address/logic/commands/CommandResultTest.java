@@ -68,4 +68,28 @@ public class CommandResultTest {
         assertTrue(commandResult1.isShowNote());
         assertFalse(commandResult2.isShowNote());
     }
+
+    @Test
+    public void isList() {
+        CommandResult commandResult1 = new CommandResult(ListCommand.MESSAGE_SUCCESS);
+        CommandResult commandResult2 = new CommandResult("Not list");
+
+        // is a list command result -> return true
+        assertTrue(commandResult1.isList());
+
+        // not a list command result -> return false
+        assertFalse(commandResult2.isList());
+    }
+
+    @Test
+    public void isFind() {
+        CommandResult commandResult1 = new CommandResult("2 persons listed!");
+        CommandResult commandResult2 = new CommandResult("Not find command");
+
+        // is a find command result -> return true
+        assertTrue(commandResult1.isFind());
+
+        // not a find command result -> return false
+        assertFalse(commandResult2.isFind());
+    }
 }

@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import hirehive.address.commons.exceptions.IllegalValueException;
 import hirehive.address.model.person.Address;
 import hirehive.address.model.person.Email;
+import hirehive.address.model.person.InterviewDate;
 import hirehive.address.model.person.Name;
 import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
@@ -33,6 +34,7 @@ class JsonAdaptedPerson {
     private final String role;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String note;
+    private final String date;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -41,7 +43,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("role") String role, @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                             @JsonProperty("note") String note) {
+                             @JsonProperty("note") String note, @JsonProperty("date") String date) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -51,6 +53,7 @@ class JsonAdaptedPerson {
             this.tags.addAll(tags);
         }
         this.note = note;
+        this.date = date;
     }
 
     /**
@@ -66,6 +69,7 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         note = source.getNote().value;
+        date = source.getDate().toString();
     }
 
     /**
@@ -129,7 +133,16 @@ class JsonAdaptedPerson {
         }
         final Note modelNote = new Note(note);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelTags, modelNote);
+        if (date == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    InterviewDate.class.getSimpleName()));
+        }
+        if (!InterviewDate.isValidDate(date)) {
+            throw new IllegalValueException(InterviewDate.MESSAGE_CONSTRAINTS);
+        }
+        final InterviewDate modelDate = new InterviewDate(date);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelTags, modelNote, modelDate);
     }
 
 }

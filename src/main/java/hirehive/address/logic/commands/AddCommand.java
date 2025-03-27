@@ -1,6 +1,7 @@
 package hirehive.address.logic.commands;
 
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static hirehive.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_NOTE;
@@ -35,7 +36,8 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_ROLE + "Software Engineer "
-            + PREFIX_NOTE + "27 years old";
+            + PREFIX_NOTE + "27 years old"
+            + PREFIX_DATE + "01/05/2025";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";

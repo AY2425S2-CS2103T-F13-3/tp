@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.AddCommand;
 import hirehive.address.logic.commands.ClearCommand;
+import hirehive.address.logic.commands.DateCommand;
 import hirehive.address.logic.commands.DeleteCommand;
 import hirehive.address.logic.commands.EditCommand;
 import hirehive.address.logic.commands.ExitCommand;
@@ -92,9 +93,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_filter() throws Exception {
-        String tag = "foo";
+        String tag = "Applicant";
         FilterCommand command = (FilterCommand) parser.parseCommand(FilterCommand.COMMAND_WORD + " t/ " + tag);
-        assertEquals(new FilterCommand(new PersonContainsTagPredicate(new Tag(tag))), command);
+        assertEquals(new FilterCommand(new PersonContainsTagPredicate(ParserUtil.parseTag(tag))), command);
     }
 
     @Test
@@ -110,6 +111,12 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_date() throws Exception {
+        assertTrue(parser.parseCommand(DateCommand.COMMAND_WORD) instanceof DateCommand);
+        assertTrue(parser.parseCommand(DateCommand.COMMAND_WORD + " 3") instanceof DateCommand);
+    }
+
+    @Test
     public void parseCommand_note() throws Exception {
         String nameToDisplay = TypicalPersons.ALICE.getName().fullName;
 
@@ -122,7 +129,6 @@ public class AddressBookParserTest {
 
         assertEquals(expectedCommand, command);
     }
-
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {

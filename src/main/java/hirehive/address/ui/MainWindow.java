@@ -6,6 +6,8 @@ import hirehive.address.commons.core.GuiSettings;
 import hirehive.address.commons.core.LogsCenter;
 import hirehive.address.logic.Logic;
 import hirehive.address.logic.commands.CommandResult;
+import hirehive.address.logic.commands.ExitCommand;
+import hirehive.address.logic.commands.ListCommand;
 import hirehive.address.logic.commands.exceptions.CommandException;
 import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.AddressBook;
@@ -196,8 +198,11 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser()
-                    + "\nSuccess: Applicant data has been saved.");
+            String userFeedback = commandResult.getFeedbackToUser();
+            if (!(commandResult.isShowHelp() || commandResult.isExit() || commandResult.isList() || commandResult.isFind())) {
+                userFeedback += "\nSuccess: Applicant data has been saved.";
+            }
+            resultDisplay.setFeedbackToUser(userFeedback);
             noteWindow.setNote(logic);
 
             if (commandResult.isShowHelp()) {
@@ -215,8 +220,7 @@ public class MainWindow extends UiPart<Stage> {
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage()
-                    + "\nError: Unable to save applicant data. Please try again.");
+            resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
     }
