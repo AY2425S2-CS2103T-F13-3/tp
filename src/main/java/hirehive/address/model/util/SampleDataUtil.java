@@ -9,6 +9,7 @@ import hirehive.address.model.AddressBook;
 import hirehive.address.model.ReadOnlyAddressBook;
 import hirehive.address.model.person.Address;
 import hirehive.address.model.person.Email;
+import hirehive.address.model.person.InterviewDate;
 import hirehive.address.model.person.Name;
 import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
@@ -24,22 +25,22 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alice Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"), new Role("UI designer"),
-                getTagSet("Applicant"), new Note("20 years old")),
+                getTagSet("Applicant"), new Note("20 years old"), new InterviewDate()),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Role("HR manager"),
-                getTagSet("Interviewee"), new Note("")),
+                getTagSet("Interviewee"), new Note(""), new InterviewDate("01/03/2025")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new Role("HR manager"),
-                getTagSet("Candidate"), new Note("")),
+                getTagSet("Candidate"), new Note(""), new InterviewDate()),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new Role("Software Engineer"),
-                getTagSet("Offered"), new Note("")),
+                getTagSet("Offered"), new Note(""), new InterviewDate("06/07/2025")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"), new Role("Software Engineer"),
-                getTagSet("Rejected"), new Note("30 years old")),
+                getTagSet("Rejected"), new Note("30 years old"), new InterviewDate("06/03/2025")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"), new Role("Cybersecurity specialist"),
-                getTagSet("Applicant"), new Note(""))
+                getTagSet("Applicant"), new Note(""), new InterviewDate())
         };
     }
 

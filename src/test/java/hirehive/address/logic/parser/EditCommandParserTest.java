@@ -8,6 +8,7 @@ import hirehive.address.logic.commands.CommandTestUtil;
 import hirehive.address.logic.commands.EditCommand;
 import hirehive.address.model.person.Address;
 import hirehive.address.model.person.Email;
+import hirehive.address.model.person.InterviewDate;
 import hirehive.address.model.person.Name;
 import hirehive.address.model.person.Phone;
 import hirehive.address.model.tag.Tag;
@@ -47,7 +48,7 @@ public class EditCommandParserTest {
         CommandParserTestUtil.assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
 
         // invalid prefix being parsed as preamble
-        CommandParserTestUtil.assertParseFailure(parser, "1 d/ string", MESSAGE_INVALID_FORMAT);
+        CommandParserTestUtil.assertParseFailure(parser, "1 z/ string", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
@@ -57,6 +58,7 @@ public class EditCommandParserTest {
         CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
         CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
         CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
+        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_DATE_DESC, InterviewDate.MESSAGE_CONSTRAINTS); // invalid date
 
         // invalid phone followed by valid email
         CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_PHONE_DESC + CommandTestUtil.EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
@@ -128,6 +130,12 @@ public class EditCommandParserTest {
         // tags
         userInput = targetIndex.getOneBased() + CommandTestUtil.TAG_DESC_APPLICANT;
         descriptor = new EditPersonDescriptorBuilder().withTags(CommandTestUtil.VALID_TAG_APPLICANT).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
+
+        // dates
+        userInput = targetIndex.getOneBased() + CommandTestUtil.DATE_DESC_BOB;
+        descriptor = new EditPersonDescriptorBuilder().withDate(CommandTestUtil.VALID_DATE_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
     }

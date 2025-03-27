@@ -11,6 +11,7 @@ import hirehive.address.logic.parser.ParserUtil;
 import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.person.Address;
 import hirehive.address.model.person.Email;
+import hirehive.address.model.person.InterviewDate;
 import hirehive.address.model.person.Name;
 import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
@@ -45,6 +46,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setRole(person.getRole());
         descriptor.setTags(person.getTags());
         descriptor.setNote(person.getNote());
+        descriptor.setDate(person.getDate());
     }
 
     /**
@@ -108,6 +110,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withNote(String note) {
         descriptor.setNote(new Note(note));
+        return this;
+    }
+
+    /**
+     * Sets the {@code InterviewDate} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withDate(String date) {
+        descriptor.setDate(new InterviewDate(date));
         return this;
     }
 

@@ -25,11 +25,13 @@ public class Person {
     private final Role role;
     private final Set<Tag> tags = new HashSet<>();
     private final Note note;
+    private final InterviewDate date;
 
     /**
      * Every field must be present.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Role role, Set<Tag> tags, Note note) {
+    public Person(Name name, Phone phone, Email email, Address address, Role role, Set<Tag> tags, Note note,
+                  InterviewDate date) {
         CollectionUtil.requireAllNonNull(name, phone, email, address, role, tags, note);
         this.name = name;
         this.phone = phone;
@@ -38,14 +40,24 @@ public class Person {
         this.role = role;
         this.tags.addAll(tags);
         this.note = note;
+        this.date = date;
     }
 
+    /**
+     * Method used to construct a default Person object without a note.
+     */
     public static Person createDefaultPerson(Name name, Phone phone, Email email, Address address, Role role) {
-        return new Person(name, phone, email, address, role, Set.of(Tag.getDefaultTag()), new Note(Note.DEFAULT_NOTE));
+        return new Person(name, phone, email, address, role, Set.of(Tag.getDefaultTag()), new Note(Note.DEFAULT_NOTE),
+                new InterviewDate());
     }
 
-    public static Person addDefaultPersonWithNote(Name name, Phone phone, Email email, Address address, Role role, Note note) {
-        return new Person(name, phone, email, address, role, Set.of(Tag.getDefaultTag()), note);
+    /**
+     * Method used to construct a default Person object with a note.
+     */
+    public static Person addDefaultPersonWithNote(Name name, Phone phone, Email email, Address address, Role role,
+                                                  Note note) {
+        return new Person(name, phone, email, address, role, Set.of(Tag.getDefaultTag()), note,
+                new InterviewDate());
     }
 
     public Name getName() {
@@ -70,6 +82,10 @@ public class Person {
 
     public Note getNote() {
         return note;
+    }
+
+    public InterviewDate getDate() {
+        return date;
     }
 
     /**
@@ -115,13 +131,14 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && role.equals(otherPerson.role)
                 && tags.equals(otherPerson.tags)
-                && note.equals(otherPerson.note);
+                && note.equals(otherPerson.note)
+                && date.equals(otherPerson.date);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, role, tags, note);
+        return Objects.hash(name, phone, email, address, role, tags, note, date);
     }
 
     @Override
@@ -134,6 +151,7 @@ public class Person {
                 .add("role", role)
                 .add("tags", tags)
                 .add("note", note)
+                .add("interviewDate", date)
                 .toString();
     }
 

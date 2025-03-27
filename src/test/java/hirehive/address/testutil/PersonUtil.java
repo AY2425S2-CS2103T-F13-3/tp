@@ -34,6 +34,7 @@ public class PersonUtil {
             s -> sb.append(CliSyntax.PREFIX_TAG + s.tagName + " ")
         );
         sb.append(CliSyntax.PREFIX_NOTE + person.getNote().value + " ");
+        sb.append(CliSyntax.PREFIX_DATE + person.getDate().toString() + " ");
         return sb.toString();
     }
 
@@ -56,6 +57,7 @@ public class PersonUtil {
                 tags.forEach(s -> sb.append(CliSyntax.PREFIX_TAG).append(s.tagName).append(" "));
             }
         }
+        descriptor.getDate().ifPresent(date -> sb.append(CliSyntax.PREFIX_DATE).append(date.toString()).append(" "));
         return sb.toString();
     }
 }
