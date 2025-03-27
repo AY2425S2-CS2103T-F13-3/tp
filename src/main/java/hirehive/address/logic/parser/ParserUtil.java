@@ -118,17 +118,23 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
-    public static Tag parseTag(String tag) {
+    public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String adjustedTag = tag.trim().toLowerCase();
-        return switch (adjustedTag) {
-            case "applicant" -> Tag.APPLICANT;
-            case "candidate" -> Tag.CANDIDATE;
-            case "interviewee" -> Tag.INTERVIEWEE;
-            case "offered" -> Tag.OFFERED;
-            case "rejected" -> Tag.REJECTED;
-            default -> Tag.APPLICANT;
-        };
+        switch (adjustedTag) {
+        case "applicant":
+            return Tag.APPLICANT;
+        case "candidate":
+            return Tag.CANDIDATE;
+        case "interviewee":
+            return Tag.INTERVIEWEE;
+        case "offered":
+            return Tag.OFFERED;
+        case "rejected":
+            return Tag.REJECTED;
+        default:
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        }
     }
 
     /**

@@ -1,9 +1,7 @@
 package hirehive.address.model.util;
 
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import hirehive.address.commons.exceptions.IllegalValueException;
 import hirehive.address.logic.parser.ParserUtil;
@@ -58,9 +56,15 @@ public class SampleDataUtil {
      * Returns a tag set containing the list of strings given.
      */
     public static Set<Tag> getTagSet(String... strings) {
-        return Arrays.stream(strings)
-                .map(ParserUtil::parseTag)
-                .collect(Collectors.toSet());
+        Set<Tag> tags = new HashSet<>();
+        for (String s : strings) {
+            try {
+                tags.add(ParserUtil.parseTag(s));
+            } catch (ParseException e) {
+                // do nothing
+            }
+        }
+        return tags;
     }
 
 }
