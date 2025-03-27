@@ -138,7 +138,7 @@ class JsonAdaptedPerson {
                     InterviewDate.class.getSimpleName()));
         }
         if (!InterviewDate.isValidDate(date)) {
-            throw new IllegalValueException(Note.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(InterviewDate.MESSAGE_CONSTRAINTS);
         }
         final InterviewDate modelDate = new InterviewDate(date);
 

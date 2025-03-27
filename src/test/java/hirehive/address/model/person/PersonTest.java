@@ -102,7 +102,7 @@ public class PersonTest {
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + TypicalPersons.ALICE.getName() + ", phone=" + TypicalPersons.ALICE.getPhone()
                 + ", email=" + TypicalPersons.ALICE.getEmail() + ", address=" + TypicalPersons.ALICE.getAddress() + ", role=" + TypicalPersons.ALICE.getRole()
-                + ", tags=" + TypicalPersons.ALICE.getTags() + ", note=" + TypicalPersons.ALICE.getNote() + "}";
+                + ", tags=" + TypicalPersons.ALICE.getTags() + ", note=" + TypicalPersons.ALICE.getNote() + ", interviewDate=" + TypicalPersons.ALICE.getDate() + "}";
         Assertions.assertEquals(expected, TypicalPersons.ALICE.toString());
     }
 }

@@ -5,6 +5,7 @@ import java.util.Set;
 
 import hirehive.address.model.person.Address;
 import hirehive.address.model.person.Email;
+import hirehive.address.model.person.InterviewDate;
 import hirehive.address.model.person.Name;
 import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
@@ -32,6 +33,7 @@ public class PersonBuilder {
     private Role role;
     private Set<Tag> tags;
     private Note note;
+    private InterviewDate date;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -44,6 +46,7 @@ public class PersonBuilder {
         role = new Role(DEFAULT_ROLE);
         tags = new HashSet<>();
         note = new Note(DEFAULT_NOTE);
+        date = new InterviewDate();
     }
 
     /**
@@ -57,6 +60,7 @@ public class PersonBuilder {
         role = personToCopy.getRole();
         tags = new HashSet<>(personToCopy.getTags());
         note = personToCopy.getNote();
+        date = personToCopy.getDate();
     }
 
     /**
@@ -115,8 +119,13 @@ public class PersonBuilder {
         return this;
     }
 
+    public PersonBuilder withDate(String date) {
+        this.date = new InterviewDate(date);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, role, tags, note);
+        return new Person(name, phone, email, address, role, tags, note, date);
     }
 
 
