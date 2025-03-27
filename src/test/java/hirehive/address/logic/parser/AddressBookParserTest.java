@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.AddCommand;
 import hirehive.address.logic.commands.ClearCommand;
+import hirehive.address.logic.commands.DateCommand;
 import hirehive.address.logic.commands.DeleteCommand;
 import hirehive.address.logic.commands.EditCommand;
 import hirehive.address.logic.commands.ExitCommand;
@@ -108,6 +109,11 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
+    @Test
+    public void parseCommand_date() throws Exception {
+        assertTrue(parser.parseCommand(DateCommand.COMMAND_WORD) instanceof DateCommand);
+        assertTrue(parser.parseCommand(DateCommand.COMMAND_WORD + " 3") instanceof DateCommand);
+    }
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
