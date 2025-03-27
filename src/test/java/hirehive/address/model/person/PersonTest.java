@@ -1,6 +1,7 @@
 package hirehive.address.model.person;
 
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static hirehive.address.logic.commands.CommandTestUtil.VALID_DATE_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_NOTE_BOB;
@@ -38,7 +39,7 @@ public class PersonTest {
         // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(TypicalPersons.ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withRole(VALID_ROLE_BOB).withTags(VALID_TAG_HUSBAND).withNote(VALID_NOTE_BOB)
-                .build();
+                .withDate(VALID_DATE_BOB).build();
         Assertions.assertTrue(TypicalPersons.ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -95,6 +96,10 @@ public class PersonTest {
 
         // different note -> returns false
         editedAlice = new PersonBuilder(TypicalPersons.ALICE).withNote(VALID_NOTE_BOB).build();
+        Assertions.assertFalse(TypicalPersons.ALICE.equals(editedAlice));
+
+        // different date -> returns false
+        editedAlice = new PersonBuilder(TypicalPersons.ALICE).withDate(VALID_DATE_BOB).build();
         Assertions.assertFalse(TypicalPersons.ALICE.equals(editedAlice));
     }
 
