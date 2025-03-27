@@ -5,7 +5,7 @@
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
     "role": "Software Engineer",
-    "tags": [ "friends" ],
+    "tags": [ "applicant" ],
     "note" : ""
   }, {
     "name": "Alice Pauline",

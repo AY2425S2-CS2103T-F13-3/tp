@@ -1,8 +1,7 @@
 package hirehive.address.model.tag;
 
-import static hirehive.address.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +16,6 @@ public class TagTest {
 
     @Test
     public void test_getDefaultTag_returnsFalse() {
-        assertEquals(Tag.getDefaultTag(), Tag.CANDIDATE);
+        assertFalse(Tag.getDefaultTag().equals(Tag.CANDIDATE));
     }
 }
