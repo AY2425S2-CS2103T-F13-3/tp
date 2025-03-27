@@ -30,10 +30,8 @@ public class NoteCommandParser implements Parser<NoteCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = argMultimap.getValue(PREFIX_NAME).get().split("\\s+");
-        NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-        // String nameKeyword = argMultimap.getValue(PREFIX_NAME).get();
-        // NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nameKeyword));
+        String nameKeyword = argMultimap.getValue(PREFIX_NAME).get();
+        NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nameKeyword));
 
         return new NoteCommand(nameQuery);
     }

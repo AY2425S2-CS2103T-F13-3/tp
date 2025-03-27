@@ -2,6 +2,8 @@ package hirehive.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.exceptions.CommandException;
 import hirehive.address.logic.commands.queries.NameQuery;
@@ -43,16 +45,19 @@ public class NoteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Person personToDisplay;
+        List<Person> personToDisplay;
         try {
             personToDisplay = query.query(model);
         } catch (QueryException e) {
             throw new CommandException(Messages.MESSAGE_NO_SUCH_PERSON);
         }
+        if (personToDisplay.size() > 1) {
+            throw new CommandException(Messages.MESSAGE_MULTIPLE_PEOPLE_QUERIED);
+        }
 
-        //model.updateNotePersonList();
-        model.updatePersonNote(personToDisplay);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToDisplay)), false,
+        Person personDisplayed = personToDisplay.get(0);
+        model.updatePersonNote(personDisplayed);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personDisplayed)), false,
                 false, true);
     }
 
