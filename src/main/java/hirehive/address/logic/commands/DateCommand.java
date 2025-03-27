@@ -12,6 +12,9 @@ import hirehive.address.logic.commands.queries.exceptions.QueryException;
 import hirehive.address.model.Model;
 import hirehive.address.model.person.Person;
 
+/**
+ * Adds or edits the interview date of a Person
+ */
 public class DateCommand extends Command {
     public static final String COMMAND_WORD = "date";
 
@@ -33,5 +36,4 @@ public class DateCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         throw new CommandException(MESSAGE_NOT_IMPLEMENTED_YET);
     }
-
 }

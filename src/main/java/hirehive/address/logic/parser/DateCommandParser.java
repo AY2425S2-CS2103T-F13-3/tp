@@ -24,6 +24,12 @@ import hirehive.address.model.tag.Tag;
  * Parses input arguments and creates a new DateCommand object
  */
 public class DateCommandParser implements Parser<DateCommand> {
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the DateCommand
+     * and returns a DateCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public DateCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =

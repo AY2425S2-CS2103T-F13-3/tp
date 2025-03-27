@@ -43,15 +43,21 @@ public class Person {
         this.date = date;
     }
 
+    /**
+     * Method used to construct a default Person object without a note.
+     */
     public static Person createDefaultPerson(Name name, Phone phone, Email email, Address address, Role role) {
         return new Person(name, phone, email, address, role, Set.of(Tag.getDefaultTag()), new Note(Note.DEFAULT_NOTE),
-                new InterviewDate(InterviewDate.DEFAULT_DATE));
+                new InterviewDate());
     }
 
+    /**
+     * Method used to construct a default Person object with a note.
+     */
     public static Person addDefaultPersonWithNote(Name name, Phone phone, Email email, Address address, Role role,
                                                   Note note) {
         return new Person(name, phone, email, address, role, Set.of(Tag.getDefaultTag()), note,
-                new InterviewDate(InterviewDate.DEFAULT_DATE));
+                new InterviewDate());
     }
 
     public Name getName() {
@@ -126,7 +132,7 @@ public class Person {
                 && role.equals(otherPerson.role)
                 && tags.equals(otherPerson.tags)
                 && note.equals(otherPerson.note)
-                && date.equals(otherPerson.date)
+                && date.equals(otherPerson.date);
     }
 
     @Override
