@@ -2,6 +2,7 @@ package hirehive.address.logic;
 
 import static hirehive.address.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -81,6 +82,17 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         Assert.assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getPersonNote_initial_returnsNull() {
+        assertNull(logic.getPersonNote());
+    }
+
+    @Test
+    public void getPersonNote_person_getPersonNote() {
+        model.updatePersonNote(TypicalPersons.ALICE);
+        assertEquals(logic.getPersonNote(), TypicalPersons.ALICE.getNote());
     }
 
     /**

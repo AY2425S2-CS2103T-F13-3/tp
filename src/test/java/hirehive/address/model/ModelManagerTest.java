@@ -3,6 +3,7 @@ package hirehive.address.model;
 import static hirehive.address.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
@@ -91,6 +92,17 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         Assert.assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getPersonNote_initial_returnsNull() {
+        assertNull(modelManager.getPersonNote());
+    }
+
+    @Test
+    public void getPersonNote_person_getPersonNote() {
+        modelManager.updatePersonNote(TypicalPersons.ALICE);
+        assertEquals(modelManager.getPersonNote(), TypicalPersons.ALICE.getNote());
     }
 
     @Test

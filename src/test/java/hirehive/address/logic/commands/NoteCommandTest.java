@@ -23,9 +23,13 @@ import hirehive.address.model.person.Person;
 import hirehive.address.testutil.TypicalIndexes;
 import hirehive.address.testutil.TypicalPersons;
 
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for
+ * {@code NoteCommand}.
+ */
 public class NoteCommandTest {
 
-    private Model model =  new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validIndex_success() {
@@ -40,7 +44,7 @@ public class NoteCommandTest {
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         try {
             List<Person> personToDisplays = nameQuery.query(expectedModel);
-        } catch (QueryException qe) {
+        } catch (QueryException e) {
             fail();
         }
 
@@ -73,15 +77,20 @@ public class NoteCommandTest {
         NoteCommand noteFirstCommand = new NoteCommand(firstQuery);
         NoteCommand noteSecondCommand = new NoteCommand(secondQuery);
 
+        // same object -> returns true
         assertTrue(noteFirstCommand.equals(noteFirstCommand));
 
+        // same values -> returns true
         NoteCommand noteFirstCommandCopy = new NoteCommand(firstQuery);
         assertTrue(noteFirstCommand.equals(noteFirstCommandCopy));
 
+        // different type -> returns false
         assertFalse(noteFirstCommand.equals(1));
 
+        // null object -> returns false
         assertFalse(noteFirstCommand.equals(null));
 
+        // different values -> returns false
         assertFalse(noteFirstCommand.equals(noteSecondCommand));
 
     }

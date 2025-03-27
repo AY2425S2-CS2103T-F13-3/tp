@@ -60,4 +60,12 @@ public class CommandResultTest {
                 + ", exit=" + commandResult.isExit() + "}";
         assertEquals(expected, commandResult.toString());
     }
+
+    @Test
+    public void isShowNote() {
+        CommandResult commandResult1 = new CommandResult("feedback", false, false, true);
+        CommandResult commandResult2 = new CommandResult("feedback");
+        assertTrue(commandResult1.isShowNote());
+        assertFalse(commandResult2.isShowNote());
+    }
 }
