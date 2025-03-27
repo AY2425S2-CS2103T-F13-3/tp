@@ -21,6 +21,7 @@ import hirehive.address.model.Model;
 import hirehive.address.model.ModelManager;
 import hirehive.address.model.UserPrefs;
 import hirehive.address.model.person.Person;
+import hirehive.address.model.person.Role;
 import hirehive.address.testutil.EditPersonDescriptorBuilder;
 import hirehive.address.testutil.PersonBuilder;
 import hirehive.address.testutil.TypicalIndexes;
@@ -67,6 +68,14 @@ public class EditCommandTest {
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
+
+    @Test
+    public void isAnyFieldEdited_onlyRoleEdited_returnsTrue() {
+        EditCommand.EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
+        descriptor.setRole(new Role("Developer"));
+        assertTrue(descriptor.isAnyFieldEdited());
+    }
+
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
@@ -144,6 +153,7 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
+
     @Test
     public void equals() {
         final EditCommand standardCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, DESC_AMY);
@@ -167,6 +177,21 @@ public class EditCommandTest {
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, DESC_BOB)));
+    }
+
+    @Test
+    public void equals_differentRole_returnsFalse() {
+        EditCommand.EditPersonDescriptor descriptorWithRole1 = new EditPersonDescriptorBuilder()
+                .withName(VALID_NAME_BOB)
+                .withRole("Software Engineer") // Role 1
+                .build();
+
+        EditCommand.EditPersonDescriptor descriptorWithRole2 = new EditPersonDescriptorBuilder()
+                .withName(VALID_NAME_BOB)
+                .withRole("Project Manager") // Different Role
+                .build();
+
+        assertFalse(descriptorWithRole1.equals(descriptorWithRole2));
     }
 
     @Test
