@@ -15,14 +15,14 @@ public class UpcomingInterviewPredicateTest {
         int firstPredicateDays = 5;
         int secondPredicateDays = 10;
 
-        UpcomingInterviewPredicate firstPredicate = new UpcomingInterviewPredicate(firstPredicateDays);
-        UpcomingInterviewPredicate secondPredicate = new UpcomingInterviewPredicate(secondPredicateDays);
+        UpcomingInterviewPredicate firstPredicate = new UpcomingInterviewPredicate(firstPredicateDays, TEST_CURRENT_DAY);
+        UpcomingInterviewPredicate secondPredicate = new UpcomingInterviewPredicate(secondPredicateDays, TEST_CURRENT_DAY);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        UpcomingInterviewPredicate firstPredicateCopy = new UpcomingInterviewPredicate(firstPredicateDays);
+        UpcomingInterviewPredicate firstPredicateCopy = new UpcomingInterviewPredicate(firstPredicateDays, TEST_CURRENT_DAY);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false

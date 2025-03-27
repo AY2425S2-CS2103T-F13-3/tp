@@ -39,4 +39,19 @@ public class UpcomingInterviewPredicate implements Predicate<Person> {
         return person.getDate().value.map(date -> ChronoUnit.DAYS.between(currDay, date) <= this.days)
                 .orElse(false);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof UpcomingInterviewPredicate)) {
+            return false;
+        }
+
+        UpcomingInterviewPredicate otherUpcomingInterviewPredicate = (UpcomingInterviewPredicate) other;
+        return this.days == otherUpcomingInterviewPredicate.days && this.currDay.equals(otherUpcomingInterviewPredicate.currDay);
+    }
 }
