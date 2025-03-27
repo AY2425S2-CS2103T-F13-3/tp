@@ -22,6 +22,7 @@ import hirehive.address.model.Model;
 import hirehive.address.model.ModelManager;
 import hirehive.address.model.ReadOnlyAddressBook;
 import hirehive.address.model.UserPrefs;
+import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
 import hirehive.address.storage.JsonAddressBookStorage;
 import hirehive.address.storage.JsonUserPrefsStorage;
@@ -85,8 +86,8 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getPersonNote_initial_returnsNull() {
-        assertNull(logic.getPersonNote());
+    public void getPersonNote_initial_returnsDefaultNote() {
+        assertEquals(logic.getPersonNote(), new Note(Note.DEFAULT_NOTE));
     }
 
     @Test

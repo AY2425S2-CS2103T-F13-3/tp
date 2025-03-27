@@ -36,6 +36,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        personNote = new Note(Note.DEFAULT_NOTE);
     }
 
     public ModelManager() {

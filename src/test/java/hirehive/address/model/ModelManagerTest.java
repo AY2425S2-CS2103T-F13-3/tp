@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import hirehive.address.commons.core.GuiSettings;
 import hirehive.address.model.person.NameContainsKeywordsPredicate;
+import hirehive.address.model.person.Note;
 import hirehive.address.testutil.AddressBookBuilder;
 import hirehive.address.testutil.Assert;
 import hirehive.address.testutil.TypicalPersons;
@@ -95,8 +96,8 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getPersonNote_initial_returnsNull() {
-        assertNull(modelManager.getPersonNote());
+    public void getPersonNote_initial_returnsDefaultNote() {
+        assertEquals(modelManager.getPersonNote(), new Note(Note.DEFAULT_NOTE));
     }
 
     @Test
