@@ -6,24 +6,22 @@ import hirehive.address.commons.util.ToStringBuilder;
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.exceptions.CommandException;
 import hirehive.address.model.Model;
-import hirehive.address.model.person.PersonContainsTagPredicate;
+import hirehive.address.model.person.UpcomingInterviewPredicate;
 
 /**
- * Finds and lists all persons in address book whose tags contain any of the argument tags.
- * Tag matching is case insensitive.
+ * Finds and lists all persons in address book whose interviews are coming up within a number of days.
+ * Filter is start and end date-inclusive.
  */
-public class FilterCommand extends Command {
-    public static final String COMMAND_WORD = "filter";
+public class ReminderCommand extends Command {
+    public static final String COMMAND_WORD = "remind";
     public static final String NOT_IMPLEMENTED_TEXT = "Command not implemented yet";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all persons with an upcoming interview "
+            + "within the given amount of days and displays them as a list with index numbers.\n"
+            + "Parameters: DAYS\n"
+            + "Example: " + COMMAND_WORD + " 3";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all persons with the given tag "
-            + "(case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: t/ TAG\n"
-            + "Example: " + COMMAND_WORD + " applicant";
-
-    private final PersonContainsTagPredicate predicate;
-
-    public FilterCommand(PersonContainsTagPredicate predicate) {
+    private final UpcomingInterviewPredicate predicate;
+    public ReminderCommand(UpcomingInterviewPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -39,12 +37,12 @@ public class FilterCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FilterCommand)) {
+        if (!(other instanceof ReminderCommand)) {
             return false;
         }
 
-        FilterCommand otherFilterCommand = (FilterCommand) other;
-        return predicate.equals(otherFilterCommand.predicate);
+        ReminderCommand otherReminderCommand = (ReminderCommand) other;
+        return predicate.equals(otherReminderCommand.predicate);
     }
 
     @Override
