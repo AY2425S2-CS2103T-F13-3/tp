@@ -3,7 +3,11 @@ package hirehive.address.model.util;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import hirehive.address.commons.exceptions.IllegalValueException;
+import hirehive.address.logic.parser.ParserUtil;
+import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.AddressBook;
 import hirehive.address.model.ReadOnlyAddressBook;
 import hirehive.address.model.person.Address;
@@ -55,7 +59,7 @@ public class SampleDataUtil {
      */
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
+                .map(ParserUtil::parseTag)
                 .collect(Collectors.toSet());
     }
 

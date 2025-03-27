@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import hirehive.address.commons.exceptions.IllegalValueException;
+import hirehive.address.logic.parser.ParserUtil;
+import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.tag.Tag;
 
 /**
@@ -39,10 +41,9 @@ class JsonAdaptedTag {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public Tag toModelType() throws IllegalValueException {
-        if (!Tag.isValidTagName(tagName)) {
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
-        }
-        return new Tag(tagName);
+        Tag tag;
+        tag = ParserUtil.parseTag(tagName);
+        return tag;
     }
 
 }
