@@ -1,28 +1,28 @@
 ---
 layout: page
 title: User Guide
+
 ---
-# User Guide
+
 HireHive is an **all-in-one desktop application** designed to streamline recruitment for small businesses and hiring managers, **combining the efficiency of a Command Line Interface (CLI) with the ease of a Graphical User Interface (GUI)**. It simplifies tracking candidates, organizing interview notes, and managing hiring stages—all in one centralized platform. With **fast keyboard-driven commands**, HireHive lets you complete tasks quicker than traditional GUI apps, so you can focus less on administrative work and more on finding the best talent.
 
 - [Quick start](#quick-start-)
+- [Command Summary](#command-summary)
 - [Features](#features-)
   - [Viewing help: `help`](#viewing-help--help)
   - [Adding a person: `add`](#adding-a-person-add)
-  - Listing all persons: `list`
-  - Editing a person: `edit`
-  - Tagging a person: `tag`
-  - Filter persons by tag: `filter`
-  - Locating persons by name `find`
-  - Deleting a person: `delete`
-  - Clearing all entries: `clear`
-  - Exiting the program: `exit`
-  - Saving that data
-  - Editing the data file
-- Glossary
-- FAQ
-- Known Issues
-- Command Summary
+  - [Listing all persons: `list`](#listing-all-persons--list)
+  - [Editing a person: `edit`](#editing-a-person--edit)
+  - [Tagging a person: `tag`](#tagging-a-person--tag)
+  - [Filter persons by tag: `filter`](#filter-persons-by-tag--filter)
+  - [Locating persons by name `find`](#locating-persons-by-name-find)
+  - [Deleting a person: `delete`](#deleting-a-person--delete)
+  - [Clearing all entries: `clear`](#clearing-all-entries--clear)
+  - [Exiting the program: `exit`](#exiting-the-program--exit)
+  - [Saving the data](#saving-the-data)
+  - [Editing the data file](#editing-the-data-file)
+- [FAQ](#faq)
+- [Known Issues](#known-issues)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -58,7 +58,25 @@ HireHive is an **all-in-one desktop application** designed to streamline recruit
 
   * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#features) section below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Command summary
+
+Action | Format, Examples
+--------|------------------
+**Help** | `help`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [i/INFO]` <br> e.g., `add n/James Ho p/87654321 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/software engineer intern i/26 years old`
+**List** | `list`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Tag** | `tag n/NAME [t/TAG]…​`
+**Filter** |
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Delete** | `delete n/NAME`<br> e.g., `delete n/John Doe`
+**Clear** | `clear`
+**Exit** | `exit`
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -122,7 +140,7 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in HireHive.
+Shows a list of all applicants in HireHive.
 
 Format: `list`
 
@@ -145,12 +163,24 @@ Examples:
 
 ### Tagging a person : `tag`
 
-Changes or adds the tags of an existing application in HireHive. 
+Changes or adds tags to the specified person from HireHive. 
 
-Format: 
+Format: `tag n/NAME t/TAG`
+
+* Tags a person if the given name partially matches **exactly one person** in the list (case-insensitive).
+* If multiple matches are found, a list of all matching names will be displayed. The user must then enter the **full name** of the person they want to delete.
+
+Examples:
+* `tag n/John Doe t/Applicant` will tag John Doe as "Applicant" in HireHive
 
 ### Filter persons by tag : `filter`
 
+Shows a list of all applicants with a certain tag in HireHive.
+
+Format: `filter t/TAG`
+
+* The search is case-insensitive. e.g `applicant` will match `Applicant`
+* Only full words will be matched e.g. `Reject` will not match `Rejected`
 
 ### Locating persons by name: `find`
 
@@ -174,15 +204,15 @@ Examples:
 
 Deletes the specified person from HireHive.
 
-Format: `delete INDEX`
+Format: `delete n/NAME`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the person if the given name partially matches **exactly one person** in the list (case-insensitive).
+* If multiple matches are found, a list of all matching names will be displayed. The user must then enter the **full name** of the person they want to delete.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete n/John Doe` deletes John Doe's contact from HireHive
+
+![delete message](images/Ui-DeleteCommand.png)
 
 ### Clearing all entries : `clear`
 
@@ -198,7 +228,7 @@ Format: `exit`
 
 ### Saving the data
 
-HireHive data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+HireHive data are saved in the hard disk automatically after any command that changes the data. If successfully saved, the output following the command will display the success message. There is no need to save manually.
 
 ### Editing the data file
 
@@ -226,17 +256,3 @@ Furthermore, certain edits can cause HireHive to behave in unexpected ways (e.g.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
-
-Action | Format, Examples
---------|------------------
-**Help** | `help`
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [i/INFO]` <br> e.g., `add n/James Ho p/87654321 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/software engineer intern i/26 years old`
-**List** | `list`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Tag** |
-**Filter** |
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Delete** | `delete NAME`<br> e.g., `delete n/John Doe`
-**Clear** | `clear`
-**Exit** | `exit`
