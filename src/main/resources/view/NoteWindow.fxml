@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.stage.Stage?>
+
+<fx:root title="Note" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+         minHeight="300" minWidth="400">
+    <icons>
+        <Image url="@/images/note_icon.png" />
+    </icons>
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@NoteWindow.css" />
+            </stylesheets>
+
+            <HBox alignment="CENTER" fx:id="noteContainer">
+                <children>
+                    <Label fx:id="note" text="Label">
+                        <HBox.margin>
+                        </HBox.margin>
+                    </Label>
+                </children>
+                <padding>
+                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                </padding>
+            </HBox>
+        </Scene>
+    </scene>
+</fx:root>

@@ -3,6 +3,7 @@ package hirehive.address.model;
 import static hirehive.address.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import hirehive.address.commons.core.GuiSettings;
 import hirehive.address.model.person.NameContainsKeywordsPredicate;
+import hirehive.address.model.person.Note;
 import hirehive.address.testutil.AddressBookBuilder;
 import hirehive.address.testutil.Assert;
 import hirehive.address.testutil.TypicalPersons;
@@ -91,6 +93,17 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         Assert.assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getPersonNote_initial_returnsDefaultNote() {
+        assertEquals(modelManager.getPersonNote(), new Note(Note.DEFAULT_NOTE));
+    }
+
+    @Test
+    public void getPersonNote_person_getPersonNote() {
+        modelManager.updatePersonNote(TypicalPersons.ALICE);
+        assertEquals(modelManager.getPersonNote(), TypicalPersons.ALICE.getNote());
     }
 
     @Test

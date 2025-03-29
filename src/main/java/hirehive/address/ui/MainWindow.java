@@ -39,6 +39,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private NoteWindow noteWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -71,6 +72,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        noteWindow = new NoteWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -154,6 +156,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the note window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleNote() {
+        if (!noteWindow.isShowing()) {
+            noteWindow.show();
+        } else {
+            noteWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -166,6 +180,7 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
+        noteWindow.hide();
         helpWindow.hide();
         primaryStage.hide();
     }
@@ -188,6 +203,7 @@ public class MainWindow extends UiPart<Stage> {
                 userFeedback += "\nSuccess: Applicant data has been saved.";
             }
             resultDisplay.setFeedbackToUser(userFeedback);
+            noteWindow.setNote(logic);
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -195,6 +211,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowNote()) {
+                handleNote();
             }
 
             return commandResult;

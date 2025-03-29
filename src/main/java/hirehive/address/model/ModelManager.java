@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import hirehive.address.commons.core.GuiSettings;
 import hirehive.address.commons.core.LogsCenter;
 import hirehive.address.commons.util.CollectionUtil;
+import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -22,6 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private Note personNote;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +36,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        personNote = new Note(Note.DEFAULT_NOTE);
     }
 
     public ModelManager() {
@@ -126,6 +129,16 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updatePersonNote(Person person) {
+        personNote = person.getNote();
+    }
+
+    @Override
+    public Note getPersonNote() {
+        return personNote;
     }
 
     @Override
