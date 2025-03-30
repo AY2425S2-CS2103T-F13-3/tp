@@ -39,7 +39,7 @@ DeleteCommandParser -> ArgumentTokenizer : tokenize("n/Alice", PREFIX_NAME)
 activate ArgumentTokenizer
 
 create ArgumentMultimap
-ArgumentTokenizer -> ArgumentMultimap : store extracted name
+ArgumentTokenizer -> ArgumentMultimap : extractArguments
 activate ArgumentMultimap
 ArgumentMultimap --> ArgumentTokenizer
 deactivate ArgumentMultimap
