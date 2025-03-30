@@ -6,12 +6,16 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
+participant ":ArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
+participant ":ArgumentMultimap" as ArgumentMultimap LOGIC_COLOR
+participant "q:NameQuery" as NameQuery LOGIC_COLOR
 participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
+participant "n:NameContainsKeywordsPredicate" as NameContainsKeywordsPredicate MODEL_COLOR
 end box
 
 [-> LogicManager : execute("delete n/Alice")
@@ -30,11 +34,37 @@ deactivate DeleteCommandParser
 AddressBookParser -> DeleteCommandParser : parse("n/Alice")
 activate DeleteCommandParser
 
+DeleteCommandParser -> ArgumentTokenizer : tokenize("n/Alice", PREFIX_NAME)
+activate ArgumentTokenizer
+ArgumentTokenizer -> ArgumentMultimap : store extracted name
+activate ArgumentMultimap
+ArgumentMultimap --> ArgumentTokenizer
+deactivate ArgumentMultimap
+ArgumentTokenizer --> DeleteCommandParser
+deactivate ArgumentTokenizer
+
+DeleteCommandParser -> ArgumentMultimap : getValue(PREFIX_NAME)
+activate ArgumentMultimap
+ArgumentMultimap --> DeleteCommandParser : "Alice"
+deactivate ArgumentMultimap
+
+create NameContainsKeywordsPredicate
+DeleteCommandParser -> NameContainsKeywordsPredicate : new NameContainsKeywordsPredicate("Alice")
+activate NameContainsKeywordsPredicate
+NameContainsKeywordsPredicate --> DeleteCommandParser : n
+deactivate NameContainsKeywordsPredicate
+
+create NameQuery
+DeleteCommandParser -> NameQuery : new(n)
+activate NameQuery
+NameQuery --> DeleteCommandParser : q
+deactivate NameQuery
+
 create DeleteCommand
-DeleteCommandParser -> DeleteCommand
+DeleteCommandParser -> DeleteCommand : new DeleteCommand(q)
 activate DeleteCommand
 
-DeleteCommand --> DeleteCommandParser :
+DeleteCommand --> DeleteCommandParser : d
 deactivate DeleteCommand
 
 DeleteCommandParser --> AddressBookParser : d
@@ -49,9 +79,27 @@ deactivate AddressBookParser
 LogicManager -> DeleteCommand : execute(m)
 activate DeleteCommand
 
-DeleteCommand -> Model : deletePerson(Alice)
+DeleteCommand -> NameQuery
+activate NameQuery
+
+NameQuery -> Model : query(m)
 activate Model
 
+Model -> NameContainsKeywordsPredicate : updateFilteredPersonList
+activate NameContainsKeywordsPredicate
+NameContainsKeywordsPredicate --> Model
+deactivate NameContainsKeywordsPredicate
+
+Model --> NameQuery
+deactivate Model
+
+NameQuery --> DeleteCommand
+deactivate NameQuery
+
+DeleteCommand -> Model : deletePerson(p)
+activate Model
+Model --> DeleteCommand
+DeleteCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
 Model --> DeleteCommand
 deactivate Model
 
