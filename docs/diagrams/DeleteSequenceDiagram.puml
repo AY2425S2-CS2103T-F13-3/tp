@@ -34,8 +34,11 @@ deactivate DeleteCommandParser
 AddressBookParser -> DeleteCommandParser : parse("n/Alice")
 activate DeleteCommandParser
 
+create ArgumentTokenizer
 DeleteCommandParser -> ArgumentTokenizer : tokenize("n/Alice", PREFIX_NAME)
 activate ArgumentTokenizer
+
+create ArgumentMultimap
 ArgumentTokenizer -> ArgumentMultimap : store extracted name
 activate ArgumentMultimap
 ArgumentMultimap --> ArgumentTokenizer
