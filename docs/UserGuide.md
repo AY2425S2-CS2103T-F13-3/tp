@@ -28,7 +28,7 @@ HireHive is an **all-in-one desktop application** designed to streamline recruit
 --------------------------------------------------------------------------------------------------------------------
 
 
-## Quick start 
+## Quick start
 1. Ensure you have Java `17` or above installed in your computer.<br>
    - For **Mac users:** Ensure you have the precise [JDK](#glossary) version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
@@ -48,7 +48,7 @@ HireHive is an **all-in-one desktop application** designed to streamline recruit
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/intern`: Adds an applicant named `John Doe` to HireHive, with his relevant information
 
    * `delete n/John Doe` : Deletes the applicant `John Doe` from the current list.
-   
+
    * `edit 3 n/Josef` : Edits the name of the 3rd applicant in the list to Josef
 
    * `find John Doe`: Searches for John Doe in the current list.
@@ -81,7 +81,7 @@ Action | Format, Examples
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features 
+## Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -164,7 +164,7 @@ Examples:
 
 ### Tagging a person : `tag`
 
-Changes or adds tags to the specified person from HireHive. 
+Changes or adds tags to the specified person from HireHive.
 
 Format: `tag n/NAME t/TAG`
 
