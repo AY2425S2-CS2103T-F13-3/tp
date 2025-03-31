@@ -91,7 +91,6 @@ public class LogicManager implements Logic {
     public Note getPersonNote() {
         return model.getPersonNote();
     }
-  
     @Override
     public int getFilteredPersonListSize() {
         return model.getFilteredPersonList().size();
