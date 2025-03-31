@@ -30,6 +30,9 @@ public class NoteCommandParser implements Parser<NoteCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
+        //argMultimap.
+
         String nameKeyword = argMultimap.getValue(PREFIX_NAME).get();
         NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nameKeyword));
 
