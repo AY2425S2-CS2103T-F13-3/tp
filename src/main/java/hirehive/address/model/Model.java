@@ -89,5 +89,5 @@ public interface Model {
      * Returns the number of applicants in the filtered list
      * @return the size of the filtered list
      */
-    int getFilteredPersonListSize();
+
 }
