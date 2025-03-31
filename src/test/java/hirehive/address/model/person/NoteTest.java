@@ -22,19 +22,19 @@ public class NoteTest {
     }
 
     @Test
-    public void constructor_invalidName_throwsIllegalArgumentException() {
+    public void constructor_invalidNote_throwsIllegalArgumentException() {
         Assert.assertThrows(IllegalArgumentException.class, () -> new Note(invalidNote));
     }
 
     @Test
-    public void isValidName() {
-        // null name
+    public void isValidNote() {
+        // null note
         Assert.assertThrows(NullPointerException.class, () -> Note.isValidNote(null));
 
-        // invalid name
+        // invalid note
         assertFalse(Note.isValidNote(invalidNote)); // >500 characters
 
-        // valid name
+        // valid note
         assertTrue(Note.isValidNote("Very smart")); // alphabets only
         assertTrue(Note.isValidNote("!@#$%^&*()_+")); // mix of symbols
     }

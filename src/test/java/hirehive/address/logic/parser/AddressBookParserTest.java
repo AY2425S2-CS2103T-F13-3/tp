@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.AddCommand;
 import hirehive.address.logic.commands.ClearCommand;
+import hirehive.address.logic.commands.DateCommand;
 import hirehive.address.logic.commands.DeleteCommand;
 import hirehive.address.logic.commands.EditCommand;
 import hirehive.address.logic.commands.ExitCommand;
@@ -20,6 +21,7 @@ import hirehive.address.logic.commands.FilterCommand;
 import hirehive.address.logic.commands.FindCommand;
 import hirehive.address.logic.commands.HelpCommand;
 import hirehive.address.logic.commands.ListCommand;
+import hirehive.address.logic.commands.NoteCommand;
 import hirehive.address.logic.commands.queries.NameQuery;
 import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.person.NameContainsKeywordsPredicate;
@@ -91,9 +93,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_filter() throws Exception {
-        String tag = "foo";
+        String tag = "Applicant";
         FilterCommand command = (FilterCommand) parser.parseCommand(FilterCommand.COMMAND_WORD + " t/ " + tag);
-        assertEquals(new FilterCommand(new PersonContainsTagPredicate(new Tag(tag))), command);
+        assertEquals(new FilterCommand(new PersonContainsTagPredicate(ParserUtil.parseTag(tag))), command);
     }
 
     @Test
@@ -108,6 +110,25 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
+    @Test
+    public void parseCommand_date() throws Exception {
+        assertTrue(parser.parseCommand(DateCommand.COMMAND_WORD) instanceof DateCommand);
+        assertTrue(parser.parseCommand(DateCommand.COMMAND_WORD + " 3") instanceof DateCommand);
+    }
+
+    @Test
+    public void parseCommand_note() throws Exception {
+        String nameToDisplay = TypicalPersons.ALICE.getName().fullName;
+
+        NoteCommand expectedCommand = new NoteCommand(
+                new NameQuery(new NameContainsKeywordsPredicate(nameToDisplay))
+        );
+        NoteCommand command = (NoteCommand) parser.parseCommand(
+                NoteCommand.COMMAND_WORD + " " + "n/" + nameToDisplay
+        );
+
+        assertEquals(expectedCommand, command);
+    }
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {

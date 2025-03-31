@@ -1,6 +1,7 @@
 package hirehive.address.logic.commands;
 
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static hirehive.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_NOTE;
@@ -10,6 +11,7 @@ import static hirehive.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -24,6 +26,7 @@ import hirehive.address.logic.commands.exceptions.CommandException;
 import hirehive.address.model.Model;
 import hirehive.address.model.person.Address;
 import hirehive.address.model.person.Email;
+import hirehive.address.model.person.InterviewDate;
 import hirehive.address.model.person.Name;
 import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
@@ -49,6 +52,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ROLE + "ROLE]"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "[" + PREFIX_NOTE + "NOTE]"
+            + "[" + PREFIX_DATE + "DATE]"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -90,6 +94,7 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.updatePersonNote(editedPerson);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
@@ -107,9 +112,10 @@ public class EditCommand extends Command {
         Role updatedRole = editPersonDescriptor.getRole().orElse(personToEdit.getRole());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
+        InterviewDate updatedDate = editPersonDescriptor.getDate().orElse(personToEdit.getDate());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRole, updatedTags,
-                updatedNote);
+                updatedNote, updatedDate);
     }
 
     protected Index getIndex() {
@@ -156,6 +162,7 @@ public class EditCommand extends Command {
         private Role role;
         private Set<Tag> tags;
         private Note note;
+        private InterviewDate date;
 
         public EditPersonDescriptor() {}
 
@@ -171,13 +178,14 @@ public class EditCommand extends Command {
             setRole(toCopy.role);
             setTags(toCopy.tags);
             setNote(toCopy.note);
+            setDate(toCopy.date);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, note);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, role, tags, note, date);
         }
 
         public void setName(Name name) {
@@ -228,6 +236,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(note);
         }
 
+        public void setDate(InterviewDate date) {
+            this.date = date;
+        }
+
+        public Optional<InterviewDate> getDate() {
+            return Optional.ofNullable(date);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -261,8 +277,10 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(role, otherEditPersonDescriptor.role)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
-                    && Objects.equals(note, otherEditPersonDescriptor.note);
+                    && Objects.equals(note, otherEditPersonDescriptor.note)
+                    && Objects.equals(date, otherEditPersonDescriptor.date);
         }
 
         @Override
@@ -275,6 +293,7 @@ public class EditCommand extends Command {
                     .add("role", role)
                     .add("tags", tags)
                     .add("note", note)
+                    .add("interviewDate", date)
                     .toString();
         }
     }

@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import hirehive.address.commons.core.GuiSettings;
+import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
 import javafx.collections.ObservableList;
 
@@ -85,9 +86,8 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    /**
-     * Returns the number of applicants in the filtered list
-     * @return the size of the filtered list
-     */
+    void updatePersonNote(Person person);
+
+    Note getPersonNote();
 
 }

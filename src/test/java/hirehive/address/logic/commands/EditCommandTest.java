@@ -4,7 +4,7 @@ import static hirehive.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static hirehive.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static hirehive.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static hirehive.address.logic.commands.CommandTestUtil.VALID_TAG_CANDIDATE;
 import static hirehive.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static hirehive.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static hirehive.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -21,6 +21,7 @@ import hirehive.address.model.Model;
 import hirehive.address.model.ModelManager;
 import hirehive.address.model.UserPrefs;
 import hirehive.address.model.person.Person;
+import hirehive.address.model.person.Role;
 import hirehive.address.testutil.EditPersonDescriptorBuilder;
 import hirehive.address.testutil.PersonBuilder;
 import hirehive.address.testutil.TypicalIndexes;
@@ -54,10 +55,10 @@ public class EditCommandTest {
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
         Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withTags(VALID_TAG_CANDIDATE).build();
 
         EditCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_CANDIDATE).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
@@ -67,6 +68,14 @@ public class EditCommandTest {
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
+
+    @Test
+    public void isAnyFieldEdited_onlyRoleEdited_returnsTrue() {
+        EditCommand.EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
+        descriptor.setRole(new Role("Developer"));
+        assertTrue(descriptor.isAnyFieldEdited());
+    }
+
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
@@ -144,6 +153,7 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
+
     @Test
     public void equals() {
         final EditCommand standardCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, DESC_AMY);
@@ -167,6 +177,21 @@ public class EditCommandTest {
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, DESC_BOB)));
+    }
+
+    @Test
+    public void equals_differentRole_returnsFalse() {
+        EditCommand.EditPersonDescriptor descriptorWithRole1 = new EditPersonDescriptorBuilder()
+                .withName(VALID_NAME_BOB)
+                .withRole("Software Engineer") // Role 1
+                .build();
+
+        EditCommand.EditPersonDescriptor descriptorWithRole2 = new EditPersonDescriptorBuilder()
+                .withName(VALID_NAME_BOB)
+                .withRole("Project Manager") // Different Role
+                .build();
+
+        assertFalse(descriptorWithRole1.equals(descriptorWithRole2));
     }
 
     @Test

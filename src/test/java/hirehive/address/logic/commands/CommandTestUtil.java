@@ -33,11 +33,12 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_ROLE_AMY = "Software engineer";
     public static final String VALID_ROLE_BOB = "Cybersecurity specialist";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_CANDIDATE = "candidate";
+    public static final String VALID_TAG_APPLICANT = "applicant";
     public static final String DEFAULT_TAG_APPLICANT = "Applicant";
     public static final String VALID_NOTE_AMY = "30 years old";
     public static final String VALID_NOTE_BOB = "";
+    public static final String VALID_DATE_BOB = "01/01/2025";
 
     public static final String NAME_DESC_AMY = " " + CliSyntax.PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + CliSyntax.PREFIX_NAME + VALID_NAME_BOB;
@@ -49,10 +50,12 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + CliSyntax.PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String ROLE_DESC_AMY = " " + CliSyntax.PREFIX_ROLE + VALID_ROLE_AMY;
     public static final String ROLE_DESC_BOB = " " + CliSyntax.PREFIX_ROLE + VALID_ROLE_BOB;
-    public static final String TAG_DESC_FRIEND = " " + CliSyntax.PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + CliSyntax.PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String TAG_DESC_APPLICANT = " " + CliSyntax.PREFIX_TAG + VALID_TAG_APPLICANT;
+    public static final String TAG_DESC_CANDIDATE = " " + CliSyntax.PREFIX_TAG + VALID_TAG_CANDIDATE;
     public static final String NOTE_DESC_AMY = " " + CliSyntax.PREFIX_NOTE + VALID_NOTE_AMY;
     public static final String NOTE_DESC_BOB = " " + CliSyntax.PREFIX_NOTE + VALID_NOTE_BOB;
+
+    public static final String DATE_DESC_BOB = " " + CliSyntax.PREFIX_DATE + VALID_DATE_BOB;
 
     public static final String INVALID_NAME_DESC = " " + CliSyntax.PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + CliSyntax.PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -66,7 +69,7 @@ public class CommandTestUtil {
             + "pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, "
             + "aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. "
             + "Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus"; // >500 chars not allowed for notes
-
+    public static final String INVALID_DATE_DESC = " " + CliSyntax.PREFIX_DATE + "01012025";
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
@@ -76,10 +79,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withRole(VALID_ROLE_AMY).withTags(VALID_TAG_FRIEND).withNote(VALID_NOTE_AMY).build();
+                .withRole(VALID_ROLE_AMY).withTags(VALID_TAG_APPLICANT).withNote(VALID_NOTE_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withRole(VALID_ROLE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+                .withRole(VALID_ROLE_BOB).withTags(VALID_TAG_CANDIDATE, VALID_TAG_APPLICANT)
                 .withNote(VALID_NOTE_BOB).build();
     }
 

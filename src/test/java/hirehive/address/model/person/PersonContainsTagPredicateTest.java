@@ -10,14 +10,16 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import hirehive.address.logic.parser.ParserUtil;
+import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.tag.Tag;
 import hirehive.address.testutil.PersonBuilder;
 
 public class PersonContainsTagPredicateTest {
     @Test
     public void equals() {
-        Tag firstPredicateTag = new Tag("first");
-        Tag secondPredicateTag = new Tag("second");
+        Tag firstPredicateTag = Tag.APPLICANT;
+        Tag secondPredicateTag = Tag.CANDIDATE;
 
         PersonContainsTagPredicate firstPredicate = new PersonContainsTagPredicate(firstPredicateTag);
         PersonContainsTagPredicate secondPredicate = new PersonContainsTagPredicate(secondPredicateTag);
@@ -40,30 +42,30 @@ public class PersonContainsTagPredicateTest {
     }
 
     @Test
-    public void test_nameContainsKeywords_returnsTrue() {
+    public void test_tagContainsKeywords_returnsTrue() throws ParseException {
         // One Tag
-        PersonContainsTagPredicate predicate = new PersonContainsTagPredicate(new Tag("applicant"));
+        PersonContainsTagPredicate predicate = new PersonContainsTagPredicate(ParserUtil.parseTag("applicant"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withTags("applicant").build()));
 
         // Mixed-case tag
-        predicate = new PersonContainsTagPredicate(new Tag("Applicant"));
+        predicate = new PersonContainsTagPredicate(ParserUtil.parseTag("Applicant"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withTags("applicant").build()));
     }
 
     @Test
-    public void test_nameDoesNotContainKeywords_returnsFalse() {
-        PersonContainsTagPredicate predicate = new PersonContainsTagPredicate(new Tag("applicant"));
+    public void test_tagDoesNotContainKeywords_returnsFalse() throws ParseException {
+        PersonContainsTagPredicate predicate = new PersonContainsTagPredicate(ParserUtil.parseTag("applicant"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").withTags("rejected").build()));
 
         // Keywords match phone, email and address, but does not match name
-        predicate = new PersonContainsTagPredicate(new Tag("Alice"));
+        predicate = new PersonContainsTagPredicate(ParserUtil.parseTag("applicant"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("91234567")
                 .withEmail("alice@email.com").withAddress("Main Street").withTags("rejected").build()));
     }
 
     @Test
     public void toStringMethod() {
-        Tag tag = new Tag("test");
+        Tag tag = Tag.APPLICANT;
         PersonContainsTagPredicate predicate = new PersonContainsTagPredicate(tag);
 
         String expected = PersonContainsTagPredicate.class.getCanonicalName() + "{tag=" + tag + "}";

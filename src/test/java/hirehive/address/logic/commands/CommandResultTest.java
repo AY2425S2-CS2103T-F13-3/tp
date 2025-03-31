@@ -14,7 +14,7 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", false, false)));
+        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, false)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -29,10 +29,10 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("different")));
 
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", true, false, false)));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, false)));
     }
 
     @Test
@@ -46,10 +46,10 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
         // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false, false).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true, false).hashCode());
     }
 
     @Test
@@ -59,5 +59,37 @@ public class CommandResultTest {
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
                 + ", exit=" + commandResult.isExit() + "}";
         assertEquals(expected, commandResult.toString());
+    }
+
+    @Test
+    public void isShowNote() {
+        CommandResult commandResult1 = new CommandResult("feedback", false, false, true);
+        CommandResult commandResult2 = new CommandResult("feedback");
+        assertTrue(commandResult1.isShowNote());
+        assertFalse(commandResult2.isShowNote());
+    }
+
+    @Test
+    public void isList() {
+        CommandResult commandResult1 = new CommandResult(ListCommand.MESSAGE_SUCCESS);
+        CommandResult commandResult2 = new CommandResult("Not list");
+
+        // is a list command result -> return true
+        assertTrue(commandResult1.isList());
+
+        // not a list command result -> return false
+        assertFalse(commandResult2.isList());
+    }
+
+    @Test
+    public void isFind() {
+        CommandResult commandResult1 = new CommandResult("2 persons listed!");
+        CommandResult commandResult2 = new CommandResult("Not find command");
+
+        // is a find command result -> return true
+        assertTrue(commandResult1.isFind());
+
+        // not a find command result -> return false
+        assertFalse(commandResult2.isFind());
     }
 }

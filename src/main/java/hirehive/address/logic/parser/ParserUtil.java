@@ -3,6 +3,7 @@ package hirehive.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,6 +12,7 @@ import hirehive.address.commons.util.StringUtil;
 import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.person.Address;
 import hirehive.address.model.person.Email;
+import hirehive.address.model.person.InterviewDate;
 import hirehive.address.model.person.Name;
 import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Phone;
@@ -120,11 +122,21 @@ public class ParserUtil {
      */
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
+        String adjustedTag = tag.trim().toLowerCase();
+        switch (adjustedTag) {
+        case "applicant":
+            return Tag.APPLICANT;
+        case "candidate":
+            return Tag.CANDIDATE;
+        case "interviewee":
+            return Tag.INTERVIEWEE;
+        case "offered":
+            return Tag.OFFERED;
+        case "rejected":
+            return Tag.REJECTED;
+        default:
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
     }
 
     /**
@@ -152,5 +164,20 @@ public class ParserUtil {
             throw new ParseException(Note.MESSAGE_CONSTRAINTS);
         }
         return new Note(trimmedNote);
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code InterviewDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static InterviewDate parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!InterviewDate.isValidDate(trimmedDate)) {
+            throw new ParseException(InterviewDate.MESSAGE_CONSTRAINTS);
+        }
+        return new InterviewDate(trimmedDate);
     }
 }

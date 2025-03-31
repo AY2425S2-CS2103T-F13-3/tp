@@ -20,6 +20,7 @@ import hirehive.address.model.AddressBook;
 import hirehive.address.model.Model;
 import hirehive.address.model.ReadOnlyAddressBook;
 import hirehive.address.model.ReadOnlyUserPrefs;
+import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
 import hirehive.address.testutil.Assert;
 import hirehive.address.testutil.PersonBuilder;
@@ -157,6 +158,16 @@ public class AddCommandTest {
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updatePersonNote(Person person) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public Note getPersonNote() {
+            throw new AssertionError("This method should not be called");
         }
     }
 

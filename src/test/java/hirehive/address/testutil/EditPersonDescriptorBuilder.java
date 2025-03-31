@@ -1,12 +1,17 @@
 package hirehive.address.testutil;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import hirehive.address.logic.commands.EditCommand;
+import hirehive.address.logic.parser.ParserUtil;
+import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.person.Address;
 import hirehive.address.model.person.Email;
+import hirehive.address.model.person.InterviewDate;
 import hirehive.address.model.person.Name;
 import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
@@ -41,6 +46,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setRole(person.getRole());
         descriptor.setTags(person.getTags());
         descriptor.setNote(person.getNote());
+        descriptor.setDate(person.getDate());
     }
 
     /**
@@ -88,7 +94,13 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
+        Set<Tag> tagSet = new HashSet<>();
+        try {
+            tagSet = ParserUtil.parseTags(Arrays.asList(tags));
+        } catch (ParseException e) {
+            // do nothing
+        }
+
         descriptor.setTags(tagSet);
         return this;
     }
@@ -98,6 +110,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withNote(String note) {
         descriptor.setNote(new Note(note));
+        return this;
+    }
+
+    /**
+     * Sets the {@code InterviewDate} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withDate(String date) {
+        descriptor.setDate(new InterviewDate(date));
         return this;
     }
 
