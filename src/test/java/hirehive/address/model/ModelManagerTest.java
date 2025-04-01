@@ -3,11 +3,13 @@ package hirehive.address.model;
 import static hirehive.address.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -99,19 +101,34 @@ public class ModelManagerTest {
 
     @Test
     public void sortPersons_sortsApplicantsByInterviewDate() {
+        modelManager.addPerson(TypicalPersons.ELLE);
+        modelManager.addPerson(TypicalPersons.BENSON);
+
         List<Person> originalList = List.copyOf(modelManager.getFilteredPersonList());
+
         modelManager.sortPersons();
+
         List<Person> sortedList = modelManager.getFilteredPersonList();
-        assertFalse(originalList.equals(sortedList));
+
+        assertNotEquals(originalList, sortedList);
+        assertTrue(sortedList.get(0).getDate().getValue().orElse(LocalDate.MAX)
+                .isBefore(sortedList.get(1).getDate().getValue().orElse(LocalDate.MAX)));
     }
+
 
     @Test
     public void resetSorting_revertsToOriginalOrder() {
+        modelManager.addPerson(TypicalPersons.BENSON);
+        modelManager.addPerson(TypicalPersons.ELLE);
+
+        List<Person> originalList = List.copyOf(modelManager.getFilteredPersonList());
+
         modelManager.sortPersons();
-        List<Person> sortedList = List.copyOf(modelManager.getFilteredPersonList());
         modelManager.resetSorting();
+
         List<Person> resetList = modelManager.getFilteredPersonList();
-        assertFalse(sortedList.equals(resetList));
+
+        assertEquals(originalList, resetList);
     }
 
     @Test
