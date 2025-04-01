@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import hirehive.address.commons.core.GuiSettings;
 import hirehive.address.model.person.NameContainsKeywordsPredicate;
 import hirehive.address.model.person.Note;
+import hirehive.address.model.person.Person;
 import hirehive.address.testutil.AddressBookBuilder;
 import hirehive.address.testutil.Assert;
 import hirehive.address.testutil.TypicalPersons;
@@ -93,6 +95,23 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         Assert.assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void sortPersons_sortsApplicantsByInterviewDate() {
+        List<Person> originalList = List.copyOf(modelManager.getFilteredPersonList());
+        modelManager.sortPersons();
+        List<Person> sortedList = modelManager.getFilteredPersonList();
+        assertFalse(originalList.equals(sortedList));
+    }
+
+    @Test
+    public void resetSorting_revertsToOriginalOrder() {
+        modelManager.sortPersons();
+        List<Person> sortedList = List.copyOf(modelManager.getFilteredPersonList());
+        modelManager.resetSorting();
+        List<Person> resetList = modelManager.getFilteredPersonList();
+        assertFalse(sortedList.equals(resetList));
     }
 
     @Test
