@@ -1,6 +1,7 @@
 package hirehive.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+
 import hirehive.address.model.Model;
 
 /**
