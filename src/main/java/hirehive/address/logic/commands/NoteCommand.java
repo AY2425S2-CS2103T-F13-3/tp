@@ -20,7 +20,7 @@ public class NoteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Displays the note of the person identified by the name used in the displayed person list.\n"
-            + "Parameters: NAME\nExample: " + COMMAND_WORD + "n/john doe";
+            + "Parameters: n/NAME\nExample: " + COMMAND_WORD + "n/john doe";
 
     public static final String MESSAGE_SUCCESS = "Displaying note of: %1$s";
 

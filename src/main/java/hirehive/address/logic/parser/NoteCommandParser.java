@@ -31,7 +31,6 @@ public class NoteCommandParser implements Parser<NoteCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
-        //argMultimap.
 
         String nameKeyword = argMultimap.getValue(PREFIX_NAME).get();
         NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nameKeyword));
