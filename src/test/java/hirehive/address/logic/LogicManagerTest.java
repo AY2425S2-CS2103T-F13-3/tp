@@ -96,6 +96,12 @@ public class LogicManagerTest {
         assertEquals(logic.getPersonNote(), TypicalPersons.ALICE.getNote());
     }
 
+    @Test
+    public void getFilteredPersonListSize_initialList_returnListSize() {
+        int listSize = model.getFilteredPersonList().size();
+        assertEquals(listSize, logic.getFilteredPersonListSize());
+    }
+
     /**
      * Executes the command and confirms that
      * - no exceptions are thrown <br>

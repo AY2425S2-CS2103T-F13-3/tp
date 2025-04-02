@@ -143,6 +143,12 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getListSize_initialList_returnListSize() {
+        int listSize = modelManager.getListSize();
+        assertEquals(listSize, modelManager.getFilteredPersonList().size());
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(TypicalPersons.ALICE).withPerson(TypicalPersons.BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
