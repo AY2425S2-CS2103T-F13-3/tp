@@ -176,7 +176,7 @@ Examples:
 
 ### Filter persons by tag : `filter`
 
-Lists down all applicants of a certain tag. 
+Lists down all your applicants of a certain tag. 
 
 Format: `filter t/TAG`
 
