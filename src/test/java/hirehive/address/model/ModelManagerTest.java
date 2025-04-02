@@ -3,12 +3,15 @@ package hirehive.address.model;
 import static hirehive.address.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -16,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import hirehive.address.commons.core.GuiSettings;
 import hirehive.address.model.person.NameContainsKeywordsPredicate;
 import hirehive.address.model.person.Note;
+import hirehive.address.model.person.Person;
 import hirehive.address.testutil.AddressBookBuilder;
 import hirehive.address.testutil.Assert;
 import hirehive.address.testutil.TypicalPersons;
@@ -93,6 +97,38 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         Assert.assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void sortPersons_sortsApplicantsByInterviewDate() {
+        modelManager.addPerson(TypicalPersons.ELLE);
+        modelManager.addPerson(TypicalPersons.BENSON);
+
+        List<Person> originalList = List.copyOf(modelManager.getFilteredPersonList());
+
+        modelManager.sortPersons();
+
+        List<Person> sortedList = modelManager.getFilteredPersonList();
+
+        assertNotEquals(originalList, sortedList);
+        assertTrue(sortedList.get(0).getDate().getValue().orElse(LocalDate.MAX)
+                .isBefore(sortedList.get(1).getDate().getValue().orElse(LocalDate.MAX)));
+    }
+
+
+    @Test
+    public void resetSorting_revertsToOriginalOrder() {
+        modelManager.addPerson(TypicalPersons.BENSON);
+        modelManager.addPerson(TypicalPersons.ELLE);
+
+        List<Person> originalList = List.copyOf(modelManager.getFilteredPersonList());
+
+        modelManager.sortPersons();
+        modelManager.resetSorting();
+
+        List<Person> resetList = modelManager.getFilteredPersonList();
+
+        assertEquals(originalList, resetList);
     }
 
     @Test
