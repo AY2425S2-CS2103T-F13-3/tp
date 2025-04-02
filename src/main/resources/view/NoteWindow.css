@@ -1,7 +1,28 @@
 #note {
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-border-color: white;
     -fx-text-fill: white;
+}
+
+#note .content {
+    -fx-background-color: derive(#1d1d1d, 20%);
 }
 
 #noteContainer {
     -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+#copy {
+    -fx-text-fill: white;
+    -fx-background-color: dimgray;
+
+}
+
+#copy:hover {
+    -fx-background-color: gray;
+}
+
+#copy:armed {
+    -fx-background-color: green;
+
 }

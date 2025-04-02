@@ -6,7 +6,10 @@ import hirehive.address.commons.core.LogsCenter;
 import hirehive.address.logic.Logic;
 import hirehive.address.model.person.Note;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 
 /**
@@ -20,7 +23,10 @@ public class NoteWindow extends UiPart<Stage> {
     private static final String FXML = "NoteWindow.fxml";
 
     @FXML
-    private Label note;
+    private TextArea note;
+
+    @FXML
+    private Button save;
 
     /**
      * Creates a new NoteWindow.
@@ -43,8 +49,6 @@ public class NoteWindow extends UiPart<Stage> {
      * @param logic from the MainWindow.
      */
     public void setNote(Logic logic) {
-        // How to update this window continuously
-        // singletonObservableList? use model to update
         Note newNote = logic.getPersonNote();
         note.setText(newNote.value);
     }
@@ -78,6 +82,14 @@ public class NoteWindow extends UiPart<Stage> {
      */
     public void focus() {
         getRoot().requestFocus();
+    }
+
+    @FXML
+    public void copyNote() {
+        final Clipboard clipboard = Clipboard.getSystemClipboard();
+        final ClipboardContent noteText = new ClipboardContent();
+        noteText.putString(note.getText());
+        clipboard.setContent(noteText);
     }
 
 }

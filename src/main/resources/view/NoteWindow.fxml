@@ -3,13 +3,14 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
 <fx:root title="Note" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         minHeight="300" minWidth="400">
+         minHeight="350" minWidth="450">
     <icons>
         <Image url="@/images/note_icon.png" />
     </icons>
@@ -19,17 +20,18 @@
                 <URL value="@NoteWindow.css" />
             </stylesheets>
 
-            <HBox alignment="CENTER" fx:id="noteContainer">
+            <VBox alignment="CENTER" spacing="20" fx:id="noteContainer">
                 <children>
-                    <Label fx:id="note" text="Label">
-                        <HBox.margin>
-                        </HBox.margin>
-                    </Label>
+                    <TextArea fx:id="note" text="TextArea" wrapText="true" editable="false" VBox.vgrow="ALWAYS">
+                        <VBox.margin>
+                        </VBox.margin>
+                    </TextArea>
+                    <Button fx:id="copy" text="Copy" onAction="#copyNote"/>
                 </children>
                 <padding>
-                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    <Insets bottom="20" left="20" right="20" top="20" />
                 </padding>
-            </HBox>
+            </VBox>
         </Scene>
     </scene>
 </fx:root>
