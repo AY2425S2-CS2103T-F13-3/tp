@@ -32,24 +32,24 @@ public class ReminderCommandTest {
         UpcomingInterviewPredicate secondPredicate =
                 new UpcomingInterviewPredicate(10, "01/01/2025");
 
-        FilterCommand filterFirstCommand = new FilterCommand(firstPredicate);
-        FilterCommand filterSecondCommand = new FilterCommand(secondPredicate);
+        ReminderCommand reminderFirstCommand = new ReminderCommand(firstPredicate);
+        ReminderCommand reminderSecondCommand = new ReminderCommand(secondPredicate);
 
         // same object -> returns true
-        assertTrue(filterFirstCommand.equals(filterFirstCommand));
+        assertTrue(reminderFirstCommand.equals(reminderFirstCommand));
 
         // same values -> returns true
-        FilterCommand findFirstCommandCopy = new FilterCommand(firstPredicate);
-        assertTrue(filterFirstCommand.equals(findFirstCommandCopy));
+        ReminderCommand findFirstCommandCopy = new ReminderCommand(firstPredicate);
+        assertTrue(reminderFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(filterFirstCommand.equals(1));
+        assertFalse(reminderFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(filterFirstCommand.equals(null));
+        assertFalse(reminderFirstCommand.equals(null));
 
         // different days -> returns false
-        assertFalse(filterFirstCommand.equals(filterSecondCommand));
+        assertFalse(reminderFirstCommand.equals(reminderSecondCommand));
     }
 
     @Test
