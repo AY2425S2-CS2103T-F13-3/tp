@@ -30,5 +30,4 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get());
         return new FilterCommand(new PersonContainsTagPredicate(tag));
     }
-
 }
