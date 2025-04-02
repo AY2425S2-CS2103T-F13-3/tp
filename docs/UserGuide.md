@@ -4,8 +4,8 @@ title: User Guide
 
 ---
 # HireHive User Guide
+HireHive is an **all-in-one desktop application** designed to streamline recruitment for small businesses and hiring managers, **combining the efficiency of a Command Line Interface (CLI) with the ease of a Graphical User Interface (GUI)**. It simplifies tracking candidates, organizing interview notes, and managing hiring stages—all in one centralized platform. With **fast keyboard-driven commands**, HireHive lets you complete tasks quicker than traditional GUI apps, so you can focus less on administrative work and more on finding the best talent.
 
-HireHive is an **all-in-one desktop application** designed to streamline recruitment for small businesses and hiring managers, **combining the efficiency of a [Command Line Interface (CLI)](#glossary) with the ease of a [Graphical User Interface (GUI)](#glossary)**. It simplifies tracking [applicants](#glossary), organizing interview notes, and managing hiring stages—all in one centralized platform. With **fast keyboard-driven commands**, HireHive lets you complete tasks quicker than traditional GUI apps, so you can focus less on administrative work and more on finding the best talent.
 
 - [Quick start](#quick-start-)
 - [Command Summary](#command-summary)
@@ -165,15 +165,18 @@ Examples:
 
 ### Tagging a person : `tag`
 
-Changes or adds tags to the specified person from HireHive.
+You can change or add tags to a specific person from HireHive to easily  differentiate between all your applicants! 
 
 Format: `tag n/NAME t/TAG`
 
 * Tags a person if the given name partially matches **exactly one person** in the list ([case-insensitive](#glossary)).
-* If multiple matches are found, a list of all matching names will be displayed. The user must then enter the **full name** of the person they want to delete.
+* If multiple matches are found, a list of all matching names will be displayed. You can then enter the **full name** 
+  of the person you want to delete.
 
 Examples:
 * `tag n/John Doe t/Applicant` will tag John Doe as "Applicant" in HireHive
+
+[Back to top](#hirehive-user-guide)
 
 ### Filter persons by tag : `filter`
 
