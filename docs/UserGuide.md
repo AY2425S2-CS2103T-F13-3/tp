@@ -165,12 +165,12 @@ Examples:
 
 ### Tagging a person : `tag`
 
-You can change or add tags to a specific person from HireHive to easily  differentiate between all your applicants! 
+You can change or add tags to a specific person from HireHive to easily differentiate between all your applicants!
 
 Format: `tag n/NAME t/TAG`
 
 * Tags a person if the given name partially matches **exactly one person** in the list ([case-insensitive](#glossary)).
-* If multiple matches are found, a list of all matching names will be displayed. You can then enter the **full name** 
+* If multiple matches are found, a list of all matching names will be displayed. You can then enter the **full name**
   of the person you want to delete.
 
 Examples:

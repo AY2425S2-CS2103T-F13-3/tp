@@ -72,7 +72,7 @@ public class StringUtilTest {
         assertFalse(StringUtil.isPositiveInteger(Long.toString(Integer.MAX_VALUE + 1)));
 
         // EP: valid numbers, should return true
-        assertTrue(StringUtil.isPositiveInteger("0")); 
+        assertTrue(StringUtil.isPositiveInteger("0"));
         assertTrue(StringUtil.isPositiveInteger("10"));
     }
 

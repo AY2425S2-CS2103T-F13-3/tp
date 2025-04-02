@@ -95,7 +95,7 @@ public class AddressBookParser {
 
         case ReminderCommand.COMMAND_WORD:
             return new ReminderCommandParser().parse(arguments);
-            
+
         case SortCommand.COMMAND_WORD:
             return new SortCommand();
 
