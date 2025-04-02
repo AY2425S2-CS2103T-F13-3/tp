@@ -51,15 +51,6 @@ public class Person {
                 new InterviewDate());
     }
 
-    /**
-     * Method used to construct a default Person object with a note.
-     */
-    public static Person addDefaultPersonWithNote(Name name, Phone phone, Email email, Address address, Role role,
-                                                  Note note) {
-        return new Person(name, phone, email, address, role, Set.of(Tag.getDefaultTag()), note,
-                new InterviewDate());
-    }
-
     public Name getName() {
         return name;
     }

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import hirehive.address.commons.util.ToStringBuilder;
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.exceptions.CommandException;
 import hirehive.address.logic.commands.queries.NameQuery;
@@ -76,4 +77,10 @@ public class NoteCommand extends Command {
         return query.equals(otherNoteCommand.query);
     }
 
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("query", query)
+                .toString();
+    }
 }

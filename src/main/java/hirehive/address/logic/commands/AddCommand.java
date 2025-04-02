@@ -36,7 +36,6 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_ROLE + "Software Engineer "
-            + PREFIX_NOTE + "27 years old"
             + PREFIX_DATE + "01/05/2025";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
