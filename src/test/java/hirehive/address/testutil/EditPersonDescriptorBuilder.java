@@ -44,7 +44,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setRole(person.getRole());
-        descriptor.setTags(person.getTags());
+        descriptor.setTag(person.getTag());
         descriptor.setNote(person.getNote());
         descriptor.setDate(person.getDate());
     }
@@ -90,18 +90,15 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
-     * that we are building.
+     * Sets the {@code Tag} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = new HashSet<>();
+    public EditPersonDescriptorBuilder withTag(String tag) {
         try {
-            tagSet = ParserUtil.parseTags(Arrays.asList(tags));
+            descriptor.setTag(ParserUtil.parseTag(tag));
         } catch (ParseException e) {
             // do nothing
         }
 
-        descriptor.setTags(tagSet);
         return this;
     }
 

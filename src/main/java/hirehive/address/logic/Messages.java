@@ -50,8 +50,8 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Role: ")
                 .append(person.getRole())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+                .append("; Tag: ")
+                .append(person.getTag());
         return builder.toString();
     }
 

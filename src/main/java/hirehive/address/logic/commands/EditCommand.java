@@ -109,11 +109,11 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Role updatedRole = editPersonDescriptor.getRole().orElse(personToEdit.getRole());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Tag updatedTag = editPersonDescriptor.getTag().orElse(personToEdit.getTag());
         Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
         InterviewDate updatedDate = editPersonDescriptor.getDate().orElse(personToEdit.getDate());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRole, updatedTags,
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRole, updatedTag,
                 updatedNote, updatedDate);
     }
 
@@ -159,7 +159,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Role role;
-        private Set<Tag> tags;
+        private Tag tag;
         private Note note;
         private InterviewDate date;
 
@@ -167,7 +167,7 @@ public class EditCommand extends Command {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code tag} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
@@ -175,7 +175,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setRole(toCopy.role);
-            setTags(toCopy.tags);
+            setTag(toCopy.tag);
             setNote(toCopy.note);
             setDate(toCopy.date);
         }
@@ -184,7 +184,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, role, tags, note, date);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, role, tag, note, date);
         }
 
         public void setName(Name name) {
@@ -244,20 +244,20 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code tag} to this object's {@code tag}.
+         * A defensive copy of {@code tag} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setTag(Tag tag) {
+            this.tag = tag;
         }
 
         /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code tag} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Tag> getTag() {
+            return Optional.ofNullable(tag);
         }
 
         @Override
@@ -277,7 +277,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(role, otherEditPersonDescriptor.role)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(tag, otherEditPersonDescriptor.tag)
                     && Objects.equals(note, otherEditPersonDescriptor.note)
                     && Objects.equals(date, otherEditPersonDescriptor.date);
         }
@@ -290,7 +290,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("role", role)
-                    .add("tags", tags)
+                    .add("tag", tag)
                     .add("note", note)
                     .add("interviewDate", date)
                     .toString();

@@ -56,7 +56,7 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withRole(VALID_ROLE_BOB).build();
 
         // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_CANDIDATE).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTag(VALID_TAG_CANDIDATE).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different note -> returns false
@@ -72,8 +72,8 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", address="
                 + editPersonDescriptor.getAddress().orElse(null) + ", role="
-                + editPersonDescriptor.getRole().orElse(null) + ", tags="
-                + editPersonDescriptor.getTags().orElse(null) + ", note="
+                + editPersonDescriptor.getRole().orElse(null) + ", tag="
+                + editPersonDescriptor.getTag().orElse(null) + ", note="
                 + editPersonDescriptor.getNote().orElse(null) + ", interviewDate="
                 + editPersonDescriptor.getDate().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());

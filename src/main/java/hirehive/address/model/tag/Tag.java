@@ -26,6 +26,10 @@ public enum Tag {
         this.tagName = tagName;
     }
 
+    public String getTagName() {
+        return tagName;
+    }
+
     public static Tag getDefaultTag() {
         return DEFAULT_TAG;
     }
