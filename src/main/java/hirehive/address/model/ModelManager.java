@@ -142,6 +142,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public int getListSize() {
+        return filteredPersons.size();
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

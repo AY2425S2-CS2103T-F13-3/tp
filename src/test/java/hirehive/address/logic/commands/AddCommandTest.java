@@ -169,6 +169,11 @@ public class AddCommandTest {
         public Note getPersonNote() {
             throw new AssertionError("This method should not be called");
         }
+
+        @Override
+        public int getListSize() {
+            throw new AssertionError("This method should not be called");
+        }
     }
 
     /**
