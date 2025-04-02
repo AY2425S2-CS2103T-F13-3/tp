@@ -22,7 +22,7 @@ public class NoteCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        CommandParserTestUtil.assertParseFailure(parser, "",
+        CommandParserTestUtil.assertParseFailure(parser, "note Alice",
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE));
     }
 }

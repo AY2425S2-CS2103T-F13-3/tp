@@ -40,6 +40,17 @@ public class NoteTest {
     }
 
     @Test
+    public void isEmpty() {
+        // empty note, return true
+        Note empty = new Note("");
+        assertTrue(empty.isEmpty());
+
+        // non empty note, return false
+        Note nonempty = new Note("nonempty");
+        assertFalse(nonempty.isEmpty());
+    }
+
+    @Test
     public void equals() {
         Note note = new Note("Valid");
 

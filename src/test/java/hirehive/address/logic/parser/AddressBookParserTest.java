@@ -21,10 +21,12 @@ import hirehive.address.logic.commands.FilterCommand;
 import hirehive.address.logic.commands.FindCommand;
 import hirehive.address.logic.commands.HelpCommand;
 import hirehive.address.logic.commands.ListCommand;
+import hirehive.address.logic.commands.NewNoteCommand;
 import hirehive.address.logic.commands.NoteCommand;
 import hirehive.address.logic.commands.queries.NameQuery;
 import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.person.NameContainsKeywordsPredicate;
+import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
 import hirehive.address.model.person.PersonContainsTagPredicate;
 import hirehive.address.model.tag.Tag;
@@ -124,7 +126,24 @@ public class AddressBookParserTest {
                 new NameQuery(new NameContainsKeywordsPredicate(nameToDisplay))
         );
         NoteCommand command = (NoteCommand) parser.parseCommand(
-                NoteCommand.COMMAND_WORD + " " + "n/" + nameToDisplay
+                NoteCommand.COMMAND_WORD + " n/" + nameToDisplay
+        );
+
+        assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_newnote() throws Exception {
+        String nameToAddNote = TypicalPersons.ALICE.getName().fullName;
+        EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
+        editPersonDescriptor.setNote(new Note("test"));
+
+        NewNoteCommand expectedCommand = new NewNoteCommand(
+                new NameQuery(new NameContainsKeywordsPredicate(nameToAddNote)),
+                editPersonDescriptor
+        );
+        NewNoteCommand command = (NewNoteCommand) parser.parseCommand(
+                NewNoteCommand.COMMAND_WORD + " n/" + nameToAddNote + " i/test"
         );
 
         assertEquals(expectedCommand, command);

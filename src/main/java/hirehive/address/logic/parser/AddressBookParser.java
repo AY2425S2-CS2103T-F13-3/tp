@@ -19,6 +19,7 @@ import hirehive.address.logic.commands.FilterCommand;
 import hirehive.address.logic.commands.FindCommand;
 import hirehive.address.logic.commands.HelpCommand;
 import hirehive.address.logic.commands.ListCommand;
+import hirehive.address.logic.commands.NewNoteCommand;
 import hirehive.address.logic.commands.NoteCommand;
 import hirehive.address.logic.commands.SortCommand;
 import hirehive.address.logic.commands.TagCommand;
@@ -97,6 +98,9 @@ public class AddressBookParser {
 
         case NoteCommand.COMMAND_WORD:
             return new NoteCommandParser().parse(arguments);
+
+        case NewNoteCommand.COMMAND_WORD:
+            return new NewNoteCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

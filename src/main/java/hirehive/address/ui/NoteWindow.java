@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  */
 public class NoteWindow extends UiPart<Stage> {
 
-    public static final String EMPTY_NOTE = "No note currently.";
+    public static final String EMPTY_NOTE = "Currently empty...";
 
     private static final Logger logger = LogsCenter.getLogger(NoteWindow.class);
     private static final String FXML = "NoteWindow.fxml";
@@ -46,7 +46,13 @@ public class NoteWindow extends UiPart<Stage> {
         // How to update this window continuously
         // singletonObservableList? use model to update
         Note newNote = logic.getPersonNote();
-        note.setText(newNote.value);
+        if (newNote.isEmpty()) {
+            note.setText(EMPTY_NOTE);
+            note.setStyle("-fx-text-fill: yellow;");
+        } else {
+            note.setText(newNote.value);
+            note.setStyle("-fx-text-fill: white;");
+        }
     }
 
     /**
