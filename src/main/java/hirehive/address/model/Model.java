@@ -105,4 +105,6 @@ public interface Model {
      * Returns the notes of the person.
      */
     Note getPersonNote();
+
+    int getListSize();
 }
