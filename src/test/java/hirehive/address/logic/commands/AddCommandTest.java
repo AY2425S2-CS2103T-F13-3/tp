@@ -161,12 +161,27 @@ public class AddCommandTest {
         }
 
         @Override
+        public void sortPersons() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetSorting() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updatePersonNote(Person person) {
             throw new AssertionError("This method should not be called");
         }
 
         @Override
         public Note getPersonNote() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public int getListSize() {
             throw new AssertionError("This method should not be called");
         }
     }

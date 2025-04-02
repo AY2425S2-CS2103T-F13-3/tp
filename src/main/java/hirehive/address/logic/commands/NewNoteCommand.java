@@ -1,11 +1,13 @@
 package hirehive.address.logic.commands;
 
+import static hirehive.address.logic.commands.EditCommand.createEditedPerson;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
 import hirehive.address.commons.util.ToStringBuilder;
 import hirehive.address.logic.Messages;
+import hirehive.address.logic.commands.EditCommand.EditPersonDescriptor;
 import hirehive.address.logic.commands.exceptions.CommandException;
 import hirehive.address.logic.commands.queries.NameQuery;
 import hirehive.address.logic.commands.queries.exceptions.QueryException;
@@ -13,31 +15,35 @@ import hirehive.address.model.Model;
 import hirehive.address.model.person.Person;
 
 /**
- * Finds a Person by name and displays the note in a pop up window.
+ * Finds a Person by name, then creates and displays the note in a pop up window.
  */
-public class NoteCommand extends Command {
+public class NewNoteCommand extends Command {
 
-    public static final String COMMAND_WORD = "note";
+    public static final String COMMAND_WORD = "newnote";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Displays the note of the person identified by the name used in the displayed person list.\n"
+            + ": Creates a note for the person identified by the name used in the displayed person list. \n"
             + "Parameters: n/NAME\nExample: " + COMMAND_WORD + " n/john doe";
 
-    public static final String MESSAGE_SUCCESS = "Displaying note of: %1$s";
+    public static final String MESSAGE_SUCCESS = "Added and displaying note of: %1$s";
 
     private final NameQuery query;
+    private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * Creates NoteCommand to show the note of a person.
+     * Creates NewnoteCommand to create and show the note of a person.
      * @param query the name of the person.
      */
-    public NoteCommand(NameQuery query) {
+    public NewNoteCommand(NameQuery query, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(query);
+        requireNonNull(editPersonDescriptor);
+
         this.query = query;
+        this.editPersonDescriptor = editPersonDescriptor;
     }
 
     /**
-     * Executes the note command to display the note of the queried person
+     * Executes the newnote command to add and display the note of the queried person
      * @param model {@code Model} which the command should operate on.
      * @return A {@code CommandResult} containing success message.
      * @throws CommandException if person is not found.
@@ -46,19 +52,22 @@ public class NoteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Person> personToDisplay;
+        List<Person> personToAddNote;
         try {
-            personToDisplay = query.query(model);
+            personToAddNote = query.query(model);
         } catch (QueryException e) {
             throw new CommandException(Messages.MESSAGE_NO_SUCH_PERSON);
         }
-        if (personToDisplay.size() > 1) {
+        if (personToAddNote.size() > 1) {
             throw new CommandException(Messages.MESSAGE_MULTIPLE_PEOPLE_QUERIED);
         }
 
-        Person personDisplayed = personToDisplay.get(0);
-        model.updatePersonNote(personDisplayed);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personDisplayed)), false,
+        Person personAddedNote = personToAddNote.get(0);
+        Person editedPerson = createEditedPerson(personAddedNote, editPersonDescriptor);
+
+        model.setPerson(personAddedNote, editedPerson);
+        model.updatePersonNote(editedPerson);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(editedPerson)), false,
                 false, true);
     }
 
@@ -69,18 +78,20 @@ public class NoteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NoteCommand)) {
+        if (!(other instanceof NewNoteCommand)) {
             return false;
         }
 
-        NoteCommand otherNoteCommand = (NoteCommand) other;
-        return query.equals(otherNoteCommand.query);
+        NewNoteCommand otherNewNoteCommand = (NewNoteCommand) other;
+        return query.equals(otherNewNoteCommand.query)
+                && editPersonDescriptor.equals(otherNewNoteCommand.editPersonDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("query", query)
+                .add("editPersonDescriptor", editPersonDescriptor)
                 .toString();
     }
 }

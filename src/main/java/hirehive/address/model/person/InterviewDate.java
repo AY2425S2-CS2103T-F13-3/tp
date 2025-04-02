@@ -55,6 +55,13 @@ public class InterviewDate {
         }
     }
 
+    /**
+     * Returns the value of the interview date, or empty if not set.
+     */
+    public Optional<LocalDate> getValue() {
+        return value;
+    }
+
     @Override
     public String toString() {
         return value.map(x -> x.format(DATE_TIME_FORMATTER)).orElse("");

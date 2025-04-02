@@ -33,6 +33,13 @@ public class Note {
         return test.length() <= 500;
     }
 
+    /**
+     * Returns true if the note is empty.
+     */
+    public boolean isEmpty() {
+        return value.isEmpty();
+    }
+
     @Override
     public String toString() {
         return value;

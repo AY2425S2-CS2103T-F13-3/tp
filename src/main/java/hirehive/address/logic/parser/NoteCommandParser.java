@@ -4,9 +4,6 @@ import static hirehive.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static java.util.Objects.requireNonNull;
 
-import java.util.Arrays;
-
-import hirehive.address.logic.commands.DeleteCommand;
 import hirehive.address.logic.commands.NoteCommand;
 import hirehive.address.logic.commands.queries.NameQuery;
 import hirehive.address.logic.parser.exceptions.ParseException;
