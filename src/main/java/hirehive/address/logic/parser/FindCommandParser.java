@@ -1,7 +1,5 @@
 package hirehive.address.logic.parser;
 
-import java.util.Arrays;
-
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.FindCommand;
 import hirehive.address.logic.parser.exceptions.ParseException;

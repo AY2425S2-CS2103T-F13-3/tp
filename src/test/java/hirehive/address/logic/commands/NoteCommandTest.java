@@ -18,7 +18,6 @@ import hirehive.address.model.Model;
 import hirehive.address.model.ModelManager;
 import hirehive.address.model.UserPrefs;
 import hirehive.address.model.person.NameContainsKeywordsPredicate;
-import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
 import hirehive.address.testutil.TypicalIndexes;
 import hirehive.address.testutil.TypicalPersons;

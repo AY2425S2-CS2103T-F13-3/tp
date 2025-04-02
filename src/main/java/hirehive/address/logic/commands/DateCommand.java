@@ -2,15 +2,9 @@ package hirehive.address.logic.commands;
 
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static java.util.Objects.requireNonNull;
 
-import hirehive.address.logic.Messages;
-import hirehive.address.logic.commands.EditCommand.EditPersonDescriptor;
 import hirehive.address.logic.commands.exceptions.CommandException;
-import hirehive.address.logic.commands.queries.NameQuery;
-import hirehive.address.logic.commands.queries.exceptions.QueryException;
 import hirehive.address.model.Model;
-import hirehive.address.model.person.Person;
 
 /**
  * Adds or edits the interview date of a Person

@@ -86,7 +86,23 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    /**
+     * Sorts the filtered person list by their interview date.
+     */
+    void sortPersons();
+
+    /**
+     * Resets the sorted list when other commands are typed.
+     */
+    void resetSorting();
+
+    /**
+     * Updates the notes of the person.
+     */
     void updatePersonNote(Person person);
 
+    /**
+     * Returns the notes of the person.
+     */
     Note getPersonNote();
 }
