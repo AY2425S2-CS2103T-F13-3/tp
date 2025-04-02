@@ -52,6 +52,12 @@ public class Messages {
                 .append(person.getRole())
                 .append("; Tag: ")
                 .append(person.getTag());
+                .append("; Note: ")
+                .append(person.getNote())
+                .append("; Date: ")
+                .append(person.getDate())
+                .append("; Tag: ");
+        person.getTags().forEach(builder::append);
         return builder.toString();
     }
 

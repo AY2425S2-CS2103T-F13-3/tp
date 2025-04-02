@@ -32,7 +32,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
-                + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.ROLE_DESC_BOB + CommandTestUtil.TAG_DESC_APPLICANT + CommandTestUtil.NOTE_DESC_BOB;
+                + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.ROLE_DESC_BOB + CommandTestUtil.TAG_DESC_APPLICANT;
 
         // multiple names
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.NAME_DESC_AMY + validExpectedPersonString,
@@ -50,17 +50,13 @@ public class AddCommandParserTest {
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.ADDRESS_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_ADDRESS));
 
-        // multiple notes
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.NOTE_DESC_AMY + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_NOTE));
-
         // multiple fields repeated
         CommandParserTestUtil.assertParseFailure(parser,
                 validExpectedPersonString + CommandTestUtil.PHONE_DESC_AMY + CommandTestUtil.EMAIL_DESC_AMY
                         + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY + CommandTestUtil.ROLE_DESC_AMY
                         + CommandTestUtil.NOTE_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_ADDRESS, CliSyntax.PREFIX_EMAIL, CliSyntax.PREFIX_PHONE,
-                        CliSyntax.PREFIX_ROLE, CliSyntax.PREFIX_NOTE));
+                        CliSyntax.PREFIX_ROLE));
 
         // invalid value followed by valid value
 
@@ -80,10 +76,6 @@ public class AddCommandParserTest {
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.INVALID_ADDRESS_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_ADDRESS));
 
-        // invalid note
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.INVALID_NOTE_DESC + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_NOTE));
-
         // valid value followed by invalid value
 
         // invalid name
@@ -101,18 +93,14 @@ public class AddCommandParserTest {
         // invalid address
         CommandParserTestUtil.assertParseFailure(parser, validExpectedPersonString + CommandTestUtil.INVALID_ADDRESS_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_ADDRESS));
-
-        // invalid note
-        CommandParserTestUtil.assertParseFailure(parser, validExpectedPersonString + CommandTestUtil.INVALID_NOTE_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_NOTE));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Person expectedPerson = new PersonBuilder(TypicalPersons.AMY).build();
-        CommandParserTestUtil.assertParseSuccess(parser, CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.PHONE_DESC_AMY + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY
-                + CommandTestUtil.ROLE_DESC_AMY + CommandTestUtil.NOTE_DESC_AMY,
+        Person expectedPerson = new PersonBuilder(TypicalPersons.BOB).build();
+        CommandParserTestUtil.assertParseSuccess(parser, CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB
+                + CommandTestUtil.ROLE_DESC_BOB,
                 new AddCommand(expectedPerson));
 
         // no notes
@@ -169,10 +157,6 @@ public class AddCommandParserTest {
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB
                 + CommandTestUtil.ROLE_DESC_BOB + CommandTestUtil.INVALID_TAG_DESC + CommandTestUtil.VALID_TAG_APPLICANT,
                 Role.MESSAGE_CONSTRAINTS);
-
-        // invalid note
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB
-                + CommandTestUtil.ROLE_DESC_BOB + CommandTestUtil.INVALID_NOTE_DESC, Note.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.INVALID_NAME_DESC + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.INVALID_ADDRESS_DESC
