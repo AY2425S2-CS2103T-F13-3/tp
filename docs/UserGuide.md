@@ -68,6 +68,8 @@ HireHive is an **all-in-one desktop application** designed to streamline recruit
 
 6. You can refer to the [Features](#features) section below for details of each command.
 
+[Back to top](#welcome-to-hirehive)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
@@ -85,6 +87,7 @@ Action | Format, Examples
 **Clear** | `clear`
 **Exit** | `exit`
 
+[Back to top](#welcome-to-hirehive)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -112,6 +115,8 @@ Action | Format, Examples
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+[Back to top](#welcome-to-hirehive)
+
 ### Viewing help : `help`
 
 Shows a message explaining how you can access the help page. The help page contains all the features of HireHive. 
@@ -119,6 +124,8 @@ Shows a message explaining how you can access the help page. The help page conta
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+[Back to top](#welcome-to-hirehive)
 
 
 ### Adding a person: `add`
@@ -147,11 +154,15 @@ Examples:
 
 ![help message](images/Ui-AddCommand.png)
 
+[Back to top](#welcome-to-hirehive)
+
 ### Listing all persons : `list`
 
 Shows you a list of all the applicants in HireHive.
 
 Format: `list`
+
+[Back to top](#welcome-to-hirehive)
 
 ### Editing a person : `edit`
 
@@ -167,7 +178,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/ROLE] [i
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 
-[Back to top](#hirehive-user-guide)
+[Back to top](#welcome-to-hirehive)
 
 
 ### Tagging a person : `tag`
@@ -194,6 +205,8 @@ Format: `filter t/TAG`
 * The search is [case-insensitive](#glossary). e.g `applicant` will match `Applicant`
 * Only full words will be matched e.g. `Reject` will not match `Rejected`
 
+[Back to top](#welcome-to-hirehive)
+
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
@@ -212,6 +225,8 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+[Back to top](#welcome-to-hirehive)
+
 ### Deleting a person : `delete`
 
 You can delete a specific person from HireHive.
@@ -226,7 +241,7 @@ Examples:
 
 ![delete message](images/Ui-DeleteCommand.png)
 
-[Back to top](#hirehive-user-guide)
+[Back to top](#welcome-to-hirehive)
 
 ### Clearing all entries : `clear`
 
@@ -234,15 +249,21 @@ Clears all entries from HireHive.
 
 Format: `clear`
 
+[Back to top](#welcome-to-hirehive)
+
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
+[Back to top](#welcome-to-hirehive)
+
 ### Saving the data
 
 HireHive data is saved in the [hard disk](#glossary) automatically after any command that changes the data. If successfully saved, the output following the command will display the success message. There is no need to save manually.
+
+[Back to top](#welcome-to-hirehive)
 
 ### Editing the data file
 
@@ -253,6 +274,7 @@ If your changes to the data file makes its format invalid, HireHive will discard
 Furthermore, certain edits can cause HireHive to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
+[Back to top](#welcome-to-hirehive)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -261,12 +283,16 @@ Furthermore, certain edits can cause HireHive to behave in unexpected ways (e.g.
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous HireHive home folder.
 
+[Back to top](#welcome-to-hirehive)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the [GUI](#glossary) will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. If you **minimize the Help Window and then run the `help` command** (or use the `Help` menu, or the keyboard [shortcut](#glossary) `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+
+[Back to top](#welcome-to-hirehive)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -284,5 +310,6 @@ Term | Description
 **JSON** | Acronym for _JavaScript Object Notation,_ an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of name–value pairs and arrays (or other serializable values).
 **Shortcut** | A key or combination of keys that you can press on a computer keyboard to quickly perform a specific action.
 
+[Back to top](#welcome-to-hirehive)
 
 --------------------------------------------------------------------------------------------------------------------
