@@ -3,6 +3,7 @@ layout: page
 title: User Guide
 
 ---
+# HireHive User Guide
 
 HireHive is an **all-in-one desktop application** designed to streamline recruitment for small businesses and hiring managers, **combining the efficiency of a [Command Line Interface (CLI)](#glossary) with the ease of a [Graphical User Interface (GUI)](#glossary)**. It simplifies tracking [applicants](#glossary), organizing interview notes, and managing hiring stages—all in one centralized platform. With **fast keyboard-driven commands**, HireHive lets you complete tasks quicker than traditional GUI apps, so you can focus less on administrative work and more on finding the best talent.
 
@@ -147,7 +148,7 @@ Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing applicant in HireHive.
+You can edit the information of an existing applicant in HireHive.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -155,12 +156,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
 
 ### Tagging a person : `tag`
 
@@ -203,17 +202,19 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from HireHive.
+You can delete a specific person from HireHive.
 
 Format: `delete n/NAME`
 
 * Deletes the person if the given name partially matches **exactly one person** in the list ([case-insensitive](#glossary)).
-* If multiple matches are found, a list of all matching names will be displayed. The user must then enter the **full name** of the person they want to delete.
+* If multiple matches are found, a list of all matching names will be displayed. You can then enter the **full name** of the person you want to delete.
 
 Examples:
 * `delete n/John Doe` deletes John Doe's contact from HireHive
 
 ![delete message](images/Ui-DeleteCommand.png)
+
+[Back to top](#hirehive-user-guide)
 
 ### Clearing all entries : `clear`
 
