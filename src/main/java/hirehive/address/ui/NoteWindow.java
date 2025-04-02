@@ -84,6 +84,9 @@ public class NoteWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
+    /**
+     * Copies the contents of the note to the clipboard.
+     */
     @FXML
     public void copyNote() {
         final Clipboard clipboard = Clipboard.getSystemClipboard();
