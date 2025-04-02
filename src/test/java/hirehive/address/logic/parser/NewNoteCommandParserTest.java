@@ -30,4 +30,16 @@ public class NewNoteCommandParserTest {
         CommandParserTestUtil.assertParseFailure(parser, "newnote Alice i/test",
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, NewNoteCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_noName_throwsParseException() {
+        CommandParserTestUtil.assertParseFailure(parser, "newnote i/test",
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, NewNoteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_noNote_throwsParseException() {
+        CommandParserTestUtil.assertParseFailure(parser, "newnote n/Alice",
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, NewNoteCommand.MESSAGE_USAGE));
+    }
 }
