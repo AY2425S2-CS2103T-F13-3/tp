@@ -3,9 +3,10 @@ layout: page
 title: User Guide
 
 ---
-# HireHive User Guide
-HireHive is an **all-in-one desktop application** designed to streamline recruitment for small businesses and hiring managers, **combining the efficiency of a Command Line Interface (CLI) with the ease of a Graphical User Interface (GUI)**. It simplifies tracking candidates, organizing interview notes, and managing hiring stages—all in one centralized platform. With **fast keyboard-driven commands**, HireHive lets you complete tasks quicker than traditional GUI apps, so you can focus less on administrative work and more on finding the best talent.
 
+# Welcome to HireHive!
+
+HireHive is an **all-in-one desktop application** designed to streamline recruitment for small businesses and hiring managers, combining the efficiency of a [Command Line Interface (CLI)](#glossary) with the ease of a [Graphical User Interface (GUI)](#glossary). It simplifies tracking [applicants](#glossary), organizing interview notes, and managing hiring stages—all in one centralized platform. With **fast keyboard-driven commands**, HireHive lets you complete tasks quicker than traditional GUI apps, so you can focus less on administrative work and more on finding the best talent.
 
 - [Quick start](#quick-start-)
 - [Command Summary](#command-summary)
@@ -30,18 +31,23 @@ HireHive is an **all-in-one desktop application** designed to streamline recruit
 
 
 ## Quick start
-1. Ensure you have Java `17` or above installed in your computer.<br>
+1. To use Hirehive, you need Java `17` or above installed in your computer.<br>
    - For **Mac users:** Ensure you have the precise [JDK](#glossary) version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S2-CS2103T-F13-3/tp/releases).
+2. Download the latest HireHive `.jar` file from [here](https://github.com/AY2425S2-CS2103T-F13-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for HireHive.
+3. Copy the downloaded file to a folder where you would like to store HireHive (e.g. "Documents" or "Desktop" or a new folder "HireHive") .
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar hirehive.jar` command to run the application.<br>
-   A [GUI](#glossary) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Run HireHive
+   - Find the folder that you stored HireHive previously (e.g. "Documents" or "Desktop" or "HireHive").
+   - Right-click on the folder and choose:  
+     - For MAC: "New terminal at [folder-name]".
+     - For Windows: "Open in terminal".
+   - Type `java -jar hirehive.jar` command in the opened terminal and press Enter to run the HireHive application.<br>
+   - A [GUI](#glossary) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui-2.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
+5. To use HireHive, you can type a command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all applicants.
@@ -60,7 +66,7 @@ HireHive is an **all-in-one desktop application** designed to streamline recruit
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) section below for details of each command.
+6. You can refer to the [Features](#features) section below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -88,7 +94,7 @@ Action | Format, Examples
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the  parameters to be supplied by you.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
@@ -100,7 +106,7 @@ Action | Format, Examples
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `list` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -108,7 +114,7 @@ Action | Format, Examples
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Shows a message explaining how you can access the help page. The help page contains all the features of HireHive. 
 
 ![help message](images/helpMessage.png)
 
@@ -122,16 +128,17 @@ Adds a person to HireHive.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [i/INFO]`
 
 **:information_source: Note!**<br>
-* Phone numbers must **start with 9/8/6**, must not contain spaces and must be **exactly 8 digits** long.
-* Dashes(-), commas(,), slashes(/) and periods (.) in names should be **omitted**.
+* Please input a phone number that **start with 9/8/6**, is **exactly 8 digits** long and do not use spaces.
+* Please **do not use** dashes(-), commas(,), slashes(/) and periods(.) in names.
     - Example: `Doe, John` or `Doe/John` should be entered as `Doe John`.
+* Names need to be in English!
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-An 'Applicant' tag is automatically assigned to each person when they are added to HireHive.
+An 'Applicant' tag is automatically assigned to the applicant when you add them to HireHive.
 </div>
 
-- Optional to provide INFO of a person. INFO has a maximum length of 500 characters.
-- The parameter NAME is **[unique](#glossary)** and **[case-insensitive](#glossary)**, and is displayed as how the user types it.
+- It is optional for you to provide INFO of a person. INFO has a maximum length of 500 characters.
+- The parameter NAME is **[unique](#glossary)** and **[case-insensitive](#glossary)**, and is displayed as how you type it.
 - Applicants in HireHive can share the same phone number, email, address and role.
 
 Examples:
@@ -142,7 +149,7 @@ Examples:
 
 ### Listing all persons : `list`
 
-Lists down all your applicants in HireHive.
+Shows you a list of all the applicants in HireHive.
 
 Format: `list`
 
