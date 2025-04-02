@@ -131,6 +131,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [i/INFO]`
 * Please input a phone number that **start with 9/8/6**, is **exactly 8 digits** long and do not use spaces.
 * Please **do not use** dashes(-), commas(,), slashes(/) and periods(.) in names.
     - Example: `Doe, John` or `Doe/John` should be entered as `Doe John`.
+* Names need to be in English!
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 An 'Applicant' tag is automatically assigned to the applicant when you add them to HireHive.
