@@ -36,7 +36,8 @@ public class UpcomingInterviewPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return person.getDate().value.map(date -> ChronoUnit.DAYS.between(currDay, date) <= this.days)
+        return person.getDate().value.map(date -> ChronoUnit.DAYS.between(currDay, date))
+                .map(days -> days <= this.days && days >= 0)
                 .orElse(false);
     }
 

@@ -45,7 +45,7 @@ public class TypicalPersons {
             .withTags("Rejected").withNote("Cheerful").withDate("01/03/2025").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("94824273")
             .withEmail("lydia@example.com").withAddress("little tokyo").withRole("Software Engineer")
-            .withTags("Rejected").withNote("Scary").withDate("01/04/2025").build();
+            .withTags("Rejected").withNote("Scary").withDate("01/03/2025").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("94824421")
             .withEmail("anna@example.com").withAddress("4th street").withRole("Software Engineer")
             .withTags("Applicant").withNote("Fat").withDate("").build();
