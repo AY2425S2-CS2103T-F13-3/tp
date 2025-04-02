@@ -51,4 +51,5 @@ public interface Logic {
     void setGuiSettings(GuiSettings guiSettings);
 
     Note getPersonNote();
+    int getFilteredPersonListSize();
 }
