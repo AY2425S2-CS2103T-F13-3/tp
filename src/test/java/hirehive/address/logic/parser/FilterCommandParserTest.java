@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.FilterCommand;
+import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.person.PersonContainsTagPredicate;
 import hirehive.address.model.tag.Tag;
 
@@ -16,9 +17,9 @@ public class FilterCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFilterCommand() {
+    public void parse_validArgs_returnsFilterCommand() throws ParseException {
         FilterCommand expectedFilterCommand =
-                new FilterCommand(new PersonContainsTagPredicate(new Tag("applicant")));
+                new FilterCommand(new PersonContainsTagPredicate(ParserUtil.parseTag("Applicant")));
         CommandParserTestUtil.assertParseSuccess(parser, " t/ applicant", expectedFilterCommand);
     }
 }

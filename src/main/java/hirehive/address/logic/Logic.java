@@ -8,6 +8,7 @@ import hirehive.address.logic.commands.exceptions.CommandException;
 import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.Model;
 import hirehive.address.model.ReadOnlyAddressBook;
+import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
 import javafx.collections.ObservableList;
 
@@ -48,4 +49,7 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    Note getPersonNote();
+    int getFilteredPersonListSize();
 }

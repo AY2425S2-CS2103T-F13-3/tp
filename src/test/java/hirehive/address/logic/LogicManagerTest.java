@@ -2,6 +2,7 @@ package hirehive.address.logic;
 
 import static hirehive.address.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -21,6 +22,7 @@ import hirehive.address.model.Model;
 import hirehive.address.model.ModelManager;
 import hirehive.address.model.ReadOnlyAddressBook;
 import hirehive.address.model.UserPrefs;
+import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
 import hirehive.address.storage.JsonAddressBookStorage;
 import hirehive.address.storage.JsonUserPrefsStorage;
@@ -81,6 +83,23 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         Assert.assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getPersonNote_initial_returnsDefaultNote() {
+        assertEquals(logic.getPersonNote(), new Note(Note.DEFAULT_NOTE));
+    }
+
+    @Test
+    public void getPersonNote_person_getPersonNote() {
+        model.updatePersonNote(TypicalPersons.ALICE);
+        assertEquals(logic.getPersonNote(), TypicalPersons.ALICE.getNote());
+    }
+
+    @Test
+    public void getFilteredPersonListSize_initialList_returnListSize() {
+        int listSize = model.getFilteredPersonList().size();
+        assertEquals(listSize, logic.getFilteredPersonListSize());
     }
 
     /**

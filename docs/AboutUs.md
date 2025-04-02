@@ -45,7 +45,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/deannapoh.md)]
 
 * Role: Developer
-* Responsibilities: UI/UX 
+* Responsibilities: UI/UX
 
 ### Caleb Cherng
 

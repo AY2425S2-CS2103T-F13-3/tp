@@ -6,6 +6,8 @@ import hirehive.address.commons.core.GuiSettings;
 import hirehive.address.commons.core.LogsCenter;
 import hirehive.address.logic.Logic;
 import hirehive.address.logic.commands.CommandResult;
+import hirehive.address.logic.commands.ExitCommand;
+import hirehive.address.logic.commands.ListCommand;
 import hirehive.address.logic.commands.exceptions.CommandException;
 import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.AddressBook;
@@ -13,6 +15,7 @@ import hirehive.address.model.ReadOnlyAddressBook;
 import hirehive.address.model.util.SampleDataUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -37,6 +40,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private NoteWindow noteWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -52,6 +56,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private Label contactCountLabel;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -69,6 +76,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        noteWindow = new NoteWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -116,6 +124,8 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        updateContactCount();
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -152,6 +162,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the note window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleNote() {
+        if (!noteWindow.isShowing()) {
+            noteWindow.show();
+        } else {
+            noteWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -164,6 +186,7 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
+        noteWindow.hide();
         helpWindow.hide();
         primaryStage.hide();
     }
@@ -181,8 +204,15 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser()
-                    + "\nSuccess: Applicant data has been saved.");
+            String userFeedback = commandResult.getFeedbackToUser();
+            if (!(commandResult.isShowHelp() || commandResult.isExit() || commandResult.isList()
+                    || commandResult.isFind() || commandResult.isShowNote())) {
+                userFeedback += "\nSuccess: Applicant data has been saved.";
+            }
+            resultDisplay.setFeedbackToUser(userFeedback);
+            noteWindow.setNote(logic);
+
+            updateContactCount();
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -192,11 +222,15 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isShowNote()) {
+                handleNote();
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage()
-                    + "\nError: Unable to save applicant data. Please try again.");
+            resultDisplay.setFeedbackToUser(e.getMessage());
+            updateContactCount();
             throw e;
         }
     }
@@ -216,5 +250,10 @@ public class MainWindow extends UiPart<Stage> {
             // Data file loaded successfully
             resultDisplay.setFeedbackToUser("Success: Applicant data has been loaded successfully.");
         }
+    }
+
+    private void updateContactCount() {
+        int count = logic.getFilteredPersonListSize();
+        contactCountLabel.setText("Total contacts displayed: " + count);
     }
 }

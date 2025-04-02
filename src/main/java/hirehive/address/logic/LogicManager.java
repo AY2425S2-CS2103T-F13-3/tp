@@ -14,6 +14,7 @@ import hirehive.address.logic.parser.AddressBookParser;
 import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.Model;
 import hirehive.address.model.ReadOnlyAddressBook;
+import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
 import hirehive.address.storage.Storage;
 import javafx.collections.ObservableList;
@@ -84,5 +85,14 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public Note getPersonNote() {
+        return model.getPersonNote();
+    }
+    @Override
+    public int getFilteredPersonListSize() {
+        return model.getListSize();
     }
 }

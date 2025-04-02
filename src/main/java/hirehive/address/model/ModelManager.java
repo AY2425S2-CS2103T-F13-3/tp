@@ -3,15 +3,19 @@ package hirehive.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import hirehive.address.commons.core.GuiSettings;
 import hirehive.address.commons.core.LogsCenter;
 import hirehive.address.commons.util.CollectionUtil;
+import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +26,10 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private Note personNote;
+    private final SortedList<Person> sortedPersons;
+    private boolean isSorted = false;
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +42,8 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        personNote = new Note(Note.DEFAULT_NOTE);
+        this.sortedPersons = new SortedList<>(filteredPersons);
     }
 
     public ModelManager() {
@@ -119,13 +129,45 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+        return sortedPersons;
     }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+        resetSorting();
+    }
+
+    @Override
+    public void sortPersons() {
+        Comparator<Person> comparator = Comparator.comparing(
+                person -> person.getDate().getValue().orElse(LocalDate.MAX)
+        );
+        sortedPersons.setComparator(comparator);
+        isSorted = true;
+    }
+
+    @Override
+    public void resetSorting() {
+        sortedPersons.setComparator(null);
+        isSorted = false;
+    }
+
+
+    @Override
+    public void updatePersonNote(Person person) {
+        personNote = person.getNote();
+    }
+
+    @Override
+    public Note getPersonNote() {
+        return personNote;
+    }
+
+    @Override
+    public int getListSize() {
+        return filteredPersons.size();
     }
 
     @Override

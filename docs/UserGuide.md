@@ -3,8 +3,9 @@ layout: page
 title: User Guide
 
 ---
-
+# HireHive User Guide
 HireHive is an **all-in-one desktop application** designed to streamline recruitment for small businesses and hiring managers, **combining the efficiency of a Command Line Interface (CLI) with the ease of a Graphical User Interface (GUI)**. It simplifies tracking candidates, organizing interview notes, and managing hiring stages—all in one centralized platform. With **fast keyboard-driven commands**, HireHive lets you complete tasks quicker than traditional GUI apps, so you can focus less on administrative work and more on finding the best talent.
+
 
 - [Quick start](#quick-start-)
 - [Command Summary](#command-summary)
@@ -23,23 +24,24 @@ HireHive is an **all-in-one desktop application** designed to streamline recruit
   - [Editing the data file](#editing-the-data-file)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
+- [Glossary](#glossary)
 
 --------------------------------------------------------------------------------------------------------------------
 
 
-## Quick start 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
-   - **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+## Quick start
+1. Ensure you have Java `17` or above installed in your computer.<br>
+   - For **Mac users:** Ensure you have the precise [JDK](#glossary) version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S2-CS2103T-F13-3/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for HireHive.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar hirehive.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A [GUI](#glossary) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui-2.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all applicants.
@@ -47,16 +49,16 @@ HireHive is an **all-in-one desktop application** designed to streamline recruit
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/intern`: Adds an applicant named `John Doe` to HireHive, with his relevant information
 
    * `delete n/John Doe` : Deletes the applicant `John Doe` from the current list.
-   
-  * `edit 3 n/Josef` : Edits the name of the 3rd applicant in the list to Josef
 
-  * `find John Doe`: Searches for John Doe in the current list.
+   * `edit 3 n/Josef` : Edits the name of the 3rd applicant in the list to Josef
 
-  * `tag n/John Doe t/interviewee` : Tags John Doe with the 'interviewee' tag
+   * `find John Doe`: Searches for John Doe in the current list.
 
-  * `clear` : Deletes all contacts.
+   * `tag n/John Doe t/interviewee` : Tags John Doe with the 'interviewee' tag
 
-  * `exit` : Exits the app.
+   * `clear` : Deletes all contacts.
+
+   * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) section below for details of each command.
 
@@ -69,7 +71,7 @@ Action | Format, Examples
 **Help** | `help`
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [i/INFO]` <br> e.g., `add n/James Ho p/87654321 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/software engineer intern i/26 years old`
 **List** | `list`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [i/NOTE] [d/DATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Tag** | `tag n/NAME [t/TAG]…​`
 **Filter** |
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
@@ -80,7 +82,7 @@ Action | Format, Examples
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features 
+## Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -129,7 +131,7 @@ An 'Applicant' tag is automatically assigned to each person when they are added 
 </div>
 
 - Optional to provide INFO of a person. INFO has a maximum length of 500 characters.
-- The parameter NAME is **unique** and **case insensitive**, and is displayed as how the user types it.
+- The parameter NAME is **[unique](#glossary)** and **[case-insensitive](#glossary)**, and is displayed as how the user types it.
 - Applicants in HireHive can share the same phone number, email, address and role.
 
 Examples:
@@ -146,32 +148,35 @@ Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing applicant in HireHive.
+You can edit the information of an existing applicant in HireHive if needed!
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/ROLE] [i/NOTE] [d/DATE]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+[Back to top](#hirehive-user-guide)
+
 
 ### Tagging a person : `tag`
 
-Changes or adds tags to the specified person from HireHive. 
+You can change or add tags to a specific person from HireHive to easily  differentiate between all your applicants! 
 
 Format: `tag n/NAME t/TAG`
 
-* Tags a person if the given name partially matches **exactly one person** in the list (case-insensitive).
-* If multiple matches are found, a list of all matching names will be displayed. The user must then enter the **full name** of the person they want to delete.
+* Tags a person if the given name partially matches **exactly one person** in the list ([case-insensitive](#glossary)).
+* If multiple matches are found, a list of all matching names will be displayed. You can then enter the **full name** 
+  of the person you want to delete.
 
 Examples:
 * `tag n/John Doe t/Applicant` will tag John Doe as "Applicant" in HireHive
+
+[Back to top](#hirehive-user-guide)
 
 ### Filter persons by tag : `filter`
 
@@ -179,7 +184,7 @@ Shows a list of all applicants with a certain tag in HireHive.
 
 Format: `filter t/TAG`
 
-* The search is case-insensitive. e.g `applicant` will match `Applicant`
+* The search is [case-insensitive](#glossary). e.g `applicant` will match `Applicant`
 * Only full words will be matched e.g. `Reject` will not match `Rejected`
 
 ### Locating persons by name: `find`
@@ -188,7 +193,7 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is [case-insensitive](#glossary). e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -202,17 +207,19 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from HireHive.
+You can delete a specific person from HireHive.
 
 Format: `delete n/NAME`
 
-* Deletes the person if the given name partially matches **exactly one person** in the list (case-insensitive).
-* If multiple matches are found, a list of all matching names will be displayed. The user must then enter the **full name** of the person they want to delete.
+* Deletes the person if the given name partially matches **exactly one person** in the list ([case-insensitive](#glossary)).
+* If multiple matches are found, a list of all matching names will be displayed. You can then enter the **full name** of the person you want to delete.
 
 Examples:
 * `delete n/John Doe` deletes John Doe's contact from HireHive
 
 ![delete message](images/Ui-DeleteCommand.png)
+
+[Back to top](#hirehive-user-guide)
 
 ### Clearing all entries : `clear`
 
@@ -228,11 +235,11 @@ Format: `exit`
 
 ### Saving the data
 
-HireHive data are saved in the hard disk automatically after any command that changes the data. If successfully saved, the output following the command will display the success message. There is no need to save manually.
+HireHive data is saved in the [hard disk](#glossary) automatically after any command that changes the data. If successfully saved, the output following the command will display the success message. There is no need to save manually.
 
 ### Editing the data file
 
-HireHive data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+HireHive data are saved automatically as a [JSON](#glossary) file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, HireHive will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -251,8 +258,24 @@ Furthermore, certain edits can cause HireHive to behave in unexpected ways (e.g.
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the [GUI](#glossary) will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+2. If you **minimize the Help Window and then run the `help` command** (or use the `Help` menu, or the keyboard [shortcut](#glossary) `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Glossary
+
+Term | Description
+--------|------------------
+**Command Line Interface (CLI)** | A text-based interface where users interact with a computer by typing commands into a terminal, allowing for direct control and automation of tasks.
+**Graphical User Interface (GUI)** | A form of user interface that allows users to interact with electronic devices through graphical icons and visual indicators such as secondary notation.
+**Applicant** | A person who makes a formal application for something, especially a job.
+**JDK** | Acronym for _Java Development Kit._ It is a distribution of Java technology by Oracle Corporation. It implements the Java Language Specification and the Java Virtual Machine Specification and provides the Standard Edition of the Java Application Programming Interface.
+**Unique** | Only 1 specific instance of it exists.
+**Case-insensitive** | Uppercase and lowercase letters are treated the same and hence equivalent.
+**Hard disk** | The storage device used by a computer. These can be used as primary or secondary storage.
+**JSON** | Acronym for _JavaScript Object Notation,_ an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of name–value pairs and arrays (or other serializable values).
+**Shortcut** | A key or combination of keys that you can press on a computer keyboard to quickly perform a specific action.
+
+
+--------------------------------------------------------------------------------------------------------------------
