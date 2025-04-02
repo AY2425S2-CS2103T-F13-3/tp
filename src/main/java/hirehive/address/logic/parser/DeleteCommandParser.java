@@ -1,9 +1,17 @@
 package hirehive.address.logic.parser;
 
 import static hirehive.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static hirehive.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static hirehive.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static hirehive.address.logic.parser.CliSyntax.PREFIX_NOTE;
+import static hirehive.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static hirehive.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static java.util.Objects.requireNonNull;
 
+import java.util.stream.Stream;
+
+import hirehive.address.logic.commands.AddCommand;
 import hirehive.address.logic.commands.DeleteCommand;
 import hirehive.address.logic.commands.queries.NameQuery;
 import hirehive.address.logic.parser.exceptions.ParseException;
@@ -24,10 +32,12 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
-        if (argMultimap.getValue(PREFIX_NAME).isEmpty()) {
+        if (argMultimap.getValue(PREFIX_NAME).map(String::trim).filter(String::isEmpty).isPresent()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
 
         String nameKeywords = argMultimap.getValue(PREFIX_NAME).get();
         NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nameKeywords));
