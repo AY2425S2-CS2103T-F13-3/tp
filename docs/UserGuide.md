@@ -148,17 +148,19 @@ Format: `list`
 
 ### Editing a person : `edit`
 
-You can edit the information of an existing applicant in HireHive.
+You can edit the information of an existing applicant in HireHive if needed!
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/ROLE]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+
+[Back to top](#hirehive-user-guide)
 
 
 ### Tagging a person : `tag`
@@ -264,13 +266,13 @@ Term | Description
 --------|------------------
 **Command Line Interface (CLI)** | A text-based interface where users interact with a computer by typing commands into a terminal, allowing for direct control and automation of tasks.
 **Graphical User Interface (GUI)** | A form of user interface that allows users to interact with electronic devices through graphical icons and visual indicators such as secondary notation.
-**applicant** | A person who makes a formal application for something, especially a job.
+**Applicant** | A person who makes a formal application for something, especially a job.
 **JDK** | Acronym for _Java Development Kit._ It is a distribution of Java technology by Oracle Corporation. It implements the Java Language Specification and the Java Virtual Machine Specification and provides the Standard Edition of the Java Application Programming Interface.
-**unique** | Only 1 specific instance of it exists.
-**case-insensitive** | Uppercase and lowercase letters are treated the same and hence equivalent.
-**hard disk** | The storage device used by a computer. These can be used as primary or secondary storage.
+**Unique** | Only 1 specific instance of it exists.
+**Case-insensitive** | Uppercase and lowercase letters are treated the same and hence equivalent.
+**Hard disk** | The storage device used by a computer. These can be used as primary or secondary storage.
 **JSON** | Acronym for _JavaScript Object Notation,_ an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of name–value pairs and arrays (or other serializable values).
-**shortcut** | A key or combination of keys that you can press on a computer keyboard to quickly perform a specific action.
+**Shortcut** | A key or combination of keys that you can press on a computer keyboard to quickly perform a specific action.
 
 
 --------------------------------------------------------------------------------------------------------------------
