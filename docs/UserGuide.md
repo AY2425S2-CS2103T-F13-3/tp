@@ -72,7 +72,7 @@ Action | Format, Examples
 **List** | `list`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Tag** | `tag n/NAME [t/TAG]…​`
-**Filter** |
+**Filter** |`filter t/TAG` <br> e.g., `filter t/Applicant`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Delete** | `delete n/NAME`<br> e.g., `delete n/John Doe`
 **Clear** | `clear`
@@ -141,7 +141,7 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all applicants in HireHive.
+Lists down all your applicants in HireHive.
 
 Format: `list`
 
@@ -176,7 +176,7 @@ Examples:
 
 ### Filter persons by tag : `filter`
 
-Shows a list of all applicants with a certain tag in HireHive.
+Lists down all applicants of a certain tag. 
 
 Format: `filter t/TAG`
 
