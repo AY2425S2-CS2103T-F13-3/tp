@@ -20,7 +20,7 @@ public class FilterCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all persons with the given tag "
             + "(case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: t/TAG\n"
-            + "Example: " + COMMAND_WORD + " " + CliSyntax.PREFIX_TAG +"applicant";
+            + "Example: " + COMMAND_WORD + " " + CliSyntax.PREFIX_TAG + "applicant";
 
     private final PersonContainsTagPredicate predicate;
 
