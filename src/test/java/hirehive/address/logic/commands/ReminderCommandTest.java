@@ -27,10 +27,10 @@ public class ReminderCommandTest {
 
     @Test
     public void equals() {
-        PersonContainsTagPredicate firstPredicate =
-                new PersonContainsTagPredicate(new Tag("first"));
-        PersonContainsTagPredicate secondPredicate =
-                new PersonContainsTagPredicate(new Tag("second"));
+        UpcomingInterviewPredicate firstPredicate =
+                new UpcomingInterviewPredicate(5, "01/01/2025");
+        UpcomingInterviewPredicate secondPredicate =
+                new UpcomingInterviewPredicate(10, "01/01/2025");
 
         FilterCommand filterFirstCommand = new FilterCommand(firstPredicate);
         FilterCommand filterSecondCommand = new FilterCommand(secondPredicate);
@@ -48,7 +48,7 @@ public class ReminderCommandTest {
         // null -> returns false
         assertFalse(filterFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different days -> returns false
         assertFalse(filterFirstCommand.equals(filterSecondCommand));
     }
 
