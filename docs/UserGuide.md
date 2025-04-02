@@ -40,8 +40,10 @@ HireHive is an **all-in-one desktop application** designed to streamline recruit
 
 4. Run HireHive
    - Find the folder that you stored HireHive previously (e.g. "Documents" or "Desktop" or "HireHive").
-   - Right-click on the folder and choose "New terminal at [folder-name]".
-   - Type `java -jar hirehive.jar` command and press Enter to run the application.<br>
+   - Right-click on the folder and choose:  
+     - For MAC: "New terminal at [folder-name]".
+     - For Windows: "Open in terminal".
+   - Type `java -jar hirehive.jar` command in the opened terminal and press Enter to run the HireHive application.<br>
    - A [GUI](#glossary) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui-2.png)
 
