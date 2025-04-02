@@ -31,7 +31,9 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
 
-        String nameKeywords = argMultimap.getValue(PREFIX_NAME).get();
+        String nameKeywords = argMultimap.getValue(PREFIX_NAME)
+                .orElseThrow(() -> new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE)));
         NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nameKeywords));
 
         return new DeleteCommand(nameQuery);
