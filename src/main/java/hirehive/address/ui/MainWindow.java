@@ -15,6 +15,7 @@ import hirehive.address.model.ReadOnlyAddressBook;
 import hirehive.address.model.util.SampleDataUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -55,6 +56,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private Label contactCountLabel;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -119,6 +123,8 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        updateContactCount();
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -206,6 +212,8 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(userFeedback);
             noteWindow.setNote(logic);
 
+            updateContactCount();
+
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
@@ -222,6 +230,7 @@ public class MainWindow extends UiPart<Stage> {
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
+            updateContactCount();
             throw e;
         }
     }
@@ -241,5 +250,10 @@ public class MainWindow extends UiPart<Stage> {
             // Data file loaded successfully
             resultDisplay.setFeedbackToUser("Success: Applicant data has been loaded successfully.");
         }
+    }
+
+    private void updateContactCount() {
+        int count = logic.getFilteredPersonListSize();
+        contactCountLabel.setText("Total contacts displayed: " + count);
     }
 }
