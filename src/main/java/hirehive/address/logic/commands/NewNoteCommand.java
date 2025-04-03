@@ -1,5 +1,6 @@
 package hirehive.address.logic.commands;
 
+import static hirehive.address.logic.Messages.MESSAGE_DATA_SAVED;
 import static hirehive.address.logic.commands.EditCommand.createEditedPerson;
 import static java.util.Objects.requireNonNull;
 
@@ -67,8 +68,8 @@ public class NewNoteCommand extends Command {
 
         model.setPerson(personAddedNote, editedPerson);
         model.updatePersonNote(editedPerson);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(editedPerson)), false,
-                false, true);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(editedPerson)),
+                false, false, true, true);
     }
 
     @Override
