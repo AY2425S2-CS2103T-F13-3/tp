@@ -6,23 +6,31 @@ title: User Guide
 
 # Welcome to HireHive!
 
-HireHive is an **all-in-one desktop application** designed to streamline recruitment for small businesses and hiring managers, combining the efficiency of a [Command Line Interface (CLI)](#glossary) with the ease of a [Graphical User Interface (GUI)](#glossary). It simplifies tracking [applicants](#glossary), organizing interview notes, and managing hiring stages—all in one centralized platform. With **fast keyboard-driven commands**, HireHive lets you complete tasks quicker than traditional GUI apps, so you can focus less on administrative work and more on finding the best talent.
+Tired of drowning in resumes and losing track of candidates? Meet HireHive— your **personal, all-in-one** hiring assistant designed to simplify the hiring process so you can focus on what matters most - finding the best talent. 
+
+We combine the speed of keyboard commands with an intuitive visual interface to help you:
+- Find top talent faster with **lightning-fast** keyboard shortcuts
+- Stay effortlessly organized with all **[applicant](#glossary) details in one place**
+- Make better hiring decisions with **structured interview notes**
+
+Ready to revolutionise your hiring? Let's begin!
 
 - [Quick start](#quick-start-)
 - [Command Summary](#command-summary)
 - [Features](#features-)
-  - [Viewing help: `help`](#viewing-help--help)
-  - [Adding a person: `add`](#adding-a-person-add)
-  - [Listing all persons: `list`](#listing-all-persons--list)
-  - [Editing a person: `edit`](#editing-a-person--edit)
-  - [Tagging a person: `tag`](#tagging-a-person--tag)
-  - [Filter persons by tag: `filter`](#filter-persons-by-tag--filter)
-  - [Locating persons by name `find`](#locating-persons-by-name-find)
-  - [Deleting a person: `delete`](#deleting-a-person--delete)
-  - [Clearing all entries: `clear`](#clearing-all-entries--clear)
-  - [Exiting the program: `exit`](#exiting-the-program--exit)
-  - [Saving the data](#saving-the-data)
-  - [Editing the data file](#editing-the-data-file)
+  - [View help: `help`](#viewing-help--help)
+  - [Add an applicant: `add`](#adding-a-person-add)
+  - [Edit an applicant: `edit`](#editing-a-person--edit)
+  - [Tag an applicant: `tag`](#tagging-a-person--tag)
+  - [Filter applicants by tag: `filter`](#filter-persons-by-tag--filter)
+  - [Find applicants by name `find`](#locating-persons-by-name-find)
+  - [List all applicants: `list`](#listing-all-persons--list)
+  - [Sort applicants `sort`](#sort-applicants--sort)
+  - [Delete an applicant: `delete`](#deleting-a-person--delete)
+  - [Clear all entries: `clear`](#clearing-all-entries--clear)
+  - [Exit the program: `exit`](#exiting-the-program--exit)
+  - [Save the data](#saving-the-data)
+  - [Edit the data file](#editing-the-data-file)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Glossary](#glossary)
@@ -32,7 +40,7 @@ HireHive is an **all-in-one desktop application** designed to streamline recruit
 
 ## Quick start
 1. To use Hirehive, you need Java `17` or above installed in your computer.<br>
-   - For **Mac users:** Ensure you have the precise [JDK](#glossary) version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+   - For **Mac users:** Ensure you have the precise version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
 2. Download the latest HireHive `.jar` file from [here](https://github.com/AY2425S2-CS2103T-F13-3/tp/releases).
 
@@ -41,8 +49,8 @@ HireHive is an **all-in-one desktop application** designed to streamline recruit
 4. Run HireHive
    - Find the folder that you stored HireHive previously (e.g. "Documents" or "Desktop" or "HireHive").
    - Right-click on the folder and choose:  
-     - For MAC: "New terminal at [folder-name]".
-     - For Windows: "Open in terminal".
+     - For **Mac users**: "New terminal at [folder-name]".
+     - For **Windows users**: "Open in terminal".
    - Type `java -jar hirehive.jar` command in the opened terminal and press Enter to run the HireHive application.<br>
    - A [GUI](#glossary) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui-2.png)
@@ -61,8 +69,6 @@ HireHive is an **all-in-one desktop application** designed to streamline recruit
    * `find John Doe`: Searches for John Doe in the current list.
 
    * `tag n/John Doe t/interviewee` : Tags John Doe with the 'interviewee' tag
-
-   * `clear` : Deletes all contacts.
 
    * `exit` : Exits the app.
 
@@ -117,9 +123,9 @@ Action | Format, Examples
 
 [Back to top](#welcome-to-hirehive)
 
-### Viewing help : `help`
+### View help : `help`
 
-Shows a message explaining how you can access the help page. The help page contains all the features of HireHive. 
+Shows a message explaining how you can access the help page that can assist you in understanding the different features of HireHive and how they work. 
 
 ![help message](images/helpMessage.png)
 
@@ -128,43 +134,33 @@ Format: `help`
 [Back to top](#welcome-to-hirehive)
 
 
-### Adding a person: `add`
+### Add an applicant: `add`
 
-Adds a person to HireHive.
+You can add a new applicant to HireHive when someone new applies to you company!
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [i/INFO]`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE`
 
 **:information_source: Note!**<br>
 * Please input a phone number that **start with 9/8/6**, is **exactly 8 digits** long and do not use spaces.
-* Please **do not use** dashes(-), commas(,), slashes(/) and periods(.) in names.
-    - Example: `Doe, John` or `Doe/John` should be entered as `Doe John`.
+* Please **do not use** dashes(-), commas(,) and periods(.) in names.
+    - Example: `Doe, John` or `Doe-John` should be entered as `Doe John`.
 * Names need to be in English!
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-An 'Applicant' tag is automatically assigned to the applicant when you add them to HireHive.
+There is no need to manually add a tag as the 'Applicant' tag is automatically assigned when you add a new applicant to HireHive.
 </div>
 
-- It is optional for you to provide INFO of a person. INFO has a maximum length of 500 characters.
 - The parameter NAME is **[unique](#glossary)** and **[case-insensitive](#glossary)**, and is displayed as how you type it.
 - Applicants in HireHive can share the same phone number, email, address and role.
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/Software Engineer intern`
-* `add n/Betsy Crowe e/betsycrowe@example.com a/Ang Mo Kio Street 22 p/87654321 r/senior consulting analyst i/32 years old`
+* `add n/Betsy Crowe e/betsycrowe@example.com a/Ang Mo Kio Street 22 p/87654321 r/senior consulting analyst`: Adds an applicant with the name `Betsy Crowe`, who has `betsycrowe@example.com` as their email, `87654321` as their phone number, and is applying for the `senior consulting analyst` role.
 
 ![help message](images/Ui-AddCommand.png)
 
 [Back to top](#welcome-to-hirehive)
 
-### Listing all persons : `list`
-
-Shows you a list of all the applicants in HireHive.
-
-Format: `list`
-
-[Back to top](#welcome-to-hirehive)
-
-### Editing a person : `edit`
+### Edit an applicant : `edit`
 
 You can edit the information of an existing applicant in HireHive if needed!
 
@@ -181,7 +177,7 @@ Examples:
 [Back to top](#welcome-to-hirehive)
 
 
-### Tagging a person : `tag`
+### Tag an applicant : `tag`
 
 You can change or add tags to a specific person from HireHive to easily differentiate between all your applicants!
 
@@ -196,7 +192,7 @@ Examples:
 
 [Back to top](#hirehive-user-guide)
 
-### Filter persons by tag : `filter`
+### Filter applicants by tag : `filter`
 
 Lists down all your applicants of a certain tag. 
 
@@ -207,7 +203,7 @@ Format: `filter t/TAG`
 
 [Back to top](#welcome-to-hirehive)
 
-### Locating persons by name: `find`
+### Finding applicants by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -227,7 +223,23 @@ Examples:
 
 [Back to top](#welcome-to-hirehive)
 
-### Deleting a person : `delete`
+### List all applicants : `list`
+
+Shows you a list of all the applicants in HireHive so that you can look at an overview of all the applicants if needed.
+
+Format: `list`
+
+[Back to top](#welcome-to-hirehive)
+
+### Sort applicants : `sort`
+
+Sorts the applicants displayed on your screen by interview date, in chronological order so that you can conveniently view upcoming interviews.
+
+Format: `sort`
+
+[Back to top](#welcome-to-hirehive)
+
+### Delete an applicant : `delete`
 
 You can delete a specific person from HireHive.
 
@@ -243,29 +255,32 @@ Examples:
 
 [Back to top](#welcome-to-hirehive)
 
-### Clearing all entries : `clear`
+### Clear all entries : `clear`
 
 Clears all entries from HireHive.
 
 Format: `clear`
 
+**:information_source: Note!**<br> 
+This action is **irreversible**! Please use this command with caution!
+
 [Back to top](#welcome-to-hirehive)
 
-### Exiting the program : `exit`
+### Exit the program : `exit`
 
-Exits the program.
+You can use this command to exit the program once you are done using it.
 
 Format: `exit`
 
 [Back to top](#welcome-to-hirehive)
 
-### Saving the data
+### Save the data
 
 HireHive data is saved in the [hard disk](#glossary) automatically after any command that changes the data. If successfully saved, the output following the command will display the success message. There is no need to save manually.
 
 [Back to top](#welcome-to-hirehive)
 
-### Editing the data file
+### Edit the data file
 
 HireHive data are saved automatically as a [JSON](#glossary) file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -300,10 +315,8 @@ Furthermore, certain edits can cause HireHive to behave in unexpected ways (e.g.
 
 Term | Description
 --------|------------------
-**Command Line Interface (CLI)** | A text-based interface where users interact with a computer by typing commands into a terminal, allowing for direct control and automation of tasks.
 **Graphical User Interface (GUI)** | A form of user interface that allows users to interact with electronic devices through graphical icons and visual indicators such as secondary notation.
 **Applicant** | A person who makes a formal application for something, especially a job.
-**JDK** | Acronym for _Java Development Kit._ It is a distribution of Java technology by Oracle Corporation. It implements the Java Language Specification and the Java Virtual Machine Specification and provides the Standard Edition of the Java Application Programming Interface.
 **Unique** | Only 1 specific instance of it exists.
 **Case-insensitive** | Uppercase and lowercase letters are treated the same and hence equivalent.
 **Hard disk** | The storage device used by a computer. These can be used as primary or secondary storage.
