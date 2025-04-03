@@ -81,8 +81,6 @@ public class ScheduleCommandTest {
         Person editedPerson = new PersonBuilder(TypicalPersons.ALICE)
                 .withDate(LocalDate.now().plusDays(1).format(formatter))
                 .withTag("INTERVIEWEE").build();
-        EditCommand.EditPersonDescriptor descriptor =
-                new EditPersonDescriptorBuilder(editedPerson).build();
         NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(TypicalPersons.ALICE.getName().fullName));
         ScheduleCommand scheduleCommand = new ScheduleCommand(nameQuery);
 

@@ -5,16 +5,21 @@ import static hirehive.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+
 import hirehive.address.logic.commands.EditCommand;
 import hirehive.address.logic.commands.ScheduleCommand;
 import hirehive.address.logic.commands.queries.NameQuery;
 import hirehive.address.logic.parser.exceptions.ParseException;
+import hirehive.address.model.person.InterviewDate;
 import hirehive.address.model.person.NameContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new DateCommand object
  */
 public class ScheduleCommandParser implements Parser<ScheduleCommand> {
+    public static final String MESSAGE_DATE_OUT_OF_BOUNDS = "The given date has already passed."
+            + "Please provide a valid date.";
 
     /**
      * Parses the given {@code String} of arguments in the context of the DateCommand
@@ -35,8 +40,12 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
         if (argMultimap.getValue(PREFIX_DATE).orElse("").trim().isEmpty()) {
             return new ScheduleCommand(nameQuery);
         } else {
+            InterviewDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+            if (date.getValue().get().isBefore(LocalDate.now())) {
+                throw new ParseException(MESSAGE_DATE_OUT_OF_BOUNDS);
+            }
             EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
-            editPersonDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
+            editPersonDescriptor.setDate(date);
             return new ScheduleCommand(nameQuery, editPersonDescriptor);
         }
     }
