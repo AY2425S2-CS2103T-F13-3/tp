@@ -15,24 +15,24 @@ We combine the speed of keyboard commands with an intuitive visual interface to 
 
 Ready to revolutionise your hiring? Let's begin!
 
-- [Quick start](#quick-start-)
+- [Quick start](#quick-start)
 - [Command Summary](#command-summary)
-- [Features](#features-)
-  - [View help: `help`](#viewing-help--help)
-  - [Add an applicant: `add`](#adding-a-person-add)
-  - [Edit an applicant: `edit`](#editing-a-person--edit)
-  - [Tag an applicant: `tag`](#tagging-a-person--tag)
-  - [Filter applicants by tag: `filter`](#filter-persons-by-tag--filter)
+- [Features](#features)
+  - [View help: `help`](#view-help--help)
+  - [Add an applicant: `add`](#add-an-applicant-add)
+  - [Edit an applicant: `edit`](#edit-an-applicant--edit)
+  - [Tag an applicant: `tag`](#tag-an-applicant--tag)
+  - [Filter applicants by tag: `filter`](#filter-applicants-by-tag--filter)
   - [Add note to applicant: `newnote`](#add-notes-to-person--newnote)
   - [Display note of applicant: `displaynote`](#display-note-of-person--displaynote)
-  - [Find applicants by name `find`](#locating-persons-by-name-find)
-  - [List all applicants: `list`](#listing-all-persons--list)
+  - [Find applicants by name `find`](#find-applicants-by-name--find)
+  - [List all applicants: `list`](#list-all-applicants--list)
   - [Sort applicants `sort`](#sort-applicants--sort)
-  - [Delete an applicant: `delete`](#deleting-a-person--delete)
-  - [Clear all entries: `clear`](#clearing-all-entries--clear)
-  - [Exit the program: `exit`](#exiting-the-program--exit)
-  - [Save the data](#saving-the-data)
-  - [Edit the data file](#editing-the-data-file)
+  - [Delete an applicant: `delete`](#delete-an-applicant--delete)
+  - [Clear all entries: `clear`](#clear-all-entries--clear)
+  - [Exit the program: `exit`](#exit-the-program--exit)
+  - [Save the data](#save-the-data)
+  - [Edit the data file](#edit-the-data-file)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Glossary](#glossary)
@@ -136,7 +136,7 @@ Format: `help`
 [Back to top](#welcome-to-hirehive)
 
 
-### Add an applicant : `add`
+### Add an applicant: `add`
 
 You can add a new applicant to HireHive when someone new applies to you company!
 
@@ -280,7 +280,7 @@ Command | Description
 * If date is left empty, 
 * Scheduling interview date by index must have a **positive** index number
 
-### Finding applicants by name : `find`
+### Find applicants by name : `find`
 
 Finds persons whose names contain any of the given keywords.
 

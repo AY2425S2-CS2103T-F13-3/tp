@@ -413,21 +413,71 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Viewing help
+1. Viewing help page
+
+   1. Prerequisites: Application must be running.
+   
+   2. Test case: `help` <br>
+      Expected: A 'Help' window pops up, with the link to the user guide, that can be copied.
+   
+   3. Test case: `help 1` <br>
+      Expected: A 'Help' window pops up, with the link to the user guide, that can be copied.
+
+### Adding a person
+1. Adding a person
+
+   1. Prerequisites: Application must be running.
+   
+   2. Test case: `add n/Betsy Crowe e/betsycrowe@example.com a/Ang Mo Kio Street 22 p/87654321 r/senior consulting analyst` <br>
+       Expected: A person with name "Betsy Crowe", email "betsycrowe@example.com", address "Ang Mo Kio Street 22", phone number "87654321", applying for the "senior consulting analyst" role is added to the bottom of the existing list. Added person is given an index that follows immediately after the last assigned index.
+
+   3. Test case: `add n/John Doe a/Bishan Street 20 p/98765432 r/senior consulting intern` <br>
+      Expected: No person is added. Error details shown in the status message.
+   
+   4. Test case: `add n/John Doe e/john@gmail.com a/Bishan Street 20 p/98765432 r/senior consulting intern t/applicant` <br>
+      Expected: No person is added. Error details shown in the status message.
+   
+   5. Test case: `add n/John Doe e/john@gmail.com a/Bishan Street 20 p/98765432 r/senior consulting intern i/Likes to talk` <br>
+      Expected: No person is added. Error details shown in the status message.
+   
+   6. Test case: `add n/小丽 e/john@gmail.com a/Bishan Street 20 p/98765432 r/senior consulting intern` <br>
+      Expected: No person is added. Error details shown in the status message.
+
+### Listing persons
+1. Listing all the persons in HireHive
+
+   1. Prerequisites: List is not empty
+   
+   2. Test case: `list` <br>
+      Expected: All the persons in the list are listed. Topmost person in the list is the oldest person who was added to the list, while the bottom-most person was the person who was most recently added to the list. Index of persons should start from 1 and increase from top to bottom of the list. 
+   3. Test case: `list help` <br> 
+       Expected: All the persons in the list are listed. Topmost person in the list is the oldest person who was added to the list, while the bottom-most person was the person who was most recently added to the list. Index of persons should start from 1 and increase from top to bottom of the list.
+
+### Sorting persons
+1. Sorting all the persons shown in the list. 
+
+   1. Prerequisites: Multiple persons in the list, with some persons having interview dates
+   
+   2. Test case: `sort` <br>
+      Expected: All the persons in the list are sorted.Those with interview dates are sorted in chronological order, while those without interview dates are pushed to the back of the list, in the original order they were in previously. New index given based on the newly sorted order of the list.
+
+   3. Test case: `list help` <br>
+      Expected: All the persons in the list are sorted.Those with interview dates are sorted in chronological order, while those without interview dates are pushed to the back of the list, in the original order they were in previously. New index given based on the newly sorted order of the list.
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   1. Test case: `delete 1`<br>
+   
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
@@ -502,6 +552,25 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `schedule 1 d/test` <br>
       Expected: Expected: Error message for invalid command format shown in status message with command format and example.
 
+
+### Clearing all entries
+1. Clearing all entries in HireHive
+
+    1. Prerequisites: List contains people.
+
+    2. Test case: `clear` <br>
+       Expected: All the persons in the list are cleared. List is now empty.
+
+    3. Test case: `Clear` <br>
+       Expected: Nothing is cleared. Error details shown in the status message.
+
+### Exiting the program 
+1. Exiting the program
+
+   1. Prerequisites: Program was originally running.
+   
+   2. Test case: `exit` <br>
+      Expected: Program exits and closes. 
 
 ### Saving data
 
