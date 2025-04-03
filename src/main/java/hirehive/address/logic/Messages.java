@@ -28,6 +28,11 @@ public class Messages {
     public static final String MESSAGE_FILTER_OVERVIEW_TAG = "Showing all %s entries.";
     public static final String MESSAGE_FILTER_OVERVIEW_DATE = "Showing entries with interviews in %1$d days.";
     public static final String MESSAGE_FILTER_OVERVIEW_NAME = "Showing entries with keywords %s in name.";
+    public static final String MESSAGE_EMPTY_ADDRESS_BOOK = "Error: Unable to load applicant data. Invalid data format in saved file.";
+    public static final String MESSAGE_SAMPLE_ADDRESS_BOOK = "Success: Sample applicant data has been loaded successfully.";
+    public static final String MESSAGE_LOAD_SUCCESS = "Success: Applicant data has been loaded successfully.";
+    public static final String MESSAGE_DATA_SAVED = "\nSuccess: Applicant data has been saved.";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
