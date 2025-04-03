@@ -17,7 +17,7 @@ public class PersonDoesNotContainTagPredicate implements PersonPredicate {
 
     @Override
     public boolean test(Person person) {
-        return person.getTags().stream().noneMatch(t -> t.equals(tag));
+        return !person.getTag().equals(tag);
     }
 
     @Override

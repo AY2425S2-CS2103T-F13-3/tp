@@ -1,5 +1,7 @@
 package hirehive.address.logic.parser;
 
+import static hirehive.address.logic.parser.CliSyntax.PREFIX_TAG;
+
 import org.junit.jupiter.api.Test;
 
 import hirehive.address.commons.core.index.Index;
@@ -17,7 +19,7 @@ import hirehive.address.testutil.TypicalIndexes;
 
 public class EditCommandParserTest {
 
-    private static final String TAG_EMPTY = " " + CliSyntax.PREFIX_TAG;
+    private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
@@ -65,9 +67,15 @@ public class EditCommandParserTest {
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.TAG_DESC_APPLICANT + CommandTestUtil.TAG_DESC_CANDIDATE + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.TAG_DESC_APPLICANT + TAG_EMPTY + CommandTestUtil.TAG_DESC_CANDIDATE, Tag.MESSAGE_CONSTRAINTS);
-        CommandParserTestUtil.assertParseFailure(parser, "1" + TAG_EMPTY + CommandTestUtil.TAG_DESC_APPLICANT + CommandTestUtil.TAG_DESC_CANDIDATE, Tag.MESSAGE_CONSTRAINTS);
+        CommandParserTestUtil.assertParseFailure(parser,
+                "1" + CommandTestUtil.TAG_DESC_APPLICANT + CommandTestUtil.TAG_DESC_CANDIDATE + TAG_EMPTY,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TAG));
+        CommandParserTestUtil.assertParseFailure(parser,
+                "1" + CommandTestUtil.TAG_DESC_APPLICANT + TAG_EMPTY + CommandTestUtil.TAG_DESC_CANDIDATE,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TAG));
+        CommandParserTestUtil.assertParseFailure(parser,
+                "1" + TAG_EMPTY + CommandTestUtil.TAG_DESC_APPLICANT + CommandTestUtil.TAG_DESC_CANDIDATE,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TAG));
 
         // multiple invalid values, but only the first invalid value is captured
         CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_NAME_DESC + CommandTestUtil.INVALID_EMAIL_DESC + CommandTestUtil.VALID_ADDRESS_AMY + CommandTestUtil.VALID_PHONE_AMY,
@@ -77,12 +85,12 @@ public class EditCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = TypicalIndexes.INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.TAG_DESC_CANDIDATE
-                + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.TAG_DESC_APPLICANT;
+        String userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_AMY
+                + CommandTestUtil.ADDRESS_DESC_AMY + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.TAG_DESC_APPLICANT;
 
         EditCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_AMY)
                 .withPhone(CommandTestUtil.VALID_PHONE_BOB).withEmail(CommandTestUtil.VALID_EMAIL_AMY).withAddress(CommandTestUtil.VALID_ADDRESS_AMY)
-                .withTags(CommandTestUtil.VALID_TAG_CANDIDATE, CommandTestUtil.VALID_TAG_APPLICANT).build();
+                .withTag(CommandTestUtil.VALID_TAG_APPLICANT).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
@@ -129,7 +137,7 @@ public class EditCommandParserTest {
 
         // tags
         userInput = targetIndex.getOneBased() + CommandTestUtil.TAG_DESC_APPLICANT;
-        descriptor = new EditPersonDescriptorBuilder().withTags(CommandTestUtil.VALID_TAG_APPLICANT).build();
+        descriptor = new EditPersonDescriptorBuilder().withTag(CommandTestUtil.VALID_TAG_APPLICANT).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -162,7 +170,8 @@ public class EditCommandParserTest {
                 + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.TAG_DESC_CANDIDATE;
 
         CommandParserTestUtil.assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_EMAIL, CliSyntax.PREFIX_ADDRESS));
+                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_EMAIL,
+                        CliSyntax.PREFIX_ADDRESS, PREFIX_TAG));
 
         // multiple invalid values
         userInput = targetIndex.getOneBased() + CommandTestUtil.INVALID_PHONE_DESC + CommandTestUtil.INVALID_ADDRESS_DESC + CommandTestUtil.INVALID_EMAIL_DESC
@@ -170,16 +179,5 @@ public class EditCommandParserTest {
 
         CommandParserTestUtil.assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_EMAIL, CliSyntax.PREFIX_ADDRESS));
-    }
-
-    @Test
-    public void parse_resetTags_success() {
-        Index targetIndex = TypicalIndexes.INDEX_THIRD_PERSON;
-        String userInput = targetIndex.getOneBased() + TAG_EMPTY;
-
-        EditCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-
-        CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
     }
 }
