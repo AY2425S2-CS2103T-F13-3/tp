@@ -266,6 +266,20 @@ Examples:
 
 [Back to top](#welcome-to-hirehive)
 
+### Schedule interview dates for applicants : `schedule`
+
+Format:
+
+Command | Description
+--------|------------------
+`schedule n/NAME [d/DATE]` | Schedule interview date by name.
+`schedule INDEX [d/DATE]` | Schedule interview date by index.
+
+
+* The date format is DD/MM/YYYY (date/month/year) e.g. "04/04/2025"
+* If date is left empty, 
+* Scheduling interview date by index must have a **positive** index number
+
 ### Finding applicants by name : `find`
 
 Finds persons whose names contain any of the given keywords.
