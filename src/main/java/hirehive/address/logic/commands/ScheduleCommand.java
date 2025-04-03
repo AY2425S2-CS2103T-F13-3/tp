@@ -11,6 +11,7 @@ import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.exceptions.CommandException;
 import hirehive.address.logic.commands.queries.NameQuery;
 import hirehive.address.model.Model;
+import hirehive.address.model.person.NameContainsKeywordsPredicate;
 import hirehive.address.model.person.Person;
 import hirehive.address.model.tag.Tag;
 
@@ -24,9 +25,11 @@ public class ScheduleCommand extends Command {
             + ": Adds or edits the interview date for the person identified by the name used in\n"
             + "the displayed person list.\n"
             + "If no date is specified, the next available date starting from the next day will be used instead.\n"
-            + "Parameters: " + PREFIX_NAME + "NAME ["
-            + PREFIX_DATE + "DATE]\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "John " + PREFIX_DATE + "01/05/2025";
+            + "Parameters (either 1 or 2):\n"
+            + " 1. " + PREFIX_NAME + "NAME [" + PREFIX_DATE + "DATE]\n"
+            + " 2. INDEX [" + PREFIX_DATE + "NAME]\n"
+            + "Example:\n - " + COMMAND_WORD + " " + PREFIX_NAME + "John " + PREFIX_DATE + "01/05/2025\n"
+            + " - " +COMMAND_WORD + " 1 " + PREFIX_DATE + "01/05/2025";
 
     public static final String MESSAGE_DATE_PERSON_SUCCESS = "Added interview date: %1$s";
     public static final String MESSAGE_INVALID_PERSON = "%1$s has invalid tag: %2$s.\n"
@@ -108,6 +111,7 @@ public class ScheduleCommand extends Command {
         }
         Person editedPerson = createEditedPerson(personToAddDate, editPersonDescriptor);
         model.setPerson(personToAddDate, editedPerson);
+        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(editedPerson.getName().fullName));
         return new CommandResult(String.format(MESSAGE_DATE_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 

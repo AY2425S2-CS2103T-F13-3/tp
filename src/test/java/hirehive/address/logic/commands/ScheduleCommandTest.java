@@ -1,6 +1,7 @@
 package hirehive.address.logic.commands;
 
 import static hirehive.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -13,10 +14,13 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import hirehive.address.commons.core.index.Index;
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.exceptions.CommandException;
 import hirehive.address.logic.commands.queries.NameQuery;
 import hirehive.address.logic.commands.queries.exceptions.QueryException;
+import hirehive.address.logic.parser.ParserUtil;
+import hirehive.address.logic.parser.ParserUtilTest;
 import hirehive.address.model.Model;
 import hirehive.address.model.ModelManager;
 import hirehive.address.model.UserPrefs;
@@ -31,7 +35,7 @@ public class ScheduleCommandTest {
     private Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validApplicantAndDate_success() {
+    public void execute_validApplicantNameAndDate_success() {
         Person editedPerson = new PersonBuilder(TypicalPersons.ALICE).withDate("31/12/2025").withTag("INTERVIEWEE").build();
         EditCommand.EditPersonDescriptor descriptor =
                 new EditPersonDescriptorBuilder(editedPerson).build();
@@ -53,7 +57,35 @@ public class ScheduleCommandTest {
     }
 
     @Test
-    public void execute_validIntervieweeAndDate_success() {
+    public void execute_validApplicantIndexAndDate_success() {
+        Person editedPerson = new PersonBuilder(TypicalPersons.ALICE).withDate("31/12/2025").withTag("INTERVIEWEE").build();
+        EditCommand.EditPersonDescriptor descriptor =
+                new EditPersonDescriptorBuilder(editedPerson).build();
+        NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(TypicalPersons.ALICE.getName().fullName));
+        Index index = null;
+        try {
+            index = ParserUtil.parseIndex("1");
+        } catch (Exception e) {
+            assert false;
+        }
+        ScheduleCommand scheduleCommand = new ScheduleCommand(index, descriptor);
+
+        String expectedMessage = String.format(ScheduleCommand.MESSAGE_DATE_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        List<Person> personsToAddNote;
+        try {
+            personsToAddNote = nameQuery.query(expectedModel);
+            expectedModel.setPerson(personsToAddNote.get(0), editedPerson);
+        } catch (QueryException e) {
+            fail();
+        }
+        System.out.println(model.getAddressBook().toString());
+        assertCommandSuccess(scheduleCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validIntervieweeNameAndDate_success() {
         Person editedPerson = new PersonBuilder(TypicalPersons.CARL).withDate("31/12/2025").build();
         EditCommand.EditPersonDescriptor descriptor =
                 new EditPersonDescriptorBuilder(editedPerson).build();
@@ -75,7 +107,35 @@ public class ScheduleCommandTest {
     }
 
     @Test
-    public void execute_validApplicantWithoutDate_success() {
+    public void execute_validInterviewIndexAndDate_success() {
+        Person editedPerson = new PersonBuilder(TypicalPersons.CARL).withDate("31/12/2025").build();
+        EditCommand.EditPersonDescriptor descriptor =
+                new EditPersonDescriptorBuilder(editedPerson).build();
+        NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(TypicalPersons.CARL.getName().fullName));
+        Index index = null;
+        try {
+            index = ParserUtil.parseIndex("3");
+        } catch (Exception e) {
+            assert false;
+        }
+        ScheduleCommand scheduleCommand = new ScheduleCommand(index, descriptor);
+
+        String expectedMessage = String.format(ScheduleCommand.MESSAGE_DATE_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        List<Person> personsToAddNote;
+        try {
+            personsToAddNote = nameQuery.query(expectedModel);
+            expectedModel.setPerson(personsToAddNote.get(0), editedPerson);
+        } catch (QueryException e) {
+            fail();
+        }
+        System.out.println(model.getAddressBook().toString());
+        assertCommandSuccess(scheduleCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validApplicantNameWithoutDate_success() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu")
                 .withResolverStyle(ResolverStyle.STRICT);
         Person editedPerson = new PersonBuilder(TypicalPersons.ALICE)
@@ -95,6 +155,38 @@ public class ScheduleCommandTest {
             fail();
         }
 
+        assertCommandSuccess(scheduleCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validApplicantIndexWithoutDate_success() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+                .withResolverStyle(ResolverStyle.STRICT);
+        Person editedPerson = new PersonBuilder(TypicalPersons.ALICE)
+                .withDate(LocalDate.now().plusDays(1).format(formatter))
+                .withTag("INTERVIEWEE").build();
+        EditCommand.EditPersonDescriptor descriptor =
+                new EditPersonDescriptorBuilder(editedPerson).build();
+        NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(TypicalPersons.ALICE.getName().fullName));
+        Index index = null;
+        try {
+            index = ParserUtil.parseIndex("1");
+        } catch (Exception e) {
+            assert false;
+        }
+        ScheduleCommand scheduleCommand = new ScheduleCommand(index);
+
+        String expectedMessage = String.format(ScheduleCommand.MESSAGE_DATE_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        List<Person> personsToAddNote;
+        try {
+            personsToAddNote = nameQuery.query(expectedModel);
+            expectedModel.setPerson(personsToAddNote.get(0), editedPerson);
+        } catch (QueryException e) {
+            fail();
+        }
+        System.out.println(model.getAddressBook().toString());
         assertCommandSuccess(scheduleCommand, model, expectedMessage, expectedModel);
     }
 
