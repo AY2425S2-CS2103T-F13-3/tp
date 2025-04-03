@@ -46,22 +46,22 @@ public class PersonContainsTagPredicateTest {
     public void test_tagContainsKeywords_returnsTrue() throws ParseException {
         // One Tag
         PersonContainsTagPredicate predicate = new PersonContainsTagPredicate(ParserUtil.parseTag("applicant"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withTags("applicant").build()));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withTag("applicant").build()));
 
         // Mixed-case tag
         predicate = new PersonContainsTagPredicate(ParserUtil.parseTag("Applicant"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withTags("applicant").build()));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withTag("applicant").build()));
     }
 
     @Test
     public void test_tagDoesNotContainKeywords_returnsFalse() throws ParseException {
         PersonContainsTagPredicate predicate = new PersonContainsTagPredicate(ParserUtil.parseTag("applicant"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").withTags("rejected").build()));
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").withTag("rejected").build()));
 
         // Keywords match phone, email and address, but does not match name
         predicate = new PersonContainsTagPredicate(ParserUtil.parseTag("applicant"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("91234567")
-                .withEmail("alice@email.com").withAddress("Main Street").withTags("rejected").build()));
+                .withEmail("alice@email.com").withAddress("Main Street").withTag("rejected").build()));
     }
 
     @Test

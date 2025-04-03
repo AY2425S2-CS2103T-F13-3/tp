@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
+import hirehive.address.commons.core.index.Index;
 import hirehive.address.logic.commands.EditCommand.EditPersonDescriptor;
 import hirehive.address.logic.commands.TagCommand;
 import hirehive.address.logic.commands.queries.NameQuery;
@@ -33,33 +34,29 @@ public class TagCommandParser implements Parser<TagCommand> {
                 ArgumentTokenizer.tokenize(
                         args, PREFIX_NAME, PREFIX_TAG);
 
-        if (argMultimap.getValue(PREFIX_NAME).isEmpty()) {
+        Index index;
+        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+
+        if (argMultimap.getValue(PREFIX_TAG).isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+        }
+
+        editPersonDescriptor.setTag(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get()));
+
+        if (argMultimap.getValue(PREFIX_NAME).isEmpty()) {
+            try {
+                index = ParserUtil.parseIndex(argMultimap.getPreamble());
+                return new TagCommand(index, editPersonDescriptor);
+            } catch (ParseException e) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+            }
         }
 
         String nameKeywords = argMultimap.getValue(PREFIX_NAME).get();
         NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nameKeywords));
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
-
         return new TagCommand(nameQuery, editPersonDescriptor);
-    }
-
-    /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
-     */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
-        assert tags != null;
-
-        if (tags.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
     }
 }

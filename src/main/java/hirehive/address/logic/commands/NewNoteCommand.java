@@ -24,7 +24,7 @@ public class NewNoteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Creates a note for the person identified by the name used in the displayed person list. \n"
-            + "Parameters: n/NAME\nExample: " + COMMAND_WORD + " n/john doe";
+            + "Parameters: n/NAME i/NOTE\nExample: " + COMMAND_WORD + " n/john doe i/Good at expressing himself";
 
     public static final String MESSAGE_SUCCESS = "Added and displaying note of: %1$s";
 
