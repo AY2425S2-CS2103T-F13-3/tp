@@ -1,12 +1,7 @@
 package hirehive.address.logic.parser;
 
-import static hirehive.address.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +10,7 @@ import hirehive.address.logic.commands.AddCommand;
 import hirehive.address.logic.commands.ClearCommand;
 import hirehive.address.logic.commands.DateCommand;
 import hirehive.address.logic.commands.DeleteCommand;
+import hirehive.address.logic.commands.DisplayNoteCommand;
 import hirehive.address.logic.commands.EditCommand;
 import hirehive.address.logic.commands.ExitCommand;
 import hirehive.address.logic.commands.FilterCommand;
@@ -23,7 +19,6 @@ import hirehive.address.logic.commands.FindCommand;
 import hirehive.address.logic.commands.HelpCommand;
 import hirehive.address.logic.commands.ListCommand;
 import hirehive.address.logic.commands.NewNoteCommand;
-import hirehive.address.logic.commands.NoteCommand;
 import hirehive.address.logic.commands.ReminderCommand;
 import hirehive.address.logic.commands.queries.NameQuery;
 import hirehive.address.logic.parser.exceptions.ParseException;
@@ -33,7 +28,6 @@ import hirehive.address.model.person.Person;
 import hirehive.address.model.person.PersonContainsTagPredicate;
 import hirehive.address.model.person.PersonDoesNotContainTagPredicate;
 import hirehive.address.model.person.UpcomingInterviewPredicate;
-import hirehive.address.model.tag.Tag;
 import hirehive.address.testutil.Assert;
 import hirehive.address.testutil.DefaultPersonBuilder;
 import hirehive.address.testutil.DefaultPersonUtil;
@@ -133,11 +127,11 @@ public class AddressBookParserTest {
     public void parseCommand_note() throws Exception {
         String nameToDisplay = TypicalPersons.ALICE.getName().fullName;
 
-        NoteCommand expectedCommand = new NoteCommand(
+        DisplayNoteCommand expectedCommand = new DisplayNoteCommand(
                 new NameQuery(new NameContainsKeywordsPredicate(nameToDisplay))
         );
-        NoteCommand command = (NoteCommand) parser.parseCommand(
-                NoteCommand.COMMAND_WORD + " n/" + nameToDisplay
+        DisplayNoteCommand command = (DisplayNoteCommand) parser.parseCommand(
+                DisplayNoteCommand.COMMAND_WORD + " n/" + nameToDisplay
         );
 
         assertEquals(expectedCommand, command);
