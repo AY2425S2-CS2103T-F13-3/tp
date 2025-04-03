@@ -53,7 +53,7 @@ public class ScheduleCommandTest {
             fail();
         }
 
-        assertCommandSuccess(scheduleCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(scheduleCommand, model, new CommandResult(expectedMessage, true), expectedModel);
     }
 
     @Test
@@ -81,7 +81,7 @@ public class ScheduleCommandTest {
             fail();
         }
         System.out.println(model.getAddressBook().toString());
-        assertCommandSuccess(scheduleCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(scheduleCommand, model, new CommandResult(expectedMessage, true), expectedModel);
     }
 
     @Test
@@ -103,7 +103,7 @@ public class ScheduleCommandTest {
             fail();
         }
 
-        assertCommandSuccess(scheduleCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(scheduleCommand, model, new CommandResult(expectedMessage, true), expectedModel);
     }
 
     @Test
@@ -131,7 +131,7 @@ public class ScheduleCommandTest {
             fail();
         }
         System.out.println(model.getAddressBook().toString());
-        assertCommandSuccess(scheduleCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(scheduleCommand, model, new CommandResult(expectedMessage, true), expectedModel);
     }
 
     @Test
@@ -155,7 +155,7 @@ public class ScheduleCommandTest {
             fail();
         }
 
-        assertCommandSuccess(scheduleCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(scheduleCommand, model, new CommandResult(expectedMessage, true), expectedModel);
     }
 
     @Test
@@ -187,7 +187,7 @@ public class ScheduleCommandTest {
             fail();
         }
         System.out.println(model.getAddressBook().toString());
-        assertCommandSuccess(scheduleCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(scheduleCommand, model, new CommandResult(expectedMessage, true), expectedModel);
     }
 
     @Test

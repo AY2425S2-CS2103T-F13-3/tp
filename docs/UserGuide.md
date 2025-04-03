@@ -25,7 +25,7 @@ Ready to revolutionise your hiring? Let's begin!
   - [Filter applicants by tag: `filter`](#filter-applicants-by-tag--filter)
   - [Add note to applicant: `newnote`](#add-notes-to-person--newnote)
   - [Display note of applicant: `displaynote`](#display-note-of-person--displaynote)
-  - [Find applicants by name `find`](#find-applicants-by-name-find)
+  - [Find applicants by name `find`](#find-applicants-by-name--find)
   - [List all applicants: `list`](#list-all-applicants--list)
   - [Sort applicants `sort`](#sort-applicants--sort)
   - [Delete an applicant: `delete`](#delete-an-applicant--delete)
@@ -266,7 +266,21 @@ Examples:
 
 [Back to top](#welcome-to-hirehive)
 
-### Find applicants by name: `find`
+### Schedule interview dates for applicants : `schedule`
+
+Format:
+
+Command | Description
+--------|------------------
+`schedule n/NAME [d/DATE]` | Schedule interview date by name.
+`schedule INDEX [d/DATE]` | Schedule interview date by index.
+
+
+* The date format is DD/MM/YYYY (date/month/year) e.g. "04/04/2025"
+* If date is left empty, 
+* Scheduling interview date by index must have a **positive** index number
+
+### Find applicants by name : `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -301,6 +315,15 @@ Sorts the applicants displayed on your screen by interview date, in chronologica
 Format: `sort`
 
 [Back to top](#welcome-to-hirehive)
+
+### Show applicants with upcoming interviews: `remind`
+
+Shows you a list of all applicants with interviews in the given days' time, so that you can remind yourself of your 
+upcoming interviews to prepare for.
+
+Format: `remind DAYS`
+
+* The number of days given must be non-negative, i.e. greater or equal to 0
 
 ### Delete an applicant : `delete`
 
