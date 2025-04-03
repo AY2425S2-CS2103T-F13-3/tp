@@ -3,9 +3,10 @@ layout: page
 title: User Guide
 
 ---
-# HireHive User Guide
-HireHive is an **all-in-one desktop application** designed to streamline recruitment for small businesses and hiring managers, **combining the efficiency of a Command Line Interface (CLI) with the ease of a Graphical User Interface (GUI)**. It simplifies tracking candidates, organizing interview notes, and managing hiring stages—all in one centralized platform. With **fast keyboard-driven commands**, HireHive lets you complete tasks quicker than traditional GUI apps, so you can focus less on administrative work and more on finding the best talent.
 
+# Welcome to HireHive!
+
+HireHive is an **all-in-one desktop application** designed to streamline recruitment for small businesses and hiring managers, combining the efficiency of a [Command Line Interface (CLI)](#glossary) with the ease of a [Graphical User Interface (GUI)](#glossary). It simplifies tracking [applicants](#glossary), organizing interview notes, and managing hiring stages—all in one centralized platform. With **fast keyboard-driven commands**, HireHive lets you complete tasks quicker than traditional GUI apps, so you can focus less on administrative work and more on finding the best talent.
 
 - [Quick start](#quick-start-)
 - [Command Summary](#command-summary)
@@ -30,18 +31,23 @@ HireHive is an **all-in-one desktop application** designed to streamline recruit
 
 
 ## Quick start
-1. Ensure you have Java `17` or above installed in your computer.<br>
+1. To use Hirehive, you need Java `17` or above installed in your computer.<br>
    - For **Mac users:** Ensure you have the precise [JDK](#glossary) version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S2-CS2103T-F13-3/tp/releases).
+2. Download the latest HireHive `.jar` file from [here](https://github.com/AY2425S2-CS2103T-F13-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for HireHive.
+3. Copy the downloaded file to a folder where you would like to store HireHive (e.g. "Documents" or "Desktop" or a new folder "HireHive") .
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar hirehive.jar` command to run the application.<br>
-   A [GUI](#glossary) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Run HireHive
+   - Find the folder that you stored HireHive previously (e.g. "Documents" or "Desktop" or "HireHive").
+   - Right-click on the folder and choose:  
+     - For MAC: "New terminal at [folder-name]".
+     - For Windows: "Open in terminal".
+   - Type `java -jar hirehive.jar` command in the opened terminal and press Enter to run the HireHive application.<br>
+   - A [GUI](#glossary) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui-2.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
+5. To use HireHive, you can type a command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all applicants.
@@ -60,7 +66,9 @@ HireHive is an **all-in-one desktop application** designed to streamline recruit
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) section below for details of each command.
+6. You can refer to the [Features](#features) section below for details of each command.
+
+[Back to top](#welcome-to-hirehive)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -79,6 +87,7 @@ Action | Format, Examples
 **Clear** | `clear`
 **Exit** | `exit`
 
+[Back to top](#welcome-to-hirehive)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -88,7 +97,7 @@ Action | Format, Examples
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the  parameters to be supplied by you.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
@@ -100,19 +109,23 @@ Action | Format, Examples
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `list` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+[Back to top](#welcome-to-hirehive)
+
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Shows a message explaining how you can access the help page. The help page contains all the features of HireHive. 
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+[Back to top](#welcome-to-hirehive)
 
 
 ### Adding a person: `add`
@@ -122,16 +135,17 @@ Adds a person to HireHive.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [i/INFO]`
 
 **:information_source: Note!**<br>
-* Phone numbers must **start with 9/8/6**, must not contain spaces and must be **exactly 8 digits** long.
-* Dashes(-), commas(,), slashes(/) and periods (.) in names should be **omitted**.
+* Please input a phone number that **start with 9/8/6**, is **exactly 8 digits** long and do not use spaces.
+* Please **do not use** dashes(-), commas(,), slashes(/) and periods(.) in names.
     - Example: `Doe, John` or `Doe/John` should be entered as `Doe John`.
+* Names need to be in English!
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-An 'Applicant' tag is automatically assigned to each person when they are added to HireHive.
+An 'Applicant' tag is automatically assigned to the applicant when you add them to HireHive.
 </div>
 
-- Optional to provide INFO of a person. INFO has a maximum length of 500 characters.
-- The parameter NAME is **[unique](#glossary)** and **[case-insensitive](#glossary)**, and is displayed as how the user types it.
+- It is optional for you to provide INFO of a person. INFO has a maximum length of 500 characters.
+- The parameter NAME is **[unique](#glossary)** and **[case-insensitive](#glossary)**, and is displayed as how you type it.
 - Applicants in HireHive can share the same phone number, email, address and role.
 
 Examples:
@@ -140,11 +154,15 @@ Examples:
 
 ![help message](images/Ui-AddCommand.png)
 
+[Back to top](#welcome-to-hirehive)
+
 ### Listing all persons : `list`
 
-Lists down all your applicants in HireHive.
+Shows you a list of all the applicants in HireHive.
 
 Format: `list`
+
+[Back to top](#welcome-to-hirehive)
 
 ### Editing a person : `edit`
 
@@ -160,17 +178,17 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/ROLE] [i
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 
-[Back to top](#hirehive-user-guide)
+[Back to top](#welcome-to-hirehive)
 
 
 ### Tagging a person : `tag`
 
-You can change or add tags to a specific person from HireHive to easily  differentiate between all your applicants! 
+You can change or add tags to a specific person from HireHive to easily differentiate between all your applicants!
 
 Format: `tag n/NAME t/TAG`
 
 * Tags a person if the given name partially matches **exactly one person** in the list ([case-insensitive](#glossary)).
-* If multiple matches are found, a list of all matching names will be displayed. You can then enter the **full name** 
+* If multiple matches are found, a list of all matching names will be displayed. You can then enter the **full name**
   of the person you want to delete.
 
 Examples:
@@ -186,6 +204,8 @@ Format: `filter t/TAG`
 
 * The search is [case-insensitive](#glossary). e.g `applicant` will match `Applicant`
 * Only full words will be matched e.g. `Reject` will not match `Rejected`
+
+[Back to top](#welcome-to-hirehive)
 
 ### Locating persons by name: `find`
 
@@ -205,6 +225,8 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+[Back to top](#welcome-to-hirehive)
+
 ### Deleting a person : `delete`
 
 You can delete a specific person from HireHive.
@@ -219,7 +241,7 @@ Examples:
 
 ![delete message](images/Ui-DeleteCommand.png)
 
-[Back to top](#hirehive-user-guide)
+[Back to top](#welcome-to-hirehive)
 
 ### Clearing all entries : `clear`
 
@@ -227,15 +249,21 @@ Clears all entries from HireHive.
 
 Format: `clear`
 
+[Back to top](#welcome-to-hirehive)
+
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
+[Back to top](#welcome-to-hirehive)
+
 ### Saving the data
 
 HireHive data is saved in the [hard disk](#glossary) automatically after any command that changes the data. If successfully saved, the output following the command will display the success message. There is no need to save manually.
+
+[Back to top](#welcome-to-hirehive)
 
 ### Editing the data file
 
@@ -246,6 +274,7 @@ If your changes to the data file makes its format invalid, HireHive will discard
 Furthermore, certain edits can cause HireHive to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
+[Back to top](#welcome-to-hirehive)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -254,12 +283,16 @@ Furthermore, certain edits can cause HireHive to behave in unexpected ways (e.g.
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous HireHive home folder.
 
+[Back to top](#welcome-to-hirehive)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the [GUI](#glossary) will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. If you **minimize the Help Window and then run the `help` command** (or use the `Help` menu, or the keyboard [shortcut](#glossary) `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+
+[Back to top](#welcome-to-hirehive)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -277,5 +310,6 @@ Term | Description
 **JSON** | Acronym for _JavaScript Object Notation,_ an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of name–value pairs and arrays (or other serializable values).
 **Shortcut** | A key or combination of keys that you can press on a computer keyboard to quickly perform a specific action.
 
+[Back to top](#welcome-to-hirehive)
 
 --------------------------------------------------------------------------------------------------------------------

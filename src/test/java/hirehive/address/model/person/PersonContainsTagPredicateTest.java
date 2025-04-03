@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import hirehive.address.logic.Messages;
 import hirehive.address.logic.parser.ParserUtil;
 import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.tag.Tag;
@@ -70,5 +71,13 @@ public class PersonContainsTagPredicateTest {
 
         String expected = PersonContainsTagPredicate.class.getCanonicalName() + "{tag=" + tag + "}";
         assertEquals(expected, predicate.toString());
+    }
+
+    @Test
+    public void getSuccessString() {
+        String tag = "APPLICANT";
+        PersonContainsTagPredicate predicate = new PersonContainsTagPredicate(Tag.APPLICANT);
+        String expected = String.format(Messages.MESSAGE_FILTER_OVERVIEW_TAG, tag);
+        assertEquals(expected, predicate.getSuccessString());
     }
 }

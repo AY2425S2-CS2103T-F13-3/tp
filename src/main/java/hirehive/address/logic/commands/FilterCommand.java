@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import hirehive.address.commons.util.ToStringBuilder;
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.exceptions.CommandException;
+import hirehive.address.logic.parser.CliSyntax;
 import hirehive.address.model.Model;
 import hirehive.address.model.person.PersonContainsTagPredicate;
 
@@ -15,11 +16,11 @@ import hirehive.address.model.person.PersonContainsTagPredicate;
 public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
     public static final String NOT_IMPLEMENTED_TEXT = "Command not implemented yet";
-    public static final String MESSAGE_ARGUMENTS = "Tag: %1$s";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all persons with the given tag "
             + "(case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: t/ TAG\n"
-            + "Example: " + COMMAND_WORD + " applicant";
+            + "Parameters: t/TAG\n"
+            + "Example: " + COMMAND_WORD + " " + CliSyntax.PREFIX_TAG + "applicant";
 
     private final PersonContainsTagPredicate predicate;
 
@@ -29,15 +30,7 @@ public class FilterCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
-        String message;
-        if (!model.getFilteredPersonList().isEmpty()) {
-            message = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size());
-        } else {
-            message = Messages.MESSAGE_NO_SUCH_PERSON;
-        }
-        return new CommandResult(message);
+        return FilterUtil.executeFilter(model, predicate);
     }
 
     @Override
