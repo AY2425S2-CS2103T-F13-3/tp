@@ -14,6 +14,7 @@ import hirehive.address.logic.commands.DisplayNoteCommand;
 import hirehive.address.logic.commands.EditCommand;
 import hirehive.address.logic.commands.ExitCommand;
 import hirehive.address.logic.commands.FilterCommand;
+import hirehive.address.logic.commands.FilterOutCommand;
 import hirehive.address.logic.commands.FindCommand;
 import hirehive.address.logic.commands.HelpCommand;
 import hirehive.address.logic.commands.ListCommand;
@@ -25,6 +26,7 @@ import hirehive.address.model.person.NameContainsKeywordsPredicate;
 import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
 import hirehive.address.model.person.PersonContainsTagPredicate;
+import hirehive.address.model.person.PersonDoesNotContainTagPredicate;
 import hirehive.address.model.person.UpcomingInterviewPredicate;
 import hirehive.address.testutil.Assert;
 import hirehive.address.testutil.DefaultPersonBuilder;
@@ -150,6 +152,14 @@ public class AddressBookParserTest {
         );
 
         assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_filterout() throws Exception {
+        String tag = "Applicant";
+        FilterOutCommand command =
+                (FilterOutCommand) parser.parseCommand(FilterOutCommand.COMMAND_WORD + " t/ " + tag);
+        assertEquals(new FilterOutCommand(new PersonDoesNotContainTagPredicate(ParserUtil.parseTag(tag))), command);
     }
 
     @Test
