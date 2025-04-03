@@ -10,6 +10,8 @@ participant ":ArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
 participant ":ArgumentMultimap" as ArgumentMultimap LOGIC_COLOR
 participant "q:NameQuery" as NameQuery LOGIC_COLOR
 participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant "<<class>> CommandUtil" as CommandUtil LOGIC_COLOR
+participant "l:List<Person>" as ListPerson LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -23,6 +25,8 @@ activate LogicManager
 
 LogicManager -> AddressBookParser : parseCommand("delete n/Alice")
 activate AddressBookParser
+
+create CommandUtil
 
 create DeleteCommandParser
 AddressBookParser -> DeleteCommandParser
@@ -82,7 +86,10 @@ deactivate AddressBookParser
 LogicManager -> DeleteCommand : execute(m)
 activate DeleteCommand
 
-DeleteCommand -> NameQuery
+DeleteCommand -> CommandUtil : querySearch(m, q)
+activate CommandUtil
+
+CommandUtil -> NameQuery : query(m)
 activate NameQuery
 
 NameQuery -> Model : query(m)
@@ -90,14 +97,17 @@ activate Model
 
 Model -> NameContainsKeywordsPredicate : updateFilteredPersonList
 activate NameContainsKeywordsPredicate
+
 NameContainsKeywordsPredicate --> Model
 deactivate NameContainsKeywordsPredicate
 
-Model --> NameQuery
+Model --> NameQuery : List<Person> l
 deactivate Model
 
-NameQuery --> DeleteCommand
+NameQuery -> CommandUtil : List<Person> l
 deactivate NameQuery
+CommandUtil -> DeleteCommand : Person : p
+deactivate CommandUtil
 
 DeleteCommand -> Model : deletePerson(p)
 activate Model
