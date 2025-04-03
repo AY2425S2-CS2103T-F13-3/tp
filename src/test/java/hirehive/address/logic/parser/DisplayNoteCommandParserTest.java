@@ -25,4 +25,10 @@ public class DisplayNoteCommandParserTest {
         CommandParserTestUtil.assertParseFailure(parser, "displaynote Alice",
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DisplayNoteCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_duplicateArgs_throwsParseException() {
+        CommandParserTestUtil.assertParseFailure(parser, "note n/Alice n/Bob",
+                String.format(Messages.getErrorMessageForDuplicatePrefixes(new Prefix("n/"))));
+    }
 }
