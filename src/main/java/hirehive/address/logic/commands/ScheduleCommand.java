@@ -6,6 +6,7 @@ import static hirehive.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
 
+import hirehive.address.commons.core.index.Index;
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.exceptions.CommandException;
 import hirehive.address.logic.commands.queries.NameQuery;
@@ -35,6 +36,7 @@ public class ScheduleCommand extends Command {
 
     private final NameQuery query;
     private final EditCommand.EditPersonDescriptor editPersonDescriptor;
+    private final Index index;
 
     private final boolean bDateProvided;
 
@@ -46,6 +48,7 @@ public class ScheduleCommand extends Command {
         requireNonNull(editPersonDescriptor);
         this.query = query;
         this.editPersonDescriptor = editPersonDescriptor;
+        this.index = null;
         bDateProvided = true;
     }
 
@@ -56,6 +59,30 @@ public class ScheduleCommand extends Command {
         requireNonNull(query);
         this.query = query;
         this.editPersonDescriptor = new EditCommand.EditPersonDescriptor();
+        this.index = null;
+        bDateProvided = false;
+    }
+
+    /**
+     * Creates a {@code ScheduleCommand} object with a provided date.
+     */
+    public ScheduleCommand(Index index, EditCommand.EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(index);
+        requireNonNull(editPersonDescriptor);
+        this.index = index;
+        this.query = null;
+        this.editPersonDescriptor = editPersonDescriptor;
+        bDateProvided = true;
+    }
+
+    /**
+     * Creates a {@code ScheduleCommand} object without a provided date.
+     */
+    public ScheduleCommand(Index index) {
+        requireNonNull(index);
+        this.index = index;
+        this.query = null;
+        this.editPersonDescriptor = new EditCommand.EditPersonDescriptor();
         bDateProvided = false;
     }
 
@@ -65,7 +92,14 @@ public class ScheduleCommand extends Command {
         if (!bDateProvided) {
             editPersonDescriptor.setDate(model.getAvailableDate());
         }
-        Person personToAddDate = CommandUtil.querySearch(model, query);
+
+        Person personToAddDate;
+        if (index == null) {
+            personToAddDate = CommandUtil.querySearch(model, query);
+        } else {
+            personToAddDate = CommandUtil.indexSearch(model, index);
+        }
+
         if (personToAddDate.getTag().equals(Tag.APPLICANT) || personToAddDate.getTag().equals(Tag.CANDIDATE)) {
             editPersonDescriptor.setTag(Tag.INTERVIEWEE);
         } else if (personToAddDate.getTag().equals(Tag.OFFERED) || personToAddDate.getTag().equals(Tag.REJECTED)) {

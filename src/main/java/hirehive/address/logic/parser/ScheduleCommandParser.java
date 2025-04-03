@@ -7,6 +7,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 
+import hirehive.address.commons.core.index.Index;
 import hirehive.address.logic.commands.EditCommand;
 import hirehive.address.logic.commands.ScheduleCommand;
 import hirehive.address.logic.commands.queries.NameQuery;
@@ -29,24 +30,41 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
     public ScheduleCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE);
+        NameQuery nameQuery = null;
+        Index index = null;
+        InterviewDate date = null;
 
-        if (argMultimap.getValue(PREFIX_NAME).orElse("").trim().isEmpty()) {
+        if (argMultimap.getValue(PREFIX_NAME).orElse("").trim().isEmpty()
+                && argMultimap.getPreamble().trim().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
         }
-        String name = argMultimap.getValue(PREFIX_NAME).get();
-        NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(name));
-
-        if (argMultimap.getValue(PREFIX_DATE).orElse("").trim().isEmpty()) {
-            return new ScheduleCommand(nameQuery);
+        if (argMultimap.getPreamble().trim().isEmpty()) {
+            String name = argMultimap.getValue(PREFIX_NAME).get();
+            nameQuery = new NameQuery(new NameContainsKeywordsPredicate(name));
         } else {
-            InterviewDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+            index = ParserUtil.parseIndex(argMultimap.getPreamble().trim());
+        }
+        if (!argMultimap.getValue(PREFIX_DATE).orElse("").trim().isEmpty()) {
+            date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
             if (date.getValue().get().isBefore(LocalDate.now())) {
                 throw new ParseException(MESSAGE_DATE_OUT_OF_BOUNDS);
             }
+        }
+        if (date == null) {
+            if (index == null) {
+                return new ScheduleCommand(nameQuery);
+            } else {
+                return new ScheduleCommand(index);
+            }
+        } else {
             EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
             editPersonDescriptor.setDate(date);
-            return new ScheduleCommand(nameQuery, editPersonDescriptor);
+            if (index == null) {
+                return new ScheduleCommand(nameQuery, editPersonDescriptor);
+            } else {
+                return new ScheduleCommand(index, editPersonDescriptor);
+            }
         }
     }
 }

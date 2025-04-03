@@ -151,10 +151,10 @@ public class AddressBookParserTest {
     public void parseCommand_schedule() throws Exception {
         String name = TypicalPersons.ALICE.getName().fullName;
         EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
-        editPersonDescriptor.setDate(new InterviewDate("01/01/2025"));
+        editPersonDescriptor.setDate(new InterviewDate("01/01/2026"));
         ScheduleCommand expectedCommand = new ScheduleCommand(new NameQuery(new NameContainsKeywordsPredicate(name)), editPersonDescriptor);
         ScheduleCommand parsedCommand = (ScheduleCommand) parser.parseCommand(ScheduleCommand.COMMAND_WORD + " "
-                + CliSyntax.PREFIX_NAME + name + " " + CliSyntax.PREFIX_DATE + "01/01/2025");
+                + CliSyntax.PREFIX_NAME + name + " " + CliSyntax.PREFIX_DATE + "01/01/2026");
         assertEquals(expectedCommand, parsedCommand);
     }
 

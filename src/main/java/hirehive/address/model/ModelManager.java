@@ -7,8 +7,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 import hirehive.address.commons.core.GuiSettings;
 import hirehive.address.commons.core.LogsCenter;
@@ -179,15 +181,16 @@ public class ModelManager implements Model {
      */
     @Override
     public InterviewDate getAvailableDate() {
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        sortPersons();
+        List<LocalDate> sortedAllDates = this.addressBook.getPersonList().stream()
+                .map(person -> person.getDate().getValue().orElse(LocalDate.MAX))
+                .sorted(LocalDate::compareTo).toList();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu")
                 .withResolverStyle(ResolverStyle.STRICT);
         LocalDate iterationDate = LocalDate.now().plusDays(1);
-        int i = 0;
         boolean bContinue = true;
-        while (i < sortedPersons.size() && sortedPersons.get(i).getDate().getValue().isPresent() && bContinue) {
-            LocalDate currDate = sortedPersons.get(i).getDate().getValue().get();
+        int i = 0;
+        while (i < sortedAllDates.size() && sortedAllDates.get(i) != LocalDate.MAX && bContinue) {
+            LocalDate currDate = sortedAllDates.get(i);
             if (currDate.isBefore(iterationDate)) {
                 i++;
             } else if (currDate.isAfter(iterationDate)) {
