@@ -54,7 +54,6 @@ public class NewNoteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         NameQuery query = new NameQuery(new NameContainsKeywordsPredicate(name));
         List<Person> personToAddNote;
         try {

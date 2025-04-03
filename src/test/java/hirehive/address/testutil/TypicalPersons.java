@@ -36,7 +36,7 @@ public class TypicalPersons {
             .withTag("Rejected").withNote("6 foot tall").withDate("01/02/2025").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withRole("Software Engineer")
-            .withTag("Applicant").withNote("Only 18 years old").withDate("").build();
+            .withTag("Interviewee").withNote("Only 18 years old").withDate("01/04/2025").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withRole("Software Engineer")
             .withTag("Applicant").withNote("Funny").withDate("").build();

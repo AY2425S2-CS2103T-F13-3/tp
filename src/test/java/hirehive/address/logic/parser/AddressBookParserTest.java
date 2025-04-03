@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.AddCommand;
 import hirehive.address.logic.commands.ClearCommand;
-import hirehive.address.logic.commands.DateCommand;
 import hirehive.address.logic.commands.DeleteCommand;
 import hirehive.address.logic.commands.DisplayNoteCommand;
 import hirehive.address.logic.commands.EditCommand;
@@ -20,8 +19,10 @@ import hirehive.address.logic.commands.HelpCommand;
 import hirehive.address.logic.commands.ListCommand;
 import hirehive.address.logic.commands.NewNoteCommand;
 import hirehive.address.logic.commands.ReminderCommand;
+import hirehive.address.logic.commands.ScheduleCommand;
 import hirehive.address.logic.commands.queries.NameQuery;
 import hirehive.address.logic.parser.exceptions.ParseException;
+import hirehive.address.model.person.InterviewDate;
 import hirehive.address.model.person.NameContainsKeywordsPredicate;
 import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
@@ -118,12 +119,6 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_date() throws Exception {
-        assertTrue(parser.parseCommand(DateCommand.COMMAND_WORD) instanceof DateCommand);
-        assertTrue(parser.parseCommand(DateCommand.COMMAND_WORD + " 3") instanceof DateCommand);
-    }
-
-    @Test
     public void parseCommand_note() throws Exception {
         String nameToDisplay = TypicalPersons.ALICE.getName().fullName;
 
@@ -147,6 +142,17 @@ public class AddressBookParserTest {
         );
 
         assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_schedule() throws Exception {
+        String name = TypicalPersons.ALICE.getName().fullName;
+        EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
+        editPersonDescriptor.setDate(new InterviewDate("01/01/2026"));
+        ScheduleCommand expectedCommand = new ScheduleCommand(new NameQuery(new NameContainsKeywordsPredicate(name)), editPersonDescriptor);
+        ScheduleCommand parsedCommand = (ScheduleCommand) parser.parseCommand(ScheduleCommand.COMMAND_WORD + " "
+                + CliSyntax.PREFIX_NAME + name + " " + CliSyntax.PREFIX_DATE + "01/01/2026");
+        assertEquals(expectedCommand, parsedCommand);
     }
 
     @Test

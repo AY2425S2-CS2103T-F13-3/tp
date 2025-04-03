@@ -20,6 +20,7 @@ import hirehive.address.model.AddressBook;
 import hirehive.address.model.Model;
 import hirehive.address.model.ReadOnlyAddressBook;
 import hirehive.address.model.ReadOnlyUserPrefs;
+import hirehive.address.model.person.InterviewDate;
 import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
 import hirehive.address.testutil.Assert;
@@ -182,6 +183,11 @@ public class AddCommandTest {
 
         @Override
         public int getListSize() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public InterviewDate getAvailableDate() {
             throw new AssertionError("This method should not be called");
         }
     }
