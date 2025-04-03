@@ -10,6 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,6 +19,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import hirehive.address.commons.core.GuiSettings;
+import hirehive.address.model.person.InterviewDate;
 import hirehive.address.model.person.NameContainsKeywordsPredicate;
 import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
@@ -146,6 +149,13 @@ public class ModelManagerTest {
     public void getListSize_initialList_returnListSize() {
         int listSize = modelManager.getListSize();
         assertEquals(listSize, modelManager.getFilteredPersonList().size());
+    }
+
+    @Test
+    public void getAvailableDate_initialList_returnAvailableDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+                .withResolverStyle(ResolverStyle.STRICT);
+        assertEquals(modelManager.getAvailableDate(), new InterviewDate(LocalDate.now().plusDays(1).format(formatter)));
     }
 
     @Test

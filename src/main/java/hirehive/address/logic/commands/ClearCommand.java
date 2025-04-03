@@ -1,5 +1,6 @@
 package hirehive.address.logic.commands;
 
+import static hirehive.address.logic.Messages.MESSAGE_DATA_SAVED;
 import static java.util.Objects.requireNonNull;
 
 import hirehive.address.model.AddressBook;
@@ -18,6 +19,6 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setAddressBook(new AddressBook());
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, true);
     }
 }

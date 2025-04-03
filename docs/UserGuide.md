@@ -15,15 +15,17 @@ We combine the speed of keyboard commands with an intuitive visual interface to 
 
 Ready to revolutionise your hiring? Let's begin!
 
-- [Quick start](#quick-start-)
+- [Quick start](#quick-start)
 - [Command Summary](#command-summary)
-- [Features](#features-)
+- [Features](#features)
   - [View help: `help`](#view-help--help)
   - [Add an applicant: `add`](#add-an-applicant-add)
   - [Edit an applicant: `edit`](#edit-an-applicant--edit)
   - [Tag an applicant: `tag`](#tag-an-applicant--tag)
   - [Filter applicants by tag: `filter`](#filter-applicants-by-tag--filter)
-  - [Find applicants by name `find`](#finding-applicants-by-name-find)
+  - [Add note to applicant: `newnote`](#add-notes-to-person--newnote)
+  - [Display note of applicant: `displaynote`](#display-note-of-person--displaynote)
+  - [Find applicants by name `find`](#find-applicants-by-name-find)
   - [List all applicants: `list`](#list-all-applicants--list)
   - [Sort applicants `sort`](#sort-applicants--sort)
   - [Delete an applicant: `delete`](#delete-an-applicant--delete)
@@ -179,16 +181,39 @@ Examples:
 
 ### Tag an applicant : `tag`
 
-You can change or add tags to a specific person from HireHive to easily differentiate between all your applicants!
+You can change the tag to a specific person from HireHive to easily differentiate between all your applicants!
 
-Format: `tag n/NAME t/TAG`
+Format:
 
-* Tags a person if the given name partially matches **exactly one person** in the list ([case-insensitive](#glossary)).
-* If multiple matches are found, a list of all matching names will be displayed. You can then enter the **full name**
-  of the person you want to delete.
+Command | Description
+--------|------------------
+`tag n/NAME t/TAG` | Tags by name.
+`tag INDEX t/TAG` | Tags by index.
+`tag OFFSET n/NAME` | Offset tag of named person.
+
+
+* Tagging by name will partially match to **exactly one person** in the list ([case-insensitive](#glossary)).
+  * If multiple matches are found, a list of all matching names will be displayed. You can then enter the **full name**
+    of the person you want to delete.
+* Tagging by index must have a **positive** index number
+* Tags must be one of the following values:
+  1. Rejected
+  2. Applicant
+  3. Candidate
+  4. Interviewee
+  5. Offered
+* The tag written in the command must match one of the values above ([case-insensitive](#glossary)) e.g. `t/applicant`
+* To tag with offset, the offset takes in `+` or `-`, followed by a number for the offset amount, e.g. `+1`, `-2`
+  * The tag, which represents the hiring stage the specific person is at, will progress/regress the hiring stage by 
+    the offset amount
+  * The order for the hiring stages is Rejected > Applicant > Candidate > Interviewee > Offered
+  * The tag will not regress pass Rejected and progress pass Offered
+
 
 Examples:
 * `tag n/John Doe t/Applicant` will tag John Doe as "Applicant" in HireHive
+* `tag 1 t/Candidate` will tag the 1st person as "Candidate"
+* `tag +1 n/John Doe` for a John Doe person with tag "Applicant" will tag them as "Candidate"
 
 [Back to top](#hirehive-user-guide)
 
@@ -200,6 +225,44 @@ Format: `filter t/TAG`
 
 * The search is [case-insensitive](#glossary). e.g `applicant` will match `Applicant`
 * Only full words will be matched e.g. `Reject` will not match `Rejected`
+
+[Back to top](#welcome-to-hirehive)
+
+### Add notes to person : `newnote`
+
+You can add information about the applicant into a note with this command.
+
+Format: `newnote n/NAME i/NOTE`
+
+* Adds the note if the given name partially matches **exactly one** person in the list ([case-insensitive](#glossary))
+* If multiple matches are found, a list of all matching names will be displayed. You should then retry the command but using the **full name** of the desired person.
+* NOTE has a limit of 500 characters.
+* After adding, a popup window will appear containing the given input.
+* If the input is empty or consists only of whitespace, then the popup window displays a default message "Currently empty..." in yellow.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can remove the contents of the note by leaving the NOTE field blank.
+</div>
+
+Examples:
+* `newnote n/John Doe i/25 years old` adds a note to John Doe that says "25 years old"
+* `newnote n/John Doe i/` removes any existing content in John Doe's note
+
+[Back to top](#welcome-to-hirehive)
+
+### Display note of person : `displaynote`
+
+You can display the note of a person with this command.
+
+Format: `displaynote n/NAME`
+
+* Displays the note if the given name partially matches **exactly one** person in the list ([case-insensitive](#glossary))
+* If multiple matches are found, a list of all matching names will be displayed. You should then retry the command but using the **full name** of the desired person.
+* A popup window will appear containing the person's note.
+* If the input is empty or consists only of whitespace, then the popup window displays a default message "Currently empty..." in yellow.
+
+Examples:
+* `displaynote n/John Doe` shows John Doe's note
 
 [Back to top](#welcome-to-hirehive)
 

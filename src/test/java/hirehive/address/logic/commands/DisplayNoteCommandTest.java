@@ -37,7 +37,7 @@ public class DisplayNoteCommandTest {
         String nameToDisplay = personToDisplay.getName().fullName;
 
         NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nameToDisplay));
-        DisplayNoteCommand noteCommand = new DisplayNoteCommand(nameQuery);
+        DisplayNoteCommand noteCommand = new DisplayNoteCommand(nameToDisplay);
 
         String expectedMessage = String.format(DisplayNoteCommand.MESSAGE_SUCCESS, Messages.format(personToDisplay));
 
@@ -48,14 +48,13 @@ public class DisplayNoteCommandTest {
             fail();
         }
 
-        assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(noteCommand, model, new CommandResult(expectedMessage, false, false, true, false), expectedModel);
     }
 
     @Test
     public void execute_nonexistentName_throwsCommandException() {
         String nonexistentKeyword = "Nonexistent";
-        NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nonexistentKeyword));
-        DisplayNoteCommand noteCommand = new DisplayNoteCommand(nameQuery);
+        DisplayNoteCommand noteCommand = new DisplayNoteCommand(nonexistentKeyword);
 
         assertThrows(CommandException.class, () -> noteCommand.execute(model), Messages.MESSAGE_NO_SUCH_PERSON);
     }
@@ -63,25 +62,21 @@ public class DisplayNoteCommandTest {
     @Test
     public void execute_multipleMatches_throwsCommandException() {
         String multipleMatches = "Meier";
-        NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(multipleMatches));
-        DisplayNoteCommand noteCommand = new DisplayNoteCommand(nameQuery);
+        DisplayNoteCommand noteCommand = new DisplayNoteCommand(multipleMatches);
 
-        assertThrows(CommandException.class, () -> noteCommand.execute(model), Messages.MESSAGE_MULTIPLE_PEOPLE_QUERIED);
+        assertThrows(CommandException.class, () -> noteCommand.execute(model), Messages.MESSAGE_MULTIPLE_PEOPLE_QUERIED_NAME);
     }
 
     @Test
     public void equals() {
-        NameQuery firstQuery = new NameQuery(new NameContainsKeywordsPredicate("Alice"));
-        NameQuery secondQuery = new NameQuery(new NameContainsKeywordsPredicate("Bob"));
-
-        DisplayNoteCommand noteFirstCommand = new DisplayNoteCommand(firstQuery);
-        DisplayNoteCommand noteSecondCommand = new DisplayNoteCommand(secondQuery);
+        DisplayNoteCommand noteFirstCommand = new DisplayNoteCommand("Alice");
+        DisplayNoteCommand noteSecondCommand = new DisplayNoteCommand("Bob");
 
         // same object -> returns true
         assertTrue(noteFirstCommand.equals(noteFirstCommand));
 
         // same values -> returns true
-        DisplayNoteCommand noteFirstCommandCopy = new DisplayNoteCommand(firstQuery);
+        DisplayNoteCommand noteFirstCommandCopy = new DisplayNoteCommand("Alice");
         assertTrue(noteFirstCommand.equals(noteFirstCommandCopy));
 
         // different type -> returns false
@@ -97,10 +92,10 @@ public class DisplayNoteCommandTest {
 
     @Test
     public void toStringMethod() {
-        NameQuery query = new NameQuery(new NameContainsKeywordsPredicate("Alice"));
-        DisplayNoteCommand noteCommand = new DisplayNoteCommand(query);
-        String expected = DisplayNoteCommand.class.getCanonicalName() + "{query="
-                + query + "}";
+        String name = "Alice";
+        DisplayNoteCommand noteCommand = new DisplayNoteCommand(name);
+        String expected = DisplayNoteCommand.class.getCanonicalName() + "{name="
+                + name + "}";
         assertEquals(expected, noteCommand.toString());
     }
 }

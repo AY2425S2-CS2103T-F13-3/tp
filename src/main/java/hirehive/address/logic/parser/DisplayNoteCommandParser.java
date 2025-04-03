@@ -30,9 +30,9 @@ public class DisplayNoteCommandParser implements Parser<DisplayNoteCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
 
         String nameKeyword = argMultimap.getValue(PREFIX_NAME).get();
-        NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nameKeyword));
+        //NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nameKeyword));
 
-        return new DisplayNoteCommand(nameQuery);
+        return new DisplayNoteCommand(nameKeyword);
     }
 
 }

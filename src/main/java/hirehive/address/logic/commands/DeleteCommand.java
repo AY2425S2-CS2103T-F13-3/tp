@@ -1,6 +1,8 @@
 package hirehive.address.logic.commands;
 
+import static hirehive.address.logic.Messages.MESSAGE_DATA_SAVED;
 import static hirehive.address.logic.Messages.MESSAGE_MULTIPLE_PEOPLE_QUERIED;
+import static hirehive.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
@@ -22,7 +24,7 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the name used in the displayed person list.\n"
-            + "Parameters: NAME\n"
+            + "Parameters: " + PREFIX_NAME + "NAME\n"
             + "Example: " + COMMAND_WORD + " n/john doe";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
@@ -62,7 +64,7 @@ public class DeleteCommand extends Command {
         Person deletedPerson = personToDelete.get(0);
         model.deletePerson(deletedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(deletedPerson)));
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(deletedPerson)), true);
     }
 
     @Override
