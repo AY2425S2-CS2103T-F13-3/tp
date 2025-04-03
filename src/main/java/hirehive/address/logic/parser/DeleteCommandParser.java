@@ -24,12 +24,16 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
-        if (argMultimap.getValue(PREFIX_NAME).isEmpty()) {
+        if (argMultimap.getValue(PREFIX_NAME).map(String::trim).filter(String::isEmpty).isPresent()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
-        String nameKeywords = argMultimap.getValue(PREFIX_NAME).get();
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
+
+        String nameKeywords = argMultimap.getValue(PREFIX_NAME)
+                .orElseThrow(() -> new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE)));
         NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nameKeywords));
 
         return new DeleteCommand(nameQuery);
