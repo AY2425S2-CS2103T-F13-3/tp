@@ -54,8 +54,6 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Role: ")
                 .append(person.getRole())
-                .append("; Note: ")
-                .append(person.getNote())
                 .append("; Date: ")
                 .append(person.getDate())
                 .append("; Tag: ")

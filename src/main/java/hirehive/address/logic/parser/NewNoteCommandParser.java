@@ -25,7 +25,7 @@ public class NewNoteCommandParser implements Parser<NewNoteCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NOTE);
         if (argMultimap.getValue(PREFIX_NAME).orElse("").trim().isEmpty()
-                || argMultimap.getValue(PREFIX_NOTE).orElse("").trim().isEmpty()) {
+                || argMultimap.getValue(PREFIX_NOTE).isEmpty()) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     NewNoteCommand.MESSAGE_USAGE));
         }
@@ -35,7 +35,7 @@ public class NewNoteCommandParser implements Parser<NewNoteCommand> {
         NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(name));
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        editPersonDescriptor.setNote(ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get()));
+        editPersonDescriptor.setNote(ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get().trim()));
 
         return new NewNoteCommand(nameQuery, editPersonDescriptor);
     }

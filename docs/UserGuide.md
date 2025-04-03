@@ -23,6 +23,8 @@ Ready to revolutionise your hiring? Let's begin!
   - [Edit an applicant: `edit`](#editing-a-person--edit)
   - [Tag an applicant: `tag`](#tagging-a-person--tag)
   - [Filter applicants by tag: `filter`](#filter-persons-by-tag--filter)
+  - [Add note to applicant: `newnote`](#add-notes-to-person--newnote)
+  - [Display note of applicant: `displaynote`](#display-note-of-person--displaynote)
   - [Find applicants by name `find`](#locating-persons-by-name-find)
   - [List all applicants: `list`](#listing-all-persons--list)
   - [Sort applicants `sort`](#sort-applicants--sort)
@@ -134,7 +136,7 @@ Format: `help`
 [Back to top](#welcome-to-hirehive)
 
 
-### Add an applicant: `add`
+### Add an applicant : `add`
 
 You can add a new applicant to HireHive when someone new applies to you company!
 
@@ -203,7 +205,45 @@ Format: `filter t/TAG`
 
 [Back to top](#welcome-to-hirehive)
 
-### Finding applicants by name: `find`
+### Add notes to person : `newnote`
+
+You can add information about the applicant into a note with this command.
+
+Format: `newnote n/NAME i/NOTE`
+
+* Adds the note if the given name partially matches **exactly one** person in the list ([case-insensitive](#glossary))
+* If multiple matches are found, a list of all matching names will be displayed. You should then retry the command but using the **full name** of the desired person.
+* NOTE has a limit of 500 characters.
+* After adding, a popup window will appear containing the given input.
+* If the input is empty or consists only of whitespace, then the popup window displays a default message "Currently empty..." in yellow.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can remove the contents of the note by leaving the NOTE field blank.
+</div>
+
+Examples:
+* `newnote n/John Doe i/25 years old` adds a note to John Doe that says "25 years old"
+* `newnote n/John Doe i/` removes any existing content in John Doe's note
+
+[Back to top](#welcome-to-hirehive)
+
+### Display note of person : `displaynote`
+
+You can display the note of a person with this command.
+
+Format: `displaynote n/NAME`
+
+* Displays the note if the given name partially matches **exactly one** person in the list ([case-insensitive](#glossary))
+* If multiple matches are found, a list of all matching names will be displayed. You should then retry the command but using the **full name** of the desired person.
+* A popup window will appear containing the person's note.
+* If the input is empty or consists only of whitespace, then the popup window displays a default message "Currently empty..." in yellow.
+
+Examples:
+* `displaynote n/John Doe` shows John Doe's note
+
+[Back to top](#welcome-to-hirehive)
+
+### Finding applicants by name : `find`
 
 Finds persons whose names contain any of the given keywords.
 
