@@ -54,10 +54,12 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Role: ")
                 .append(person.getRole())
+                .append("; Note: ")
+                .append(person.getNote())
                 .append("; Date: ")
                 .append(person.getDate())
-                .append("; Tag: ");
-        person.getTags().forEach(builder::append);
+                .append("; Tag: ")
+                .append(person.getTag());
         return builder.toString();
     }
 

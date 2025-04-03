@@ -1,8 +1,9 @@
 package hirehive.address.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
+import static hirehive.address.model.tag.Tag.getDefaultTag;
 
+import hirehive.address.logic.parser.ParserUtil;
+import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.person.Address;
 import hirehive.address.model.person.Email;
 import hirehive.address.model.person.InterviewDate;
@@ -31,7 +32,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Role role;
-    private Set<Tag> tags;
+    private Tag tag;
     private Note note;
     private InterviewDate date;
 
@@ -44,7 +45,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         role = new Role(DEFAULT_ROLE);
-        tags = new HashSet<>();
+        tag = getDefaultTag();
         note = new Note(DEFAULT_NOTE);
         date = new InterviewDate();
     }
@@ -58,7 +59,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         role = personToCopy.getRole();
-        tags = new HashSet<>(personToCopy.getTags());
+        tag = personToCopy.getTag();
         note = personToCopy.getNote();
         date = personToCopy.getDate();
     }
@@ -74,8 +75,12 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withTag(String tag) {
+        try {
+            this.tag = ParserUtil.parseTag(tag);
+        } catch (ParseException e) {
+            // do nothing
+        }
         return this;
     }
 
@@ -128,7 +133,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, role, tags, note, date);
+        return new Person(name, phone, email, address, role, tag, note, date);
     }
 
 
