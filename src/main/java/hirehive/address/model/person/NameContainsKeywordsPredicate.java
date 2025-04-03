@@ -1,16 +1,13 @@
 package hirehive.address.model.person;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.function.Predicate;
-
 import hirehive.address.commons.util.StringUtil;
 import hirehive.address.commons.util.ToStringBuilder;
+import hirehive.address.logic.Messages;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keyword given.
  */
-public class NameContainsKeywordsPredicate implements Predicate<Person> {
+public class NameContainsKeywordsPredicate implements PersonPredicate {
     private final String keyword;
 
     public NameContainsKeywordsPredicate(String keyword) {
@@ -40,5 +37,10 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public String toString() {
         return new ToStringBuilder(this).add("keywords", keyword).toString();
+    }
+
+    @Override
+    public String getSuccessString() {
+        return String.format(Messages.MESSAGE_FILTER_OVERVIEW_NAME, keyword);
     }
 }

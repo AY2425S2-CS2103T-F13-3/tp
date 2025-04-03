@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import hirehive.address.logic.Messages;
 import hirehive.address.testutil.PersonBuilder;
 
 public class NameContainsKeywordsPredicateTest {
@@ -83,5 +84,13 @@ public class NameContainsKeywordsPredicateTest {
 
         String expected = NameContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";
         assertEquals(expected, predicate.toString());
+    }
+
+    @Test
+    public void getSuccessString() {
+        String keyword = "keyword 1";
+        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(keyword);
+        String expected = String.format(Messages.MESSAGE_FILTER_OVERVIEW_NAME, keyword);
+        assertEquals(expected, predicate.getSuccessString());
     }
 }

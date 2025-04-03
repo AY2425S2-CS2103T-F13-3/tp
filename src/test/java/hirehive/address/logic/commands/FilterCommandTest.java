@@ -62,7 +62,7 @@ public class FilterCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() throws ParseException {
-        String expectedMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(Messages.MESSAGE_FILTER_OVERVIEW_TAG, "REJECTED");
         PersonContainsTagPredicate predicate = preparePredicate("Rejected");
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);

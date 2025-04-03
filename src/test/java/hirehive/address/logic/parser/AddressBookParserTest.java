@@ -23,12 +23,14 @@ import hirehive.address.logic.commands.HelpCommand;
 import hirehive.address.logic.commands.ListCommand;
 import hirehive.address.logic.commands.NewNoteCommand;
 import hirehive.address.logic.commands.NoteCommand;
+import hirehive.address.logic.commands.ReminderCommand;
 import hirehive.address.logic.commands.queries.NameQuery;
 import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.person.NameContainsKeywordsPredicate;
 import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
 import hirehive.address.model.person.PersonContainsTagPredicate;
+import hirehive.address.model.person.UpcomingInterviewPredicate;
 import hirehive.address.model.tag.Tag;
 import hirehive.address.testutil.Assert;
 import hirehive.address.testutil.DefaultPersonBuilder;
@@ -98,6 +100,13 @@ public class AddressBookParserTest {
         String tag = "Applicant";
         FilterCommand command = (FilterCommand) parser.parseCommand(FilterCommand.COMMAND_WORD + " t/ " + tag);
         assertEquals(new FilterCommand(new PersonContainsTagPredicate(ParserUtil.parseTag(tag))), command);
+    }
+
+    @Test
+    public void parseCommand_remind() throws Exception {
+        String days = "5";
+        ReminderCommand command = (ReminderCommand) parser.parseCommand(ReminderCommand.COMMAND_WORD + " " + days);
+        assertEquals(new ReminderCommand(new UpcomingInterviewPredicate(5)), command);
     }
 
     @Test

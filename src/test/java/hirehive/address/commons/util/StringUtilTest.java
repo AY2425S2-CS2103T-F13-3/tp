@@ -47,6 +47,35 @@ public class StringUtilTest {
         assertTrue(StringUtil.isNonZeroUnsignedInteger("10"));
     }
 
+    @Test
+    public void isPositiveInteger() {
+        // EP: empty strings
+        assertFalse(StringUtil.isPositiveInteger("")); // Boundary value
+        assertFalse(StringUtil.isPositiveInteger("  "));
+
+        // EP: not a number
+        assertFalse(StringUtil.isPositiveInteger("a"));
+        assertFalse(StringUtil.isPositiveInteger("aaa"));
+
+        // EP: zero as prefix
+        assertTrue(StringUtil.isPositiveInteger("01"));
+
+        // EP: signed numbers
+        assertFalse(StringUtil.isPositiveInteger("-1"));
+        assertFalse(StringUtil.isPositiveInteger("+1"));
+
+        // EP: numbers with white space
+        assertFalse(StringUtil.isPositiveInteger(" 10 ")); // Leading/trailing spaces
+        assertFalse(StringUtil.isPositiveInteger("1 0")); // Spaces in the middle
+
+        // EP: number larger than Integer.MAX_VALUE
+        assertFalse(StringUtil.isPositiveInteger(Long.toString(Integer.MAX_VALUE + 1)));
+
+        // EP: valid numbers, should return true
+        assertTrue(StringUtil.isPositiveInteger("0"));
+        assertTrue(StringUtil.isPositiveInteger("10"));
+    }
+
 
     //---------------- Tests for containsWordIgnoreCase --------------------------------------
 

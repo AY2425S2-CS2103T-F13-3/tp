@@ -24,6 +24,10 @@ public class Messages {
 
     public static final String MESSAGE_MULTIPLE_PEOPLE_QUERIED = "There are multiple contacts containing the given name."
             + "\n Please enter the full name of the person";
+
+    public static final String MESSAGE_FILTER_OVERVIEW_TAG = "Showing all %s entries.";
+    public static final String MESSAGE_FILTER_OVERVIEW_DATE = "Showing entries with interviews in %1$d days.";
+    public static final String MESSAGE_FILTER_OVERVIEW_NAME = "Showing entries with keywords %s in name.";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
