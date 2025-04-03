@@ -38,6 +38,9 @@ public class ScheduleCommand extends Command {
 
     private final boolean bDateProvided;
 
+    /**
+     * Creates a {@code ScheduleCommand} object with a provided date.
+     */
     public ScheduleCommand(NameQuery query, EditCommand.EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(query);
         requireNonNull(editPersonDescriptor);
@@ -46,6 +49,9 @@ public class ScheduleCommand extends Command {
         bDateProvided = true;
     }
 
+    /**
+     * Creates a {@code ScheduleCommand} object without a provided date.
+     */
     public ScheduleCommand(NameQuery query) {
         requireNonNull(query);
         this.query = query;

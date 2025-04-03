@@ -5,8 +5,8 @@ import static hirehive.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static java.util.Objects.requireNonNull;
 
-import hirehive.address.logic.commands.ScheduleCommand;
 import hirehive.address.logic.commands.EditCommand;
+import hirehive.address.logic.commands.ScheduleCommand;
 import hirehive.address.logic.commands.queries.NameQuery;
 import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.person.NameContainsKeywordsPredicate;
