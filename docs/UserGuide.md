@@ -88,12 +88,12 @@ Ready to revolutionise your hiring? Let's begin!
 | **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [i/INFO]` <br> e.g., `add n/James Ho p/87654321 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/software engineer intern i/26 years old` |
 | **List**     | `list`                                                                                                                                                                                           |
 | **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [i/NOTE] [d/DATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                      |
-| **Tag**      | `tag n/NAME [t/TAG]…​`                                                                                                                                                                           |
+| **Tag**      | `tag n/NAME [t/TAG]...​`                                                                                                                                                                         |
 | **Filter**   | `filter t/TAG` <br> e.g., `filter t/Applicant`                                                                                                                                                   |
 | **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                       |
 | **Delete**   | `delete n/NAME`<br> e.g., `delete n/John Doe`                                                                                                                                                    |
 | **Clear**    | `clear`                                                                                                                                                                                          |
-| **Schedule** | `schedule n/NAME [d/DATE]` <br> `schedule INDEX [d/DATE]                                                                                                                                         |
+| **Schedule** | `schedule n/NAME [d/DATE]` <br> `schedule INDEX [d/DATE]`                                                                                                                                        |
 | **Reminder** | `remind DAYS`                                                                                                                                                                                    |
 | **Exit**     | `exit`                                                                                                                                                                                           |
 
