@@ -163,7 +163,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_filterout() throws Exception {
         String tag = "Applicant";
-        FilterOutCommand command = 
+        FilterOutCommand command =
                 (FilterOutCommand) parser.parseCommand(FilterOutCommand.COMMAND_WORD + " t/ " + tag);
         assertEquals(new FilterOutCommand(new PersonDoesNotContainTagPredicate(ParserUtil.parseTag(tag))), command);
     }
