@@ -23,6 +23,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
         Tag tag;
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TAG);
         if (argMultimap.getValue(PREFIX_TAG).isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
@@ -30,5 +31,4 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get());
         return new FilterCommand(new PersonContainsTagPredicate(tag));
     }
-
 }

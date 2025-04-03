@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import hirehive.address.commons.util.ToStringBuilder;
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.exceptions.CommandException;
+import hirehive.address.logic.parser.CliSyntax;
 import hirehive.address.model.Model;
 import hirehive.address.model.person.PersonContainsTagPredicate;
 
@@ -18,8 +19,8 @@ public class FilterCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all persons with the given tag "
             + "(case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: t/ TAG\n"
-            + "Example: " + COMMAND_WORD + " applicant";
+            + "Parameters: t/TAG\n"
+            + "Example: " + COMMAND_WORD + " " + CliSyntax.PREFIX_TAG + "applicant";
 
     private final PersonContainsTagPredicate predicate;
 
