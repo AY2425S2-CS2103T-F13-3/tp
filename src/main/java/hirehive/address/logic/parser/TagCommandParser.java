@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
+import hirehive.address.commons.core.index.Index;
 import hirehive.address.logic.commands.EditCommand.EditPersonDescriptor;
 import hirehive.address.logic.commands.TagCommand;
 import hirehive.address.logic.commands.queries.NameQuery;
@@ -52,6 +53,16 @@ public class TagCommandParser implements Parser<TagCommand> {
         }
 
         editPersonDescriptor.setTag(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get()));
+
+        if (argMultimap.getValue(PREFIX_NAME).isEmpty()) {
+            try {
+                index = ParserUtil.parseIndex(argMultimap.getPreamble());
+                return new TagCommand(index, editPersonDescriptor);
+            } catch (ParseException e) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+            }
+        }
 
         String nameKeywords = argMultimap.getValue(PREFIX_NAME).get();
         NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nameKeywords));
