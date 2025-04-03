@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.function.Predicate;
 
 import hirehive.address.commons.core.GuiSettings;
+import hirehive.address.model.person.InterviewDate;
 import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
 import javafx.collections.ObservableList;
@@ -112,5 +113,5 @@ public interface Model {
     /**
      * Returns the next available date for an interview from the current date.
      */
-    LocalDate getAvailableDate();
+    InterviewDate getAvailableDate();
 }

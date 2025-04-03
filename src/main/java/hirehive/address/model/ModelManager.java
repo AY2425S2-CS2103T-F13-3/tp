@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -11,6 +13,7 @@ import java.util.logging.Logger;
 import hirehive.address.commons.core.GuiSettings;
 import hirehive.address.commons.core.LogsCenter;
 import hirehive.address.commons.util.CollectionUtil;
+import hirehive.address.model.person.InterviewDate;
 import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
 import javafx.collections.ObservableList;
@@ -170,9 +173,31 @@ public class ModelManager implements Model {
         return filteredPersons.size();
     }
 
+    /**
+     * Returns the next available date for an interview starting from the next day.
+     * @return An {@code InterviewDate} object
+     */
     @Override
-    public LocalDate getAvailableDate() {
-        return LocalDate.now();
+    public InterviewDate getAvailableDate() {
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        sortPersons();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+                .withResolverStyle(ResolverStyle.STRICT);
+        LocalDate iterationDate = LocalDate.now().plusDays(1);
+        int i = 0;
+        boolean bContinue = true;
+        while (sortedPersons.get(i).getDate().getValue().isPresent() && bContinue) {
+            LocalDate currDate = sortedPersons.get(i).getDate().getValue().get();
+            if (currDate.isBefore(iterationDate)) {
+                i++;
+            } else if (currDate.isAfter(iterationDate)) {
+                bContinue = false;
+            } else {
+                iterationDate = iterationDate.plusDays(1);
+                i++;
+            }
+        }
+        return new InterviewDate(iterationDate.format(formatter));
     }
 
     @Override

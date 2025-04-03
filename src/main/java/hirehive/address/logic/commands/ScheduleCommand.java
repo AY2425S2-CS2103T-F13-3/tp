@@ -1,6 +1,7 @@
 package hirehive.address.logic.commands;
 
 import static hirehive.address.logic.commands.EditCommand.createEditedPerson;
+import static hirehive.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
@@ -19,11 +20,12 @@ public class ScheduleCommand extends Command {
     public static final String COMMAND_WORD = "schedule";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds or edits the interview date for the person identified by the name used in "
+            + ": Adds or edits the interview date for the person identified by the name used in\n"
             + "the displayed person list.\n"
-            + "Parameters: " + PREFIX_NAME + "NAME "
-            + PREFIX_TAG + "TAG...\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "John " + PREFIX_TAG + "example";
+            + "If no date is specified, the next available date starting from the next day will be used instead.\n"
+            + "Parameters: " + PREFIX_NAME + "NAME ["
+            + PREFIX_DATE + "DATE]\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "John " + PREFIX_DATE + "01/05/2025";
 
     public static final String MESSAGE_DATE_PERSON_SUCCESS = "Added interview date: %1$s";
     public static final String MESSAGE_INVALID_PERSON = "%1$s has invalid tag: %2$s.\n"
@@ -34,16 +36,29 @@ public class ScheduleCommand extends Command {
     private final NameQuery query;
     private final EditCommand.EditPersonDescriptor editPersonDescriptor;
 
+    private final boolean bDateProvided;
+
     public ScheduleCommand(NameQuery query, EditCommand.EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(query);
         requireNonNull(editPersonDescriptor);
         this.query = query;
         this.editPersonDescriptor = editPersonDescriptor;
+        bDateProvided = true;
+    }
+
+    public ScheduleCommand(NameQuery query) {
+        requireNonNull(query);
+        this.query = query;
+        this.editPersonDescriptor = new EditCommand.EditPersonDescriptor();
+        bDateProvided = false;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        if (!bDateProvided) {
+            editPersonDescriptor.setDate(model.getAvailableDate());
+        }
         Person personToAddDate = CommandUtil.querySearch(model, query);
         if (personToAddDate.getTag().equals(Tag.APPLICANT) || personToAddDate.getTag().equals(Tag.CANDIDATE)) {
             editPersonDescriptor.setTag(Tag.INTERVIEWEE);
@@ -52,8 +67,23 @@ public class ScheduleCommand extends Command {
                     personToAddDate.getTag().getTagName()));
         }
         Person editedPerson = createEditedPerson(personToAddDate, editPersonDescriptor);
-
         model.setPerson(personToAddDate, editedPerson);
         return new CommandResult(String.format(MESSAGE_DATE_PERSON_SUCCESS, Messages.format(editedPerson)));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ScheduleCommand)) {
+            return false;
+        }
+
+        ScheduleCommand otherCommand = (ScheduleCommand) other;
+        return query.equals(otherCommand.query)
+                && editPersonDescriptor.equals(otherCommand.editPersonDescriptor);
     }
 }

@@ -33,12 +33,11 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
         NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(name));
 
         if (argMultimap.getValue(PREFIX_DATE).orElse("").trim().isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
+            return new ScheduleCommand(nameQuery);
+        } else {
+            EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
+            editPersonDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
+            return new ScheduleCommand(nameQuery, editPersonDescriptor);
         }
-        EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
-        editPersonDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
-
-        return new ScheduleCommand(nameQuery, editPersonDescriptor);
     }
 }

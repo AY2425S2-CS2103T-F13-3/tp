@@ -22,6 +22,7 @@ import hirehive.address.logic.commands.NoteCommand;
 import hirehive.address.logic.commands.ReminderCommand;
 import hirehive.address.logic.commands.queries.NameQuery;
 import hirehive.address.logic.parser.exceptions.ParseException;
+import hirehive.address.model.person.InterviewDate;
 import hirehive.address.model.person.NameContainsKeywordsPredicate;
 import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
@@ -117,12 +118,6 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_date() throws Exception {
-        assertTrue(parser.parseCommand(ScheduleCommand.COMMAND_WORD) instanceof ScheduleCommand);
-        assertTrue(parser.parseCommand(ScheduleCommand.COMMAND_WORD + " 3") instanceof ScheduleCommand);
-    }
-
-    @Test
     public void parseCommand_note() throws Exception {
         String nameToDisplay = TypicalPersons.ALICE.getName().fullName;
 
@@ -151,6 +146,17 @@ public class AddressBookParserTest {
         );
 
         assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_schedule() throws Exception {
+        String name = TypicalPersons.ALICE.getName().fullName;
+        EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
+        editPersonDescriptor.setDate(new InterviewDate("01/01/2025"));
+        ScheduleCommand expectedCommand = new ScheduleCommand(new NameQuery(new NameContainsKeywordsPredicate(name)), editPersonDescriptor);
+        ScheduleCommand parsedCommand = (ScheduleCommand) parser.parseCommand(ScheduleCommand.COMMAND_WORD + " "
+                + CliSyntax.PREFIX_NAME + name + " " + CliSyntax.PREFIX_DATE + "01/01/2025");
+        assertEquals(expectedCommand, parsedCommand);
     }
 
     @Test
