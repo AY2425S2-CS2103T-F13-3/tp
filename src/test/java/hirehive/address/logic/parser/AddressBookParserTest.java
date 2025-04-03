@@ -14,6 +14,7 @@ import hirehive.address.logic.commands.DisplayNoteCommand;
 import hirehive.address.logic.commands.EditCommand;
 import hirehive.address.logic.commands.ExitCommand;
 import hirehive.address.logic.commands.FilterCommand;
+import hirehive.address.logic.commands.FilterOutCommand;
 import hirehive.address.logic.commands.FindCommand;
 import hirehive.address.logic.commands.HelpCommand;
 import hirehive.address.logic.commands.ListCommand;
@@ -25,6 +26,7 @@ import hirehive.address.model.person.NameContainsKeywordsPredicate;
 import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
 import hirehive.address.model.person.PersonContainsTagPredicate;
+import hirehive.address.model.person.PersonDoesNotContainTagPredicate;
 import hirehive.address.model.person.UpcomingInterviewPredicate;
 import hirehive.address.testutil.Assert;
 import hirehive.address.testutil.DefaultPersonBuilder;
@@ -125,9 +127,7 @@ public class AddressBookParserTest {
     public void parseCommand_note() throws Exception {
         String nameToDisplay = TypicalPersons.ALICE.getName().fullName;
 
-        DisplayNoteCommand expectedCommand = new DisplayNoteCommand(
-                new NameQuery(new NameContainsKeywordsPredicate(nameToDisplay))
-        );
+        DisplayNoteCommand expectedCommand = new DisplayNoteCommand(nameToDisplay);
         DisplayNoteCommand command = (DisplayNoteCommand) parser.parseCommand(
                 DisplayNoteCommand.COMMAND_WORD + " n/" + nameToDisplay
         );
@@ -141,15 +141,20 @@ public class AddressBookParserTest {
         EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
         editPersonDescriptor.setNote(new Note("test"));
 
-        NewNoteCommand expectedCommand = new NewNoteCommand(
-                new NameQuery(new NameContainsKeywordsPredicate(nameToAddNote)),
-                editPersonDescriptor
-        );
+        NewNoteCommand expectedCommand = new NewNoteCommand(nameToAddNote, editPersonDescriptor);
         NewNoteCommand command = (NewNoteCommand) parser.parseCommand(
                 NewNoteCommand.COMMAND_WORD + " n/" + nameToAddNote + " i/test"
         );
 
         assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_filterout() throws Exception {
+        String tag = "Applicant";
+        FilterOutCommand command =
+                (FilterOutCommand) parser.parseCommand(FilterOutCommand.COMMAND_WORD + " t/ " + tag);
+        assertEquals(new FilterOutCommand(new PersonDoesNotContainTagPredicate(ParserUtil.parseTag(tag))), command);
     }
 
     @Test

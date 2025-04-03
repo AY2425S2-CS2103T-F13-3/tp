@@ -22,14 +22,18 @@ public class CommandResult {
     /** Note window should be displayed to the user. */
     private final boolean showNote;
 
+    /** Saved message should appear to the user */
+    private final boolean isChange;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showNote) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showNote, boolean isChange) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.showNote = showNote;
+        this.isChange = isChange;
     }
 
     /**
@@ -37,7 +41,11 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser, false, false, false, false);
+    }
+
+    public CommandResult(String feedbackToUser, boolean isChange) {
+        this(feedbackToUser, false, false, false, isChange);
     }
 
     public String getFeedbackToUser() {
@@ -56,12 +64,8 @@ public class CommandResult {
         return showNote;
     }
 
-    public boolean isList() {
-        return feedbackToUser.equals(ListCommand.MESSAGE_SUCCESS);
-    }
-
-    public boolean isFind() {
-        return feedbackToUser.endsWith(" persons listed!");
+    public boolean isChange() {
+        return isChange;
     }
 
     @Override
@@ -78,7 +82,9 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && showNote == otherCommandResult.showNote
+                && isChange == otherCommandResult.isChange;
     }
 
     @Override
@@ -92,6 +98,8 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("showNote", showNote)
+                .add("isChange", isChange)
                 .toString();
     }
 
