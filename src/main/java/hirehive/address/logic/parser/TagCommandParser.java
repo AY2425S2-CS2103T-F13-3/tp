@@ -55,6 +55,7 @@ public class TagCommandParser implements Parser<TagCommand> {
         editPersonDescriptor.setTag(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get()));
 
         if (argMultimap.getValue(PREFIX_NAME).isEmpty()) {
+            Index index;
             try {
                 index = ParserUtil.parseIndex(argMultimap.getPreamble());
                 return new TagCommand(index, editPersonDescriptor);

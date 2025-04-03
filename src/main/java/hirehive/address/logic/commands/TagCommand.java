@@ -86,6 +86,22 @@ public class TagCommand extends Command {
       
         if (isNull(index)) {
             List<Person> personToTag;
+            if (isNull(editPersonDescriptor)) {
+                try {
+                    personToTag = query.query(model);
+                } catch (QueryException qe) {
+                    throw new CommandException(qe.getMessage());
+                }
+
+                if (personToTag.size() > 1) {
+                    throw new CommandException(MESSAGE_MULTIPLE_PEOPLE_QUERIED);
+                }
+
+                Person taggedPerson = createOffsetTagPerson(personToTag.get(0), offset);
+
+                model.setPerson(personToTag.get(0), taggedPerson);
+                return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, Messages.format(taggedPerson)));
+            }
             try {
                 personToTag = query.query(model);
             } catch (QueryException qe) {
@@ -114,22 +130,7 @@ public class TagCommand extends Command {
             model.setPerson(personToTag, taggedPerson);
             return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, Messages.format(taggedPerson)));
         }
-        if (isNull(editPersonDescriptor)) {
-            List<Person> personToTag;
-            try {
-                personToTag = query.query(model);
-            } catch (QueryException qe) {
-                throw new CommandException(qe.getMessage());
-            }
 
-            if (personToTag.size() > 1) {
-                throw new CommandException(MESSAGE_MULTIPLE_PEOPLE_QUERIED);
-            }
-          
-            Person taggedPerson = createOffsetTagPerson(personToTag.get(0), offset);
-
-            model.setPerson(personToTag.get(0), taggedPerson);
-            return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, Messages.format(taggedPerson)));
         throw new CommandException(MESSAGE_TAG_INVALID_PARAMS);
     }
 
