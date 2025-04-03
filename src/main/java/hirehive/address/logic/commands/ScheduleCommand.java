@@ -127,12 +127,15 @@ public class ScheduleCommand extends Command {
         }
 
         ScheduleCommand otherCommand = (ScheduleCommand) other;
-        if (this.query != null && !this.query.equals(otherCommand.query)) {
+        if (!this.editPersonDescriptor.equals(otherCommand.editPersonDescriptor)) {
             return false;
         }
-        if (this.index != null && !this.index.equals(otherCommand.index)) {
-            return false;
+        if (this.query == null) {
+            return this.index.equals(otherCommand.index) && otherCommand.query == null;
         }
-        return true;
+        if (this.index == null) {
+            return this.query.equals(otherCommand.query) && otherCommand.index == null;
+        }
+        return false;
     }
 }
