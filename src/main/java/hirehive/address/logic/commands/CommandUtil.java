@@ -1,10 +1,12 @@
 package hirehive.address.logic.commands;
 
 import static hirehive.address.logic.Messages.MESSAGE_MULTIPLE_PEOPLE_QUERIED;
+import static hirehive.address.logic.commands.EditCommand.createEditedPerson;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import hirehive.address.commons.core.index.Index;
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.exceptions.CommandException;
 import hirehive.address.logic.commands.queries.NameQuery;
@@ -41,7 +43,7 @@ public class CommandUtil {
      * Uses the given query to find the matching person in the model.
      * @param model The model to update the list in
      * @param query The {@code NameQuery} object used to search for the person
-     * @return A {@code CommandResult} object
+     * @return A {@code Person} object
      * @throws CommandException
      */
     public static Person querySearch(Model model, NameQuery query) throws CommandException {
@@ -56,5 +58,21 @@ public class CommandUtil {
             throw new CommandException(MESSAGE_MULTIPLE_PEOPLE_QUERIED);
         }
         return personToEdit.get(0);
+    }
+    /**
+     * Uses the given index to find the matching person in the model.
+     * @param model The model to update the list in
+     * @param index The {@code index} object used to search for the person
+     * @return A {@code Person} object
+     * @throws CommandException
+     */
+    public static Person indexSearch(Model model, Index index) throws CommandException {
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        return lastShownList.get(index.getZeroBased());
     }
 }

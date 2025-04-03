@@ -117,6 +117,23 @@ public class EditCommand extends Command {
                 updatedNote, updatedDate);
     }
 
+    protected static Person createOffsetTagPerson(Person personToEdit, int offset) {
+        assert personToEdit != null;
+
+        Name name = personToEdit.getName();
+        Phone phone = personToEdit.getPhone();
+        Email email = personToEdit.getEmail();
+        Address address = personToEdit.getAddress();
+        Role role = personToEdit.getRole();
+        Note note = personToEdit.getNote();
+        InterviewDate date = personToEdit.getDate();
+
+        Tag updatedTag = personToEdit.getTag().offsetBy(offset);
+
+        return new Person(name, phone, email, address, role, updatedTag,
+                note, date);
+    }
+
     protected Index getIndex() {
         return index;
     }
