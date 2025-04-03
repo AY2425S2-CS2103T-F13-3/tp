@@ -1,6 +1,5 @@
 package hirehive.address.logic.parser;
 
-import static hirehive.address.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -11,6 +10,7 @@ import hirehive.address.logic.commands.AddCommand;
 import hirehive.address.logic.commands.ClearCommand;
 import hirehive.address.logic.commands.ScheduleCommand;
 import hirehive.address.logic.commands.DeleteCommand;
+import hirehive.address.logic.commands.DisplayNoteCommand;
 import hirehive.address.logic.commands.EditCommand;
 import hirehive.address.logic.commands.ExitCommand;
 import hirehive.address.logic.commands.FilterCommand;
@@ -18,7 +18,6 @@ import hirehive.address.logic.commands.FindCommand;
 import hirehive.address.logic.commands.HelpCommand;
 import hirehive.address.logic.commands.ListCommand;
 import hirehive.address.logic.commands.NewNoteCommand;
-import hirehive.address.logic.commands.NoteCommand;
 import hirehive.address.logic.commands.ReminderCommand;
 import hirehive.address.logic.commands.queries.NameQuery;
 import hirehive.address.logic.parser.exceptions.ParseException;
@@ -121,11 +120,11 @@ public class AddressBookParserTest {
     public void parseCommand_note() throws Exception {
         String nameToDisplay = TypicalPersons.ALICE.getName().fullName;
 
-        NoteCommand expectedCommand = new NoteCommand(
+        DisplayNoteCommand expectedCommand = new DisplayNoteCommand(
                 new NameQuery(new NameContainsKeywordsPredicate(nameToDisplay))
         );
-        NoteCommand command = (NoteCommand) parser.parseCommand(
-                NoteCommand.COMMAND_WORD + " n/" + nameToDisplay
+        DisplayNoteCommand command = (DisplayNoteCommand) parser.parseCommand(
+                DisplayNoteCommand.COMMAND_WORD + " n/" + nameToDisplay
         );
 
         assertEquals(expectedCommand, command);
