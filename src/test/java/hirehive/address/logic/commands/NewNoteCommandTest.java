@@ -34,7 +34,7 @@ public class NewNoteCommandTest {
         EditCommand.EditPersonDescriptor descriptor =
                 new EditPersonDescriptorBuilder(editedPerson).build();
         NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(TypicalPersons.ALICE.getName().fullName));
-        NewNoteCommand newNoteCommand = new NewNoteCommand(nameQuery, descriptor);
+        NewNoteCommand newNoteCommand = new NewNoteCommand(TypicalPersons.ALICE.getName().fullName, descriptor);
 
         String expectedMessage = String.format(NewNoteCommand.MESSAGE_SUCCESS, Messages.format(editedPerson));
 
@@ -53,9 +53,8 @@ public class NewNoteCommandTest {
     @Test
     public void execute_nonexistentName_throwsCommandException() {
         String name = "Nonexistent";
-        NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(name));
         EditCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
-        NewNoteCommand newNoteCommand = new NewNoteCommand(nameQuery, descriptor);
+        NewNoteCommand newNoteCommand = new NewNoteCommand(name, descriptor);
 
         assertThrows(CommandException.class, () -> newNoteCommand.execute(model), Messages.MESSAGE_NO_SUCH_PERSON);
     }
@@ -63,30 +62,27 @@ public class NewNoteCommandTest {
     @Test
     public void execute_multipleMatches_throwsCommandException() {
         String name = "Meier";
-        NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(name));
         EditCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
-        NewNoteCommand newNoteCommand = new NewNoteCommand(nameQuery, descriptor);
+        NewNoteCommand newNoteCommand = new NewNoteCommand(name, descriptor);
 
-        assertThrows(CommandException.class, () -> newNoteCommand.execute(model), Messages.MESSAGE_MULTIPLE_PEOPLE_QUERIED);
+        assertThrows(CommandException.class, () -> newNoteCommand.execute(model), Messages.MESSAGE_MULTIPLE_PEOPLE_QUERIED_NAME);
     }
 
     @Test
     public void equals() {
-        NameQuery firstQuery = new NameQuery(new NameContainsKeywordsPredicate("Alice"));
-        NameQuery secondQuery = new NameQuery(new NameContainsKeywordsPredicate("Bob"));
         EditCommand.EditPersonDescriptor firstDescriptor = new EditPersonDescriptorBuilder().withNote("first").build();
         EditCommand.EditPersonDescriptor secondDescriptor = new EditPersonDescriptorBuilder().withNote("second").build();
 
-        NewNoteCommand newNoteFirstCommand = new NewNoteCommand(firstQuery, firstDescriptor);
-        NewNoteCommand newNoteSecondCommand = new NewNoteCommand(secondQuery, secondDescriptor);
+        NewNoteCommand newNoteFirstCommand = new NewNoteCommand("Alice", firstDescriptor);
+        NewNoteCommand newNoteSecondCommand = new NewNoteCommand("Bob", secondDescriptor);
 
         // same object -> returns true
         assertTrue(newNoteFirstCommand.equals(newNoteFirstCommand));
         assertTrue(newNoteSecondCommand.equals(newNoteSecondCommand));
 
         // same values -> returns true
-        NewNoteCommand newNoteFirstCopy = new NewNoteCommand(firstQuery, firstDescriptor);
-        NewNoteCommand newNoteSecondCopy = new NewNoteCommand(secondQuery, secondDescriptor);
+        NewNoteCommand newNoteFirstCopy = new NewNoteCommand("Alice", firstDescriptor);
+        NewNoteCommand newNoteSecondCopy = new NewNoteCommand("Bob", secondDescriptor);
         assertTrue(newNoteFirstCommand.equals(newNoteFirstCopy));
         assertTrue(newNoteSecondCommand.equals(newNoteSecondCopy));
 
@@ -100,8 +96,8 @@ public class NewNoteCommandTest {
 
         // different values -> returns false
         assertFalse(newNoteFirstCommand.equals(newNoteSecondCommand));
-        NewNoteCommand newNoteFirstSecond = new NewNoteCommand(firstQuery, secondDescriptor);
-        NewNoteCommand newNoteSecondFirst = new NewNoteCommand(secondQuery, firstDescriptor);
+        NewNoteCommand newNoteFirstSecond = new NewNoteCommand("Alice", secondDescriptor);
+        NewNoteCommand newNoteSecondFirst = new NewNoteCommand("Bob", firstDescriptor);
         assertFalse(newNoteFirstCommand.equals(newNoteFirstSecond));
         assertFalse(newNoteFirstCommand.equals(newNoteSecondFirst));
         assertFalse(newNoteSecondCommand.equals(newNoteFirstSecond));
@@ -110,11 +106,11 @@ public class NewNoteCommandTest {
 
     @Test
     public void toStringMethod() {
-        NameQuery query = new NameQuery(new NameContainsKeywordsPredicate(TypicalPersons.ALICE.getName().fullName));
+        String name = TypicalPersons.ALICE.getName().fullName;
         EditCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
-        NewNoteCommand newNoteCommand = new NewNoteCommand(query, descriptor);
+        NewNoteCommand newNoteCommand = new NewNoteCommand(TypicalPersons.ALICE.getName().fullName, descriptor);
 
-        String expected = NewNoteCommand.class.getCanonicalName() + "{query=" + query + ", editPersonDescriptor=" + descriptor + "}";
+        String expected = NewNoteCommand.class.getCanonicalName() + "{name=" + name + ", editPersonDescriptor=" + descriptor + "}";
         assertEquals(expected, newNoteCommand.toString());
     }
 }

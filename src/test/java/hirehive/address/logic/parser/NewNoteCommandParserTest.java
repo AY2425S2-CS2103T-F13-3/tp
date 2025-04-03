@@ -17,10 +17,9 @@ public class NewNoteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsNewNoteCommand() {
-        NameQuery query = new NameQuery(new NameContainsKeywordsPredicate("Alice"));
         EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
         editPersonDescriptor.setNote(new Note("test"));
-        NewNoteCommand expectedCommand = new NewNoteCommand(query, editPersonDescriptor);
+        NewNoteCommand expectedCommand = new NewNoteCommand("Alice", editPersonDescriptor);
 
         CommandParserTestUtil.assertParseSuccess(parser, "newnote n/Alice i/test", expectedCommand);
     }
