@@ -27,11 +27,9 @@ public class TagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Tags the person identified by the given name or index.\n"
-            + "Parameters:\n"
-            + " - " + PREFIX_NAME + "NAME "
-            + PREFIX_TAG + "TAG\n"
-            + " - " + "INDEX (must be a positive integer) "
-            + PREFIX_TAG + "TAG\n"
+            + "Parameters (either 1 or 2):\n"
+            + " 1. " + PREFIX_NAME + "NAME " + PREFIX_TAG + "TAG\n"
+            + " 2. " + "INDEX (must be a positive integer) " + PREFIX_TAG + "TAG\n"
             + "Example:\n"
             + " - " + COMMAND_WORD + " " + PREFIX_NAME + "John " + PREFIX_TAG + "Applicant\n"
             + " - " + COMMAND_WORD + " 1 " + PREFIX_TAG + "Applicant\n";
@@ -55,6 +53,10 @@ public class TagCommand extends Command {
         this.editPersonDescriptor = editPersonDescriptor;
     }
 
+    /**
+     * @param index of the person in the filtered person list to tag
+     * @param editPersonDescriptor details to tag the person with
+     */
     public TagCommand(Index index, EditCommand.EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
