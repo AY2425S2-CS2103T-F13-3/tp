@@ -30,7 +30,7 @@ public class TagCommand extends Command {
             + ": Tags the person identified by the given name or index.\n"
             + "Parameters (either 1, 2, 3):\n"
             + " 1. " + PREFIX_NAME + "NAME " + PREFIX_TAG + "TAG\n"
-            + " 2. OFFSET " + PREFIX_NAME + "NAME\n" 
+            + " 2. OFFSET " + PREFIX_NAME + "NAME\n"
             + " 3. INDEX (must be a positive integer) " + PREFIX_TAG + "TAG\n"
             + "Example:\n"
             + " - " + COMMAND_WORD + " " + PREFIX_NAME + "John " + PREFIX_TAG + "Applicant\n"
@@ -43,7 +43,7 @@ public class TagCommand extends Command {
     private NameQuery query = null;
     private EditPersonDescriptor editPersonDescriptor = null;
     private Index index = null;
-    private int offset = 0;    
+    private int offset = 0;
 
     /**
      * @param query to query for the specific person by name
@@ -67,7 +67,7 @@ public class TagCommand extends Command {
         this.query = query;
         this.offset = offset;
     }
-  
+
     /**
      * @param index of the person in the filtered person list to tag
      * @param editPersonDescriptor details to tag the person with
@@ -83,7 +83,7 @@ public class TagCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-      
+
         if (isNull(index)) {
             List<Person> personToTag;
             if (isNull(editPersonDescriptor)) {
