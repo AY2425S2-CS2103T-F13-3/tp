@@ -127,9 +127,7 @@ public class AddressBookParserTest {
     public void parseCommand_note() throws Exception {
         String nameToDisplay = TypicalPersons.ALICE.getName().fullName;
 
-        DisplayNoteCommand expectedCommand = new DisplayNoteCommand(
-                new NameQuery(new NameContainsKeywordsPredicate(nameToDisplay))
-        );
+        DisplayNoteCommand expectedCommand = new DisplayNoteCommand(nameToDisplay);
         DisplayNoteCommand command = (DisplayNoteCommand) parser.parseCommand(
                 DisplayNoteCommand.COMMAND_WORD + " n/" + nameToDisplay
         );
@@ -143,10 +141,7 @@ public class AddressBookParserTest {
         EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
         editPersonDescriptor.setNote(new Note("test"));
 
-        NewNoteCommand expectedCommand = new NewNoteCommand(
-                new NameQuery(new NameContainsKeywordsPredicate(nameToAddNote)),
-                editPersonDescriptor
-        );
+        NewNoteCommand expectedCommand = new NewNoteCommand(nameToAddNote, editPersonDescriptor);
         NewNoteCommand command = (NewNoteCommand) parser.parseCommand(
                 NewNoteCommand.COMMAND_WORD + " n/" + nameToAddNote + " i/test"
         );
