@@ -23,6 +23,7 @@ Ready to revolutionise your hiring? Let's begin!
   - [Edit an applicant: `edit`](#editing-a-person--edit)
   - [Tag an applicant: `tag`](#tagging-a-person--tag)
   - [Filter applicants by tag: `filter`](#filter-persons-by-tag--filter)
+  - [Filtering out applicants with tag: `filterout`](#filtering-out-applicants-by-tag-filterout)
   - [Find applicants by name `find`](#locating-persons-by-name-find)
   - [List all applicants: `list`](#listing-all-persons--list)
   - [Sort applicants `sort`](#sort-applicants--sort)
@@ -162,13 +163,13 @@ Examples:
 
 ### Edit an applicant : `edit`
 
-You can edit the information of an existing applicant in HireHive if needed!
+If you have accidentally mistyped some details, you can edit the information of an existing applicant in HireHive!
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/ROLE] [i/NOTE] [d/DATE]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
+* The provided values will replace the existing information in the respective fields.
 
 
 Examples:
@@ -203,9 +204,21 @@ Format: `filter t/TAG`
 
 [Back to top](#welcome-to-hirehive)
 
+### Filtering out applicants with tag: `filterout`
+You can view all your applicants in a list **except** for those with the specified tag, for easier tracking of applicants!
+
+Format: `filterout t/TAG`
+
+*The search is [case-insensitive](#glossary). e.g `applicant` will match `Applicant`
+
+Examples:
+* `filterout t/offered` will filter out all applicants that were already offered the job, the remaining list will display applicants without the "Offered" tag.
+
+[Back to top](#welcome-to-hirehive)
+
 ### Finding applicants by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+You can search for persons whose names contain any of the given keywords!
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -241,7 +254,7 @@ Format: `sort`
 
 ### Delete an applicant : `delete`
 
-You can delete a specific person from HireHive.
+You can delete a specific person from HireHive if their contact is no longer required.
 
 Format: `delete n/NAME`
 
