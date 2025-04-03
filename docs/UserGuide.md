@@ -183,16 +183,39 @@ Examples:
 
 ### Tagging a person : `tag`
 
-You can change or add tags to a specific person from HireHive to easily differentiate between all your applicants!
+You can change the tag to a specific person from HireHive to easily differentiate between all your applicants!
 
-Format: `tag n/NAME t/TAG`
+Format:
 
-* Tags a person if the given name partially matches **exactly one person** in the list ([case-insensitive](#glossary)).
-* If multiple matches are found, a list of all matching names will be displayed. You can then enter the **full name**
-  of the person you want to delete.
+Command | Description
+--------|------------------
+`tag n/NAME t/TAG` | Tags by name.
+`tag INDEX t/TAG` | Tags by index.
+`tag OFFSET n/NAME` | Offset tag of named person.
+
+
+* Tagging by name will partially match to **exactly one person** in the list ([case-insensitive](#glossary)).
+  * If multiple matches are found, a list of all matching names will be displayed. You can then enter the **full name**
+    of the person you want to delete.
+* Tagging by index must have a **positive** index number
+* Tags must be one of the following values:
+  1. Rejected
+  2. Applicant
+  3. Candidate
+  4. Interviewee
+  5. Offered
+* The tag written in the command must match one of the values above ([case-insensitive](#glossary)) e.g. `t/applicant`
+* To tag with offset, the offset takes in `+` or `-`, followed by a number for the offset amount, e.g. `+1`, `-2`
+  * The tag, which represents the hiring stage the specific person is at, will progress/regress the hiring stage by 
+    the offset amount
+  * The order for the hiring stages is Rejected > Applicant > Candidate > Interviewee > Offered
+  * The tag will not regress pass Rejected and progress pass Offered
+
 
 Examples:
 * `tag n/John Doe t/Applicant` will tag John Doe as "Applicant" in HireHive
+* `tag 1 t/Candidate` will tag the 1st person as "Candidate"
+* `tag +1 n/John Doe` for a John Doe person with tag "Applicant" will tag them as "Candidate"
 
 [Back to top](#hirehive-user-guide)
 
