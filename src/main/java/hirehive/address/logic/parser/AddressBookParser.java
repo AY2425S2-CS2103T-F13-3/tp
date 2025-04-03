@@ -89,7 +89,7 @@ public class AddressBookParser {
             return new HelpCommand();
 
         case DateCommand.COMMAND_WORD:
-            return new DateCommand();
+            return new DateCommandParser().parse(arguments);
 
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);

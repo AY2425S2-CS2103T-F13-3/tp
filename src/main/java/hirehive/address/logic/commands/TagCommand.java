@@ -49,21 +49,10 @@ public class TagCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        Person personToTag = CommandUtil.querySearch(model, query);
+        Person taggedPerson = createEditedPerson(personToTag, editPersonDescriptor);
 
-        List<Person> personToTag;
-        try {
-            personToTag = query.query(model);
-        } catch (QueryException qe) {
-            throw new CommandException(qe.getMessage());
-        }
-
-        if (personToTag.size() > 1) {
-            throw new CommandException(MESSAGE_MULTIPLE_PEOPLE_QUERIED);
-        }
-
-        Person taggedPerson = createEditedPerson(personToTag.get(0), editPersonDescriptor);
-
-        model.setPerson(personToTag.get(0), taggedPerson);
+        model.setPerson(personToTag, taggedPerson);
         return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, Messages.format(taggedPerson)));
     }
 

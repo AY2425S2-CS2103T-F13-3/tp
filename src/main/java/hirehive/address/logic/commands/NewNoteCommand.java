@@ -51,21 +51,10 @@ public class NewNoteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        Person personToAddNote = CommandUtil.querySearch(model, query);
+        Person editedPerson = createEditedPerson(personToAddNote, editPersonDescriptor);
 
-        List<Person> personToAddNote;
-        try {
-            personToAddNote = query.query(model);
-        } catch (QueryException e) {
-            throw new CommandException(Messages.MESSAGE_NO_SUCH_PERSON);
-        }
-        if (personToAddNote.size() > 1) {
-            throw new CommandException(Messages.MESSAGE_MULTIPLE_PEOPLE_QUERIED);
-        }
-
-        Person personAddedNote = personToAddNote.get(0);
-        Person editedPerson = createEditedPerson(personAddedNote, editPersonDescriptor);
-
-        model.setPerson(personAddedNote, editedPerson);
+        model.setPerson(personToAddNote, editedPerson);
         model.updatePersonNote(editedPerson);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(editedPerson)), false,
                 false, true);

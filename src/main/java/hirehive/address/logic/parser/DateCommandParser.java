@@ -3,6 +3,7 @@ package hirehive.address.logic.parser;
 import static hirehive.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static hirehive.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
 
@@ -31,24 +32,23 @@ public class DateCommandParser implements Parser<DateCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DateCommand parse(String args) throws ParseException {
-        /*
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(
-                        args, PREFIX_NAME, PREFIX_DATE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE);
 
-        if (argMultimap.getValue(PREFIX_NAME).isEmpty()) {
+        if (argMultimap.getValue(PREFIX_NAME).orElse("").trim().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DateCommand.MESSAGE_USAGE));
         }
+        String name = argMultimap.getValue(PREFIX_NAME).get();
+        NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(name));
 
-        String[] nameKeywords = argMultimap.getValue(PREFIX_NAME).get().split("\\s+");
-        NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-
+        if (argMultimap.getValue(PREFIX_DATE).orElse("").trim().isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DateCommand.MESSAGE_USAGE));
+        }
         EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
+        editPersonDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
 
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
-         */
-        return new DateCommand();
+        return new DateCommand(nameQuery, editPersonDescriptor);
     }
 }
