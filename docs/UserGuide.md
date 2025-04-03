@@ -93,7 +93,9 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Delete** | `delete n/NAME`<br> e.g., `delete n/John Doe`
 **Clear** | `clear`
-**Exit** | `exit`
+**Schedule** | `schedule n/NAME [d/DATE]` <br> `schedule INDEX [d/DATE]
+**Reminder** | `remind DAYS`
+**Exit* | `exit)`
 
 [Back to top](#welcome-to-hirehive)
 
@@ -219,7 +221,7 @@ Examples:
 
 ### Filter applicants by tag : `filter`
 
-Lists down all your applicants of a certain tag. 
+Lists down all your entries of a given tag.
 
 Format: `filter t/TAG`
 
@@ -268,6 +270,8 @@ Examples:
 
 ### Schedule interview dates for applicants : `schedule`
 
+Automatically or manually schedule your next interview with a potential candidate.
+
 Format:
 
 Command | Description
@@ -277,7 +281,7 @@ Command | Description
 
 
 * The date format is DD/MM/YYYY (date/month/year) e.g. "04/04/2025"
-* If date is left empty, 
+* If date is left empty, the next day that does not have an interview after the current day will be used to schedule the meeting instead.
 * Scheduling interview date by index must have a **positive** index number
 
 ### Find applicants by name : `find`
@@ -318,8 +322,7 @@ Format: `sort`
 
 ### Show applicants with upcoming interviews: `remind`
 
-Shows you a list of all applicants with interviews in the given days' time, so that you can remind yourself of your 
-upcoming interviews to prepare for.
+Easily remind yourself of your upcoming interviews by listing down all applicants with interviews in the given days' time.
 
 Format: `remind DAYS`
 

@@ -551,6 +551,12 @@ testers are expected to do more *exploratory* testing.
       contact shown in the status message.
    3. Test case: `schedule 1 d/test` <br>
       Expected: Expected: Error message for invalid command format shown in status message with command format and example.
+3. Automatically scheduling the next interview date
+   1. Prerequisites: Use the same persons list as when you first ran HireHive.jar
+   2. Test case: `schedule 1`<br>
+      Expected: First contact will be updated to tomorrow's date.
+   3. Test case: `schedule n/alice` <br>
+      Expected: Alice's contact will be updated to tomorrow's date
 
 
 ### Clearing all entries
