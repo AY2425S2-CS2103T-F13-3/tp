@@ -24,10 +24,10 @@ public class TagCommand extends Command {
     public static final String COMMAND_WORD = "tag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Tags the person identified by the index number used in the displayed person list.\n"
+            + ": Tags the person identified by the given name.\n"
             + "Parameters: " + PREFIX_NAME + "NAME "
-            + PREFIX_TAG + "TAG...\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "John " + PREFIX_TAG + "example";
+            + PREFIX_TAG + "TAG\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "John " + PREFIX_TAG + "Applicant";
 
     public static final String MESSAGE_TAG_PERSON_SUCCESS = "Tagged Person: %1$s";
 

@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import hirehive.address.commons.exceptions.IllegalValueException;
+import hirehive.address.logic.parser.ParserUtil;
 import hirehive.address.model.person.Address;
 import hirehive.address.model.person.Email;
 import hirehive.address.model.person.InterviewDate;
@@ -32,7 +33,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String role;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String tag;
     private final String note;
     private final String date;
 
@@ -42,16 +43,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("role") String role, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("role") String role, @JsonProperty("tag") String tag,
                              @JsonProperty("note") String note, @JsonProperty("date") String date) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.role = role;
-        if (tags != null) {
-            this.tags.addAll(tags);
-        }
+        this.tag = tag;
         this.note = note;
         this.date = date;
     }
@@ -65,9 +64,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         role = source.getRole().fullRole;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+        tag = source.getTag().getTagName();
         note = source.getNote().value;
         date = source.getDate().toString();
     }
@@ -78,11 +75,6 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
-        }
-
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -123,7 +115,10 @@ class JsonAdaptedPerson {
         }
         final Role modelRole = new Role(role);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        if (tag == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Tag.class.getSimpleName()));
+        }
+        final Tag modelTag = ParserUtil.parseTag(tag);
 
         if (note == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName()));
@@ -142,7 +137,7 @@ class JsonAdaptedPerson {
         }
         final InterviewDate modelDate = new InterviewDate(date);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelTags, modelNote, modelDate);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelTag, modelNote, modelDate);
     }
 
 }

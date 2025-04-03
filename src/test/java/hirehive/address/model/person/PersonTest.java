@@ -21,13 +21,6 @@ import hirehive.address.testutil.PersonBuilder;
 import hirehive.address.testutil.TypicalPersons;
 
 public class PersonTest {
-
-    @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Person person = new PersonBuilder().build();
-        Assert.assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
-    }
-
     @Test
     public void isSamePerson() {
         // same object -> returns true
@@ -38,7 +31,7 @@ public class PersonTest {
 
         // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(TypicalPersons.ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withRole(VALID_ROLE_BOB).withTags(VALID_TAG_CANDIDATE).withNote(VALID_NOTE_BOB)
+                .withAddress(VALID_ADDRESS_BOB).withRole(VALID_ROLE_BOB).withTag(VALID_TAG_CANDIDATE).withNote(VALID_NOTE_BOB)
                 .withDate(VALID_DATE_BOB).build();
         Assertions.assertTrue(TypicalPersons.ALICE.isSamePerson(editedAlice));
 
@@ -90,8 +83,8 @@ public class PersonTest {
         editedAlice = new PersonBuilder(TypicalPersons.ALICE).withAddress(VALID_ADDRESS_BOB).build();
         Assertions.assertFalse(TypicalPersons.ALICE.equals(editedAlice));
 
-        // different tags -> returns false
-        editedAlice = new PersonBuilder(TypicalPersons.ALICE).withTags(VALID_TAG_CANDIDATE).build();
+        // different Tag -> returns false
+        editedAlice = new PersonBuilder(TypicalPersons.ALICE).withTag(VALID_TAG_CANDIDATE).build();
         Assertions.assertFalse(TypicalPersons.ALICE.equals(editedAlice));
 
         // different note -> returns false
@@ -107,7 +100,8 @@ public class PersonTest {
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + TypicalPersons.ALICE.getName() + ", phone=" + TypicalPersons.ALICE.getPhone()
                 + ", email=" + TypicalPersons.ALICE.getEmail() + ", address=" + TypicalPersons.ALICE.getAddress() + ", role=" + TypicalPersons.ALICE.getRole()
-                + ", tags=" + TypicalPersons.ALICE.getTags() + ", note=" + TypicalPersons.ALICE.getNote() + ", interviewDate=" + TypicalPersons.ALICE.getDate() + "}";
+                + ", tag=" + TypicalPersons.ALICE.getTag() + ", note=" + TypicalPersons.ALICE.getNote() + ", "
+                + "interviewDate=" + TypicalPersons.ALICE.getDate() + "}";
         Assertions.assertEquals(expected, TypicalPersons.ALICE.toString());
     }
 }

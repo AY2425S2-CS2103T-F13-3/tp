@@ -23,22 +23,22 @@ public class Person {
     // Data fields
     private final Address address;
     private final Role role;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Tag tag;
     private final Note note;
     private final InterviewDate date;
 
     /**
      * Every field must be present.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Role role, Set<Tag> tags, Note note,
+    public Person(Name name, Phone phone, Email email, Address address, Role role, Tag tag, Note note,
                   InterviewDate date) {
-        CollectionUtil.requireAllNonNull(name, phone, email, address, role, tags, note);
+        CollectionUtil.requireAllNonNull(name, phone, email, address, role, tag, note);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.role = role;
-        this.tags.addAll(tags);
+        this.tag = tag;
         this.note = note;
         this.date = date;
     }
@@ -47,7 +47,16 @@ public class Person {
      * Method used to construct a default Person object without a note.
      */
     public static Person createDefaultPerson(Name name, Phone phone, Email email, Address address, Role role) {
-        return new Person(name, phone, email, address, role, Set.of(Tag.getDefaultTag()), new Note(Note.DEFAULT_NOTE),
+        return new Person(name, phone, email, address, role, Tag.getDefaultTag(), new Note(Note.DEFAULT_NOTE),
+                new InterviewDate());
+    }
+
+    /**
+     * Method used to construct a default Person object with a note.
+     */
+    public static Person addDefaultPersonWithNote(Name name, Phone phone, Email email, Address address, Role role,
+                                                  Note note) {
+        return new Person(name, phone, email, address, role, Tag.getDefaultTag(), note,
                 new InterviewDate());
     }
 
@@ -83,8 +92,8 @@ public class Person {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Tag getTag() {
+        return tag;
     }
 
     /**
@@ -121,7 +130,7 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && role.equals(otherPerson.role)
-                && tags.equals(otherPerson.tags)
+                && tag.equals(otherPerson.tag)
                 && note.equals(otherPerson.note)
                 && date.equals(otherPerson.date);
     }
@@ -129,7 +138,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, role, tags, note, date);
+        return Objects.hash(name, phone, email, address, role, tag, note, date);
     }
 
     @Override
@@ -140,7 +149,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("role", role)
-                .add("tags", tags)
+                .add("tag", tag)
                 .add("note", note)
                 .add("interviewDate", date)
                 .toString();
