@@ -1,7 +1,5 @@
 package hirehive.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
 import hirehive.address.commons.util.ToStringBuilder;
 import hirehive.address.logic.commands.exceptions.CommandException;
 import hirehive.address.logic.parser.CliSyntax;
@@ -10,7 +8,7 @@ import hirehive.address.model.person.PersonContainsTagPredicate;
 
 /**
  * Finds and lists all persons in address book whose tags contain any of the argument tags.
- * Tag matching is case insensitive.
+ * Tag matching is case-insensitive.
  */
 public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
