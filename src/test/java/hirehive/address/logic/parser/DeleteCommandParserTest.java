@@ -28,7 +28,6 @@ public class DeleteCommandParserTest {
         DeleteCommand expectedCommand = new DeleteCommand(
                 new NameQuery(new NameContainsKeywordsPredicate("Alice"))
         );
-
         CommandParserTestUtil.assertParseSuccess(parser, "delete n/Alice", expectedCommand);
     }
 
