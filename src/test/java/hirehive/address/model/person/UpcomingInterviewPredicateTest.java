@@ -1,10 +1,12 @@
 package hirehive.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import hirehive.address.logic.Messages;
 import hirehive.address.testutil.PersonBuilder;
 
 public class UpcomingInterviewPredicateTest {
@@ -71,5 +73,13 @@ public class UpcomingInterviewPredicateTest {
         // Date is before the current date
         predicate = new UpcomingInterviewPredicate(5, TEST_CURRENT_DAY);
         assertFalse(predicate.test(new PersonBuilder().withDate("01/01/2024").build()));
+    }
+
+    @Test
+    public void getSuccessString() {
+        int days = 5;
+        UpcomingInterviewPredicate predicate = new UpcomingInterviewPredicate(5);
+        String expected = String.format(Messages.MESSAGE_FILTER_OVERVIEW_DATE, days);
+        assertEquals(expected, predicate.getSuccessString());
     }
 }
