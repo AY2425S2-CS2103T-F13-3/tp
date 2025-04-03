@@ -29,7 +29,7 @@ public class ScheduleCommand extends Command {
             + " 1. " + PREFIX_NAME + "NAME [" + PREFIX_DATE + "DATE]\n"
             + " 2. INDEX [" + PREFIX_DATE + "NAME]\n"
             + "Example:\n - " + COMMAND_WORD + " " + PREFIX_NAME + "John " + PREFIX_DATE + "01/05/2025\n"
-            + " - " +COMMAND_WORD + " 1 " + PREFIX_DATE + "01/05/2025";
+            + " - " + COMMAND_WORD + " 1 " + PREFIX_DATE + "01/05/2025";
 
     public static final String MESSAGE_DATE_PERSON_SUCCESS = "Added interview date: %1$s";
     public static final String MESSAGE_INVALID_PERSON = "%1$s has invalid tag: %2$s.\n"
