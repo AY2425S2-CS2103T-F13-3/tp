@@ -434,7 +434,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Tagging a person
 
-1. Tagging a person by name
+1. Tagging a person by name, with tag
    1. Prerequisites: Use the same persons list as when you first ran HireHive.jar
    2. Test case: `tag n/alice t/candidate` <br>
       Expected: Contact with name "Alice Yeoh" is tagged as "Candidate". Details of the tagged contact shown in the 
@@ -451,21 +451,29 @@ testers are expected to do more *exploratory* testing.
    6. Test case: `tag n/aLiCe t/CANDIDATE` <br>
       Expected: Contact with name "Alice Yeoh" is tagged as "Candidate". Details of the tagged contact shown in the
       status message.
-   7. Test case: `tag 1 t/interviewee` <br>
+   7. Test case: `tag n/alice t/test` <br>
+      Expected: Error message for invalid command format shown in status message with command format and example.
+2. Tagging a person by index, with tag
+   1. Prerequisites: Use the same persons list as when you first ran HireHive.jar
+   2. Test case: `tag 1 t/interviewee` <br>
       Expected: First contact is tagged as "Interviewee". Details of the tagged contact shown in the
       status message.
-   8. Test case: `tag 1 t/INTERVIEWEE` <br>
+   3. Test case: `tag 1 t/INTERVIEWEE` <br>
+      Expected: First contact is tagged as "Interviewee". Details of the tagged contact shown in the
+      status message. 
+   4. Test case: `tag 1 t/iNtErViEwEe` <br>
       Expected: First contact is tagged as "Interviewee". Details of the tagged contact shown in the
       status message.
-   9. Test case: `tag 1 t/iNtErViEwEe` <br>
-   Expected: First contact is tagged as "Interviewee". Details of the tagged contact shown in the
-      status message.
-   10. Test case: `tag +1 n/bernice` <br>
-       Expected: Contact with name "Bernice Yu" is tagged as "Offered". Details of the tagged contact shown 
-       in the status message (if tag was "Interviewee").
-   11. Test case `tag -2 n/charlotte` <br>
-       Expected: Contact with name "Charlotte Oliveiro" is tagged as "Rejected". Details of the tagged contact shown
-       in the status message (if tag was "Candidate"). 
+   5. Test case: `tag 1 t/test` <br>
+      Expected: Error message for invalid command format shown in status message with command format and example.
+3. Tagging a person by name, with offset
+   1. Prerequisites: Use the same persons list as when you first ran HireHive.jar
+   2. Test case: `tag +1 n/bernice` <br>
+      Expected: Contact with name "Bernice Yu" is tagged as "Offered". Details of the tagged contact shown 
+      in the status message (if tag was "Interviewee"). 
+   3. Test case `tag -2 n/charlotte` <br>
+      Expected: Contact with name "Charlotte Oliveiro" is tagged as "Rejected". Details of the tagged contact shown
+      in the status message (if tag was "Candidate"). 
 
 ### Show persons with upcoming interviews
 
