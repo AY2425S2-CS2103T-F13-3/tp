@@ -3,7 +3,6 @@ package hirehive.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import hirehive.address.commons.util.ToStringBuilder;
-import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.exceptions.CommandException;
 import hirehive.address.logic.parser.CliSyntax;
 import hirehive.address.model.Model;
@@ -30,7 +29,7 @@ public class FilterCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        return FilterUtil.executeFilter(model, predicate);
+        return CommandUtil.executeFilter(model, predicate);
     }
 
     @Override

@@ -84,47 +84,25 @@ public class TagCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        Person personToTag;
+
         if (isNull(index)) {
-            List<Person> personToTag;
             if (isNull(editPersonDescriptor)) {
-                try {
-                    personToTag = query.query(model);
-                } catch (QueryException qe) {
-                    throw new CommandException(qe.getMessage());
-                }
+                personToTag = CommandUtil.querySearch(model, query);
+                Person taggedPerson = createOffsetTagPerson(personToTag, offset);
 
-                if (personToTag.size() > 1) {
-                    throw new CommandException(MESSAGE_MULTIPLE_PEOPLE_QUERIED);
-                }
-
-                Person taggedPerson = createOffsetTagPerson(personToTag.get(0), offset);
-
-                model.setPerson(personToTag.get(0), taggedPerson);
+                model.setPerson(personToTag, taggedPerson);
                 return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, Messages.format(taggedPerson)));
             }
-            try {
-                personToTag = query.query(model);
-            } catch (QueryException qe) {
-                throw new CommandException(qe.getMessage());
-            }
 
-            if (personToTag.size() > 1) {
-                throw new CommandException(MESSAGE_MULTIPLE_PEOPLE_QUERIED);
-            }
+            personToTag = CommandUtil.querySearch(model, query);
+            Person taggedPerson = createEditedPerson(personToTag, editPersonDescriptor);
 
-            Person taggedPerson = createEditedPerson(personToTag.get(0), editPersonDescriptor);
-
-            model.setPerson(personToTag.get(0), taggedPerson);
+            model.setPerson(personToTag, taggedPerson);
             return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, Messages.format(taggedPerson)));
         }
         if (isNull(query)) {
-            List<Person> lastShownList = model.getFilteredPersonList();
-
-            if (index.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
-
-            Person personToTag = lastShownList.get(index.getZeroBased());
+            personToTag = CommandUtil.indexSearch(model, index);
             Person taggedPerson = createEditedPerson(personToTag, editPersonDescriptor);
 
             model.setPerson(personToTag, taggedPerson);
