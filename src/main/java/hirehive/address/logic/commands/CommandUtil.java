@@ -2,17 +2,14 @@ package hirehive.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.function.Predicate;
-
 import hirehive.address.logic.Messages;
 import hirehive.address.model.Model;
-import hirehive.address.model.person.Person;
 import hirehive.address.model.person.PersonPredicate;
 
 /**
  * Helper functions for handling filtering commands
  */
-public class FilterUtil {
+public class CommandUtil {
 
     /**
      * Updates the displayed list based on the given {@code predicate} and returns a CommandResult indicating
