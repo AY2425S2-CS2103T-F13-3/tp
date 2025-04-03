@@ -467,12 +467,12 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a person by index
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
    
    2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. 
 
    3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
@@ -480,7 +480,17 @@ testers are expected to do more *exploratory* testing.
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+1. Deleting a person by name
+   1. Prerequisites: List all persons using `list` command. Multiple persons in the list 
+
+   2. Test case: `delete n/Alice` <br>
+      Expected: Contact with the name "Alice" is deleted from the list. Details of the deleted contact shown in status message. 
+   3. Test case: `delete n/john doe` <br>
+      Expected: Contact with the name "John Doe" is deleted from the list. Details of the deleted contact shown in status message.
+   4. Test case: `delete n/nonexistent name` <br>
+      Expected: Error message is shown, stating that no such contact exists in the list
+   5. Test case: `delete john` <br>
+      Expected: Error message for invalid command format is displayed in status message with example.
 
 ### Tagging a person
 
@@ -558,6 +568,17 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `schedule n/alice` <br>
       Expected: Alice's contact will be updated to tomorrow's date
 
+### Filtering out applicants with tag
+1. Filtering out all applicants with specified tag, and the remaining list contains applicants without that tag
+   1. Prerequisities: Use the same persons list as when you first ran HireHive.jar
+   2. Test case: `filterout t/interviewee` <br>
+      Expected: All contacts without the interviewee tag will be displayed on the list
+   3. Test case: `filterout t/Applicant` <br>
+      Expected: All contacts without the Applicant tag will be displayed on the list
+   4. Test case: `filterout t/testing` <br>
+      Expected: Error message for invalid command format shown in status message with command format and example.
+   5. Test case `filterout candidate` <br>
+      Expected: Error message for invalid command format shown in status message with command format and example.
 
 ### Clearing all entries
 1. Clearing all entries in HireHive
