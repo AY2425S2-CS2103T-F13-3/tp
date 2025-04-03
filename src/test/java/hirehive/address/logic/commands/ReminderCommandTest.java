@@ -5,10 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.concurrent.ThreadPoolExecutor;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,9 +14,7 @@ import hirehive.address.logic.Messages;
 import hirehive.address.model.Model;
 import hirehive.address.model.ModelManager;
 import hirehive.address.model.UserPrefs;
-import hirehive.address.model.person.PersonContainsTagPredicate;
 import hirehive.address.model.person.UpcomingInterviewPredicate;
-import hirehive.address.model.tag.Tag;
 import hirehive.address.testutil.TypicalPersons;
 
 public class ReminderCommandTest {
@@ -64,7 +60,7 @@ public class ReminderCommandTest {
 
     @Test
     public void execute_zeroDays_onePersonFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_FIlTER_OVERVIEW_DATE, 0);
+        String expectedMessage = String.format(Messages.MESSAGE_FILTER_OVERVIEW_DATE, 0);
         UpcomingInterviewPredicate predicate = preparePredicate(0, "01/02/2025");
         ReminderCommand command = new ReminderCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -74,7 +70,7 @@ public class ReminderCommandTest {
 
     @Test
     public void execute_zeroDays_multiplePersonsFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_FIlTER_OVERVIEW_DATE, 0);
+        String expectedMessage = String.format(Messages.MESSAGE_FILTER_OVERVIEW_DATE, 0);
         UpcomingInterviewPredicate predicate = preparePredicate(0, "01/03/2025");
         ReminderCommand command = new ReminderCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -94,7 +90,7 @@ public class ReminderCommandTest {
 
     @Test
     public void execute_nonZeroDays_onePersonFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_FIlTER_OVERVIEW_DATE, 10);
+        String expectedMessage = String.format(Messages.MESSAGE_FILTER_OVERVIEW_DATE, 10);
         UpcomingInterviewPredicate predicate = preparePredicate(10, "22/01/2025");
         ReminderCommand command = new ReminderCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -104,7 +100,7 @@ public class ReminderCommandTest {
 
     @Test
     public void execute_nonZeroDays_multiplePersonsFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_FIlTER_OVERVIEW_DATE, 10);
+        String expectedMessage = String.format(Messages.MESSAGE_FILTER_OVERVIEW_DATE, 10);
         UpcomingInterviewPredicate predicate = preparePredicate(10, "21/02/2025");
         ReminderCommand command = new ReminderCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);

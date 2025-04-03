@@ -1,9 +1,5 @@
 package hirehive.address.model.person;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.function.Predicate;
-
 import hirehive.address.commons.util.StringUtil;
 import hirehive.address.commons.util.ToStringBuilder;
 import hirehive.address.logic.Messages;
@@ -45,6 +41,6 @@ public class NameContainsKeywordsPredicate implements PersonPredicate {
 
     @Override
     public String getSuccessString() {
-        return String.format(Messages.MESSAGE_FIlTER_OVERVIEW_NAME, keyword);
+        return String.format(Messages.MESSAGE_FILTER_OVERVIEW_NAME, keyword);
     }
 }

@@ -3,9 +3,7 @@ package hirehive.address.model.person;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.function.Predicate;
 
-import hirehive.address.commons.util.StringUtil;
 import hirehive.address.logic.Messages;
 
 /**
@@ -59,6 +57,6 @@ public class UpcomingInterviewPredicate implements PersonPredicate {
 
     @Override
     public String getSuccessString() {
-        return String.format(Messages.MESSAGE_FIlTER_OVERVIEW_DATE, days);
+        return String.format(Messages.MESSAGE_FILTER_OVERVIEW_DATE, days);
     }
 }
