@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import hirehive.address.logic.commands.DateCommand;
 import hirehive.address.testutil.Assert;
 
 public class InterviewDateTest {

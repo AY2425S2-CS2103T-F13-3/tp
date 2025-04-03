@@ -413,24 +413,170 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Viewing help
+1. Viewing help page
+
+   1. Prerequisites: Application must be running.
+   
+   2. Test case: `help` <br>
+      Expected: A 'Help' window pops up, with the link to the user guide, that can be copied.
+   
+   3. Test case: `help 1` <br>
+      Expected: A 'Help' window pops up, with the link to the user guide, that can be copied.
+
+### Adding a person
+1. Adding a person
+
+   1. Prerequisites: Application must be running.
+   
+   2. Test case: `add n/Betsy Crowe e/betsycrowe@example.com a/Ang Mo Kio Street 22 p/87654321 r/senior consulting analyst` <br>
+       Expected: A person with name "Betsy Crowe", email "betsycrowe@example.com", address "Ang Mo Kio Street 22", phone number "87654321", applying for the "senior consulting analyst" role is added to the bottom of the existing list. Added person is given an index that follows immediately after the last assigned index.
+
+   3. Test case: `add n/John Doe a/Bishan Street 20 p/98765432 r/senior consulting intern` <br>
+      Expected: No person is added. Error details shown in the status message.
+   
+   4. Test case: `add n/John Doe e/john@gmail.com a/Bishan Street 20 p/98765432 r/senior consulting intern t/applicant` <br>
+      Expected: No person is added. Error details shown in the status message.
+   
+   5. Test case: `add n/John Doe e/john@gmail.com a/Bishan Street 20 p/98765432 r/senior consulting intern i/Likes to talk` <br>
+      Expected: No person is added. Error details shown in the status message.
+   
+   6. Test case: `add n/小丽 e/john@gmail.com a/Bishan Street 20 p/98765432 r/senior consulting intern` <br>
+      Expected: No person is added. Error details shown in the status message.
+
+### Listing persons
+1. Listing all the persons in HireHive
+
+   1. Prerequisites: List is not empty
+   
+   2. Test case: `list` <br>
+      Expected: All the persons in the list are listed. Topmost person in the list is the oldest person who was added to the list, while the bottom-most person was the person who was most recently added to the list. Index of persons should start from 1 and increase from top to bottom of the list. 
+   3. Test case: `list help` <br> 
+       Expected: All the persons in the list are listed. Topmost person in the list is the oldest person who was added to the list, while the bottom-most person was the person who was most recently added to the list. Index of persons should start from 1 and increase from top to bottom of the list.
+
+### Sorting persons
+1. Sorting all the persons shown in the list. 
+
+   1. Prerequisites: Multiple persons in the list, with some persons having interview dates
+   
+   2. Test case: `sort` <br>
+      Expected: All the persons in the list are sorted.Those with interview dates are sorted in chronological order, while those without interview dates are pushed to the back of the list, in the original order they were in previously. New index given based on the newly sorted order of the list.
+
+   3. Test case: `list help` <br>
+      Expected: All the persons in the list are sorted.Those with interview dates are sorted in chronological order, while those without interview dates are pushed to the back of the list, in the original order they were in previously. New index given based on the newly sorted order of the list.
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   1. Test case: `delete 1`<br>
+   
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Tagging a person
+
+1. Tagging a person by name, with tag
+   1. Prerequisites: Use the same persons list as when you first ran HireHive.jar
+   2. Test case: `tag n/alice t/candidate` <br>
+      Expected: Contact with name "Alice Yeoh" is tagged as "Candidate". Details of the tagged contact shown in the 
+      status message.
+   3. Test case: `tag n/alice t/CANDIDATE` <br>
+      Expected: Contact with name "Alice Yeoh" is tagged as "Candidate". Details of the tagged contact shown in the
+      status message.
+   4. Test case: `tag n/alice t/cAnDiDaTe` <br>
+      Expected: Contact with name "Alice Yeoh" is tagged as "Candidate". Details of the tagged contact shown in the
+      status message.
+   5. Test case: `tag n/ALICE t/candidate` <br>
+      Expected: Contact with name "Alice Yeoh" is tagged as "Candidate". Details of the tagged contact shown in the
+      status message.
+   6. Test case: `tag n/aLiCe t/CANDIDATE` <br>
+      Expected: Contact with name "Alice Yeoh" is tagged as "Candidate". Details of the tagged contact shown in the
+      status message.
+   7. Test case: `tag n/alice t/test` <br>
+      Expected: Error message for invalid command format shown in status message with command format and example.
+2. Tagging a person by index, with tag
+   1. Prerequisites: Use the same persons list as when you first ran HireHive.jar
+   2. Test case: `tag 1 t/interviewee` <br>
+      Expected: First contact is tagged as "Interviewee". Details of the tagged contact shown in the
+      status message.
+   3. Test case: `tag 1 t/INTERVIEWEE` <br>
+      Expected: First contact is tagged as "Interviewee". Details of the tagged contact shown in the
+      status message. 
+   4. Test case: `tag 1 t/iNtErViEwEe` <br>
+      Expected: First contact is tagged as "Interviewee". Details of the tagged contact shown in the
+      status message.
+   5. Test case: `tag 1 t/test` <br>
+      Expected: Error message for invalid command format shown in status message with command format and example.
+3. Tagging a person by name, with offset
+   1. Prerequisites: Use the same persons list as when you first ran HireHive.jar
+   2. Test case: `tag +1 n/bernice` <br>
+      Expected: Contact with name "Bernice Yu" is tagged as "Offered". Details of the tagged contact shown 
+      in the status message (if tag was "Interviewee"). 
+   3. Test case `tag -2 n/charlotte` <br>
+      Expected: Contact with name "Charlotte Oliveiro" is tagged as "Rejected". Details of the tagged contact shown
+      in the status message (if tag was "Candidate"). 
+
+### Show persons with upcoming interviews
+
+1. Show persons with upcoming interviews
+   1. Prerequisites: Use the same persons list as when you first ran HireHive.jar
+   2. Test case: `remind 100` <br>
+      Expected: Only the contact with name "David Li" and interview date "06/07/2025" is shown in the list. Success 
+      message shown in the status message.
+   3. Test case: `remind -1` <br>
+      Expected: Error message for invalid command format shown in status message with command format and example.
+
+### Scheduling interview date
+
+1. Scheduling an interview date for a person by name
+   1. Prerequisites: Use the same persons list as when you first ran HireHive.jar
+   2. Test case: `schedule n/alice d/04/05/2025` <br>
+      Expected: Contact with name "Alice Yeoh" has interview date scheduled as "04/05/2025". Details of the scheduled 
+      contact shown in the status message.
+   3. Test case: `schedule n/alice d/test` <br>
+      Expected: Error message for invalid command format shown in status message with command format and example.
+2. Scheduling an interview date for a person by index
+   1. Prerequisites: Use the same persons list as when you first ran HireHive.jar
+   2. Test case: `schedule 1 d/04/05/2025` <br>
+      Expected: First contact has interview date scheduled as "04/05/2025". Details of the scheduled
+      contact shown in the status message.
+   3. Test case: `schedule 1 d/test` <br>
+      Expected: Expected: Error message for invalid command format shown in status message with command format and example.
+3. Automatically scheduling the next interview date
+   1. Prerequisites: Use the same persons list as when you first ran HireHive.jar
+   2. Test case: `schedule 1`<br>
+      Expected: First contact will be updated to tomorrow's date.
+   3. Test case: `schedule n/alice` <br>
+      Expected: Alice's contact will be updated to tomorrow's date
+
+
+### Clearing all entries
+1. Clearing all entries in HireHive
+
+    1. Prerequisites: List contains people.
+
+    2. Test case: `clear` <br>
+       Expected: All the persons in the list are cleared. List is now empty.
+
+    3. Test case: `Clear` <br>
+       Expected: Nothing is cleared. Error details shown in the status message.
+
+### Exiting the program 
+1. Exiting the program
+
+   1. Prerequisites: Program was originally running.
+   
+   2. Test case: `exit` <br>
+      Expected: Program exits and closes. 
 
 ### Saving data
 

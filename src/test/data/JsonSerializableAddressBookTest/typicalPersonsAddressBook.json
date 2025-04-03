@@ -24,9 +24,9 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "role": "Software Engineer",
-    "tag" : "Applicant",
+    "tag" : "Interviewee",
     "note" : "Only 18 years old",
-    "date" : ""
+    "date" : "01/04/2025"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",

@@ -17,7 +17,8 @@ public class ClearCommandTest {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        CommandTestUtil.assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandTestUtil.assertCommandSuccess(new ClearCommand(), model,
+                new CommandResult(ClearCommand.MESSAGE_SUCCESS, true), expectedModel);
     }
 
     @Test
@@ -26,7 +27,8 @@ public class ClearCommandTest {
         Model expectedModel = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
         expectedModel.setAddressBook(new AddressBook());
 
-        CommandTestUtil.assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandTestUtil.assertCommandSuccess(new ClearCommand(), model,
+                new CommandResult(ClearCommand.MESSAGE_SUCCESS, true), expectedModel);
     }
 
 }
