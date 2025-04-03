@@ -17,6 +17,8 @@ HireHive is an **all-in-one desktop application** designed to streamline recruit
   - [Editing a person: `edit`](#editing-a-person--edit)
   - [Tagging a person: `tag`](#tagging-a-person--tag)
   - [Filter persons by tag: `filter`](#filter-persons-by-tag--filter)
+  - [Add note to person:](#add-notes-to-person-newnote)
+  - [Display note of person:](#display-note-of-person-displaynote)
   - [Locating persons by name `find`](#locating-persons-by-name-find)
   - [Deleting a person: `delete`](#deleting-a-person--delete)
   - [Clearing all entries: `clear`](#clearing-all-entries--clear)
