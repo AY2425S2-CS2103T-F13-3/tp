@@ -23,8 +23,10 @@ Ready to revolutionise your hiring? Let's begin!
   - [Edit an applicant: `edit`](#edit-an-applicant--edit)
   - [Tag an applicant: `tag`](#tag-an-applicant--tag)
   - [Filter applicants by tag: `filter`](#filter-applicants-by-tag--filter)
+  - [Filtering out applicants with tag: `filterout`](#filtering-out-applicants-with-tag-filterout)
   - [Add note to applicant: `newnote`](#add-notes-to-person--newnote)
   - [Display note of applicant: `displaynote`](#display-note-of-person--displaynote)
+  - [Schedule interview dates: `schedule`](#schedule-interview-dates-for-applicants--schedule)
   - [Find applicants by name `find`](#find-applicants-by-name--find)
   - [List all applicants: `list`](#list-all-applicants--list)
   - [Sort applicants `sort`](#sort-applicants--sort)
@@ -166,13 +168,13 @@ Examples:
 
 ### Edit an applicant : `edit`
 
-You can edit the information of an existing applicant in HireHive if needed!
+If you have accidentally mistyped some details, you can edit the information of an existing applicant in HireHive!
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/ROLE] [i/NOTE] [d/DATE]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
+* The provided values will replace the existing information in the respective fields.
 
 
 Examples:
@@ -217,7 +219,7 @@ Examples:
 * `tag 1 t/Candidate` will tag the 1st person as "Candidate"
 * `tag +1 n/John Doe` for a John Doe person with tag "Applicant" will tag them as "Candidate"
 
-[Back to top](#hirehive-user-guide)
+[Back to top](#welcome-to-hirehive)
 
 ### Filter applicants by tag : `filter`
 
@@ -229,6 +231,19 @@ Format: `filter t/TAG`
 * Only full words will be matched e.g. `Reject` will not match `Rejected`
 
 [Back to top](#welcome-to-hirehive)
+
+### Filtering out applicants with tag: `filterout`
+You can view all your applicants in a list **except** for those with the specified tag, for easier tracking of applicants!
+
+Format: `filterout t/TAG`
+
+*The search is [case-insensitive](#glossary). e.g `applicant` will match `Applicant`
+
+Examples:
+* `filterout t/offered` will filter out all applicants that were already offered the job, the remaining list will display applicants without the "Offered" tag.
+
+[Back to top](#welcome-to-hirehive)
+
 
 ### Add notes to person : `newnote`
 
@@ -285,8 +300,7 @@ Command | Description
 * Scheduling interview date by index must have a **positive** index number
 
 ### Find applicants by name : `find`
-
-Finds persons whose names contain any of the given keywords.
+You can search for persons whose names contain any of the given keywords!
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -330,15 +344,23 @@ Format: `remind DAYS`
 
 ### Delete an applicant : `delete`
 
-You can delete a specific person from HireHive.
+You can delete a specific person from HireHive if their contact is no longer required.
 
-Format: `delete n/NAME`
+Format: 
 
-* Deletes the person if the given name partially matches **exactly one person** in the list ([case-insensitive](#glossary)).
-* If multiple matches are found, a list of all matching names will be displayed. You can then enter the **full name** of the person you want to delete.
+Command | Description
+--------|------------------
+`delete n/NAME` | Delete by name.
+`delete INDEX` | Delete by index.
+
+
+* Deleting by name will partially match to **exactly one person** in the list ([case-insensitive](#glossary)). 
+  - If multiple matches are found, a list of all matching names will be displayed. You can then enter the **full name** of the person you want to delete.
+* Deleting by index must have a **positive** index number
 
 Examples:
 * `delete n/John Doe` deletes John Doe's contact from HireHive
+* `delete 2` deletes the second applicant in the list from HireHive
 
 ![delete message](images/Ui-DeleteCommand.png)
 
