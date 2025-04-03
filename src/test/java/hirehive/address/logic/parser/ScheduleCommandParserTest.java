@@ -2,6 +2,7 @@ package hirehive.address.logic.parser;
 
 import org.junit.jupiter.api.Test;
 
+import hirehive.address.commons.core.index.Index;
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.EditCommand;
 import hirehive.address.logic.commands.ReminderCommand;
@@ -31,5 +32,14 @@ public class ScheduleCommandParserTest {
         editPersonDescriptor.setDate(new InterviewDate("31/12/2999"));
         ScheduleCommand expectedScheduleCommand = new ScheduleCommand(new NameQuery(new NameContainsKeywordsPredicate("Alice")), editPersonDescriptor);
         CommandParserTestUtil.assertParseSuccess(parser, " n/Alice d/31/12/2999", expectedScheduleCommand);
+
+        expectedScheduleCommand = new ScheduleCommand(Index.fromOneBased(1), editPersonDescriptor);
+        CommandParserTestUtil.assertParseSuccess(parser, "1 d/31/12/2999", expectedScheduleCommand);
+
+        expectedScheduleCommand = new ScheduleCommand(new NameQuery(new NameContainsKeywordsPredicate("Alice")));
+        CommandParserTestUtil.assertParseSuccess(parser, " n/Alice", expectedScheduleCommand);
+
+        expectedScheduleCommand = new ScheduleCommand(Index.fromOneBased(1));
+        CommandParserTestUtil.assertParseSuccess(parser, "1", expectedScheduleCommand);
     }
 }
