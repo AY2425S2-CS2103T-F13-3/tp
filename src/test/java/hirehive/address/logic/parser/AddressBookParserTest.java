@@ -4,16 +4,12 @@ import static hirehive.address.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.junit.jupiter.api.Test;
 
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.AddCommand;
 import hirehive.address.logic.commands.ClearCommand;
-import hirehive.address.logic.commands.DateCommand;
+import hirehive.address.logic.commands.ScheduleCommand;
 import hirehive.address.logic.commands.DeleteCommand;
 import hirehive.address.logic.commands.EditCommand;
 import hirehive.address.logic.commands.ExitCommand;
@@ -31,7 +27,6 @@ import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
 import hirehive.address.model.person.PersonContainsTagPredicate;
 import hirehive.address.model.person.UpcomingInterviewPredicate;
-import hirehive.address.model.tag.Tag;
 import hirehive.address.testutil.Assert;
 import hirehive.address.testutil.DefaultPersonBuilder;
 import hirehive.address.testutil.DefaultPersonUtil;
@@ -123,8 +118,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_date() throws Exception {
-        assertTrue(parser.parseCommand(DateCommand.COMMAND_WORD) instanceof DateCommand);
-        assertTrue(parser.parseCommand(DateCommand.COMMAND_WORD + " 3") instanceof DateCommand);
+        assertTrue(parser.parseCommand(ScheduleCommand.COMMAND_WORD) instanceof ScheduleCommand);
+        assertTrue(parser.parseCommand(ScheduleCommand.COMMAND_WORD + " 3") instanceof ScheduleCommand);
     }
 
     @Test

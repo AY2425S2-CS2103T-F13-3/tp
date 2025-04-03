@@ -1,6 +1,7 @@
 package hirehive.address.model;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.function.Predicate;
 
 import hirehive.address.commons.core.GuiSettings;
@@ -107,4 +108,9 @@ public interface Model {
     Note getPersonNote();
 
     int getListSize();
+
+    /**
+     * Returns the next available date for an interview from the current date.
+     */
+    LocalDate getAvailableDate();
 }
