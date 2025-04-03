@@ -24,8 +24,8 @@ public class NewNoteCommandParser implements Parser<NewNoteCommand> {
     public NewNoteCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NOTE);
-
-        if (argMultimap.getValue(PREFIX_NAME).isEmpty() || argMultimap.getValue(PREFIX_NOTE).isEmpty()) {
+        if (argMultimap.getValue(PREFIX_NAME).orElse("").trim().isEmpty()
+                || argMultimap.getValue(PREFIX_NOTE).orElse("").trim().isEmpty()) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     NewNoteCommand.MESSAGE_USAGE));
         }
