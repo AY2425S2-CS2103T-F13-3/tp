@@ -4,6 +4,10 @@ import hirehive.address.logic.parser.CliSyntax;
 import hirehive.address.model.Model;
 import hirehive.address.model.person.PersonDoesNotContainTagPredicate;
 
+/**
+ * Finds and lists all persons in address book whose tags do not
+ * contain any of the argument tags.
+ */
 public class FilterOutCommand extends Command {
     public static final String COMMAND_WORD = "filterout";
     public static final String MESSAGE_USAGE = COMMAND_WORD
