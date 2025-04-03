@@ -256,13 +256,21 @@ Format: `sort`
 
 You can delete a specific person from HireHive if their contact is no longer required.
 
-Format: `delete n/NAME`
+Format: 
 
-* Deletes the person if the given name partially matches **exactly one person** in the list ([case-insensitive](#glossary)).
-* If multiple matches are found, a list of all matching names will be displayed. You can then enter the **full name** of the person you want to delete.
+Command | Description
+--------|------------------
+`delete n/NAME` | Delete by name.
+`delete INDEX` | Delete by index.
+
+
+* Deleting by name will partially match to **exactly one person** in the list ([case-insensitive](#glossary)). 
+  - If multiple matches are found, a list of all matching names will be displayed. You can then enter the **full name** of the person you want to delete.
+* Deleting by index must have a **positive** index number
 
 Examples:
 * `delete n/John Doe` deletes John Doe's contact from HireHive
+* `delete 2` deletes the second applicant in the list from HireHive
 
 ![delete message](images/Ui-DeleteCommand.png)
 
