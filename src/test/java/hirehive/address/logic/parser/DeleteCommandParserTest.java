@@ -1,5 +1,8 @@
 package hirehive.address.logic.parser;
 
+import static hirehive.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static hirehive.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -28,7 +31,12 @@ public class DeleteCommandParserTest {
         DeleteCommand expectedCommand = new DeleteCommand(
                 new NameQuery(new NameContainsKeywordsPredicate("Alice"))
         );
-        CommandParserTestUtil.assertParseSuccess(parser, "delete n/Alice", expectedCommand);
+        assertParseSuccess(parser, "delete n/Alice", expectedCommand);
+    }
+
+    @Test
+    public void parse_validArgsIndex_returnsDeleteCommand() {
+        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
     }
 
     @Test

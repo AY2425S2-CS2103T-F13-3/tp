@@ -7,6 +7,7 @@ import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 
 import hirehive.address.commons.core.index.Index;
 import hirehive.address.logic.Messages;
@@ -93,7 +94,7 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return query.equals(otherDeleteCommand.query);
+        return Objects.equals(this.query, otherDeleteCommand.query);
     }
 
 }

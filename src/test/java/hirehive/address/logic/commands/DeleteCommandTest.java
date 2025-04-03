@@ -2,6 +2,8 @@ package hirehive.address.logic.commands;
 
 import static hirehive.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static hirehive.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static hirehive.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static hirehive.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -12,6 +14,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import hirehive.address.commons.core.index.Index;
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.exceptions.CommandException;
 import hirehive.address.logic.commands.queries.NameQuery;
@@ -34,7 +37,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         String nameToDelete = personToDelete.getName().fullName;
 
         NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nameToDelete));
@@ -56,6 +59,20 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(nameQuery);
 
         assertThrows(CommandException.class, () -> deleteCommand.execute(model));
+    }
+
+    @Test
+    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_emptyList_throwsCommandException() {
+        model = new ModelManager();
+        assertThrows(CommandException.class, () -> new DeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON).execute(model));
     }
 
     @Test
