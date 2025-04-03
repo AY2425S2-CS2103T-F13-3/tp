@@ -3,13 +3,12 @@ package hirehive.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import hirehive.address.commons.util.ToStringBuilder;
-import hirehive.address.logic.Messages;
 import hirehive.address.model.Model;
 import hirehive.address.model.person.NameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
 
@@ -28,7 +27,7 @@ public class FindCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return FilterUtil.executeFilter(model, predicate);
+        return CommandUtil.executeFilter(model, predicate);
         /*
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);

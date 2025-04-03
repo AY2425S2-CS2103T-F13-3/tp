@@ -2,12 +2,15 @@ package hirehive.address.logic.commands;
 
 import static hirehive.address.logic.Messages.MESSAGE_MULTIPLE_PEOPLE_QUERIED;
 import static hirehive.address.logic.commands.EditCommand.createEditedPerson;
+import static hirehive.address.logic.commands.EditCommand.createOffsetTagPerson;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import hirehive.address.commons.core.index.Index;
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.EditCommand.EditPersonDescriptor;
 import hirehive.address.logic.commands.exceptions.CommandException;
@@ -17,22 +20,30 @@ import hirehive.address.model.Model;
 import hirehive.address.model.person.Person;
 
 /**
- * Tags a person identified using their name.
+ * Tags a person identified using their name or by index.
  */
 public class TagCommand extends Command {
 
     public static final String COMMAND_WORD = "tag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Tags the person identified by the given name.\n"
-            + "Parameters: " + PREFIX_NAME + "NAME "
-            + PREFIX_TAG + "TAG\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "John " + PREFIX_TAG + "Applicant";
+            + ": Tags the person identified by the given name or index.\n"
+            + "Parameters (either 1, 2, 3):\n"
+            + " 1. " + PREFIX_NAME + "NAME " + PREFIX_TAG + "TAG\n"
+            + " 2. OFFSET " + PREFIX_NAME + "NAME\n"
+            + " 3. INDEX (must be a positive integer) " + PREFIX_TAG + "TAG\n"
+            + "Example:\n"
+            + " - " + COMMAND_WORD + " " + PREFIX_NAME + "John " + PREFIX_TAG + "Applicant\n"
+            + " - " + COMMAND_WORD + " +1 " + PREFIX_NAME + "John\n"
+            + " - " + COMMAND_WORD + " 1 " + PREFIX_TAG + "Applicant\n";
 
+    public static final String MESSAGE_TAG_INVALID_PARAMS = "The given Tag parameters are invalid.";
     public static final String MESSAGE_TAG_PERSON_SUCCESS = "Tagged Person: %1$s";
 
-    private final NameQuery query;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private NameQuery query = null;
+    private EditPersonDescriptor editPersonDescriptor = null;
+    private Index index = null;
+    private int offset = 0;
 
     /**
      * @param query to query for the specific person by name
@@ -46,25 +57,59 @@ public class TagCommand extends Command {
         this.editPersonDescriptor = editPersonDescriptor;
     }
 
+    /**
+     * @param query to query for the specific person by name
+     * @param offset of the hiring stage tag from the person's tag
+     */
+    public TagCommand(NameQuery query, int offset) {
+        requireNonNull(query);
+
+        this.query = query;
+        this.offset = offset;
+    }
+
+    /**
+     * @param index of the person in the filtered person list to tag
+     * @param editPersonDescriptor details to tag the person with
+     */
+    public TagCommand(Index index, EditCommand.EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(index);
+        requireNonNull(editPersonDescriptor);
+
+        this.index = index;
+        this.editPersonDescriptor = editPersonDescriptor;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Person> personToTag;
-        try {
-            personToTag = query.query(model);
-        } catch (QueryException qe) {
-            throw new CommandException(qe.getMessage());
+        Person personToTag;
+
+        if (isNull(index)) {
+            if (isNull(editPersonDescriptor)) {
+                personToTag = CommandUtil.querySearch(model, query);
+                Person taggedPerson = createOffsetTagPerson(personToTag, offset);
+
+                model.setPerson(personToTag, taggedPerson);
+                return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, Messages.format(taggedPerson)));
+            }
+
+            personToTag = CommandUtil.querySearch(model, query);
+            Person taggedPerson = createEditedPerson(personToTag, editPersonDescriptor);
+
+            model.setPerson(personToTag, taggedPerson);
+            return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, Messages.format(taggedPerson)));
+        }
+        if (isNull(query)) {
+            personToTag = CommandUtil.indexSearch(model, index);
+            Person taggedPerson = createEditedPerson(personToTag, editPersonDescriptor);
+
+            model.setPerson(personToTag, taggedPerson);
+            return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, Messages.format(taggedPerson)));
         }
 
-        if (personToTag.size() > 1) {
-            throw new CommandException(MESSAGE_MULTIPLE_PEOPLE_QUERIED);
-        }
-
-        Person taggedPerson = createEditedPerson(personToTag.get(0), editPersonDescriptor);
-
-        model.setPerson(personToTag.get(0), taggedPerson);
-        return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, Messages.format(taggedPerson)));
+        throw new CommandException(MESSAGE_TAG_INVALID_PARAMS);
     }
 
     @Override

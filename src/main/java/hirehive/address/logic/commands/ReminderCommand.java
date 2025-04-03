@@ -1,9 +1,6 @@
 package hirehive.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
 import hirehive.address.commons.util.ToStringBuilder;
-import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.exceptions.CommandException;
 import hirehive.address.model.Model;
 import hirehive.address.model.person.UpcomingInterviewPredicate;
@@ -21,13 +18,14 @@ public class ReminderCommand extends Command {
             + "Example: " + COMMAND_WORD + " 3";
 
     private final UpcomingInterviewPredicate predicate;
+
     public ReminderCommand(UpcomingInterviewPredicate predicate) {
         this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        return FilterUtil.executeFilter(model, predicate);
+        return CommandUtil.executeFilter(model, predicate);
     }
 
     @Override

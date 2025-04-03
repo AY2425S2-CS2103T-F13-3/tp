@@ -13,11 +13,11 @@ import hirehive.address.model.Model;
 import hirehive.address.model.person.Person;
 
 /**
- * Finds a Person by name and displays the note in a pop up window.
+ * Finds a Person by name and displays the note in a popup window.
  */
-public class NoteCommand extends Command {
+public class DisplayNoteCommand extends Command {
 
-    public static final String COMMAND_WORD = "note";
+    public static final String COMMAND_WORD = "displaynote";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Displays the note of the person identified by the name used in the displayed person list.\n"
@@ -31,7 +31,7 @@ public class NoteCommand extends Command {
      * Creates NoteCommand to show the note of a person.
      * @param query the name of the person.
      */
-    public NoteCommand(NameQuery query) {
+    public DisplayNoteCommand(NameQuery query) {
         requireNonNull(query);
         this.query = query;
     }
@@ -69,11 +69,11 @@ public class NoteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NoteCommand)) {
+        if (!(other instanceof DisplayNoteCommand)) {
             return false;
         }
 
-        NoteCommand otherNoteCommand = (NoteCommand) other;
+        DisplayNoteCommand otherNoteCommand = (DisplayNoteCommand) other;
         return query.equals(otherNoteCommand.query);
     }
 
