@@ -132,7 +132,7 @@ Format: `help`
 
 Adds a person to HireHive.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [i/INFO]`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE`
 
 **:information_source: Note!**<br>
 * Please input a phone number that **start with 9/8/6**, is **exactly 8 digits** long and do not use spaces.
@@ -141,10 +141,9 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [i/INFO]`
 * Names need to be in English!
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-An 'Applicant' tag is automatically assigned to the applicant when you add them to HireHive.
+An 'Applicant' tag and an empty note is automatically assigned to the applicant when you add them to HireHive.
 </div>
 
-- It is optional for you to provide INFO of a person. INFO has a maximum length of 500 characters.
 - The parameter NAME is **[unique](#glossary)** and **[case-insensitive](#glossary)**, and is displayed as how you type it.
 - Applicants in HireHive can share the same phone number, email, address and role.
 
@@ -204,6 +203,44 @@ Format: `filter t/TAG`
 
 * The search is [case-insensitive](#glossary). e.g `applicant` will match `Applicant`
 * Only full words will be matched e.g. `Reject` will not match `Rejected`
+
+[Back to top](#welcome-to-hirehive)
+
+### Add notes to person: `newnote`
+
+You can add information about the applicant into a note with this command.
+
+Format: `newnote n/NAME i/NOTE`
+
+* Adds the note if the given name partially matches **exactly one** person in the list ([case-insensitive](#glossary))
+* If multiple matches are found, a list of all matching names will be displayed. You should then retry the command but using the **full name** of the desired person.
+* NOTE has a limit of 500 characters.
+* After adding, a popup window will appear containing the given input.
+* If the input is empty or consists only of whitespace, then the popup window displays a default message "Currently empty..." in yellow.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can remove the contents of the note by leaving the NOTE field blank.
+</div>
+
+Examples:
+* `newnote n/John Doe i/25 years old` adds a note to John Doe that says "25 years old"
+* `newnote n/John Doe i/` removes any existing content in John Doe's note
+
+[Back to top](#welcome-to-hirehive)
+
+### Display note of person: `displaynote`
+
+You can display the note of a person with this command.
+
+Format: `displaynote n/NAME`
+
+* Displays the note if the given name partially matches **exactly one** person in the list ([case-insensitive](#glossary))
+* If multiple matches are found, a list of all matching names will be displayed. You should then retry the command but using the **full name** of the desired person.
+* A popup window will appear containing the person's note.
+* If the input is empty or consists only of whitespace, then the popup window displays a default message "Currently empty..." in yellow.
+
+Examples:
+* `displaynote n/John Doe` shows John Doe's note
 
 [Back to top](#welcome-to-hirehive)
 
