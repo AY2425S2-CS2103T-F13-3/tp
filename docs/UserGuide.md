@@ -302,6 +302,15 @@ Format: `sort`
 
 [Back to top](#welcome-to-hirehive)
 
+### Show applicants with upcoming interviews: `remind`
+
+Shows you a list of all applicants with interviews in the given days' time, so that you can remind yourself of your 
+upcoming interviews to prepare for.
+
+Format: `remind DAYS`
+
+* The number of days given must be non-negative, i.e. greater or equal to 0
+
 ### Delete an applicant : `delete`
 
 You can delete a specific person from HireHive.
