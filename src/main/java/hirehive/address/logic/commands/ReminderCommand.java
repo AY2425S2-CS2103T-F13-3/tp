@@ -25,7 +25,7 @@ public class ReminderCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        return FilterUtil.executeFilter(model, predicate);
+        return CommandUtil.executeFilter(model, predicate);
     }
 
     @Override
