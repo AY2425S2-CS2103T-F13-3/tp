@@ -33,18 +33,28 @@ public class TagCommandParser implements Parser<TagCommand> {
                 ArgumentTokenizer.tokenize(
                         args, PREFIX_NAME, PREFIX_TAG);
 
-        if (argMultimap.getValue(PREFIX_NAME).isEmpty() || argMultimap.getValue(PREFIX_TAG).isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+
+        if (argMultimap.getValue(PREFIX_TAG).isEmpty()) {
+            if (argMultimap.getValue(PREFIX_NAME).isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+            }
+            String nameKeywords = argMultimap.getValue(PREFIX_NAME).get();
+            NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nameKeywords));
+            try {
+                int offset = Integer.parseInt(argMultimap.getPreamble());
+                return new TagCommand(nameQuery, offset);
+            } catch (NumberFormatException e) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+            }
         }
+
+        editPersonDescriptor.setTag(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get()));
 
         String nameKeywords = argMultimap.getValue(PREFIX_NAME).get();
         NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nameKeywords));
-
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-
-        System.out.println(argMultimap.getValue(PREFIX_TAG).get());
-        editPersonDescriptor.setTag(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get()));
 
         return new TagCommand(nameQuery, editPersonDescriptor);
     }
