@@ -64,7 +64,7 @@ public class ReminderCommandTest {
 
     @Test
     public void execute_zeroDays_onePersonFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(Messages.MESSAGE_FIlTER_OVERVIEW_DATE, 0);
         UpcomingInterviewPredicate predicate = preparePredicate(0, "01/02/2025");
         ReminderCommand command = new ReminderCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -74,7 +74,7 @@ public class ReminderCommandTest {
 
     @Test
     public void execute_zeroDays_multiplePersonsFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(Messages.MESSAGE_FIlTER_OVERVIEW_DATE, 0);
         UpcomingInterviewPredicate predicate = preparePredicate(0, "01/03/2025");
         ReminderCommand command = new ReminderCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -94,7 +94,7 @@ public class ReminderCommandTest {
 
     @Test
     public void execute_nonZeroDays_onePersonFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(Messages.MESSAGE_FIlTER_OVERVIEW_DATE, 10);
         UpcomingInterviewPredicate predicate = preparePredicate(10, "22/01/2025");
         ReminderCommand command = new ReminderCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -104,7 +104,7 @@ public class ReminderCommandTest {
 
     @Test
     public void execute_nonZeroDays_multiplePersonsFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(Messages.MESSAGE_FIlTER_OVERVIEW_DATE, 10);
         UpcomingInterviewPredicate predicate = preparePredicate(10, "21/02/2025");
         ReminderCommand command = new ReminderCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);

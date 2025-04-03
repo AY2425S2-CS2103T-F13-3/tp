@@ -6,11 +6,12 @@ import java.time.temporal.ChronoUnit;
 import java.util.function.Predicate;
 
 import hirehive.address.commons.util.StringUtil;
+import hirehive.address.logic.Messages;
 
 /**
  * Tests that a {@code Person}'s {@code InterviewDate} is within the given amount of days from the current date.
  */
-public class UpcomingInterviewPredicate implements Predicate<Person> {
+public class UpcomingInterviewPredicate implements PersonPredicate {
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private final int days;
     private final LocalDate currDay;
@@ -54,5 +55,10 @@ public class UpcomingInterviewPredicate implements Predicate<Person> {
 
         UpcomingInterviewPredicate otherUpcomingInterviewPredicate = (UpcomingInterviewPredicate) other;
         return this.days == otherUpcomingInterviewPredicate.days && this.currDay.equals(otherUpcomingInterviewPredicate.currDay);
+    }
+
+    @Override
+    public String getSuccessString() {
+        return String.format(Messages.MESSAGE_FIlTER_OVERVIEW_DATE, days);
     }
 }
