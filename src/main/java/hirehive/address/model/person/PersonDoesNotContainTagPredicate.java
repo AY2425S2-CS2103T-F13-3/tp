@@ -3,6 +3,7 @@ package hirehive.address.model.person;
 import hirehive.address.commons.util.ToStringBuilder;
 import hirehive.address.logic.Messages;
 import hirehive.address.model.tag.Tag;
+import hirehive.address.model.person.Person;
 
 /**
  * Tests that a Person's {@code tag}s do not match the given tag
