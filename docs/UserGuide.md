@@ -90,6 +90,8 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [i/NOTE] [d/DATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Tag** | `tag n/NAME [t/TAG]…​`
 **Filter** |`filter t/TAG` <br> e.g., `filter t/Applicant`
+**NewNote** | `newnote n/NAME i/NOTE` <br> e.g., `newnote n/John Doe i/25 years old`
+**DisplayNote** | `displaynote n/NAME` <br> e.g., `displaynote n/John Doe`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Delete** | `delete n/NAME`<br> e.g., `delete n/John Doe`
 **Clear** | `clear`
