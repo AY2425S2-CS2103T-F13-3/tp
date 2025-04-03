@@ -458,7 +458,7 @@ testers are expected to do more *exploratory* testing.
       Expected: First contact is tagged as "Interviewee". Details of the tagged contact shown in the
       status message.
    9. Test case: `tag 1 t/iNtErViEwEe` <br>
-      Expected: First contact is tagged as "Interviewee". Details of the tagged contact shown in the
+   Expected: First contact is tagged as "Interviewee". Details of the tagged contact shown in the
       status message.
    10. Test case: `tag +1 n/bernice` <br>
        Expected: Contact with name "Bernice Yu" is tagged as "Offered". Details of the tagged contact shown 
@@ -466,6 +466,16 @@ testers are expected to do more *exploratory* testing.
    11. Test case `tag -2 n/charlotte` <br>
        Expected: Contact with name "Charlotte Oliveiro" is tagged as "Rejected". Details of the tagged contact shown
        in the status message (if tag was "Candidate"). 
+
+### Show persons with upcoming interviews
+
+1. Show persons with upcoming interviews
+   1. Prerequisites: Use the same persons list as when you first ran HireHive.jar
+   2. Test case: `remind 100` <br>
+      Expected: Only the contact with name "David Li" and interview date "06/07/2025" is shown in the list. Success 
+      message shown in the status message.
+   3. Test case: `remind -1` <br>
+      Expected: Error message for invalid command format shown in status message with command format and example.
 
 ### Saving data
 
