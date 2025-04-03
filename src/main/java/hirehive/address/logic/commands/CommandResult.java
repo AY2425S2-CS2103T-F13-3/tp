@@ -23,17 +23,17 @@ public class CommandResult {
     private final boolean showNote;
 
     /** Saved message should appear to the user */
-    private final boolean change;
+    private final boolean isChange;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showNote, boolean change) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showNote, boolean isChange) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.showNote = showNote;
-        this.change = change;
+        this.isChange = isChange;
     }
 
     /**
@@ -44,8 +44,8 @@ public class CommandResult {
         this(feedbackToUser, false, false, false, false);
     }
 
-    public CommandResult(String feedbackToUser, boolean change) {
-        this(feedbackToUser, false, false, false, change);
+    public CommandResult(String feedbackToUser, boolean isChange) {
+        this(feedbackToUser, false, false, false, isChange);
     }
 
     public String getFeedbackToUser() {
@@ -65,7 +65,7 @@ public class CommandResult {
     }
 
     public boolean isChange() {
-        return change;
+        return isChange;
     }
 
     @Override
@@ -84,7 +84,7 @@ public class CommandResult {
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
                 && showNote == otherCommandResult.showNote
-                && change == otherCommandResult.change;
+                && isChange == otherCommandResult.isChange;
     }
 
     @Override
@@ -99,7 +99,7 @@ public class CommandResult {
                 .add("showHelp", showHelp)
                 .add("exit", exit)
                 .add("showNote", showNote)
-                .add("change", change)
+                .add("isChange", isChange)
                 .toString();
     }
 
