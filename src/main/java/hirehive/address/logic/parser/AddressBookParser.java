@@ -11,17 +11,18 @@ import hirehive.address.commons.core.LogsCenter;
 import hirehive.address.logic.commands.AddCommand;
 import hirehive.address.logic.commands.ClearCommand;
 import hirehive.address.logic.commands.Command;
-import hirehive.address.logic.commands.DateCommand;
 import hirehive.address.logic.commands.DeleteCommand;
+import hirehive.address.logic.commands.DisplayNoteCommand;
 import hirehive.address.logic.commands.EditCommand;
 import hirehive.address.logic.commands.ExitCommand;
 import hirehive.address.logic.commands.FilterCommand;
+import hirehive.address.logic.commands.FilterOutCommand;
 import hirehive.address.logic.commands.FindCommand;
 import hirehive.address.logic.commands.HelpCommand;
 import hirehive.address.logic.commands.ListCommand;
 import hirehive.address.logic.commands.NewNoteCommand;
-import hirehive.address.logic.commands.NoteCommand;
 import hirehive.address.logic.commands.ReminderCommand;
+import hirehive.address.logic.commands.ScheduleCommand;
 import hirehive.address.logic.commands.SortCommand;
 import hirehive.address.logic.commands.TagCommand;
 import hirehive.address.logic.parser.exceptions.ParseException;
@@ -88,8 +89,8 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case DateCommand.COMMAND_WORD:
-            return new DateCommand();
+        case ScheduleCommand.COMMAND_WORD:
+            return new ScheduleCommandParser().parse(arguments);
 
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
@@ -100,12 +101,14 @@ public class AddressBookParser {
         case SortCommand.COMMAND_WORD:
             return new SortCommand();
 
-        case NoteCommand.COMMAND_WORD:
-            return new NoteCommandParser().parse(arguments);
+        case DisplayNoteCommand.COMMAND_WORD:
+            return new DisplayNoteCommandParser().parse(arguments);
 
         case NewNoteCommand.COMMAND_WORD:
             return new NewNoteCommandParser().parse(arguments);
 
+        case FilterOutCommand.COMMAND_WORD:
+            return new FilterOutCommandParser().parse(arguments);
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

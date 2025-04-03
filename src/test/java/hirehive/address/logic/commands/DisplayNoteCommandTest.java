@@ -25,9 +25,9 @@ import hirehive.address.testutil.TypicalPersons;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
- * {@code NoteCommand}.
+ * {@code DisplayNoteCommand}.
  */
-public class NoteCommandTest {
+public class DisplayNoteCommandTest {
 
     private Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
 
@@ -37,9 +37,9 @@ public class NoteCommandTest {
         String nameToDisplay = personToDisplay.getName().fullName;
 
         NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nameToDisplay));
-        NoteCommand noteCommand = new NoteCommand(nameQuery);
+        DisplayNoteCommand noteCommand = new DisplayNoteCommand(nameToDisplay);
 
-        String expectedMessage = String.format(NoteCommand.MESSAGE_SUCCESS, Messages.format(personToDisplay));
+        String expectedMessage = String.format(DisplayNoteCommand.MESSAGE_SUCCESS, Messages.format(personToDisplay));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         try {
@@ -48,14 +48,13 @@ public class NoteCommandTest {
             fail();
         }
 
-        assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(noteCommand, model, new CommandResult(expectedMessage, false, false, true, false), expectedModel);
     }
 
     @Test
     public void execute_nonexistentName_throwsCommandException() {
         String nonexistentKeyword = "Nonexistent";
-        NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nonexistentKeyword));
-        NoteCommand noteCommand = new NoteCommand(nameQuery);
+        DisplayNoteCommand noteCommand = new DisplayNoteCommand(nonexistentKeyword);
 
         assertThrows(CommandException.class, () -> noteCommand.execute(model), Messages.MESSAGE_NO_SUCH_PERSON);
     }
@@ -63,25 +62,21 @@ public class NoteCommandTest {
     @Test
     public void execute_multipleMatches_throwsCommandException() {
         String multipleMatches = "Meier";
-        NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(multipleMatches));
-        NoteCommand noteCommand = new NoteCommand(nameQuery);
+        DisplayNoteCommand noteCommand = new DisplayNoteCommand(multipleMatches);
 
-        assertThrows(CommandException.class, () -> noteCommand.execute(model), Messages.MESSAGE_MULTIPLE_PEOPLE_QUERIED);
+        assertThrows(CommandException.class, () -> noteCommand.execute(model), Messages.MESSAGE_MULTIPLE_PEOPLE_QUERIED_NAME);
     }
 
     @Test
     public void equals() {
-        NameQuery firstQuery = new NameQuery(new NameContainsKeywordsPredicate("Alice"));
-        NameQuery secondQuery = new NameQuery(new NameContainsKeywordsPredicate("Bob"));
-
-        NoteCommand noteFirstCommand = new NoteCommand(firstQuery);
-        NoteCommand noteSecondCommand = new NoteCommand(secondQuery);
+        DisplayNoteCommand noteFirstCommand = new DisplayNoteCommand("Alice");
+        DisplayNoteCommand noteSecondCommand = new DisplayNoteCommand("Bob");
 
         // same object -> returns true
         assertTrue(noteFirstCommand.equals(noteFirstCommand));
 
         // same values -> returns true
-        NoteCommand noteFirstCommandCopy = new NoteCommand(firstQuery);
+        DisplayNoteCommand noteFirstCommandCopy = new DisplayNoteCommand("Alice");
         assertTrue(noteFirstCommand.equals(noteFirstCommandCopy));
 
         // different type -> returns false
@@ -97,10 +92,10 @@ public class NoteCommandTest {
 
     @Test
     public void toStringMethod() {
-        NameQuery query = new NameQuery(new NameContainsKeywordsPredicate("Alice"));
-        NoteCommand noteCommand = new NoteCommand(query);
-        String expected = NoteCommand.class.getCanonicalName() + "{query="
-                + query + "}";
+        String name = "Alice";
+        DisplayNoteCommand noteCommand = new DisplayNoteCommand(name);
+        String expected = DisplayNoteCommand.class.getCanonicalName() + "{name="
+                + name + "}";
         assertEquals(expected, noteCommand.toString());
     }
 }

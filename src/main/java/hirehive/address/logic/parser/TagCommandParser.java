@@ -34,17 +34,28 @@ public class TagCommandParser implements Parser<TagCommand> {
                 ArgumentTokenizer.tokenize(
                         args, PREFIX_NAME, PREFIX_TAG);
 
-        Index index;
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
         if (argMultimap.getValue(PREFIX_TAG).isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+            if (argMultimap.getValue(PREFIX_NAME).isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+            }
+            String nameKeywords = argMultimap.getValue(PREFIX_NAME).get();
+            NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nameKeywords));
+            try {
+                int offset = Integer.parseInt(argMultimap.getPreamble());
+                return new TagCommand(nameQuery, offset);
+            } catch (NumberFormatException e) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+            }
         }
 
         editPersonDescriptor.setTag(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get()));
 
         if (argMultimap.getValue(PREFIX_NAME).isEmpty()) {
+            Index index;
             try {
                 index = ParserUtil.parseIndex(argMultimap.getPreamble());
                 return new TagCommand(index, editPersonDescriptor);

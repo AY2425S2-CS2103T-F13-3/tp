@@ -3,6 +3,7 @@ package hirehive.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 
 import hirehive.address.commons.util.ToStringBuilder;
 import hirehive.address.logic.Messages;
@@ -10,14 +11,16 @@ import hirehive.address.logic.commands.exceptions.CommandException;
 import hirehive.address.logic.commands.queries.NameQuery;
 import hirehive.address.logic.commands.queries.exceptions.QueryException;
 import hirehive.address.model.Model;
+import hirehive.address.model.person.Name;
+import hirehive.address.model.person.NameContainsKeywordsPredicate;
 import hirehive.address.model.person.Person;
 
 /**
- * Finds a Person by name and displays the note in a pop up window.
+ * Finds a Person by name and displays the note in a popup window.
  */
-public class NoteCommand extends Command {
+public class DisplayNoteCommand extends Command {
 
-    public static final String COMMAND_WORD = "note";
+    public static final String COMMAND_WORD = "displaynote";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Displays the note of the person identified by the name used in the displayed person list.\n"
@@ -25,15 +28,15 @@ public class NoteCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Displaying note of: %1$s";
 
-    private final NameQuery query;
+    private final String name;
 
     /**
      * Creates NoteCommand to show the note of a person.
-     * @param query the name of the person.
+     * @param name the name of the person.
      */
-    public NoteCommand(NameQuery query) {
-        requireNonNull(query);
-        this.query = query;
+    public DisplayNoteCommand(String name) {
+        requireNonNull(name);
+        this.name = name;
     }
 
     /**
@@ -46,20 +49,33 @@ public class NoteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        NameQuery query = new NameQuery(new NameContainsKeywordsPredicate(name));
         List<Person> personToDisplay;
         try {
             personToDisplay = query.query(model);
         } catch (QueryException e) {
             throw new CommandException(Messages.MESSAGE_NO_SUCH_PERSON);
         }
+
+        Person personDisplayed = null;
         if (personToDisplay.size() > 1) {
-            throw new CommandException(Messages.MESSAGE_MULTIPLE_PEOPLE_QUERIED);
+            Name givenName = new Name(name);
+            for (Person person : personToDisplay) {
+                if (person.getName().equals(givenName)) {
+                    personDisplayed = person;
+                    break;
+                }
+            }
+            if (personDisplayed == null) {
+                throw new CommandException(Messages.MESSAGE_MULTIPLE_PEOPLE_QUERIED_NAME);
+            }
+        } else {
+            personDisplayed = personToDisplay.get(0);
         }
 
-        Person personDisplayed = personToDisplay.get(0);
         model.updatePersonNote(personDisplayed);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personDisplayed)), false,
-                false, true);
+                false, true, false);
     }
 
     @Override
@@ -69,18 +85,18 @@ public class NoteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NoteCommand)) {
+        if (!(other instanceof DisplayNoteCommand)) {
             return false;
         }
 
-        NoteCommand otherNoteCommand = (NoteCommand) other;
-        return query.equals(otherNoteCommand.query);
+        DisplayNoteCommand otherNoteCommand = (DisplayNoteCommand) other;
+        return name.equals(otherNoteCommand.name);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("query", query)
+                .add("name", name)
                 .toString();
     }
 }

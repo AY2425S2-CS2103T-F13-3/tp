@@ -1,37 +1,34 @@
 package hirehive.address.logic.parser;
 
-import static hirehive.address.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.AddCommand;
 import hirehive.address.logic.commands.ClearCommand;
-import hirehive.address.logic.commands.DateCommand;
 import hirehive.address.logic.commands.DeleteCommand;
+import hirehive.address.logic.commands.DisplayNoteCommand;
 import hirehive.address.logic.commands.EditCommand;
 import hirehive.address.logic.commands.ExitCommand;
 import hirehive.address.logic.commands.FilterCommand;
+import hirehive.address.logic.commands.FilterOutCommand;
 import hirehive.address.logic.commands.FindCommand;
 import hirehive.address.logic.commands.HelpCommand;
 import hirehive.address.logic.commands.ListCommand;
 import hirehive.address.logic.commands.NewNoteCommand;
-import hirehive.address.logic.commands.NoteCommand;
 import hirehive.address.logic.commands.ReminderCommand;
+import hirehive.address.logic.commands.ScheduleCommand;
 import hirehive.address.logic.commands.queries.NameQuery;
 import hirehive.address.logic.parser.exceptions.ParseException;
+import hirehive.address.model.person.InterviewDate;
 import hirehive.address.model.person.NameContainsKeywordsPredicate;
 import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
 import hirehive.address.model.person.PersonContainsTagPredicate;
+import hirehive.address.model.person.PersonDoesNotContainTagPredicate;
 import hirehive.address.model.person.UpcomingInterviewPredicate;
-import hirehive.address.model.tag.Tag;
 import hirehive.address.testutil.Assert;
 import hirehive.address.testutil.DefaultPersonBuilder;
 import hirehive.address.testutil.DefaultPersonUtil;
@@ -122,20 +119,12 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_date() throws Exception {
-        assertTrue(parser.parseCommand(DateCommand.COMMAND_WORD) instanceof DateCommand);
-        assertTrue(parser.parseCommand(DateCommand.COMMAND_WORD + " 3") instanceof DateCommand);
-    }
-
-    @Test
     public void parseCommand_note() throws Exception {
         String nameToDisplay = TypicalPersons.ALICE.getName().fullName;
 
-        NoteCommand expectedCommand = new NoteCommand(
-                new NameQuery(new NameContainsKeywordsPredicate(nameToDisplay))
-        );
-        NoteCommand command = (NoteCommand) parser.parseCommand(
-                NoteCommand.COMMAND_WORD + " n/" + nameToDisplay
+        DisplayNoteCommand expectedCommand = new DisplayNoteCommand(nameToDisplay);
+        DisplayNoteCommand command = (DisplayNoteCommand) parser.parseCommand(
+                DisplayNoteCommand.COMMAND_WORD + " n/" + nameToDisplay
         );
 
         assertEquals(expectedCommand, command);
@@ -147,15 +136,31 @@ public class AddressBookParserTest {
         EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
         editPersonDescriptor.setNote(new Note("test"));
 
-        NewNoteCommand expectedCommand = new NewNoteCommand(
-                new NameQuery(new NameContainsKeywordsPredicate(nameToAddNote)),
-                editPersonDescriptor
-        );
+        NewNoteCommand expectedCommand = new NewNoteCommand(nameToAddNote, editPersonDescriptor);
         NewNoteCommand command = (NewNoteCommand) parser.parseCommand(
                 NewNoteCommand.COMMAND_WORD + " n/" + nameToAddNote + " i/test"
         );
 
         assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_schedule() throws Exception {
+        String name = TypicalPersons.ALICE.getName().fullName;
+        EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
+        editPersonDescriptor.setDate(new InterviewDate("01/01/2026"));
+        ScheduleCommand expectedCommand = new ScheduleCommand(new NameQuery(new NameContainsKeywordsPredicate(name)), editPersonDescriptor);
+        ScheduleCommand parsedCommand = (ScheduleCommand) parser.parseCommand(ScheduleCommand.COMMAND_WORD + " "
+                + CliSyntax.PREFIX_NAME + name + " " + CliSyntax.PREFIX_DATE + "01/01/2026");
+        assertEquals(expectedCommand, parsedCommand);
+    }
+
+    @Test
+    public void parseCommand_filterout() throws Exception {
+        String tag = "Applicant";
+        FilterOutCommand command =
+                (FilterOutCommand) parser.parseCommand(FilterOutCommand.COMMAND_WORD + " t/ " + tag);
+        assertEquals(new FilterOutCommand(new PersonDoesNotContainTagPredicate(ParserUtil.parseTag(tag))), command);
     }
 
     @Test

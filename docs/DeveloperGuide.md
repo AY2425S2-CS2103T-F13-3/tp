@@ -91,7 +91,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete n/Alice")` API call as an example.
 
 ![Interactions Inside the Logic Component for the `delete n/Alice` Command](images/DeleteSequenceDiagram.png)
 
@@ -474,6 +474,16 @@ testers are expected to do more *exploratory* testing.
    3. Test case `tag -2 n/charlotte` <br>
       Expected: Contact with name "Charlotte Oliveiro" is tagged as "Rejected". Details of the tagged contact shown
       in the status message (if tag was "Candidate"). 
+
+### Show persons with upcoming interviews
+
+1. Show persons with upcoming interviews
+   1. Prerequisites: Use the same persons list as when you first ran HireHive.jar
+   2. Test case: `remind 100` <br>
+      Expected: Only the contact with name "David Li" and interview date "06/07/2025" is shown in the list. Success 
+      message shown in the status message.
+   3. Test case: `remind -1` <br>
+      Expected: Error message for invalid command format shown in status message with command format and example.
 
 ### Saving data
 
