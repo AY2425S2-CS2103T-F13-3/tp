@@ -484,10 +484,15 @@ Prerequisite: use the initial persons list loaded when first running HireHive.ja
 3. Test case: `displaynote n/Irfan` <br> Expected output: "Displaying note of: Irfan Ibrahim; Phone: 92492021; Email: irfan@example.com; Address: Blk 47 Tampines Street 20, #17-35; Role: Software Engineer; Date: 06/03/2025; Tag: REJECTED" Additionally, popup window shows "30 years old" in white font.
 4. Test case: `newnote n/raHIM i/` <br> Expected output: same as test case 3.
 
-### Saving data
+### Loading data
 
-1. Dealing with missing/corrupted data files
+1. Sample data is loaded
+   1. Test case: On first launch of `HireHive.jar`, this should automatically load the sample data. <br> Expected output: "Success: Sample applicant data has been loaded successfully."
+   2. Test case: Delete `addressbook.json` under folder `data` if it exists, then launch `HireHive.jar`. <br> Expected output: same as test case i.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+2. Saved data is loaded
+   1. Test case: perform a command that modifies data e.g. `delete 1`, then `exit` the application. Relaunch `HireHive.jar`. <br> Expected output: "Success: Applicant data has been loaded successfully."
 
-1. _{ more test cases …​ }_
+3. No data is loaded due to corruption of data
+   1. Prerequisite: Launch `HireHive.jar` at least once and exit.
+   2. Test case: Delete `addressbook.json` under folder `data` if it exists, then copy `config.json` into the same folder. Rename `config.json` to `addressbook.json`. <br> Expected output: "Error: Unable to load applicant data. Invalid data format in saved file."
