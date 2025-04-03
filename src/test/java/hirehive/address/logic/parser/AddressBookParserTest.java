@@ -158,7 +158,9 @@ public class AddressBookParserTest {
         ScheduleCommand parsedCommand = (ScheduleCommand) parser.parseCommand(ScheduleCommand.COMMAND_WORD + " "
                 + CliSyntax.PREFIX_NAME + name + " " + CliSyntax.PREFIX_DATE + "01/01/2026");
         assertEquals(expectedCommand, parsedCommand);
-      
+    }
+
+    @Test
     public void parseCommand_filterout() throws Exception {
         String tag = "Applicant";
         FilterOutCommand command =
