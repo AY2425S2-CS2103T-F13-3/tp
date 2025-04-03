@@ -1,5 +1,10 @@
 package hirehive.address.ui;
 
+import static hirehive.address.logic.Messages.MESSAGE_DATA_SAVED;
+import static hirehive.address.logic.Messages.MESSAGE_EMPTY_ADDRESS_BOOK;
+import static hirehive.address.logic.Messages.MESSAGE_LOAD_SUCCESS;
+import static hirehive.address.logic.Messages.MESSAGE_SAMPLE_ADDRESS_BOOK;
+
 import java.util.logging.Logger;
 
 import hirehive.address.commons.core.GuiSettings;
@@ -205,7 +210,10 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             String userFeedback = commandResult.getFeedbackToUser();
-
+            // if command has edited the applicant book in some way
+            if (commandResult.isChange()) {
+                userFeedback += MESSAGE_DATA_SAVED;
+            }
             resultDisplay.setFeedbackToUser(userFeedback);
             noteWindow.setNote(logic);
 
@@ -239,13 +247,13 @@ public class MainWindow extends UiPart<Stage> {
         ReadOnlyAddressBook currentAddressBook = logic.getAddressBook();
         // Data file could not be read, loads empty AddressBook instead
         if (currentAddressBook.equals(new AddressBook())) {
-            resultDisplay.setFeedbackToUser("Error: Unable to load applicant data. Invalid data format in saved file.");
+            resultDisplay.setFeedbackToUser(MESSAGE_EMPTY_ADDRESS_BOOK);
         // Data file does not exist, load sample AddressBook instead
         } else if (currentAddressBook.equals(SampleDataUtil.getSampleAddressBook())) {
-            resultDisplay.setFeedbackToUser("Success: Sample applicant data has been loaded successfully.");
+            resultDisplay.setFeedbackToUser(MESSAGE_SAMPLE_ADDRESS_BOOK);
         } else {
             // Data file loaded successfully
-            resultDisplay.setFeedbackToUser("Success: Applicant data has been loaded successfully.");
+            resultDisplay.setFeedbackToUser(MESSAGE_LOAD_SUCCESS);
         }
     }
 

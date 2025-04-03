@@ -59,7 +59,7 @@ public class NoteCommand extends Command {
         Person personDisplayed = personToDisplay.get(0);
         model.updatePersonNote(personDisplayed);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personDisplayed)), false,
-                false, true);
+                false, true, false);
     }
 
     @Override

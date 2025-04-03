@@ -47,7 +47,7 @@ public class NewNoteCommandTest {
             fail();
         }
 
-        assertCommandSuccess(newNoteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(newNoteCommand, model, new CommandResult(expectedMessage, false, false, true, true), expectedModel);
     }
 
     @Test

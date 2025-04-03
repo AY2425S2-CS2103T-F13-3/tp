@@ -65,8 +65,7 @@ public class TagCommand extends Command {
         Person taggedPerson = createEditedPerson(personToTag.get(0), editPersonDescriptor);
 
         model.setPerson(personToTag.get(0), taggedPerson);
-        return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, Messages.format(taggedPerson))
-                + MESSAGE_DATA_SAVED);
+        return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, Messages.format(taggedPerson)), true);
     }
 
     @Override

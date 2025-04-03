@@ -68,8 +68,8 @@ public class NewNoteCommand extends Command {
 
         model.setPerson(personAddedNote, editedPerson);
         model.updatePersonNote(editedPerson);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(editedPerson))
-                + MESSAGE_DATA_SAVED, false, false, true);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(editedPerson)),
+                false, false, true, true);
     }
 
     @Override
