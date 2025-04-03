@@ -485,6 +485,24 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `remind -1` <br>
       Expected: Error message for invalid command format shown in status message with command format and example.
 
+### Scheduling interview date
+
+1. Scheduling an interview date for a person by name
+   1. Prerequisites: Use the same persons list as when you first ran HireHive.jar
+   2. Test case: `schedule n/alice d/04/05/2025` <br>
+      Expected: Contact with name "Alice Yeoh" has interview date scheduled as "04/05/2025". Details of the scheduled 
+      contact shown in the status message.
+   3. Test case: `schedule n/alice d/test` <br>
+      Expected: Error message for invalid command format shown in status message with command format and example.
+2. Scheduling an interview date for a person by index
+   1. Prerequisites: Use the same persons list as when you first ran HireHive.jar
+   2. Test case: `schedule 1 d/04/05/2025` <br>
+      Expected: First contact has interview date scheduled as "04/05/2025". Details of the scheduled
+      contact shown in the status message.
+   3. Test case: `schedule 1 d/test` <br>
+      Expected: Expected: Error message for invalid command format shown in status message with command format and example.
+
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
