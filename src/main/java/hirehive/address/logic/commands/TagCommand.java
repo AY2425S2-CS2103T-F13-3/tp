@@ -1,5 +1,6 @@
 package hirehive.address.logic.commands;
 
+import static hirehive.address.logic.Messages.MESSAGE_DATA_SAVED;
 import static hirehive.address.logic.Messages.MESSAGE_MULTIPLE_PEOPLE_QUERIED;
 import static hirehive.address.logic.commands.EditCommand.createEditedPerson;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -64,7 +65,8 @@ public class TagCommand extends Command {
         Person taggedPerson = createEditedPerson(personToTag.get(0), editPersonDescriptor);
 
         model.setPerson(personToTag.get(0), taggedPerson);
-        return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, Messages.format(taggedPerson)));
+        return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, Messages.format(taggedPerson))
+                + MESSAGE_DATA_SAVED);
     }
 
     @Override

@@ -28,6 +28,7 @@ public class Messages {
     public static final String MESSAGE_FILTER_OVERVIEW_TAG = "Showing all %s entries.";
     public static final String MESSAGE_FILTER_OVERVIEW_DATE = "Showing entries with interviews in %1$d days.";
     public static final String MESSAGE_FILTER_OVERVIEW_NAME = "Showing entries with keywords %s in name.";
+    public static final String MESSAGE_DATA_SAVED = "\nSuccess: Applicant data has been saved";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */

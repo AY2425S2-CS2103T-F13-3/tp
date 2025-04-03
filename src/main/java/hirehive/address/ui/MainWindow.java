@@ -205,10 +205,7 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             String userFeedback = commandResult.getFeedbackToUser();
-            if (!(commandResult.isShowHelp() || commandResult.isExit() || commandResult.isList()
-                    || commandResult.isFind() || commandResult.isShowNote())) {
-                userFeedback += "\nSuccess: Applicant data has been saved.";
-            }
+
             resultDisplay.setFeedbackToUser(userFeedback);
             noteWindow.setNote(logic);
 

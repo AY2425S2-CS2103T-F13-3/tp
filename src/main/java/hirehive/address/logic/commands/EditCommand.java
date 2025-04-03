@@ -1,5 +1,6 @@
 package hirehive.address.logic.commands;
 
+import static hirehive.address.logic.Messages.MESSAGE_DATA_SAVED;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -94,7 +95,8 @@ public class EditCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         model.updatePersonNote(editedPerson);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson))
+                + MESSAGE_DATA_SAVED);
     }
 
     /**
