@@ -186,7 +186,7 @@ public class ModelManager implements Model {
         LocalDate iterationDate = LocalDate.now().plusDays(1);
         int i = 0;
         boolean bContinue = true;
-        while (sortedPersons.get(i).getDate().getValue().isPresent() && bContinue) {
+        while (i < sortedPersons.size() && sortedPersons.get(i).getDate().getValue().isPresent() && bContinue) {
             LocalDate currDate = sortedPersons.get(i).getDate().getValue().get();
             if (currDate.isBefore(iterationDate)) {
                 i++;
