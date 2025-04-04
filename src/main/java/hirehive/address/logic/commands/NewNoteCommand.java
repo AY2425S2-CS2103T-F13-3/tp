@@ -1,5 +1,6 @@
 package hirehive.address.logic.commands;
 
+import static hirehive.address.logic.Messages.MESSAGE_DATA_SAVED;
 import static hirehive.address.logic.commands.EditCommand.createEditedPerson;
 import static java.util.Objects.requireNonNull;
 
@@ -12,6 +13,8 @@ import hirehive.address.logic.commands.exceptions.CommandException;
 import hirehive.address.logic.commands.queries.NameQuery;
 import hirehive.address.logic.commands.queries.exceptions.QueryException;
 import hirehive.address.model.Model;
+import hirehive.address.model.person.Name;
+import hirehive.address.model.person.NameContainsKeywordsPredicate;
 import hirehive.address.model.person.Person;
 
 /**
@@ -27,18 +30,18 @@ public class NewNoteCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Added and displaying note of: %1$s";
 
-    private final NameQuery query;
+    private final String name;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
      * Creates NewnoteCommand to create and show the note of a person.
-     * @param query the name of the person.
+     * @param name the name of the person.
      */
-    public NewNoteCommand(NameQuery query, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(query);
+    public NewNoteCommand(String name, EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(name);
         requireNonNull(editPersonDescriptor);
 
-        this.query = query;
+        this.name = name;
         this.editPersonDescriptor = editPersonDescriptor;
     }
 
@@ -51,24 +54,36 @@ public class NewNoteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
+        NameQuery query = new NameQuery(new NameContainsKeywordsPredicate(name));
         List<Person> personToAddNote;
         try {
             personToAddNote = query.query(model);
         } catch (QueryException e) {
             throw new CommandException(Messages.MESSAGE_NO_SUCH_PERSON);
         }
+
+        Person personAddedNote = null;
         if (personToAddNote.size() > 1) {
-            throw new CommandException(Messages.MESSAGE_MULTIPLE_PEOPLE_QUERIED);
+            Name givenName = new Name(name);
+            for (Person person : personToAddNote) {
+                if (person.getName().equals(givenName)) {
+                    personAddedNote = person;
+                    break;
+                }
+            }
+            if (personAddedNote == null) {
+                throw new CommandException(Messages.MESSAGE_MULTIPLE_PEOPLE_QUERIED_NAME);
+            }
+        } else {
+            personAddedNote = personToAddNote.get(0);
         }
 
-        Person personAddedNote = personToAddNote.get(0);
         Person editedPerson = createEditedPerson(personAddedNote, editPersonDescriptor);
 
         model.setPerson(personAddedNote, editedPerson);
         model.updatePersonNote(editedPerson);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(editedPerson)), false,
-                false, true);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(editedPerson)),
+                false, false, true, true);
     }
 
     @Override
@@ -83,14 +98,14 @@ public class NewNoteCommand extends Command {
         }
 
         NewNoteCommand otherNewNoteCommand = (NewNoteCommand) other;
-        return query.equals(otherNewNoteCommand.query)
+        return name.equals(otherNewNoteCommand.name)
                 && editPersonDescriptor.equals(otherNewNoteCommand.editPersonDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("query", query)
+                .add("name", name)
                 .add("editPersonDescriptor", editPersonDescriptor)
                 .toString();
     }

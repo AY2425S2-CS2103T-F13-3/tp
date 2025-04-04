@@ -16,7 +16,7 @@ import hirehive.address.model.person.Person;
 import hirehive.address.model.person.PersonPredicate;
 
 /**
- * Helper functions for handling filtering commands
+ * Helper functions for handling command execution of similar types
  */
 public class CommandUtil {
 
@@ -59,7 +59,6 @@ public class CommandUtil {
         }
         return personToEdit.get(0);
     }
-
     /**
      * Uses the given index to find the matching person in the model.
      * @param model The model to update the list in
