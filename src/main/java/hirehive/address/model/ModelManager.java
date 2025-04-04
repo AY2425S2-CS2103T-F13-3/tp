@@ -4,13 +4,18 @@ import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 import hirehive.address.commons.core.GuiSettings;
 import hirehive.address.commons.core.LogsCenter;
 import hirehive.address.commons.util.CollectionUtil;
+import hirehive.address.model.person.InterviewDate;
 import hirehive.address.model.person.Note;
 import hirehive.address.model.person.Person;
 import javafx.collections.ObservableList;
@@ -168,6 +173,34 @@ public class ModelManager implements Model {
     @Override
     public int getListSize() {
         return filteredPersons.size();
+    }
+
+    /**
+     * Returns the next available date for an interview starting from the next day.
+     * @return An {@code InterviewDate} object
+     */
+    @Override
+    public InterviewDate getAvailableDate() {
+        List<LocalDate> sortedAllDates = this.addressBook.getPersonList().stream()
+                .map(person -> person.getDate().getValue().orElse(LocalDate.MAX))
+                .sorted(LocalDate::compareTo).toList();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+                .withResolverStyle(ResolverStyle.STRICT);
+        LocalDate iterationDate = LocalDate.now().plusDays(1);
+        boolean bContinue = true;
+        int i = 0;
+        while (i < sortedAllDates.size() && sortedAllDates.get(i) != LocalDate.MAX && bContinue) {
+            LocalDate currDate = sortedAllDates.get(i);
+            if (currDate.isBefore(iterationDate)) {
+                i++;
+            } else if (currDate.isAfter(iterationDate)) {
+                bContinue = false;
+            } else {
+                iterationDate = iterationDate.plusDays(1);
+                i++;
+            }
+        }
+        return new InterviewDate(iterationDate.format(formatter));
     }
 
     @Override

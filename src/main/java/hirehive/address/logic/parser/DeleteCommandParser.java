@@ -2,8 +2,10 @@ package hirehive.address.logic.parser;
 
 import static hirehive.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 
+import hirehive.address.commons.core.index.Index;
 import hirehive.address.logic.commands.DeleteCommand;
 import hirehive.address.logic.commands.queries.NameQuery;
 import hirehive.address.logic.parser.exceptions.ParseException;
@@ -21,22 +23,22 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
-        if (argMultimap.getValue(PREFIX_NAME).map(String::trim).filter(String::isEmpty).isPresent()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            String nameKeywords = argMultimap.getValue(PREFIX_NAME).get().trim();
+            if (nameKeywords.isBlank()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+            }
+            NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nameKeywords));
+            return new DeleteCommand(nameQuery);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
-
-        String nameKeywords = argMultimap.getValue(PREFIX_NAME)
-                .orElseThrow(() -> new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE)));
-        NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nameKeywords));
-
-        return new DeleteCommand(nameQuery);
+        try {
+            Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            return new DeleteCommand(index);
+        } catch (ParseException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        }
     }
-
 }

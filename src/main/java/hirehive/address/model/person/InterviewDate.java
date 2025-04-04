@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Optional;
 
 import hirehive.address.commons.util.AppUtil;
@@ -15,10 +16,11 @@ import hirehive.address.commons.util.AppUtil;
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class InterviewDate {
-    public static final String MESSAGE_CONSTRAINTS = "Dates are in the DD/MM/YYYY format";
+    public static final String MESSAGE_CONSTRAINTS = "Please provide a valid date in the DD/MM/YYYY format";
     public static final String DEFAULT_DATE = "01/01/2025";
 
-    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+            .withResolverStyle(ResolverStyle.STRICT);
 
     public final Optional<LocalDate> value;
 

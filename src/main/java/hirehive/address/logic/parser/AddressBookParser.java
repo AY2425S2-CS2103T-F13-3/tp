@@ -11,7 +11,6 @@ import hirehive.address.commons.core.LogsCenter;
 import hirehive.address.logic.commands.AddCommand;
 import hirehive.address.logic.commands.ClearCommand;
 import hirehive.address.logic.commands.Command;
-import hirehive.address.logic.commands.DateCommand;
 import hirehive.address.logic.commands.DeleteCommand;
 import hirehive.address.logic.commands.DisplayNoteCommand;
 import hirehive.address.logic.commands.EditCommand;
@@ -23,6 +22,7 @@ import hirehive.address.logic.commands.HelpCommand;
 import hirehive.address.logic.commands.ListCommand;
 import hirehive.address.logic.commands.NewNoteCommand;
 import hirehive.address.logic.commands.ReminderCommand;
+import hirehive.address.logic.commands.ScheduleCommand;
 import hirehive.address.logic.commands.SortCommand;
 import hirehive.address.logic.commands.TagCommand;
 import hirehive.address.logic.parser.exceptions.ParseException;
@@ -89,8 +89,8 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case DateCommand.COMMAND_WORD:
-            return new DateCommand();
+        case ScheduleCommand.COMMAND_WORD:
+            return new ScheduleCommandParser().parse(arguments);
 
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);

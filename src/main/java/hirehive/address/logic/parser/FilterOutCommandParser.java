@@ -17,6 +17,8 @@ public class FilterOutCommandParser implements Parser<FilterOutCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FilterOutCommand
      * and returns a FilterOutCommand object for execution.
+     * @param args the user input
+     * @return a new FilterOutCommand
      * @throws ParseException if the user input does not conform the expected format
      */
     public FilterOutCommand parse(String args) throws ParseException {

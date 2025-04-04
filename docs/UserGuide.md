@@ -15,24 +15,26 @@ We combine the speed of keyboard commands with an intuitive visual interface to 
 
 Ready to revolutionise your hiring? Let's begin!
 
-- [Quick start](#quick-start-)
+- [Quick start](#quick-start)
 - [Command Summary](#command-summary)
-- [Features](#features-)
-  - [View help: `help`](#viewing-help--help)
-  - [Add an applicant: `add`](#adding-a-person-add)
-  - [Edit an applicant: `edit`](#editing-a-person--edit)
-  - [Tag an applicant: `tag`](#tagging-a-person--tag)
-  - [Filter applicants by tag: `filter`](#filter-persons-by-tag--filter)
+- [Features](#features)
+  - [View help: `help`](#view-help--help)
+  - [Add an applicant: `add`](#add-an-applicant-add)
+  - [Edit an applicant: `edit`](#edit-an-applicant--edit)
+  - [Tag an applicant: `tag`](#tag-an-applicant--tag)
+  - [Filter applicants by tag: `filter`](#filter-applicants-by-tag--filter)
+  - [Filtering out applicants with tag: `filterout`](#filtering-out-applicants-with-tag-filterout)
   - [Add note to applicant: `newnote`](#add-notes-to-person--newnote)
   - [Display note of applicant: `displaynote`](#display-note-of-person--displaynote)
-  - [Find applicants by name `find`](#locating-persons-by-name-find)
-  - [List all applicants: `list`](#listing-all-persons--list)
+  - [Schedule interview dates: `schedule`](#schedule-interview-dates-for-applicants--schedule)
+  - [Find applicants by name `find`](#find-applicants-by-name--find)
+  - [List all applicants: `list`](#list-all-applicants--list)
   - [Sort applicants `sort`](#sort-applicants--sort)
-  - [Delete an applicant: `delete`](#deleting-a-person--delete)
-  - [Clear all entries: `clear`](#clearing-all-entries--clear)
-  - [Exit the program: `exit`](#exiting-the-program--exit)
-  - [Save the data](#saving-the-data)
-  - [Edit the data file](#editing-the-data-file)
+  - [Delete an applicant: `delete`](#delete-an-applicant--delete)
+  - [Clear all entries: `clear`](#clear-all-entries--clear)
+  - [Exit the program: `exit`](#exit-the-program--exit)
+  - [Save the data](#save-the-data)
+  - [Edit the data file](#edit-the-data-file)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Glossary](#glossary)
@@ -82,18 +84,22 @@ Ready to revolutionise your hiring? Let's begin!
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Help** | `help`
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [i/INFO]` <br> e.g., `add n/James Ho p/87654321 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/software engineer intern i/26 years old`
-**List** | `list`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [i/NOTE] [d/DATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Tag** | `tag n/NAME [t/TAG]…​`
-**Filter** |`filter t/TAG` <br> e.g., `filter t/Applicant`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Delete** | `delete n/NAME`<br> e.g., `delete n/John Doe`
-**Clear** | `clear`
-**Exit** | `exit`
+| Action          | Format, Examples                                                                                                                                                                                 |
+|-----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**        | `help`                                                                                                                                                                                           |
+| **Add**         | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [i/INFO]` <br> e.g., `add n/James Ho p/87654321 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/software engineer intern i/26 years old` |
+| **List**        | `list`                                                                                                                                                                                           |
+| **Edit**        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [i/NOTE] [d/DATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                      |
+| **Tag**         | `tag n/NAME [t/TAG]...​`                                                                                                                                                                         |
+| **Filter**      | `filter t/TAG` <br> e.g., `filter t/Applicant`                                                                                                                                                   |
+| **NewNote**     | `newnote n/NAME i/NOTE` <br> e.g., `newnote n/John Doe i/25 years old`                                                                                                                                                                                                 |
+| **DisplayNote** | `displaynote n/NAME` <br> e.g., `displaynote n/John Doe`                                                                                                                                                                                                 |
+| **Find**        | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                       |
+| **Delete**      | `delete n/NAME`<br> e.g., `delete n/John Doe`                                                                                                                                                    |
+| **Clear**       | `clear`                                                                                                                                                                                          |
+| **Schedule**    | `schedule n/NAME [d/DATE]` <br> `schedule INDEX [d/DATE]`                                                                                                                                        |
+| **Reminder**    | `remind DAYS`                                                                                                                                                                                    |
+| **Exit**        | `exit`                                                                                                                                                                                           |
 
 [Back to top](#welcome-to-hirehive)
 
@@ -125,7 +131,7 @@ Action | Format, Examples
 
 [Back to top](#welcome-to-hirehive)
 
-### View help : `help`
+### View help: `help`
 
 Shows a message explaining how you can access the help page that can assist you in understanding the different features of HireHive and how they work.
 
@@ -136,7 +142,7 @@ Format: `help`
 [Back to top](#welcome-to-hirehive)
 
 
-### Add an applicant : `add`
+### Add an applicant: `add`
 
 You can add a new applicant to HireHive when someone new applies to you company!
 
@@ -162,15 +168,15 @@ Examples:
 
 [Back to top](#welcome-to-hirehive)
 
-### Edit an applicant : `edit`
+### Edit an applicant: `edit`
 
-You can edit the information of an existing applicant in HireHive if needed!
+If you have accidentally mistyped some details, you can edit the information of an existing applicant in HireHive!
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/ROLE] [i/NOTE] [d/DATE]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
+* The provided values will replace the existing information in the respective fields.
 
 
 Examples:
@@ -179,7 +185,7 @@ Examples:
 [Back to top](#welcome-to-hirehive)
 
 
-### Tag an applicant : `tag`
+### Tag an applicant: `tag`
 
 You can change the tag to a specific person from HireHive to easily differentiate between all your applicants!
 
@@ -215,11 +221,11 @@ Examples:
 * `tag 1 t/Candidate` will tag the 1st person as "Candidate"
 * `tag +1 n/John Doe` for a John Doe person with tag "Applicant" will tag them as "Candidate"
 
-[Back to top](#hirehive-user-guide)
+[Back to top](#welcome-to-hirehive)
 
-### Filter applicants by tag : `filter`
+### Filter applicants by tag: `filter`
 
-Lists down all your applicants of a certain tag.
+Lists down all your entries of a given tag.
 
 Format: `filter t/TAG`
 
@@ -228,7 +234,20 @@ Format: `filter t/TAG`
 
 [Back to top](#welcome-to-hirehive)
 
-### Add notes to person : `newnote`
+### Filtering out applicants with tag: `filterout`
+You can view all your applicants in a list **except** for those with the specified tag, for easier tracking of applicants!
+
+Format: `filterout t/TAG`
+
+*The search is [case-insensitive](#glossary). e.g `applicant` will match `Applicant`
+
+Examples:
+* `filterout t/offered` will filter out all applicants that were already offered the job, the remaining list will display applicants without the "Offered" tag.
+
+[Back to top](#welcome-to-hirehive)
+
+
+### Add notes to person: `newnote`
 
 You can add information about the applicant into a note with this command.
 
@@ -250,7 +269,7 @@ Examples:
 
 [Back to top](#welcome-to-hirehive)
 
-### Display note of person : `displaynote`
+### Display note of person: `displaynote`
 
 You can display the note of a person with this command.
 
@@ -266,9 +285,24 @@ Examples:
 
 [Back to top](#welcome-to-hirehive)
 
-### Finding applicants by name : `find`
+### Schedule interview dates for applicants : `schedule`
 
-Finds persons whose names contain any of the given keywords.
+Automatically or manually schedule your next interview with a potential candidate.
+
+Format:
+
+Command | Description
+--------|------------------
+`schedule n/NAME [d/DATE]` | Schedule interview date by name.
+`schedule INDEX [d/DATE]` | Schedule interview date by index.
+
+
+* The date format is DD/MM/YYYY (date/month/year) e.g. "04/04/2025"
+* If date is left empty, the next day that does not have an interview after the current day will be used to schedule the meeting instead.
+* Scheduling interview date by index must have a **positive** index number
+
+### Find applicants by name: `find`
+You can search for persons whose names contain any of the given keywords!
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -286,7 +320,7 @@ Examples:
 
 [Back to top](#welcome-to-hirehive)
 
-### List all applicants : `list`
+### List all applicants: `list`
 
 Shows you a list of all the applicants in HireHive so that you can look at an overview of all the applicants if needed.
 
@@ -294,7 +328,7 @@ Format: `list`
 
 [Back to top](#welcome-to-hirehive)
 
-### Sort applicants : `sort`
+### Sort applicants: `sort`
 
 Sorts the applicants displayed on your screen by interview date, in chronological order so that you can conveniently view upcoming interviews.
 
@@ -302,17 +336,33 @@ Format: `sort`
 
 [Back to top](#welcome-to-hirehive)
 
-### Delete an applicant : `delete`
+### Show applicants with upcoming interviews: `remind`
 
-You can delete a specific person from HireHive.
+Easily remind yourself of your upcoming interviews by listing down all applicants with interviews in the given days' time.
 
-Format: `delete n/NAME`
+Format: `remind DAYS`
 
-* Deletes the person if the given name partially matches **exactly one person** in the list ([case-insensitive](#glossary)).
-* If multiple matches are found, a list of all matching names will be displayed. You can then enter the **full name** of the person you want to delete.
+* The number of days given must be non-negative, i.e. greater or equal to 0
+
+### Delete an applicant: `delete`
+
+You can delete a specific person from HireHive if their contact is no longer required.
+
+Format: 
+
+Command | Description
+--------|------------------
+`delete n/NAME` | Delete by name.
+`delete INDEX` | Delete by index.
+
+
+* Deleting by name will partially match to **exactly one person** in the list ([case-insensitive](#glossary)). 
+  - If multiple matches are found, a list of all matching names will be displayed. You can then enter the **full name** of the person you want to delete.
+* Deleting by index must have a **positive** index number
 
 Examples:
 * `delete n/John Doe` deletes John Doe's contact from HireHive
+* `delete 2` deletes the second applicant in the list from HireHive
 
 ![delete message](images/Ui-DeleteCommand.png)
 

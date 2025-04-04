@@ -32,12 +32,12 @@ public class NewNoteCommandParser implements Parser<NewNoteCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NOTE);
 
         String name = argMultimap.getValue(PREFIX_NAME).get();
-        NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(name));
+        //NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(name));
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         editPersonDescriptor.setNote(ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get().trim()));
 
-        return new NewNoteCommand(nameQuery, editPersonDescriptor);
+        return new NewNoteCommand(name, editPersonDescriptor);
     }
 
 }

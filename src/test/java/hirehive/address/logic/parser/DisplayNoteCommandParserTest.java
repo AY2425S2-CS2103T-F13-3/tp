@@ -13,9 +13,7 @@ public class DisplayNoteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsNoteCommand() {
-        DisplayNoteCommand expectedCommand = new DisplayNoteCommand(
-                new NameQuery(new NameContainsKeywordsPredicate("Alice"))
-        );
+        DisplayNoteCommand expectedCommand = new DisplayNoteCommand("Alice");
 
         CommandParserTestUtil.assertParseSuccess(parser, "displaynote n/Alice", expectedCommand);
     }

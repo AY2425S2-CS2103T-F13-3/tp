@@ -18,6 +18,10 @@ public class FilterOutCommand extends Command {
 
     private final PersonDoesNotContainTagPredicate predicate;
 
+    /**
+     * Creates FilterOutCommand to filter out applicants with the specified tag
+     * @param predicate the predicate to filter the list
+     */
     public FilterOutCommand(PersonDoesNotContainTagPredicate predicate) {
         this.predicate = predicate;
     }
