@@ -6,7 +6,7 @@ title: User Guide
 
 # Welcome to HireHive!
 
-Tired of drowning in resumes and losing track of candidates? Meet HireHive— your **personal, all-in-one** hiring assistant designed to simplify the hiring process so you can focus on what matters most - finding the best talent. 
+Tired of drowning in resumes and losing track of candidates? Meet HireHive— your **personal, all-in-one** hiring assistant designed to simplify the hiring process so you can focus on what matters most - finding the best talent.
 
 We combine the speed of keyboard commands with an intuitive visual interface to help you:
 - Find top talent faster with **lightning-fast** keyboard shortcuts
@@ -18,19 +18,19 @@ Ready to revolutionise your hiring? Let's begin!
 - [Quick start](#quick-start)
 - [Command Summary](#command-summary)
 - [Features](#features)
-  - [View help: `help`](#view-help--help)
+  - [View help: `help`](#view-help-help)
   - [Add an applicant: `add`](#add-an-applicant-add)
-  - [Edit an applicant: `edit`](#edit-an-applicant--edit)
-  - [Tag an applicant: `tag`](#tag-an-applicant--tag)
-  - [Filter applicants by tag: `filter`](#filter-applicants-by-tag--filter)
+  - [Edit an applicant: `edit`](#edit-an-applicant-edit)
+  - [Tag an applicant: `tag`](#tag-an-applicant-tag)
+  - [Filter applicants by tag: `filter`](#filter-applicants-by-tag-filter)
   - [Filtering out applicants with tag: `filterout`](#filtering-out-applicants-with-tag-filterout)
-  - [Add note to applicant: `newnote`](#add-notes-to-person--newnote)
-  - [Display note of applicant: `displaynote`](#display-note-of-person--displaynote)
+  - [Add note to applicant: `newnote`](#add-notes-to-person-newnote)
+  - [Display note of applicant: `displaynote`](#display-note-of-person-displaynote)
   - [Schedule interview dates: `schedule`](#schedule-interview-dates-for-applicants--schedule)
-  - [Find applicants by name `find`](#find-applicants-by-name--find)
-  - [List all applicants: `list`](#list-all-applicants--list)
-  - [Sort applicants `sort`](#sort-applicants--sort)
-  - [Delete an applicant: `delete`](#delete-an-applicant--delete)
+  - [Find applicants by name `find`](#find-applicants-by-name-find)
+  - [List all applicants: `list`](#list-all-applicants-list)
+  - [Sort applicants `sort`](#sort-applicants-sort)
+  - [Delete an applicant: `delete`](#delete-an-applicant-delete)
   - [Clear all entries: `clear`](#clear-all-entries--clear)
   - [Exit the program: `exit`](#exit-the-program--exit)
   - [Save the data](#save-the-data)
@@ -52,7 +52,7 @@ Ready to revolutionise your hiring? Let's begin!
 
 4. Run HireHive
    - Find the folder that you stored HireHive previously (e.g. "Documents" or "Desktop" or "HireHive").
-   - Right-click on the folder and choose:  
+   - Right-click on the folder and choose:
      - For **Mac users**: "New terminal at [folder-name]".
      - For **Windows users**: "Open in terminal".
    - Type `java -jar hirehive.jar` command in the opened terminal and press Enter to run the HireHive application.<br>
@@ -133,7 +133,7 @@ Ready to revolutionise your hiring? Let's begin!
 
 ### View help: `help`
 
-Shows a message explaining how you can access the help page that can assist you in understanding the different features of HireHive and how they work. 
+Shows a message explaining how you can access the help page that can assist you in understanding the different features of HireHive and how they work.
 
 ![help message](images/helpMessage.png)
 
@@ -210,7 +210,7 @@ Command | Description
   5. Offered
 * The tag written in the command must match one of the values above ([case-insensitive](#glossary)) e.g. `t/applicant`
 * To tag with offset, the offset takes in `+` or `-`, followed by a number for the offset amount, e.g. `+1`, `-2`
-  * The tag, which represents the hiring stage the specific person is at, will progress/regress the hiring stage by 
+  * The tag, which represents the hiring stage the specific person is at, will progress/regress the hiring stage by
     the offset amount
   * The order for the hiring stages is Rejected > Applicant > Candidate > Interviewee > Offered
   * The tag will not regress pass Rejected and progress pass Offered
@@ -374,7 +374,7 @@ Clears all entries from HireHive.
 
 Format: `clear`
 
-**:information_source: Note!**<br> 
+**:information_source: Note!**<br>
 This action is **irreversible**! Please use this command with caution!
 
 [Back to top](#welcome-to-hirehive)

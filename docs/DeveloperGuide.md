@@ -599,10 +599,32 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `exit` <br>
       Expected: Program exits and closes. 
 
-### Saving data
+### Adding note of a person
 
-1. Dealing with missing/corrupted data files
+Prerequisite: use the initial persons list loaded when first running HireHive.jar
+1. Test case: `newnote n/Bernice Yu i/20 years old` <br> Expected output: "Added and displaying note of: Bernice Yu; Phone: 99272758; Email: berniceyu@example.com; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Role: HR manager; Date: 01/03/2025; Tag: INTERVIEWEE <br> Success: Applicant data has been saved." Additionally, popup window shows "20 years old" in white font.
+2. Test case: `newnote n/BeRnIcE i/19 years old` <br> Expected output: same as test case 1, but popup window shows "19 years old" in white font.
+3. Test case: `newnote n/  Bernice  i/18 years old` <br> Expected output: same as test case 1, but popup window shows "18 years old" in white font.
+4. Test case: `newnote n/Yu i/` <br> Expected output: same as test case 1, but popup window shows "Currently empty..." in yellow font.
+5. Test case: `newnote n/bErNiCe yU i/Currently empty...` <br> Expected output: same as test case 1, but popup window shows "Currently empty..." in white font.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+### Displaying note of a person
 
-1. _{ more test cases …​ }_
+Prerequisite: use the initial persons list loaded when first running HireHive.jar
+1. Test case: `displaynote n/Alice Yeoh` <br> Expected output: "Displaying note of: Alice Yeoh; Phone: 87438807; Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40; Role: UI designer; Date: ; Tag: APPLICANT" Additionally, popup window shows "20 years old" in white font.
+2. Test case: `displaynote n/BeRnIcE yU` <br> Expected output: "Displaying note of: Bernice Yu; Phone: 99272758; Email: berniceyu@example.com; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Role: HR manager; Date: 01/03/2025; Tag: INTERVIEWEE" Additionally, popup window shows "Currently empty..." in yellow font.
+3. Test case: `displaynote n/Irfan` <br> Expected output: "Displaying note of: Irfan Ibrahim; Phone: 92492021; Email: irfan@example.com; Address: Blk 47 Tampines Street 20, #17-35; Role: Software Engineer; Date: 06/03/2025; Tag: REJECTED" Additionally, popup window shows "30 years old" in white font.
+4. Test case: `newnote n/raHIM i/` <br> Expected output: same as test case 3.
+
+### Loading data
+
+1. Sample data is loaded
+   1. Test case: On first launch of `HireHive.jar`, this should automatically load the sample data. <br> Expected output: "Success: Sample applicant data has been loaded successfully."
+   2. Test case: Delete `addressbook.json` under folder `data` if it exists, then launch `HireHive.jar`. <br> Expected output: same as test case i.
+
+2. Saved data is loaded
+   1. Test case: perform a command that modifies data e.g. `delete 1`, then `exit` the application. Relaunch `HireHive.jar`. <br> Expected output: "Success: Applicant data has been loaded successfully."
+
+3. No data is loaded due to corruption of data
+   1. Prerequisite: Launch `HireHive.jar` at least once and exit.
+   2. Test case: Delete `addressbook.json` under folder `data` if it exists, then copy `config.json` into the same folder. Rename `config.json` to `addressbook.json`. <br> Expected output: "Error: Unable to load applicant data. Invalid data format in saved file."
