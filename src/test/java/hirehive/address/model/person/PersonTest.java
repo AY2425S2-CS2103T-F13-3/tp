@@ -4,8 +4,8 @@ import static hirehive.address.logic.commands.CommandTestUtil.DEFAULT_TAG_APPLIC
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_DATE_BOB;
-import static hirehive.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static hirehive.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_NOTE_AMY;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_NOTE_BOB;
