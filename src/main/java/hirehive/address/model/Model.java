@@ -88,6 +88,8 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    void unfilterPersonList();
+
     /**
      * Sorts the filtered person list by their interview date.
      */
