@@ -304,29 +304,44 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to add a person
-2. HireHive displays the added person
-3. HireHive adds the person
+1. User chooses to add a person.
+2. User enters the details of the person.
+3. HireHive adds the person.
+4. HireHive saves the details of the added person.
+5. HireHive displays the added person.
 
     Use case ends.
 
 **Extensions**
-* 1a. The user input is invalid
-  * 1a1. HireHive shows an error message
-
-    Use case restarts from step 1.
-
+* 2a. HireHive detects an invalid input in the entered details.
+  * 2a1. HireHive shows an error message.
+  * 2a2. User enters new data.
+  * Steps 2a1-2a2 are repeated until the user adds a valid input for the parameters.
+  * Use case resumes from step 3.
+  
+* 2b. HireHive detects that the person already exists.
+  * 2b1. HireHive shows an error message.
+  * 2b2. User enters new data.
+  * Steps 2b1-2b2 are repeated until a person with a unique phone number is entered.
+  * Use case resumes from step 3.
+  
+* 2c. HireHive detects an empty input for one of the parameters.
+  * 2c1. HireHive shows an error message.
+  * 2c2. User enters new data.
+  * Steps 2c1-2c2 are repeated until the user adds a valid input for all the parameters.
+  * Use case resumes from step 3.
+  
 **Use case: UC02 - List all persons**
 
 **MSS**
-1. User requests to list persons
-2. HireHive shows a list of persons
+1. User requests to list persons.
+2. HireHive shows a list of persons.
 
     Use case ends.
 
 **Extensions**
-* 1a. The list is empty
-    * 1a1. HireHive shows an error message
+* 1a. The list is empty.
+    * 1a1. HireHive displays an empty list.
 
         Use case ends.
 
@@ -367,6 +382,72 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 1.
 
 *{More to be added}*
+
+
+**Use case: UC05 - Edit a person**
+
+Preconditions: The list is not empty 
+
+**MSS**
+
+1. User requests to edit a person
+2. User enters the index and parameter of the person to be edited.
+3. HireHive edits the person at that index by replacing the old data at the specified parameter with what was input by the user.
+4. HireHive saves the details of the edited person. 
+5. HireHive displays the person with their new details.
+
+   Use case ends.
+
+**Extensions**
+  
+* 2a. HireHive detects an invalid index.
+   * 2a1. HireHive shows an error message.
+   * 2a2. User enters new data.
+   * Steps 2a1-2a2 are repeated until the user inputs a valid index.
+   * Use case resumes from step 3.
+
+* 2b. HireHive detects an invalid parameter.
+   * 2b1. HireHive shows an error message.
+   * 2b2. User enters new data.
+   * Steps 2b1-2b2 are repeated until the user inputs a valid parameter.
+   * Use case resumes from step 3.
+
+* 2c. HireHive detects an empty input. 
+  * 2c1. HireHive shows an error message. 
+  * 2c2. User enters new data. 
+  * Steps 2c1-2c2 are repeated until the user inputs valid inputs for both index and parameter.
+  * Use case resumes from step 3.
+
+* 2d. User tries to edit the phone number parameter of a person at a valid index.
+  * 2d1. HireHive detects an existing person with the same phone number
+  * 2d2. HireHive shows an error message. 
+  * 2d3. User enters new data
+  * Steps 2d1-2d3 are repeated until the user inputs a unique phone number.
+  * Use case resumes from step 2.
+
+**Use case: UC06 - Find a person**
+
+Preconditions: The list is not empty
+
+**MSS**
+
+1. User requests to find persons whose names contain certain keyword(s). 
+2. User enters the keyword(s).
+3. HireHive displays the persons whose names have those keyword(s).
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. HireHive detects an empty keyword.
+    * 2a1. HireHive shows an error message.
+    * 2a2. User enters new data.
+    * Steps 2a1-2a2 are repeated until the user inputs at least 1 keyword.
+    * Use case resumes from step 3.
+
+* 2b. Nobody's names have those keyword(s).
+  * 2b1. HireHive displays an empty list.
+  * Use case ends.
 
 ### Non-Functional Requirements
 
