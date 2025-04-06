@@ -76,6 +76,13 @@ public class StringUtilTest {
         assertTrue(StringUtil.isPositiveInteger("10"));
     }
 
+    @Test
+    public void isValidStringOrInteger() {
+        assertTrue(StringUtil.isValidStringOrInteger("aaaaa"));
+        assertTrue(StringUtil.isValidStringOrInteger("2147483647"));
+        assertFalse(StringUtil.isValidStringOrInteger("2147483648"));
+    }
+
 
     //---------------- Tests for containsWordIgnoreCase --------------------------------------
 
