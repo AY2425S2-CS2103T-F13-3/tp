@@ -22,13 +22,15 @@ import hirehive.address.testutil.Assert;
 import hirehive.address.testutil.TypicalIndexes;
 
 public class ParserUtilTest {
-    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_NAME = "R4chel";
+    private static final String INVALID_NAME_2 = ".Rachel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_DATE = "01012004";
     private static final String VALID_NAME = "Rachel Walker";
+    private static final String VALID_NAME_2 = "R@c/hel, Wa()l-ker.";
     private static final String VALID_PHONE = "91234467";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
@@ -63,8 +65,19 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseName_invalidValue_throwsParseException() {
+    public void parseName_Number_throwsParseException() {
         Assert.assertThrows(ParseException.class, () -> ParserUtil.parseName(INVALID_NAME));
+    }
+
+    @Test
+    public void parseName_invalidValue_throwsParseException() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseName(INVALID_NAME_2));
+    }
+
+    @Test
+    public void parseName_validValueWithCommercialAt() throws Exception {
+        Name expectedName = new Name(VALID_NAME_2);
+        assertEquals(expectedName, ParserUtil.parseName(VALID_NAME_2));
     }
 
     @Test
