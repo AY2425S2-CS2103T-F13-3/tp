@@ -66,15 +66,15 @@ Ready to revolutionise your hiring? Let's begin!
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/intern`: Adds an applicant named `John Doe` to HireHive, with his relevant information
 
-   * `delete n/John Doe` : Deletes the applicant `John Doe` from the current list.
-
    * `edit 3 n/Josef` : Edits the name of the 3rd applicant in the list to Josef
 
    * `find John Doe`: Searches for John Doe in the current list.
 
    * `tag n/John Doe t/interviewee` : Tags John Doe with the 'interviewee' tag
+   
+   * `delete n/John Doe` : Deletes the applicant `John Doe` from the current list.
 
-   * `exit` : Exits the app.
+  * `exit` : Exits the app.
 
 6. You can refer to the [Features](#features) section below for details of each command.
 
@@ -84,22 +84,22 @@ Ready to revolutionise your hiring? Let's begin!
 
 ## Command summary
 
-| Action          | Format, Examples                                                                                                                                                                                 |
-|-----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Help**        | `help`                                                                                                                                                                                           |
-| **Add**         | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [i/INFO]` <br> e.g., `add n/James Ho p/87654321 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/software engineer intern i/26 years old` |
-| **List**        | `list`                                                                                                                                                                                           |
-| **Edit**        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [i/NOTE] [d/DATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                      |
-| **Tag**         | `tag n/NAME [t/TAG]...​`                                                                                                                                                                         |
-| **Filter**      | `filter t/TAG` <br> e.g., `filter t/Applicant`                                                                                                                                                   |
-| **NewNote**     | `newnote n/NAME i/NOTE` <br> e.g., `newnote n/John Doe i/25 years old`                                                                                                                                                                                                 |
-| **DisplayNote** | `displaynote n/NAME` <br> e.g., `displaynote n/John Doe`                                                                                                                                                                                                 |
-| **Find**        | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                       |
-| **Delete**      | `delete n/NAME`<br> e.g., `delete n/John Doe`                                                                                                                                                    |
-| **Clear**       | `clear`                                                                                                                                                                                          |
-| **Schedule**    | `schedule n/NAME [d/DATE]` <br> `schedule INDEX [d/DATE]`                                                                                                                                        |
-| **Reminder**    | `remind DAYS`                                                                                                                                                                                    |
-| **Exit**        | `exit`                                                                                                                                                                                           |
+| Action          | Format, Examples                                                                                                                                                         |
+|-----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**        | `help`                                                                                                                                                                   |
+| **Add**         | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE` <br> e.g., `add n/James Ho p/87654321 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/software engineer intern` |
+| **List**        | `list`                                                                                                                                                                   |
+| **Edit**        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [i/NOTE] [d/DATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                              |
+| **Tag**         | `tag n/NAME [t/TAG]...​`                                                                                                                                                 |
+| **Filter**      | `filter t/TAG` <br> e.g., `filter t/Applicant`                                                                                                                           |
+| **NewNote**     | `newnote n/NAME i/NOTE` <br> e.g., `newnote n/John Doe i/25 years old`                                                                                                                                                                         |
+| **DisplayNote** | `displaynote n/NAME` <br> e.g., `displaynote n/John Doe`                                                                                                                                                                         |
+| **Find**        | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                               |
+| **Delete**      | `delete n/NAME`<br> e.g., `delete n/John Doe`                                                                                                                            |
+| **Clear**       | `clear`                                                                                                                                                                  |
+| **Schedule**    | `schedule n/NAME [d/DATE]` <br> `schedule INDEX [d/DATE]`                                                                                                                |
+| **Reminder**    | `remind DAYS`                                                                                                                                                            |
+| **Exit**        | `exit`                                                                                                                                                                   |
 
 [Back to top](#welcome-to-hirehive)
 
@@ -148,18 +148,46 @@ You can add a new applicant to HireHive when someone new applies to you company!
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE`
 
-**:information_source: Note!**<br>
-* Please input a phone number that **start with 9/8/6**, is **exactly 8 digits** long and do not use spaces.
-* Please **do not use** dashes(-), commas(,) and periods(.) in names.
-    - Example: `Doe, John` or `Doe-John` should be entered as `Doe John`.
-* Names need to be in English!
+* NAME: 
+  - Names should only contain **English letters**, **spaces**, and the following symbols: **, ( ) / . @ - '**
+    - Example: `Ali s/o Mohammed`, `Rachel-Natalie`, `Si Min, Rachel O' Connor` are allowed names. 
+  - Names **should not be blank or start with a symbol**. 
+    - Example: `@Natalie` is not allowed
+  - Please **do not use numbers** in names.
+    - Example: `R4chel` is not allowed
+  - Names are **[case-insensitive](#glossary)**, and is displayed as how you type it.
+
+* PHONE_NUMBER: 
+  - Please input a phone number that **start with 9/8/6** and is **exactly 8 digits** long.
+  - Please **do not use spaces** 
+  
+* EMAIL:
+  - Emails should be of the format local-part@domain and adhere to the following constraints:
+    1. local-part: 
+       - The local-part should only contain alphanumeric characters and the special characters: +_.-
+       - The local-part may not start or end with any special characters.
+    2. domain:
+    + "2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels "
+    + "separated by periods.\n"
+    + "The domain name must:\n"
+    + "    - end with a domain label at least 2 characters long\n"
+    + "    - have each domain label start and end with alphanumeric characters\n"
+    + "    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.";
+
+* ADDRESS: 
+  - Addresses can take any values, and it should not be blank
+* ROLE: 
+
+**:information_source: Note!**<br> 
+- Every applicant in HireHive should **contain **[unique](#glossary)** phone numbers**!
+  - i.e. HireHive ensures that there are no applicants in HireHive that have the same phone number!
+  - More specifically, applicants can share the same name, email, address and role, but **not phone numbers**!
+    - Example: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Software Engineer` and 
+      `add n/John Doe p/88888888 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Software Engineer` are treated as 2 different applicants!
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 There is no need to manually add a tag as the 'Applicant' tag is automatically assigned when you add a new applicant to HireHive.
 </div>
-
-- The parameter NAME is **[unique](#glossary)** and **[case-insensitive](#glossary)**, and is displayed as how you type it.
-- Applicants in HireHive can share the same phone number, email, address and role.
 
 Examples:
 * `add n/Betsy Crowe e/betsycrowe@example.com a/Ang Mo Kio Street 22 p/87654321 r/senior consulting analyst`: Adds an applicant with the name `Betsy Crowe`, who has `betsycrowe@example.com` as their email, `87654321` as their phone number, and is applying for the `senior consulting analyst` role.
