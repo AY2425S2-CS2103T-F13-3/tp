@@ -164,19 +164,20 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE`
 * EMAIL:
   - Emails should be of the format local-part@domain and adhere to the following constraints:
     1. local-part: 
-       - The local-part should only contain alphanumeric characters and the special characters: +_.-
-       - The local-part may not start or end with any special characters.
+       - The local-part should only contain [alphanumeric](#glossary) characters and the special characters: +_.-
+       - The local-part should not start or end with any special characters.
     2. domain:
-    + "2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels "
-    + "separated by periods.\n"
-    + "The domain name must:\n"
-    + "    - end with a domain label at least 2 characters long\n"
-    + "    - have each domain label start and end with alphanumeric characters\n"
-    + "    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.";
+       - The domain name is made up of domain labels that may or may not be separated by periods. 
+       - The domain name must:
+           - end with a domain label at least 2 characters long, and
+           - have each domain label start and end with [alphanumeric](#glossary) characters, and
+           - have each domain label consist of [alphanumeric](#glossary) characters, separated only by hyphens, if any.
 
 * ADDRESS: 
   - Addresses can take any values, and it should not be blank
+
 * ROLE: 
+  - Roles should only contain [alphanumeric](#glossary) characters and spaces, and it should not be blank. 
 
 **:information_source: Note!**<br> 
 - Every applicant in HireHive should **contain **[unique](#glossary)** phone numbers**!
@@ -460,6 +461,7 @@ Term | Description
 **Applicant** | A person who makes a formal application for something, especially a job.
 **Unique** | Only 1 specific instance of it exists.
 **Case-insensitive** | Uppercase and lowercase letters are treated the same and hence equivalent.
+**Alphanumeric** | consisting of both letters (A to Z) and numbers (0 to 9).
 **Hard disk** | The storage device used by a computer. These can be used as primary or secondary storage.
 **JSON** | Acronym for _JavaScript Object Notation,_ an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of name–value pairs and arrays (or other serializable values).
 **Shortcut** | A key or combination of keys that you can press on a computer keyboard to quickly perform a specific action.
