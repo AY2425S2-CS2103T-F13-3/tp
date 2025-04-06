@@ -52,6 +52,9 @@ public class EditCommandParserTest {
 
         // invalid prefix being parsed as preamble
         CommandParserTestUtil.assertParseFailure(parser, "1 z/ string", ParserUtil.MESSAGE_INVALID_INDEX);
+
+        // out of range integer
+        CommandParserTestUtil.assertParseFailure(parser, "100000000000000000000000000000 n/Alice", ParserUtil.MESSAGE_OUT_OF_RANGE);
     }
 
     @Test
