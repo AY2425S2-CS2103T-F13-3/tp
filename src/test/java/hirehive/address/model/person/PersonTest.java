@@ -5,13 +5,13 @@ import static hirehive.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_DATE_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static hirehive.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_NOTE_AMY;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_NOTE_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_ROLE_AMY;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
-import static hirehive.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_TAG_CANDIDATE;
 import static hirehive.address.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -54,7 +54,7 @@ public class PersonTest {
         Assertions.assertTrue(TypicalPersons.BOB.isSamePerson(editedBob));
 
         //name same, only phone different, all other attributes same -> returns false
-        Person editedAmy =  new PersonBuilder(TypicalPersons.AMY).withPhone(VALID_PHONE_BOB)
+        Person editedAmy = new PersonBuilder(TypicalPersons.AMY).withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withRole(VALID_ROLE_AMY)
                 .withTag(DEFAULT_TAG_APPLICANT).withNote(VALID_NOTE_AMY).build();
         Assertions.assertFalse(TypicalPersons.AMY.isSamePerson(editedAmy));

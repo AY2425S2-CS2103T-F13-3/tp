@@ -65,7 +65,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseName_Number_throwsParseException() {
+    public void parseName_number_throwsParseException() {
         Assert.assertThrows(ParseException.class, () -> ParserUtil.parseName(INVALID_NAME));
     }
 
