@@ -5,6 +5,7 @@ import static hirehive.address.logic.parser.CliSyntax.PREFIX_TAG;
 import org.junit.jupiter.api.Test;
 
 import hirehive.address.commons.core.index.Index;
+import hirehive.address.commons.util.StringUtil;
 import hirehive.address.logic.Messages;
 import hirehive.address.logic.commands.CommandTestUtil;
 import hirehive.address.logic.commands.EditCommand;
@@ -29,7 +30,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
+        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.VALID_NAME_AMY, ParserUtil.MESSAGE_INVALID_INDEX);
 
         // no field specified
         CommandParserTestUtil.assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
@@ -41,16 +42,16 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        CommandParserTestUtil.assertParseFailure(parser, "-5" + CommandTestUtil.NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        CommandParserTestUtil.assertParseFailure(parser, "-5" + CommandTestUtil.NAME_DESC_AMY, ParserUtil.MESSAGE_INVALID_INDEX);
 
         // zero index
-        CommandParserTestUtil.assertParseFailure(parser, "0" + CommandTestUtil.NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        CommandParserTestUtil.assertParseFailure(parser, "0" + CommandTestUtil.NAME_DESC_AMY, ParserUtil.MESSAGE_INVALID_INDEX);
 
         // invalid arguments being parsed as preamble
-        CommandParserTestUtil.assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
+        CommandParserTestUtil.assertParseFailure(parser, "1 some random string", ParserUtil.MESSAGE_INVALID_INDEX);
 
         // invalid prefix being parsed as preamble
-        CommandParserTestUtil.assertParseFailure(parser, "1 z/ string", MESSAGE_INVALID_FORMAT);
+        CommandParserTestUtil.assertParseFailure(parser, "1 z/ string", ParserUtil.MESSAGE_INVALID_INDEX);
     }
 
     @Test
