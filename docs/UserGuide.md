@@ -54,7 +54,7 @@ Ready to revolutionise your hiring? Let's begin!
 4. Run HireHive
    - Find the folder that you stored HireHive previously (e.g. "Documents" or "Desktop" or "HireHive").
    - Right-click on the folder and choose:
-     - For **Mac users**: "New terminal at [folder-name]".
+     - For **Mac users**: "New terminal at Folder".
      - For **Windows users**: "Open in terminal".
    - Type `java -jar hirehive.jar` command in the opened terminal and press Enter to run the HireHive application.<br>
    - A [GUI](#glossary) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -410,6 +410,9 @@ Format: `clear`
 
 **:information_source: Note!**<br>
 This action is **irreversible**! Please use this command with caution!
+
+**:information_source: Note!**<br>
+If you `clear` the data in HireHive and exit the app immediately, when you re-run HireHive, you might initially see an error message on your screen. But not to worry! You may ignore this message and continue using HireHive as per normal.
 
 [Back to top](#welcome-to-hirehive)
 
