@@ -449,6 +449,18 @@ Preconditions: The list is not empty
   * 2b1. HireHive displays an empty list.
   * Use case ends.
 
+**Use case: UC07 - Sorting persons**
+
+Preconditions: The list is not empty
+
+**MSS**
+
+1. User requests to sort the list.
+2. HireHive sorts the list 
+3. HireHive displays sorted list.
+
+   Use case ends.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
