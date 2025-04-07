@@ -59,8 +59,10 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         role.setText(person.getRole().toString());
-        tags.getChildren().add(new Label(person.getTag().getTagName()));
-        date.setText(person.getDate().toString());
+        Label tag = new Label(person.getTag().getTagName());
+        tag.getStyleClass().add(person.getTag().getTagName().toLowerCase());
+        tags.getChildren().add(tag);
+        date.setText(person.getDate().toString().isBlank() ? "Date not set" : person.getDate().toString());
         note.setText("Note Contents: " + (person.getNote().isEmpty() ? "Empty" : "Not empty"));
     }
 }
