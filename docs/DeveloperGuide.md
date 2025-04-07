@@ -21,6 +21,12 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+* Note that the class names with the name `AddressBook` are intentionally left as it is as our classes are named as such
+</div>
+
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
@@ -192,7 +198,7 @@ Step 4. The user now decides that adding the person was a mistake, and decides t
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
-</div>
+</div>z
 
 The following sequence diagram shows how an undo operation goes through the `Logic` component:
 
@@ -347,10 +353,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC03 - Delete a person**
 
+Preconditions: The list is not empty
+
 **MSS**
 
-1.  User requests to <ins>list persons (UC02)</ins>.
-2. User requests to delete a specific person in the list
+1. User requests to <ins>list persons (UC02)</ins>.
+2. User requests to delete a specific person in the list, using either:
+   * The person's index in the list 
+   * The person's name in the list
 3. HireHive deletes the person
 
     Use case ends.
@@ -363,25 +373,59 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
+* 3b. The given name does not match any person
+    * 3b1. HireHive shows an error message.
+
+      Use case resumes at step 1.
+
+* 3bc. Multiple persons match the given name
+    * 3c1. HireHive shows an error message, and requests for more specific data.
+    * 3c2. User enters new data
+    * 3c3. Steps 3c1-3c2 are repeated till the data entered is correct
+
+      Use case resumes at step 3.
+
 
 **Use case: UC04 - Tag a person**
 
 **MSS**
 
 1. User requests to <ins>list persons (UC02)</ins>.
-2. User requests to tag a person with a number of tags.
-3. HireHive tags the person with the tags
+2. User specifies a person in HireHive to tag with a specific tag.
+3. HireHive tags the person with the specific tag.
+4. HireHive displays the details of the person tagged.
+5. HireHive saves the updated details of the person tagged.
+
     Use case ends.
 
 **Extensions**
 
-* 3a. The given index is invalid.
+* 3a. User specifies a person by a valid name, but HireHive has multiple people containing the same name.
 
     * 3a1. HireHive shows an error message.
+    * 3a2. HireHive shows a list of persons containing the name.
+    * 3a3. HireHive shows a message to ask user to enter the full name of the person to tag.
 
-      Use case resumes at step 1.
+      Use case ends.
 
-*{More to be added}*
+
+* 3b. User specifies a person by a name of a person that does not exist.
+    * 3b1. HireHive shows an error message that no such person exists.
+    * 3b2. HireHive shows an empty list of persons.
+
+      Use case ends.
+
+* 3c. User specifies a person by invalid index.
+    * 3c1. HireHive shows an error message that index is invalid.
+
+      Use case ends.
+
+* 3d. User enters an invalid offset.
+    * 3d1. HireHive shows an error message that offset is invalid.
+
+      Use case ends.
+
+
 
 
 **Use case: UC05 - Edit a person**
@@ -535,10 +579,19 @@ Preconditions: The list is not empty
 2. User enters the name of the person.
 3. HireHive displays the contents of the note in a popup window.
 
+**Use case: UC08 - Filtering out applicants by tag**
+
+Preconditions: The list is not empty
+
+**MSS**
+
+1. User requests to filter out the list with a tag
+2. User enters the specific tag to filter out the list
+3. HireHive displays all persons without the specified tag
+
    Use case ends.
 
 **Extensions**
-
 * 2a. HireHive detects that name is missing.
     * 2a1. HireHive shows an error message.
     * 2a2. User enters new input.
@@ -593,9 +646,34 @@ Preconditions: User device has a working Internet connection.
 * 2b. User uses the shortcut to access the `Help` window. On both Mac and Windows, press `fn` + `F1`.
   * Use case resumes from step 3.
 
-**Use case UC12 - Exiting HireHive**
+**Use case: UC12 - Filtering out applicants by tag**
 
-*MSS*
+Preconditions: The list is not empty
+
+**MSS**
+
+1. User requests to filter out the list with a tag
+2. User enters the specific tag to filter out the list
+3. HireHive displays all persons without the specified tag
+
+**Extensions**
+* 2a. HireHive detects an empty tag
+    * 2a1. HireHive shows an error message
+    * 2a2. User enters new data
+    * Steps 2a1-2a2 are repeated till user inputs a tag
+
+      Use case resumes at step 3.
+
+* 2b. HireHive detects an unknown tag
+    * 2b1. HireHive shows an error message
+    * 2b2. User enters new data
+    * Steps 2b1-2b2 are repeated till users input a valid tag
+
+      Use case resumes at step 3.
+
+**Use case UC13 - Exiting HireHive**
+
+**MSS**
 
 1. User requests to exit HireHive.
 2. User enters `exit` as input.
@@ -611,6 +689,7 @@ Preconditions: User device has a working Internet connection.
   * Use case resumes from step 3.
 * 2b. User clicks on the close button of the display window. On Mac, it is in the top left corner. On Windows, it is in the top right corner.
   * Use case resumes from step 3.
+
 
 ### Non-Functional Requirements
 
