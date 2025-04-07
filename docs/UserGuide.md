@@ -81,8 +81,11 @@ Ready to revolutionise your hiring? Let's begin!
 
   * `exit` : Exits the app.
 
-**:information_source: Note!**<br>
-- Not that in hireHive, every applicant should **contain a **[unique](#glossary)** name**!
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+- Note that in HireHive, every applicant should **contain a [unique](#glossary) name**!
+</div>
 
 6. You can refer to the [Features](#features) section below for details of each command.
 
@@ -275,6 +278,8 @@ Examples:
 * `tag 1 t/Candidate` will tag the 1st person as "Candidate"
 * `tag +1 n/John Doe` for a John Doe person with tag "Applicant" will tag them as "Candidate"
 
+[Back to top](#welcome-to-hirehive)
+
 ### Add notes to person: `newnote`
 
 You can add information about the applicant into a note with this command.
@@ -286,6 +291,10 @@ Format: `newnote n/NAME i/NOTE`
 * NOTE has a limit of 500 characters.
 * After adding, a popup window will appear containing the given input.
 * If the input is empty or consists only of whitespace, then the popup window displays a default message "Currently empty..." in yellow.
+
+Examples:
+* `newnote n/John Doe i/25 years old` adds a note to John Doe that says "25 years old"
+* `newnote n/John Doe i/` removes any existing content in John Doe's note
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can remove the contents of the note by leaving the NOTE field blank.
@@ -321,6 +330,8 @@ Examples:
 * Running `schedule n/Bob id/01/01/2025` will schedule an interview with Bob on 01/01/2025
 * Running `schedule n/Bob` on 01/01/2025 when there are no interviews scheduled will schedule an interview with Bob on 02/01/2025
 * Running `schedule n/Bob` on 01/01/2025 when there is an interview on 02/01/2025 will instead schedule the interview with Bob on 03/01/2025
+
+[Back to top](#welcome-to-hirehive)
 
 ### <u>Listing applicant information</u>
 
@@ -375,6 +386,9 @@ Format: `filter t/TAG`
 * The search is [case-insensitive](#glossary). e.g `applicant` will match `Applicant`
 * Only full words will be matched e.g. `Reject` will not match `Rejected`
 
+Examples:
+* `filter t/Applicant` will filter and display everyone with the `Applicant` tag in the list
+
 [Back to top](#welcome-to-hirehive)
 
 ### Filtering out applicants with tag: `filterout`
@@ -389,11 +403,6 @@ Examples:
 
 [Back to top](#welcome-to-hirehive)
 
-Examples:
-* `newnote n/John Doe i/25 years old` adds a note to John Doe that says "25 years old"
-* `newnote n/John Doe i/` removes any existing content in John Doe's note
-
-[Back to top](#welcome-to-hirehive)
 
 ### Show applicants with upcoming interviews: `remind`
 
