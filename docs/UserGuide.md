@@ -357,7 +357,7 @@ Format: `displaynote n/NAME`
 * Displays the note if the given name partially matches **exactly one** applicant in the list ([case-insensitive](#glossary))
 * If multiple matches are found, a list of all matching names will be displayed. You should then retry the command but using the **full name** of the desired applicant.
 * A popup window will appear containing the applicant's note.
-* If the input is empty or consists only of whitespace, then the popup window displays a default message "Currently empty..." in yellow.
+* If the note is empty, then the popup window displays a default message "Currently empty..." in yellow.
 
 Examples:
 * `displaynote n/John Doe` shows John Doe's note
