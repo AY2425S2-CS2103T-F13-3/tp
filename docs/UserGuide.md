@@ -182,12 +182,15 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE`
 * ROLE: 
   - Roles should only **contain [alphanumeric](#glossary) characters and spaces**, and it should not be blank. 
 
-**:information_source: Note!**<br> 
-- Every applicant in HireHive should **contain **[unique](#glossary)** phone numbers**!
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br> 
+- Every applicant in HireHive should **contain [unique](#glossary) phone numbers**!
   - i.e. HireHive ensures that there are no applicants in HireHive that have the same phone number!
   - More specifically, applicants can share the same name, email, address and role, but **not phone numbers**!
     - Example: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Software Engineer` and 
       `add n/John Doe p/88888888 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Software Engineer` are treated as 2 different applicants and both applicants can be added!
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 There is no need to manually add a tag as the 'Applicant' tag is automatically assigned when you add a new applicant to HireHive.
@@ -212,7 +215,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/ROLE] [i
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Note!:**<br>
+**:information_source: Note:**<br>
 * All the fields provided should follow the same rules as the [Add command](#add-an-applicant-add)
 </div>
 
@@ -416,11 +419,17 @@ Clears all entries from HireHive.
 
 Format: `clear`
 
-**:information_source: Note!**<br>
-This action is **irreversible**! Please use this command with caution!
+<div markdown="span" class="alert alert-warning">
 
-**:information_source: Note!**<br>
+:exclamation: **Caution:**
+This action is **irreversible**! Please use this command with caution!
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
 If you `clear` the data in HireHive and exit the app immediately, when you re-run HireHive, you might initially see an error message on your screen. But not to worry! You may ignore this message and continue using HireHive as per normal.
+</div>
 
 [Back to top](#welcome-to-hirehive)
 
