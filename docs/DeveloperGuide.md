@@ -521,7 +521,7 @@ Preconditions: The list is not empty
 
 Preconditions: The list is not empty
 
-*MSS*
+**MSS**
 
 1. User requests to add notes to a person.
 2. User enters the name of the person and the contents of the note to be added.
@@ -566,7 +566,7 @@ Preconditions: The list is not empty
 
 Preconditions: The list is not empty
 
-*MSS*
+**MSS**
 
 1. User requests to display notes of a person.
 2. User enters the name of the person.
@@ -608,7 +608,7 @@ Preconditions: The list is not empty
 
 **Use case UC10 - Clear AddressBook**
 
-*MSS*
+**MSS**
 
 1. User requests to clear the AddressBook.
 2. User enters `clear` in the command box.
@@ -620,7 +620,7 @@ Preconditions: The list is not empty
 
 Preconditions: User device has a working Internet connection.
 
-*MSS*
+**MSS**
 
 1. User requests help in using HireHive.
 2. User enters `help` in the command box.
@@ -730,6 +730,7 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 ### Viewing help
+
 1. Viewing help page
 
    1. Prerequisites: Application must be running.
@@ -741,6 +742,7 @@ testers are expected to do more *exploratory* testing.
       Expected: A 'Help' window pops up, with the link to the user guide, that can be copied.
 
 ### Adding a person
+
 1. Adding a person
 
    1. Prerequisites: Application must be running.
@@ -760,7 +762,15 @@ testers are expected to do more *exploratory* testing.
    6. Test case: `add n/小丽 e/john@gmail.com a/Bishan Street 20 p/98765432 r/senior consulting intern` <br>
       Expected: No person is added. Error details shown in the status message.
 
+### Editing a person
+
+1. Editing a person
+   1. Prerequisites: List is not empty
+   
+   2. Test case: `edit 1 n/John Doe e/doejohn@gmail.com` <br> Expected: The first person in the list, which is the topmost person, now has the name "John Doe" and email "doejohn@gmail.com".
+
 ### Listing persons
+
 1. Listing all the persons in HireHive
 
    1. Prerequisites: List is not empty
@@ -771,6 +781,7 @@ testers are expected to do more *exploratory* testing.
        Expected: All the persons in the list are listed. Topmost person in the list is the oldest person who was added to the list, while the bottom-most person was the person who was most recently added to the list. Index of persons should start from 1 and increase from top to bottom of the list.
 
 ### Sorting persons
+
 1. Sorting all the persons shown in the list. 
 
    1. Prerequisites: Multiple persons in the list, with some persons having interview dates
@@ -890,6 +901,7 @@ testers are expected to do more *exploratory* testing.
      Expected: Error message for invalid integer is shown.
 
 ### Filtering for applicants with tag
+
 1. Filtering for applicants with specified tag
    1. Prerequisites: Use the same persons list as when you first ran HireHive.jar. `list` command is run before the execution of the below commands.
    2. Test case: `filter t/interviewee` <br>
@@ -902,6 +914,7 @@ testers are expected to do more *exploratory* testing.
       Expected: Error message for invalid command format shown in status message with command format and example.
 
 ### Filtering out applicants with tag
+
 1. Filtering out all applicants with specified tag, and the remaining list contains applicants without that tag
    1. Prerequisites: Use the same persons list as when you first ran HireHive.jar. `list` command is run before the execution of the below commands.
    2. Test case: `filterout t/interviewee` <br>
@@ -912,25 +925,6 @@ testers are expected to do more *exploratory* testing.
       Expected: Error message showing the valid tags will be displayed.
    5. Test case `filterout candidate` <br>
       Expected: Error message for invalid command format shown in status message with command format and example.
-
-### Clearing all entries
-1. Clearing all entries in HireHive
-
-    1. Prerequisites: List contains people.
-
-    2. Test case: `clear` <br>
-       Expected: All the persons in the list are cleared. List is now empty.
-
-    3. Test case: `Clear` <br>
-       Expected: Nothing is cleared. Error details shown in the status message.
-
-### Exiting the program 
-1. Exiting the program
-
-   1. Prerequisites: Program was originally running.
-   
-   2. Test case: `exit` <br>
-      Expected: Program exits and closes. 
 
 ### Adding note of a person
 
@@ -948,6 +942,27 @@ Prerequisite: use the initial persons list loaded when first running HireHive.ja
 2. Test case: `displaynote n/BeRnIcE yU` <br> Expected output: "Displaying note of: Bernice Yu; Phone: 99272758; Email: berniceyu@example.com; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Role: HR manager; Date: 01/03/2025; Tag: INTERVIEWEE" Additionally, popup window shows "Currently empty..." in yellow font.
 3. Test case: `displaynote n/Irfan` <br> Expected output: "Displaying note of: Irfan Ibrahim; Phone: 92492021; Email: irfan@example.com; Address: Blk 47 Tampines Street 20, #17-35; Role: Software Engineer; Date: 06/03/2025; Tag: REJECTED" Additionally, popup window shows "30 years old" in white font.
 4. Test case: `newnote n/raHIM i/` <br> Expected output: same as test case 3.
+
+### Clearing all entries
+
+1. Clearing all entries in HireHive
+
+    1. Prerequisites: List contains people.
+
+    2. Test case: `clear` <br>
+       Expected: All the persons in the list are cleared. List is now empty.
+
+    3. Test case: `Clear` <br>
+       Expected: Nothing is cleared. Error details shown in the status message.
+
+### Exiting the program
+
+1. Exiting the program
+
+   1. Prerequisites: Program was originally running.
+   
+   2. Test case: `exit` <br>
+      Expected: Program exits and closes. 
 
 ### Loading data
 
