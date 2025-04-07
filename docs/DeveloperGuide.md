@@ -371,7 +371,7 @@ Preconditions: The list is not empty
 
       Use case resumes at step 1.
 
-* 3bc. Multiple persons match the given name
+* 3c. Multiple persons match the given name
     * 3c1. HireHive shows an error message, and requests for more specific data.
     * 3c2. User enters new data
     * 3c3. Steps 3c1-3c2 are repeated till the data entered is correct
@@ -386,8 +386,8 @@ Preconditions: The list is not empty
 1. User requests to <ins>list persons (UC02)</ins>.
 2. User specifies a person in HireHive to tag with a specific tag.
 3. HireHive tags the person with the specific tag.
-4. HireHive displays the details of the person tagged.
-5. HireHive saves the updated details of the person tagged.
+4. HireHive saves the details of the person tagged.
+5. HireHive displays the updated details of the person tagged.
 
     Use case ends.
 
@@ -400,7 +400,6 @@ Preconditions: The list is not empty
     * 3a3. HireHive shows a message to ask user to enter the full name of the person to tag.
 
       Use case ends.
-
 
 * 3b. User specifies a person by a name of a person that does not exist.
     * 3b1. HireHive shows an error message that no such person exists.
@@ -487,11 +486,13 @@ Preconditions: The list is not empty
 
 Use case: UC07 - Schedule an interview
 
-MSS
+**MSS**
 
 1. User requests to <ins>list persons (UC02)</ins>.
 2. User requests to schedule a meeting on a certain date.
 3. HireHive adds the date to the person's entry.
+4. HireHive saves the details of the person with the newly added date.
+5. HireHive displays the details of the person with the newly added date.
 
     Use case ends.
 
@@ -762,13 +763,6 @@ testers are expected to do more *exploratory* testing.
    6. Test case: `add n/小丽 e/john@gmail.com a/Bishan Street 20 p/98765432 r/senior consulting intern` <br>
       Expected: No person is added. Error details shown in the status message.
 
-### Editing a person
-
-1. Editing a person
-   1. Prerequisites: List is not empty
-   
-   2. Test case: `edit 1 n/John Doe e/doejohn@gmail.com` <br> Expected: The first person in the list, which is the topmost person, now has the name "John Doe" and email "doejohn@gmail.com".
-
 ### Listing persons
 
 1. Listing all the persons in HireHive
@@ -928,20 +922,42 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding note of a person
 
-Prerequisite: use the initial persons list loaded when first running HireHive.jar
-1. Test case: `newnote n/Bernice Yu i/20 years old` <br> Expected output: "Added and displaying note of: Bernice Yu; Phone: 99272758; Email: berniceyu@example.com; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Role: HR manager; Date: 01/03/2025; Tag: INTERVIEWEE <br> Success: Applicant data has been saved." Additionally, popup window shows "20 years old" in white font.
-2. Test case: `newnote n/BeRnIcE i/19 years old` <br> Expected output: same as test case 1, but popup window shows "19 years old" in white font.
-3. Test case: `newnote n/  Bernice  i/18 years old` <br> Expected output: same as test case 1, but popup window shows "18 years old" in white font.
-4. Test case: `newnote n/Yu i/` <br> Expected output: same as test case 1, but popup window shows "Currently empty..." in yellow font.
-5. Test case: `newnote n/bErNiCe yU i/Currently empty...` <br> Expected output: same as test case 1, but popup window shows "Currently empty..." in white font.
+1. Adding note of a person
+    1. Prerequisite: Use the initial persons list loaded when first running HireHive.jar
+    2. Test case: `newnote n/Bernice Yu i/20 years old` <br> Expected output: "Added and displaying note of: Bernice Yu; Phone: 99272758; Email: berniceyu@example.com; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Role: HR manager; Date: 01/03/2025; Tag: INTERVIEWEE <br> Success: Applicant data has been saved." Additionally, popup window shows "20 years old" in white font.
+    3. Test case: `newnote n/BeRnIcE i/19 years old` <br> Expected output: same as test case 1, but popup window shows "19 years old" in white font.
+    4. Test case: `newnote n/  Bernice  i/18 years old` <br> Expected output: same as test case 1, but popup window shows "18 years old" in white font.
+    5. Test case: `newnote n/Yu i/` <br> Expected output: same as test case 1, but popup window shows "Currently empty..." in yellow font.
+    6. Test case: `newnote n/bErNiCe yU i/Currently empty...` <br> Expected output: same as test case 1, but popup window shows "Currently empty..." in white font.
 
 ### Displaying note of a person
 
-Prerequisite: use the initial persons list loaded when first running HireHive.jar
-1. Test case: `displaynote n/Alice Yeoh` <br> Expected output: "Displaying note of: Alice Yeoh; Phone: 87438807; Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40; Role: UI designer; Date: ; Tag: APPLICANT" Additionally, popup window shows "20 years old" in white font.
-2. Test case: `displaynote n/BeRnIcE yU` <br> Expected output: "Displaying note of: Bernice Yu; Phone: 99272758; Email: berniceyu@example.com; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Role: HR manager; Date: 01/03/2025; Tag: INTERVIEWEE" Additionally, popup window shows "Currently empty..." in yellow font.
-3. Test case: `displaynote n/Irfan` <br> Expected output: "Displaying note of: Irfan Ibrahim; Phone: 92492021; Email: irfan@example.com; Address: Blk 47 Tampines Street 20, #17-35; Role: Software Engineer; Date: 06/03/2025; Tag: REJECTED" Additionally, popup window shows "30 years old" in white font.
-4. Test case: `newnote n/raHIM i/` <br> Expected output: same as test case 3.
+1. Displaying note of a person
+    1. Prerequisite: Use the initial persons list loaded when first running HireHive.jar
+    2. Test case: `displaynote n/Alice Yeoh` <br> Expected output: "Displaying note of: Alice Yeoh; Phone: 87438807; Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40; Role: UI designer; Date: ; Tag: APPLICANT" Additionally, popup window shows "20 years old" in white font.
+    3. Test case: `displaynote n/BeRnIcE yU` <br> Expected output: "Displaying note of: Bernice Yu; Phone: 99272758; Email: berniceyu@example.com; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Role: HR manager; Date: 01/03/2025; Tag: INTERVIEWEE" Additionally, popup window shows "Currently empty..." in yellow font.
+    4. Test case: `displaynote n/Irfan` <br> Expected output: "Displaying note of: Irfan Ibrahim; Phone: 92492021; Email: irfan@example.com; Address: Blk 47 Tampines Street 20, #17-35; Role: Software Engineer; Date: 06/03/2025; Tag: REJECTED" Additionally, popup window shows "30 years old" in white font.
+    5. Test case: `newnote n/raHIM i/` <br> Expected output: same as test case 3.
+
+### Editing the details of a person
+
+1. Editing the details of a person 
+   1. Prerequisites: Run `list` command and ensure there are at least 2 people in the list  
+   2. Test case: `edit 2 p/88888888` <br>
+      Expected: The phone number of the 2nd person in the list is changed to 88888888
+   3. Test case: `edit 2 p/88888888 e/g@gmail.com` <br>
+      Expected: The phone number and email of the 2nd person in the list is changed to 88888888 and g@gmail.com respectively. 
+   4. Test case: `edit 1 i/` <br>
+       Expected: The note of the 1st person in the list is cleared. 
+   5. Test case: `edit 0 p/88888888`
+      Expected: Nobody's details are edited. Error is displayed.
+
+### Finding a person
+
+1. Finding a person with some keywords
+   1. Prerequisites: Use the same persons list as when you first ran HireHive.jar. `list` command is run before the execution of the below commands. 
+   2. Test case: `find Alice`
+      Expected: Displays the applicant(s) whose name contains the keyword 'Alice'
 
 ### Clearing all entries
 
