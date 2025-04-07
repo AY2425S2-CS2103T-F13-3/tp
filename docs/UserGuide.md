@@ -268,7 +268,7 @@ Command | Description
     the offset amount
     * The offset amount must range from -4 to +4
   * The order for the hiring stages is Rejected > Applicant > Candidate > Interviewee > Offered
-  * The tag will not regress pass Rejected and progress pass Offered
+  * The tag will not regress past Rejected and progress past Offered
     * For example, if you enter the command `tag -4 n/John` with an applicant named John tagged as "Applicant", 
       John's tag is set to `Rejected`
 
