@@ -274,7 +274,7 @@ Command | Description
 
 
 Examples:
-* `tag n/John Doe t/Applicant` will tag John Doe as "Applicant" in 
+* `tag n/John Doe t/Applicant` will tag John Doe as "Applicant" in HireHive
 
 ![tag message](images/Ui-TagCommand.png)
 
