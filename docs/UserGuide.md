@@ -99,10 +99,10 @@ Ready to revolutionise your hiring? Let's begin!
 |-------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **[Help](#view-help-help)**                                       | `help`                                                                                                                                                                  |
 | **[Add](#add-an-applicant-add)**                                  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE` <br> e.g. `add n/James Ho p/87654321 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/software engineer intern` |
-| **[Edit](#edit-an-applicant-edit)**                               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [i/NOTE] [d/DATE]`<br> e.g. `edit 2 n/James Lee e/jameslee@example.com`                             |
-| **[Tag](#tag-an-applicant-tag)**                                  | `tag n/NAME t/TAG` <br> e.g. `tag n/John Doe t/Applicant` <br>`tag INDEX t/TAG` <br> e.g. `tag 1 t/Candidate` <br> `tag OFFSET n/NAME` <br> e.g. `tag +1 n/John Doe`                       |
+| **[Edit](#edit-an-applicant-edit)**                               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [i/NOTE] [iDATE]`<br> e.g. `edit 2 n/James Lee e/jameslee@example.com`                              |
+| **[Tag](#tag-an-applicant-tag)**                                  | `tag n/NAME t/TAG` <br> e.g. `tag n/John Doe t/Applicant` <br>`tag INDEX t/TAG` <br> e.g. `tag 1 t/Candidate` <br> `tag OFFSET n/NAME` <br> e.g. `tag +1 n/John Doe`    |
 | **[NewNote](#add-notes-to-applicant-newnote)**                    | `newnote n/NAME i/NOTE` <br> e.g. `newnote n/John Doe i/25 years old`                                                                                                   |
-| **[Schedule](#schedule-interview-dates-for-applicants--schedule)** | 1. `schedule n/NAME [id/DATE]` <br> e.g. `schedule n/John Doe d/17/04/2025` <br> 2. `schedule INDEX [id/DATE]` <br> e.g. `schedule 2 d/17/04/2025` <br>                 |
+| **[Schedule](#schedule-interview-dates-for-applicants--schedule)** | 1. `schedule n/NAME [id/DATE]` <br> e.g. `schedule n/John Doe id/17/04/2025` <br> 2. `schedule INDEX [id/DATE]` <br> e.g. `schedule 2 d/17/04/2025` <br>                |
 | **[DisplayNote](#display-note-of-applicant-displaynote)**         | `displaynote n/NAME` <br> e.g. `displaynote n/John Doe`                                                                                                                 |
 | **[Sort](#sort-applicants-sort)**                                 | `sort`                                                                                                                                                                  |
 | **[List](#list-all-applicants-list)**                             | `list`                                                                                                                                                                  |
@@ -136,7 +136,8 @@ Ready to revolutionise your hiring? Let's begin!
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `list` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `sort` and `clear`)
+  will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 </div>
 
@@ -341,7 +342,7 @@ Examples:
 
 * Running `schedule n/John Doe` on 01/01/2026 when there are no interviews scheduled will schedule an interview with 
   John Doe on 02/01/2026
-* Running `schedule n/John Doe` on 01/01/2026 when there is an interview on 02/01/2025 will instead schedule the 
+* Running `schedule n/John Doe` on 01/01/2026 when there is an interview on 02/01/2026 will instead schedule the 
   interview with John Doe on 03/01/2026
 
 [Back to top](#welcome-to-hirehive)
@@ -550,8 +551,8 @@ Furthermore, certain edits can cause HireHive to behave in unexpected ways (e.g.
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous HireHive home folder.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Install the app in the other computer and overwrite the data file it creates with the file that contains the data of your previous HireHive home folder.
 
 [Back to top](#welcome-to-hirehive)
 
