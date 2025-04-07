@@ -58,6 +58,6 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         role.setText(person.getRole().toString());
         tags.getChildren().add(new Label(person.getTag().getTagName()));
-        date.setText(person.getDate().toString());
+        date.setText(person.getDate().toString().isBlank() ? "Date not set" : person.getDate().toString());
     }
 }
