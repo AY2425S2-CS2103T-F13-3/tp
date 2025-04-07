@@ -77,6 +77,9 @@ Ready to revolutionise your hiring? Let's begin!
 
   * `exit` : Exits the app.
 
+**:information_source: Note!**<br>
+- Not that in hireHive, every applicant should **contain a **[unique](#glossary)** name**!
+
 6. You can refer to the [Features](#features) section below for details of each command.
 
 [Back to top](#welcome-to-hirehive)
@@ -182,14 +185,15 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE`
 * ROLE: 
   - Roles should only **contain [alphanumeric](#glossary) characters and spaces**, and it should not be blank. 
 
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:**<br> 
-- Every applicant in HireHive should **contain [unique](#glossary) phone numbers**!
-  - i.e. HireHive ensures that there are no applicants in HireHive that have the same phone number!
-  - More specifically, applicants can share the same name, email, address and role, but **not phone numbers**!
+- Every applicant in HireHive should **contain a **[unique](#glossary)** name**!
+  - i.e. HireHive ensures that there are no applicants in HireHive that have the same name!
+  - More specifically, applicants can share the same phone number, email, address and role, but **not name**!
     - Example: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Software Engineer` and 
-      `add n/John Doe p/88888888 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Software Engineer` are treated as 2 different applicants and both applicants can be added!
+      `add n/John Wee p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Software Engineer` are treated as 2 different applicants and both applicants can be added!
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**

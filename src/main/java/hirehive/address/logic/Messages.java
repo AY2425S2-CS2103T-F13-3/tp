@@ -23,7 +23,7 @@ public class Messages {
     public static final String MESSAGE_NO_SUCH_PERSON = "No such person exists.";
 
     public static final String MESSAGE_MULTIPLE_PEOPLE_QUERIED = "There are multiple contacts containing the given name."
-            + "\n Please enter the full name of the person, or tag by index";
+            + "\n Please enter the full name of the person, or use their index if other people have the same name";
 
     public static final String MESSAGE_MULTIPLE_PEOPLE_QUERIED_NAME = "There are multiple contacts containing the given name."
             + "\n Please enter the full name of the person.";
@@ -67,7 +67,9 @@ public class Messages {
                 .append("; Date: ")
                 .append(person.getDate())
                 .append("; Tag: ")
-                .append(person.getTag());
+                .append(person.getTag())
+                .append("; Note: ")
+                .append(person.getNote().isEmpty() ? "Empty" : "Not empty");
         return builder.toString();
     }
 

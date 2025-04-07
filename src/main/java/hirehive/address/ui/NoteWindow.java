@@ -97,7 +97,11 @@ public class NoteWindow extends UiPart<Stage> {
     public void copyNote() {
         final Clipboard clipboard = Clipboard.getSystemClipboard();
         final ClipboardContent noteText = new ClipboardContent();
-        noteText.putString(note.getText());
+        if (note.getStyle().equals("-fx-text-fill: white;")) {
+            noteText.putString(note.getText());
+        } else {
+            noteText.putString("");
+        }
         clipboard.setContent(noteText);
     }
 
