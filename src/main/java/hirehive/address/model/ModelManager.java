@@ -148,6 +148,7 @@ public class ModelManager implements Model {
 
     @Override
     public void unfilterPersonList() {
+        currFilter = PREDICATE_SHOW_ALL_PERSONS;
         filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
         resetSorting();
     }
