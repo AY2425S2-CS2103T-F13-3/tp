@@ -15,6 +15,7 @@ public class ReminderCommandParserTest {
     @Test
     public void parse_emptyArg_throwsParseException() {
         CommandParserTestUtil.assertParseFailure(parser, "     ", String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ReminderCommand.MESSAGE_USAGE));
+        CommandParserTestUtil.assertParseFailure(parser, "100000000000000000000000000000000", ParserUtil.MESSAGE_OUT_OF_RANGE);
     }
 
     @Test

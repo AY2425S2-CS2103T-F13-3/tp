@@ -78,4 +78,22 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns true if {@code s} represents a string or a valid integer
+     * @throws NullPointerException if {@code s} is null.
+     */
+    public static boolean isValidStringOrInteger(String s) {
+        requireNonNull(s);
+        if (s.matches("-?\\d+")) {
+            try {
+                long num = Long.parseLong(s);
+                return num >= Integer.MIN_VALUE && num <= Integer.MAX_VALUE;
+            } catch (NumberFormatException e) {
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
 }

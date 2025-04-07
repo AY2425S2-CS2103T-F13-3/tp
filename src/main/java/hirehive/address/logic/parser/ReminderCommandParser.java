@@ -26,10 +26,11 @@ public class ReminderCommandParser implements Parser<ReminderCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args);
         int days;
-        try {
+
+        if (argMultimap.getPreamble().trim().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ReminderCommand.MESSAGE_USAGE));
+        } else {
             days = ParserUtil.parseDays(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ReminderCommand.MESSAGE_USAGE), pe);
         }
         return new ReminderCommand(new UpcomingInterviewPredicate(days));
     }
