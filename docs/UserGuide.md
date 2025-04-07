@@ -27,13 +27,13 @@ Ready to revolutionise your hiring? Let's begin!
       - [Schedule interview dates: `schedule`](#schedule-interview-dates-for-applicants--schedule)
     - [Listing applicant information](#ulisting-applicant-informationu)
       - [Display note of applicant: `displaynote`](#display-note-of-person-displaynote)
+      - [Sort applicants `sort`](#sort-applicants-sort)
       - [List all applicants: `list`](#list-all-applicants-list)
     - [Filtering applicant information](#ufiltering-applicant-informationu)
       - [Filter applicants by tag: `filter`](#filter-applicants-by-tag-filter)
       - [Filtering out applicants with tag: `filterout`](#filtering-out-applicants-with-tag-filterout)
       - [Remind you of upcoming interviews: `remind`](#show-applicants-with-upcoming-interviews-remind)
       - [Find applicants by name `find`](#find-applicants-by-name-find)
-      - [Sort applicants `sort`](#sort-applicants-sort)
     - [Deletion of applicants](#udeletion-of-applicantsu)
       - [Delete an applicant: `delete`](#delete-an-applicant-delete)
       - [Clear all entries: `clear`](#clear-all-entries--clear)
@@ -93,17 +93,17 @@ Ready to revolutionise your hiring? Let's begin!
 |--------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **[Help](#view-help-help)**                                        | `help`                                                                                                                                                                   |
 | **[Add](#add-an-applicant-add)**                                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE` <br> e.g., `add n/James Ho p/87654321 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/software engineer intern` |
-| **[Edit](#edit-an-applicant-edit)**                                | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [i/NOTE] [d/DATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                              |
+| **[Edit](#edit-an-applicant-edit)**                                | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [i/NOTE] [id/DATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                             |
 | **[Tag](#tag-an-applicant-tag)**                                   | `tag n/NAME [t/TAG]...​`                                                                                                                                                 |
-| **[Filter](#filter-applicants-by-tag-filter)**                     | `filter t/TAG` <br> e.g., `filter t/Applicant`                                                                                                                           |
- **[Filter out](#filtering-out-applicants-with-tag-filterout)**     | `filterout t/TAG` <br> e.g., `filterout t/Applicant`                                                                                                                     |
 | **[NewNote](#add-notes-to-person-newnote)**                        | `newnote n/NAME i/NOTE` <br> e.g., `newnote n/John Doe i/25 years old`                                                                                                   |
-| **[DisplayNote](#display-note-of-person-displaynote)**             | `displaynote n/NAME` <br> e.g., `displaynote n/John Doe`                                                                                                                 
-| **[Schedule](#schedule-interview-dates-for-applicants--schedule)** | 1. `schedule n/NAME [d/DATE]` <br> e.g. schedule n/John Doe d/17/04/2025 <br> 2. `schedule INDEX [d/DATE]` <br> e.g. schedule 2 d/17/04/2025 <br>                        |
-| **[Reminder](#show-applicants-with-upcoming-interviews-remind)**   | `remind DAYS`  <br> e.g. remind 3                                                                                                                                        |
-| **[Find](#find-applicants-by-name-find)**                          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                               |
+| **[Schedule](#schedule-interview-dates-for-applicants--schedule)** | 1. `schedule n/NAME [id/DATE]` <br> e.g. `schedule n/John Doe d/17/04/2025` <br> 2. `schedule INDEX [id/DATE]` <br> e.g. `schedule 2 d/17/04/2025` <br>                  |
+| **[DisplayNote](#display-note-of-person-displaynote)**             | `displaynote n/NAME` <br> e.g., `displaynote n/John Doe`                                                                                                                 |
+| **[Sort](#sort-applicants-sort)**                                  | `sort`                                                                                                                                                                   |
 | **[List](#list-all-applicants-list)**                              | `list`                                                                                                                                                                   |
- **[Sort](#sort-applicants-sort)**                                  | `sort`                                                                                                                                                                   |
+| **[Filter](#filter-applicants-by-tag-filter)**                     | `filter t/TAG` <br> e.g., `filter t/Applicant`                                                                                                                           |
+| **[Filter Out](#filtering-out-applicants-with-tag-filterout)**     | `filterout t/TAG` <br> e.g., `filterout t/Applicant`                                                                                                                     |
+| **[Reminder](#show-applicants-with-upcoming-interviews-remind)**   | `remind DAYS`  <br> e.g. `remind 3`                                                                                                                                      |
+| **[Find](#find-applicants-by-name-find)**                          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                               |
 | **[Delete](#delete-an-applicant-delete)**                          | `delete n/NAME`<br> e.g., `delete n/John Doe`                                                                                                                            |
 | **[Clear](#clear-all-entries--clear)**                             | `clear`                                                                                                                                                                  |
 | **[Exit](#exit-the-program--exit)**                                | `exit`                                                                                                                                                                   |
@@ -209,7 +209,7 @@ Examples:
 
 If you have accidentally mistyped some details, you can edit the information of an existing applicant in HireHive!
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/ROLE] [i/NOTE] [d/DATE]`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/ROLE] [i/NOTE] [id/DATE]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -508,15 +508,15 @@ Furthermore, certain edits can cause HireHive to behave in unexpected ways (e.g.
 
 Term | Description
 --------|------------------
-**Graphical User Interface (GUI)** | A form of user interface that allows users to interact with electronic devices through graphical icons and visual indicators such as secondary notation.
-**Applicant** | A person who makes a formal application for something, especially a job.
-**Unique** | Only 1 specific instance of it exists.
-**Case-insensitive** | Uppercase and lowercase letters are treated the same and hence equivalent.
 **Alphanumeric** | Consisting of both letters (A to Z) and numbers (0 to 9).
+**Applicant** | A person who makes a formal application for something, especially a job.
+**Case-insensitive** | Uppercase and lowercase letters are treated the same and hence equivalent.
+**Graphical User Interface (GUI)** | A form of user interface that allows users to interact with electronic devices through graphical icons and visual indicators such as secondary notation.
 **Hard disk** | The storage device used by a computer. These can be used as primary or secondary storage.
+**Integer** | A whole number within the range of -2<sup>31</sup> and 2<sup>31</sup> inclusive.
 **JSON** | Acronym for _JavaScript Object Notation,_ an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of name–value pairs and arrays (or other serializable values).
 **Shortcut** | A key or combination of keys that you can press on a computer keyboard to quickly perform a specific action.
-**Integer** | A whole number within the range of -2<sup>31</sup> and 2<sup>31</sup> inclusive.
+**Unique** | Only 1 specific instance of it exists.
 
 [Back to top](#welcome-to-hirehive)
 
