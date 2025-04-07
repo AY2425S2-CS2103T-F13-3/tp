@@ -18,24 +18,28 @@ Ready to revolutionise your hiring? Let's begin!
 - [Quick start](#quick-start)
 - [Command Summary](#command-summary)
 - [Features](#features)
-  - [View help: `help`](#view-help-help)
-  - [Add an applicant: `add`](#add-an-applicant-add)
-  - [Edit an applicant: `edit`](#edit-an-applicant-edit)
-  - [Tag an applicant: `tag`](#tag-an-applicant-tag)
-  - [Filter applicants by tag: `filter`](#filter-applicants-by-tag-filter)
-  - [Filtering out applicants with tag: `filterout`](#filtering-out-applicants-with-tag-filterout)
-  - [Add note to applicant: `newnote`](#add-notes-to-person-newnote)
-  - [Display note of applicant: `displaynote`](#display-note-of-person-displaynote)
-  - [Schedule interview dates: `schedule`](#schedule-interview-dates-for-applicants--schedule)
-  - [Remind you of upcoming interviews: `remind`](#show-applicants-with-upcoming-interviews-remind)
-  - [Find applicants by name `find`](#find-applicants-by-name-find)
-  - [List all applicants: `list`](#list-all-applicants-list)
-  - [Sort applicants `sort`](#sort-applicants-sort)
-  - [Delete an applicant: `delete`](#delete-an-applicant-delete)
-  - [Clear all entries: `clear`](#clear-all-entries--clear)
-  - [Exit the program: `exit`](#exit-the-program--exit)
-  - [Save the data](#save-the-data)
-  - [Edit the data file](#edit-the-data-file)
+    - [View help: `help`](#view-help-help)
+    - [Adding and modifying applicants](#uadding-and-modifying-applicantsu)
+      - [Add an applicant: `add`](#add-an-applicant-add)
+      - [Edit an applicant: `edit`](#edit-an-applicant-edit)
+      - [Tag an applicant: `tag`](#tag-an-applicant-tag)
+      - [Add note to applicant: `newnote`](#add-notes-to-person-newnote)
+      - [Schedule interview dates: `schedule`](#schedule-interview-dates-for-applicants--schedule)
+    - [Listing applicant information](#ulisting-applicant-informationu)
+      - [Display note of applicant: `displaynote`](#display-note-of-person-displaynote)
+      - [Sort applicants `sort`](#sort-applicants-sort)
+      - [List all applicants: `list`](#list-all-applicants-list)
+    - [Filtering applicant information](#ufiltering-applicant-informationu)
+      - [Filter applicants by tag: `filter`](#filter-applicants-by-tag-filter)
+      - [Filtering out applicants with tag: `filterout`](#filtering-out-applicants-with-tag-filterout)
+      - [Remind you of upcoming interviews: `remind`](#show-applicants-with-upcoming-interviews-remind)
+      - [Find applicants by name `find`](#find-applicants-by-name-find)
+    - [Deletion of applicants](#udeletion-of-applicantsu)
+      - [Delete an applicant: `delete`](#delete-an-applicant-delete)
+      - [Clear all entries: `clear`](#clear-all-entries--clear)
+    - [Exit the program: `exit`](#exit-the-program--exit)
+    - [Save the data](#save-the-data)
+    - [Edit the data file](#edit-the-data-file)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Glossary](#glossary)
@@ -94,16 +98,16 @@ Ready to revolutionise your hiring? Let's begin!
 | **[Add](#add-an-applicant-add)**                                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE` <br> e.g., `add n/James Ho p/87654321 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/software engineer intern` |
 | **[Edit](#edit-an-applicant-edit)**                                | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [i/NOTE] [d/DATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                              |
 | **[Tag](#tag-an-applicant-tag)**                                   | `tag n/NAME t/TAG` <br> `tag INDEX t/TAG` <br> `tag OFFSET n/NAME`                                                                                                       |
-| **[Filter](#filter-applicants-by-tag-filter)**                     | `filter t/TAG` <br> e.g., `filter t/Applicant`                                                                                                                           |
- **[Filter out](#filtering-out-applicants-with-tag-filterout)**     | `filterout t/TAG` <br> e.g., `filterout t/Applicant`                                                                                                                     |
 | **[NewNote](#add-notes-to-person-newnote)**                        | `newnote n/NAME i/NOTE` <br> e.g., `newnote n/John Doe i/25 years old`                                                                                                   |
-| **[DisplayNote](#display-note-of-person-displaynote)**             | `displaynote n/NAME` <br> e.g., `displaynote n/John Doe`                                                                                                                 
-| **[Schedule](#schedule-interview-dates-for-applicants--schedule)** | 1. `schedule n/NAME [d/DATE]` <br> e.g. schedule n/John Doe d/17/04/2025 <br> 2. `schedule INDEX [d/DATE]` <br> e.g. schedule 2 d/17/04/2025 <br>                        |
-| **[Reminder](#show-applicants-with-upcoming-interviews-remind)**   | `remind DAYS`  <br> e.g. remind 3                                                                                                                                        |
-| **[Find](#find-applicants-by-name-find)**                          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                               |
+| **[Schedule](#schedule-interview-dates-for-applicants--schedule)** | 1. `schedule n/NAME [id/DATE]` <br> e.g. `schedule n/John Doe d/17/04/2025` <br> 2. `schedule INDEX [id/DATE]` <br> e.g. `schedule 2 d/17/04/2025` <br>                  |
+| **[DisplayNote](#display-note-of-person-displaynote)**             | `displaynote n/NAME` <br> e.g., `displaynote n/John Doe`                                                                                                                 |
+| **[Sort](#sort-applicants-sort)**                                  | `sort`                                                                                                                                                                   |
 | **[List](#list-all-applicants-list)**                              | `list`                                                                                                                                                                   |
- **[Sort](#sort-applicants-sort)**                                  | `sort`                                                                                                                                                                   |
-| **[Delete](#delete-an-applicant-delete)**                          | 1. `delete n/NAME`<br> e.g. delete n/John Doe <br> 2. `delete INDEX` <br> e.g. delete 2                                                                                  |
+| **[Filter](#filter-applicants-by-tag-filter)**                     | `filter t/TAG` <br> e.g., `filter t/Applicant`                                                                                                                           |
+| **[Filter Out](#filtering-out-applicants-with-tag-filterout)**     | `filterout t/TAG` <br> e.g., `filterout t/Applicant`                                                                                                                     |
+| **[Reminder](#show-applicants-with-upcoming-interviews-remind)**   | `remind DAYS`  <br> e.g. `remind 3`                                                                                                                                      |
+| **[Find](#find-applicants-by-name-find)**                          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                               |
+| **[Delete](#delete-an-applicant-delete)**                          | 1. `delete n/NAME`<br> e.g. delete n/John Doe <br> 2. `delete INDEX` <br> e.g. delete 2                                                                                                                             |
 | **[Clear](#clear-all-entries--clear)**                             | `clear`                                                                                                                                                                  |
 | **[Exit](#exit-the-program--exit)**                                | `exit`                                                                                                                                                                   |
 
@@ -147,6 +151,7 @@ Format: `help`
 
 [Back to top](#welcome-to-hirehive)
 
+### <u>Adding and modifying applicants</u>
 
 ### Add an applicant: `add`
 
@@ -211,7 +216,7 @@ Examples:
 
 If you have accidentally mistyped some details, you can edit the information of an existing applicant in HireHive!
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/ROLE] [i/NOTE] [d/DATE]`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/ROLE] [i/NOTE] [id/DATE]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -270,7 +275,96 @@ Examples:
 * `tag 1 t/Candidate` will tag the 1st person as "Candidate"
 * `tag +1 n/John Doe` for a John Doe person with tag "Applicant" will tag them as "Candidate"
 
+### Add notes to person: `newnote`
+
+You can add information about the applicant into a note with this command.
+
+Format: `newnote n/NAME i/NOTE`
+
+* Adds the note if the given name partially matches **exactly one** person in the list ([case-insensitive](#glossary))
+* If multiple matches are found, a list of all matching names will be displayed. You should then retry the command but using the **full name** of the desired person.
+* NOTE has a limit of 500 characters.
+* After adding, a popup window will appear containing the given input.
+* If the input is empty or consists only of whitespace, then the popup window displays a default message "Currently empty..." in yellow.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can remove the contents of the note by leaving the NOTE field blank.
+</div>
+
 [Back to top](#welcome-to-hirehive)
+
+### Schedule interview dates for applicants : `schedule`
+
+Automatically or manually schedule your next interview with a potential candidate.
+
+Format:
+
+Command | Description
+--------|------------------
+`schedule n/NAME [id/DATE]` | Schedule interview date by name.
+`schedule INDEX [id/DATE]` | Schedule interview date by index.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+In the event where you are unable to select a candidate due to duplicated names, select them with their index instead!
+</div>
+
+* The date format is DD/MM/YYYY (date/month/year) e.g. "04/04/2025"
+* If date is left empty, the next day that does not have an interview after the current day will be used to schedule the meeting instead.
+* You will have to provide a **positive [integer](#glossary)** to select a candidate by index.
+* Scheduling an interview with an applicant or candidate will automatically change their tag to an Interviewee.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+You will not be allowed to schedule interviews with candidates that are already offered/rejected. Please change their tags if you wish to schedule a second interview.
+</div>
+
+Examples:
+* Running `schedule n/Bob id/01/01/2025` will schedule an interview with Bob on 01/01/2025
+* Running `schedule n/Bob` on 01/01/2025 when there are no interviews scheduled will schedule an interview with Bob on 02/01/2025
+* Running `schedule n/Bob` on 01/01/2025 when there is an interview on 02/01/2025 will instead schedule the interview with Bob on 03/01/2025
+
+### <u>Listing applicant information</u>
+
+### Display note of person: `displaynote`
+
+You can display the note of a person with this command.
+
+Format: `displaynote n/NAME`
+
+* Displays the note if the given name partially matches **exactly one** person in the list ([case-insensitive](#glossary))
+* If multiple matches are found, a list of all matching names will be displayed. You should then retry the command but using the **full name** of the desired person.
+* A popup window will appear containing the person's note.
+* If the input is empty or consists only of whitespace, then the popup window displays a default message "Currently empty..." in yellow.
+
+Examples:
+* `displaynote n/John Doe` shows John Doe's note
+
+[Back to top](#welcome-to-hirehive)
+
+### Sort applicants: `sort`
+
+Sorts the applicants displayed on your screen by interview date, in chronological order so that you can conveniently view upcoming interviews.
+
+Format: `sort`
+
+[Back to top](#welcome-to-hirehive)
+
+### List all applicants: `list`
+
+Shows you a list of all the applicants in HireHive so that you can look at an overview of all the applicants if needed.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+This command also resets any filters applied by the commands below! 
+</div>
+
+Format: `list`
+
+[Back to top](#welcome-to-hirehive)
+
+### <u>Filtering applicant information</u>
+
+The commands below are accumulative! Using one filter command after another will apply **both** filters to the applicant list. The filters will persist until other commands are used.
+
+For example, running `filter t/interviewee` and `remind 5` will filter out all interviewees whose interviews are in 5 days.
 
 ### Filter applicants by tag: `filter`
 
@@ -295,60 +389,11 @@ Examples:
 
 [Back to top](#welcome-to-hirehive)
 
-
-### Add notes to person: `newnote`
-
-You can add information about the applicant into a note with this command.
-
-Format: `newnote n/NAME i/NOTE`
-
-* Adds the note if the given name partially matches **exactly one** person in the list ([case-insensitive](#glossary))
-* If multiple matches are found, a list of all matching names will be displayed. You should then retry the command but using the **full name** of the desired person.
-* NOTE has a limit of 500 characters.
-* After adding, a popup window will appear containing the given input.
-* If the input is empty or consists only of whitespace, then the popup window displays a default message "Currently empty..." in yellow.
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can remove the contents of the note by leaving the NOTE field blank.
-</div>
-
 Examples:
 * `newnote n/John Doe i/25 years old` adds a note to John Doe that says "25 years old"
 * `newnote n/John Doe i/` removes any existing content in John Doe's note
 
 [Back to top](#welcome-to-hirehive)
-
-### Display note of person: `displaynote`
-
-You can display the note of a person with this command.
-
-Format: `displaynote n/NAME`
-
-* Displays the note if the given name partially matches **exactly one** person in the list ([case-insensitive](#glossary))
-* If multiple matches are found, a list of all matching names will be displayed. You should then retry the command but using the **full name** of the desired person.
-* A popup window will appear containing the person's note.
-* If the input is empty or consists only of whitespace, then the popup window displays a default message "Currently empty..." in yellow.
-
-Examples:
-* `displaynote n/John Doe` shows John Doe's note
-
-[Back to top](#welcome-to-hirehive)
-
-### Schedule interview dates for applicants : `schedule`
-
-Automatically or manually schedule your next interview with a potential candidate.
-
-Format:
-
-Command | Description
---------|------------------
-`schedule n/NAME [d/DATE]` | Schedule interview date by name.
-`schedule INDEX [d/DATE]` | Schedule interview date by index.
-
-
-* The date format is DD/MM/YYYY (date/month/year) e.g. "04/04/2025"
-* If date is left empty, the next day that does not have an interview after the current day will be used to schedule the meeting instead.
-* Scheduling interview date by index must have a **positive** index number
 
 ### Show applicants with upcoming interviews: `remind`
 
@@ -356,7 +401,19 @@ Easily remind yourself of your upcoming interviews by listing down all applicant
 
 Format: `remind DAYS`
 
-* The number of days given must be non-negative, i.e. greater or equal to 0
+* `DAYS` is the number of upcoming days you wish to check for interviews for (inclusive).
+* The number of days given must be a **non-negative [integer](#glossary)**, i.e. greater or equal to 0
+
+Examples:
+
+Given that today is 01/01/2025, and you have the following interviews scheduled:
+
+- Alice: 01/01/2025
+- Bob: 03/01/2025
+- Charlie: 31/12/2025
+
+* `remind 0` will display Alice's entry
+* `remind 2` will display Alice's and Bob's entry
 
 [Back to top](#welcome-to-hirehive)
 
@@ -376,21 +433,7 @@ Examples:
 
 [Back to top](#welcome-to-hirehive)
 
-### List all applicants: `list`
-
-Shows you a list of all the applicants in HireHive so that you can look at an overview of all the applicants if needed.
-
-Format: `list`
-
-[Back to top](#welcome-to-hirehive)
-
-### Sort applicants: `sort`
-
-Sorts the applicants displayed on your screen by interview date, in chronological order so that you can conveniently view upcoming interviews.
-
-Format: `sort`
-
-[Back to top](#welcome-to-hirehive)
+### <u>Deletion of applicants</u>
 
 ### Delete an applicant: `delete`
 
@@ -487,14 +530,15 @@ Furthermore, certain edits can cause HireHive to behave in unexpected ways (e.g.
 
 Term | Description
 --------|------------------
-**Graphical User Interface (GUI)** | A form of user interface that allows users to interact with electronic devices through graphical icons and visual indicators such as secondary notation.
+**Alphanumeric** | Consisting of both letters (A to Z) and numbers (0 to 9).
 **Applicant** | A person who makes a formal application for something, especially a job.
-**Unique** | Only 1 specific instance of it exists.
 **Case-insensitive** | Uppercase and lowercase letters are treated the same and hence equivalent.
-**Alphanumeric** | consisting of both letters (A to Z) and numbers (0 to 9).
+**Graphical User Interface (GUI)** | A form of user interface that allows users to interact with electronic devices through graphical icons and visual indicators such as secondary notation.
 **Hard disk** | The storage device used by a computer. These can be used as primary or secondary storage.
+**Integer** | A whole number within the range of -2<sup>31</sup> and 2<sup>31</sup> inclusive.
 **JSON** | Acronym for _JavaScript Object Notation,_ an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of name–value pairs and arrays (or other serializable values).
 **Shortcut** | A key or combination of keys that you can press on a computer keyboard to quickly perform a specific action.
+**Unique** | Only 1 specific instance of it exists.
 
 [Back to top](#welcome-to-hirehive)
 
