@@ -208,7 +208,9 @@ There is no need to manually add a tag as the 'Applicant' tag is automatically a
 </div>
 
 Examples:
-* `add n/Betsy Crowe e/betsycrowe@example.com a/Ang Mo Kio Street 22 p/87654321 r/senior consulting analyst`: Adds an applicant with the name `Betsy Crowe`, who has `betsycrowe@example.com` as their email, `87654321` as their phone number, and is applying for the `senior consulting analyst` role.
+* `add n/Betsy Crowe e/betsycrowe@example.com a/Ang Mo Kio Street 22 p/87654321 r/senior consulting analyst`:
+Adds an applicant with the name `Betsy Crowe`, who has `betsycrowe@example.com` as their email, `Ang Mo Kio Street 22` 
+as their address, `87654321` as their phone number, and is applying for the `senior consulting analyst` role
 
 ![add message](images/Ui-AddCommand.png)
 
@@ -252,10 +254,13 @@ Command | Description
 `tag INDEX t/TAG` | Tags by index.
 `tag OFFSET n/NAME` | Offset tag of named applicant.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+In the event where you are unable to select a candidate due to duplicated names, select them with their index instead!
+</div>
 
 * Tagging by name will partially match to **exactly one applicant** in the list ([case-insensitive](#glossary)).
-  * If multiple matches are found, a list of all matching names will be displayed. You can then enter the **full name**
-    of the applicant you want to tag.
+  * If multiple matches are found, a list of all matching names will be displayed:
+    - You can then enter the **full name** of the applicant you want to tag
 * Tagging by index must have a **positive** index number
 * Tags must be one of the following values, which are colour-coded as follows:
   1. <p style="background-color: #913F51; display: inline; padding: 2px; border-radius:5px">Rejected</p>
@@ -328,6 +333,9 @@ In the event where you are unable to select a candidate due to duplicated names,
 * The date format is DD/MM/YYYY (date/month/year) e.g. "04/04/2025"
 * The command will only accept dates starting from the current date.
 * If date is left empty, the next day that does not have an interview after the current day will be used to schedule the meeting instead.
+* Scheduling by name will partially match to **exactly one applicant** in the list ([case-insensitive](#glossary)).
+  * If multiple matches are found, a list of all matching names will be displayed
+      * You can then enter the **full name** of the applicant you want to schedule
 * You will have to provide a **positive [integer](#glossary)** to select a candidate by index.
 * Scheduling an interview with an applicant or candidate will automatically change their tag to an Interviewee.
 
@@ -459,7 +467,7 @@ You can search for applicants whose names contain any of the given keywords!
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search follows partial name matching. e.g. `find Han` will return `Han` and `Hans`
-* The search is [case-insensitive](#glossary). e.g `hans` will match `Hans`
+* The search is [case-insensitive](#glossary). e.g. `hans` will match `Hans`
 * The order of the keywords **matter**. e.g. `Hans Bo` will not match `Bo Hans`
 * Only keywords in name are searched.
 
@@ -484,11 +492,13 @@ Command | Description
 `delete n/NAME` | Delete by name.
 `delete INDEX` | Delete by index.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+In the event where you are unable to select a candidate due to duplicated names, select them with their index instead!
+</div>
 
 * Deleting by name will partially match to **exactly one applicant** in the list ([case-insensitive](#glossary)). 
-  - If multiple matches are found, a list of all matching names will be displayed:
-    - You can then enter the **full name** of the applicant you want to delete
-    - **Or** you can delete by index of the displayed list
+  * If multiple matches are found, a list of all matching names will be displayed
+    * You can then enter the **full name** of the applicant you want to delete
 * Deleting by index must have a **positive** index number
 
 Examples:
