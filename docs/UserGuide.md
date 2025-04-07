@@ -77,6 +77,9 @@ Ready to revolutionise your hiring? Let's begin!
 
   * `exit` : Exits the app.
 
+**:information_source: Note!**<br>
+- Not that in hireHive, every applicant should **contain a **[unique](#glossary)** name**!
+
 6. You can refer to the [Features](#features) section below for details of each command.
 
 [Back to top](#welcome-to-hirehive)
