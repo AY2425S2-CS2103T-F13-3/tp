@@ -529,6 +529,58 @@ Preconditions: The list is not empty
     * Steps 2d1-2d2 are repeated until the user inputs the full name of the person.
     * Use case resumes from step 3.
 
+**Use case UC09 - Clear AddressBook**
+
+*MSS*
+
+1. User requests to clear the AddressBook.
+2. User enters `clear` in the command box.
+3. HireHive clears all existing data, and AddressBook is now empty.
+
+    Use case ends.
+
+**Use case UC10 - Getting Help**
+
+Preconditions: User device has a working Internet connection.
+
+*MSS*
+
+1. User requests help in using HireHive.
+2. User enters `help` in the command box.
+3. HireHive opens the help window with a URL to the User Guide.
+4. User copies the URL with the `Copy URL` button on the right side of the help window.
+5. User accesses the User Guide through a browser after pasting the URL in.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. User clicks on the `Help` button on the top left of the display window.
+  * 2a1. A dropdown display shows another `Help` button.
+  * 2a2. User clicks on the `Help` button.
+  * Use case resumes from step 3.
+* 2b. User uses the shortcut to access the `Help` window. On Mac, press `fn` + `F1`. On Windows, press
+  * Use case resumes from step 3.
+
+**Use case UC11 - Exiting HireHive**
+
+*MSS*
+
+1. User requests to exit HireHive.
+2. User enters `exit` as input.
+3. HireHive saves the data in its current state and closes.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. User clicks on the `File` button on the top left of the display window.
+  * 2a1. A dropdown display shows the `Exit` button.
+  * 2a2. User clicks on the `Exit` button.
+  * Use case resumes from step 3.
+* 2b. User clicks on the close button of the display window. On Mac, it is in the top left corner. On Windows, it is in the top right corner.
+  * Use case resumes from step 3.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
@@ -784,8 +836,19 @@ Prerequisite: use the initial persons list loaded when first running HireHive.ja
    2. Test case: Delete `addressbook.json` under folder `data` if it exists, then launch `HireHive.jar`. <br> Expected output: same as test case i.
 
 2. Saved data is loaded
-   1. Test case: perform a command that modifies data e.g. `delete 1`, then `exit` the application. Relaunch `HireHive.jar`. <br> Expected output: "Success: Applicant data has been loaded successfully."
+   1. Test case: perform a command that modifies data except `clear` e.g. `delete 1`, then `exit` the application. Relaunch `HireHive.jar`. <br> Expected output: "Success: Applicant data has been loaded successfully."
 
-3. No data is loaded due to corruption of data
+3. Saved data is empty
+   1. Test case: perform `clear` command e.g. `clear`, then `exit` the application. Relaunch `HireHive.jar`. <br> Expected output: "Current address book is empty. This might be due to corrupted data. <br> WARNING: Please check if data/addressbook.json has old corrupted data and attempt to fix it, otherwise any new successful commands will overwrite those contents."
+
+4. No data is loaded due to corruption of data
    1. Prerequisite: Launch `HireHive.jar` at least once and exit.
-   2. Test case: Delete `addressbook.json` under folder `data` if it exists, then copy `config.json` into the same folder. Rename `config.json` to `addressbook.json`. <br> Expected output: "Error: Unable to load applicant data. Invalid data format in saved file."
+   2. Test case: Delete `addressbook.json` under folder `data` if it exists, then copy `config.json` into the same folder. Rename `config.json` to `addressbook.json`. <br> Expected output: "Current address book is empty. This might be due to corrupted data. <br> WARNING: Please check if data/addressbook.json has old corrupted data and attempt to fix it, otherwise any new successful commands will overwrite those contents."
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+**Team size: 5**
+
+1. **Allow contacts with duplicate names to be added.** Currently, we do not allow contacts with the same name to be added, which could be overly restrictive. We plan to allow contacts with the same names to be added in the future, provided they do not share the same phone number or email address.
