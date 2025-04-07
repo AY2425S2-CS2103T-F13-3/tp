@@ -189,7 +189,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE`
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:**<br> 
-- Every applicant in HireHive should **contain a **[unique](#glossary)** name**!
+- Every applicant in HireHive should **contain a [unique](#glossary) name**!
   - i.e. HireHive ensures that there are no applicants in HireHive that have the same name!
   - More specifically, applicants can share the same phone number, email, address and role, but **not name**!
     - Example: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Software Engineer` and 
