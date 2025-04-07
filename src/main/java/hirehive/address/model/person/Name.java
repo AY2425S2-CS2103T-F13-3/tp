@@ -11,8 +11,9 @@ import hirehive.address.commons.util.AppUtil;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain English letters, spaces, and the following symbols: , ( ) / . @ - '\n"
-                    + "It should not be blank or start with a symbol.";
+            "Names should only contain English letters, spaces, and the following symbols:\n"
+                    + " , ( ) / . @ - '\n"
+                    + "Names should not be blank or start with a symbol.";
 
     /*
      * The first character of the address must not be a whitespace,
