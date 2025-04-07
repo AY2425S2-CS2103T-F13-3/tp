@@ -335,7 +335,7 @@ You will not be allowed to schedule interviews with candidates that are already 
 </div>
 
 Examples:
-* Running `schedule n/John Doe id/01/01/2026` will schedule an interview with John Doe on 01/01/2025
+* Running `schedule n/John Doe id/01/01/2026` will schedule an interview with John Doe on 01/01/2026
 
 ![schedule message](images/Ui-ScheduleCommand.png)
 
