@@ -111,6 +111,7 @@ public class ScheduleCommand extends Command {
         }
         Person editedPerson = createEditedPerson(personToAddDate, editPersonDescriptor);
         model.setPerson(personToAddDate, editedPerson);
+        model.unfilterPersonList();
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(editedPerson.getName().fullName));
         return new CommandResult(String.format(MESSAGE_DATE_PERSON_SUCCESS, Messages.format(editedPerson)), true);
     }

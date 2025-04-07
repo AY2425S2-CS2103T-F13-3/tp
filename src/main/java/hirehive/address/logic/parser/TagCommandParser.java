@@ -3,6 +3,7 @@ package hirehive.address.logic.parser;
 import static hirehive.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static hirehive.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static java.lang.Math.abs;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
@@ -45,6 +46,11 @@ public class TagCommandParser implements Parser<TagCommand> {
             NameQuery nameQuery = new NameQuery(new NameContainsKeywordsPredicate(nameKeywords));
             try {
                 int offset = Integer.parseInt(argMultimap.getPreamble());
+                if (abs(offset) > 4) {
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_TAG_INVALID_OFFSET)
+                    );
+                }
                 return new TagCommand(nameQuery, offset);
             } catch (NumberFormatException e) {
                 throw new ParseException(

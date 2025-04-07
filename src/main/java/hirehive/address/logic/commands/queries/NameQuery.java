@@ -23,6 +23,7 @@ public class NameQuery extends Query<Person> {
 
     @Override
     public List<Person> query(Model model) throws QueryException {
+        model.unfilterPersonList();
         model.updateFilteredPersonList(this.predicate);
         List<Person> filteredList = model.getFilteredPersonList();
         if (filteredList.isEmpty()) {

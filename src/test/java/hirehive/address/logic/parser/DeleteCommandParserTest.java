@@ -1,5 +1,6 @@
 package hirehive.address.logic.parser;
 
+import static hirehive.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static hirehive.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static hirehive.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -31,7 +32,7 @@ public class DeleteCommandParserTest {
         DeleteCommand expectedCommand = new DeleteCommand(
                 new NameQuery(new NameContainsKeywordsPredicate("Alice"))
         );
-        assertParseSuccess(parser, "delete n/Alice", expectedCommand);
+        assertParseSuccess(parser, " " + PREFIX_NAME + "Alice", expectedCommand);
     }
 
     @Test
@@ -42,6 +43,13 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         CommandParserTestUtil.assertParseFailure(parser, "",
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_indexAndNamePresent_throwsParseException() {
+        String userInput = "1 n/Alice";
+        CommandParserTestUtil.assertParseFailure(parser, userInput,
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 }

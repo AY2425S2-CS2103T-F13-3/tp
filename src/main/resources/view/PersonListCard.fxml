@@ -39,8 +39,13 @@
       <padding>
         <Insets top="5" right="15" bottom="5" left="5" />
       </padding>
-      <Label styleClass="cell_big_label">Upcoming Interview:</Label>
-      <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
+      <VBox alignment="CENTER_RIGHT">
+        <Label styleClass="cell_big_label">Upcoming Interview:</Label>
+        <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
+      </VBox>
+      <VBox alignment="CENTER_RIGHT">
+        <Label fx:id="note" styleClass="cell_small_label" text="\$note" />
+      </VBox>
     </VBox>
   </GridPane>
 </HBox>

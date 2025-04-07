@@ -44,6 +44,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label date;
+    @FXML
+    private Label note;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -61,5 +63,6 @@ public class PersonCard extends UiPart<Region> {
         tag.getStyleClass().add(person.getTag().getTagName().toLowerCase());
         tags.getChildren().add(tag);
         date.setText(person.getDate().toString().isBlank() ? "Date not set" : person.getDate().toString());
+        note.setText("Note Contents: " + (person.getNote().isEmpty() ? "Empty" : "Not empty"));
     }
 }
