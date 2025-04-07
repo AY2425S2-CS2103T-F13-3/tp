@@ -23,7 +23,7 @@ public class ScheduleCommandParserTest {
 
     @Test
     public void parse_invalidDate_throwsParseException() {
-        CommandParserTestUtil.assertParseFailure(parser, " n/Alice d/01/01/1500", ScheduleCommandParser.MESSAGE_DATE_OUT_OF_BOUNDS);
+        CommandParserTestUtil.assertParseFailure(parser, " n/Alice id/01/01/1500", ScheduleCommandParser.MESSAGE_DATE_OUT_OF_BOUNDS);
     }
 
     @Test
@@ -31,10 +31,10 @@ public class ScheduleCommandParserTest {
         EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
         editPersonDescriptor.setDate(new InterviewDate("31/12/2999"));
         ScheduleCommand expectedScheduleCommand = new ScheduleCommand(new NameQuery(new NameContainsKeywordsPredicate("Alice")), editPersonDescriptor);
-        CommandParserTestUtil.assertParseSuccess(parser, " n/Alice d/31/12/2999", expectedScheduleCommand);
+        CommandParserTestUtil.assertParseSuccess(parser, " n/Alice id/31/12/2999", expectedScheduleCommand);
 
         expectedScheduleCommand = new ScheduleCommand(Index.fromOneBased(1), editPersonDescriptor);
-        CommandParserTestUtil.assertParseSuccess(parser, "1 d/31/12/2999", expectedScheduleCommand);
+        CommandParserTestUtil.assertParseSuccess(parser, "1 id/31/12/2999", expectedScheduleCommand);
 
         expectedScheduleCommand = new ScheduleCommand(new NameQuery(new NameContainsKeywordsPredicate("Alice")));
         CommandParserTestUtil.assertParseSuccess(parser, " n/Alice", expectedScheduleCommand);
