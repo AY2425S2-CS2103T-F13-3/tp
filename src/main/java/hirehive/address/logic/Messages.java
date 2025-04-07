@@ -67,7 +67,9 @@ public class Messages {
                 .append("; Date: ")
                 .append(person.getDate())
                 .append("; Tag: ")
-                .append(person.getTag());
+                .append(person.getTag())
+                .append("; Note: ")
+                .append(person.getNote().isEmpty() ? "Empty" : "Not empty");
         return builder.toString();
     }
 
