@@ -19,8 +19,8 @@ Class Email
 Class Name
 Class Phone
 Class Tag
-Class Role
 Class Note
+Class Role
 Class InterviewDate
 
 
@@ -41,21 +41,20 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
-Person *--> Name
+Person *-left-> Name
 Person *--> Phone
-Person *--> Email
+Person *-right-> Email
 Person *--> Address
 Person *--> Tag
 Person *--> Role
 Person *--> Note
-Person *-> InterviewDate
+Person *--> InterviewDate
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Name -[hidden]down-> Address
+Email -[hidden]down-> InterviewDate
 
 ModelManager --> "~* filtered" Person
 @enduml
