@@ -27,6 +27,7 @@ Ready to revolutionise your hiring? Let's begin!
   - [Add note to applicant: `newnote`](#add-notes-to-person-newnote)
   - [Display note of applicant: `displaynote`](#display-note-of-person-displaynote)
   - [Schedule interview dates: `schedule`](#schedule-interview-dates-for-applicants--schedule)
+  - [Remind you of upcoming interviews: `remind`](#show-applicants-with-upcoming-interviews-remind)
   - [Find applicants by name `find`](#find-applicants-by-name-find)
   - [List all applicants: `list`](#list-all-applicants-list)
   - [Sort applicants `sort`](#sort-applicants-sort)
@@ -53,7 +54,7 @@ Ready to revolutionise your hiring? Let's begin!
 4. Run HireHive
    - Find the folder that you stored HireHive previously (e.g. "Documents" or "Desktop" or "HireHive").
    - Right-click on the folder and choose:
-     - For **Mac users**: "New terminal at [folder-name]".
+     - For **Mac users**: "New terminal at Folder".
      - For **Windows users**: "Open in terminal".
    - Type `java -jar hirehive.jar` command in the opened terminal and press Enter to run the HireHive application.<br>
    - A [GUI](#glossary) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -66,15 +67,18 @@ Ready to revolutionise your hiring? Let's begin!
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/intern`: Adds an applicant named `John Doe` to HireHive, with his relevant information
 
-   * `delete n/John Doe` : Deletes the applicant `John Doe` from the current list.
-
    * `edit 3 n/Josef` : Edits the name of the 3rd applicant in the list to Josef
 
    * `find John Doe`: Searches for John Doe in the current list.
 
    * `tag n/John Doe t/interviewee` : Tags John Doe with the 'interviewee' tag
+   
+   * `delete n/John Doe` : Deletes the applicant `John Doe` from the current list.
 
-   * `exit` : Exits the app.
+  * `exit` : Exits the app.
+
+**:information_source: Note!**<br>
+- Not that in hireHive, every applicant should **contain a **[unique](#glossary)** name**!
 
 6. You can refer to the [Features](#features) section below for details of each command.
 
@@ -84,22 +88,24 @@ Ready to revolutionise your hiring? Let's begin!
 
 ## Command summary
 
-| Action          | Format, Examples                                                                                                                                                                                 |
-|-----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Help**        | `help`                                                                                                                                                                                           |
-| **Add**         | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [i/INFO]` <br> e.g., `add n/James Ho p/87654321 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/software engineer intern i/26 years old` |
-| **List**        | `list`                                                                                                                                                                                           |
-| **Edit**        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [i/NOTE] [d/DATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                      |
-| **Tag**         | `tag n/NAME [t/TAG]...​`                                                                                                                                                                         |
-| **Filter**      | `filter t/TAG` <br> e.g., `filter t/Applicant`                                                                                                                                                   |
-| **NewNote**     | `newnote n/NAME i/NOTE` <br> e.g., `newnote n/John Doe i/25 years old`                                                                                                                                                                                                 |
-| **DisplayNote** | `displaynote n/NAME` <br> e.g., `displaynote n/John Doe`                                                                                                                                                                                                 |
-| **Find**        | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                       |
-| **Delete**      | `delete n/NAME`<br> e.g., `delete n/John Doe`                                                                                                                                                    |
-| **Clear**       | `clear`                                                                                                                                                                                          |
-| **Schedule**    | `schedule n/NAME [d/DATE]` <br> `schedule INDEX [d/DATE]`                                                                                                                                        |
-| **Reminder**    | `remind DAYS`                                                                                                                                                                                    |
-| **Exit**        | `exit`                                                                                                                                                                                           |
+| Action                                                             | Format, Examples                                                                                                                                                         |
+|--------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Help](#view-help-help)**                                        | `help`                                                                                                                                                                   |
+| **[Add](#add-an-applicant-add)**                                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE` <br> e.g., `add n/James Ho p/87654321 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/software engineer intern` |
+| **[Edit](#edit-an-applicant-edit)**                                | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [i/NOTE] [d/DATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                              |
+| **[Tag](#tag-an-applicant-tag)**                                   | `tag n/NAME t/TAG` <br> `tag INDEX t/TAG` <br> `tag OFFSET n/NAME`                                                                                                       |
+| **[Filter](#filter-applicants-by-tag-filter)**                     | `filter t/TAG` <br> e.g., `filter t/Applicant`                                                                                                                           |
+ **[Filter out](#filtering-out-applicants-with-tag-filterout)**     | `filterout t/TAG` <br> e.g., `filterout t/Applicant`                                                                                                                     |
+| **[NewNote](#add-notes-to-person-newnote)**                        | `newnote n/NAME i/NOTE` <br> e.g., `newnote n/John Doe i/25 years old`                                                                                                   |
+| **[DisplayNote](#display-note-of-person-displaynote)**             | `displaynote n/NAME` <br> e.g., `displaynote n/John Doe`                                                                                                                 
+| **[Schedule](#schedule-interview-dates-for-applicants--schedule)** | 1. `schedule n/NAME [d/DATE]` <br> e.g. schedule n/John Doe d/17/04/2025 <br> 2. `schedule INDEX [d/DATE]` <br> e.g. schedule 2 d/17/04/2025 <br>                        |
+| **[Reminder](#show-applicants-with-upcoming-interviews-remind)**   | `remind DAYS`  <br> e.g. remind 3                                                                                                                                        |
+| **[Find](#find-applicants-by-name-find)**                          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                               |
+| **[List](#list-all-applicants-list)**                              | `list`                                                                                                                                                                   |
+ **[Sort](#sort-applicants-sort)**                                  | `sort`                                                                                                                                                                   |
+| **[Delete](#delete-an-applicant-delete)**                          | 1. `delete n/NAME`<br> e.g. delete n/John Doe <br> 2. `delete INDEX` <br> e.g. delete 2                                                                                  |
+| **[Clear](#clear-all-entries--clear)**                             | `clear`                                                                                                                                                                  |
+| **[Exit](#exit-the-program--exit)**                                | `exit`                                                                                                                                                                   |
 
 [Back to top](#welcome-to-hirehive)
 
@@ -115,7 +121,7 @@ Ready to revolutionise your hiring? Let's begin!
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [i/INFO]` can be used as `n/John Doe i/27 years old` or as `n/John Doe`.
+  e.g `n/NAME [i/NOTE]` can be used as `n/John Doe i/27 years old` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/interviewee`, `t/shortlisted` etc.
@@ -144,22 +150,55 @@ Format: `help`
 
 ### Add an applicant: `add`
 
-You can add a new applicant to HireHive when someone new applies to you company!
+You can add a new applicant to HireHive when someone new applies to your company!
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE`
 
-**:information_source: Note!**<br>
-* Please input a phone number that **start with 9/8/6**, is **exactly 8 digits** long and do not use spaces.
-* Please **do not use** dashes(-), commas(,) and periods(.) in names.
-    - Example: `Doe, John` or `Doe-John` should be entered as `Doe John`.
-* Names need to be in English!
+* NAME: 
+  - Names should only contain **English letters**, **spaces**, and the following symbols: **, ( ) / . @ - '**
+    - Example: `Ali s/o Mohammed`, `Rachel-Natalie`, `Si Min, Rachel O' Connor` are allowed names. 
+  - Names **should not be blank or start with a symbol**. 
+    - Example: `@Natalie` is not allowed
+  - Please **do not use numbers** in names.
+    - Example: `R4chel` is not allowed
+  - Names are **[case-insensitive](#glossary)**, and is displayed as how you type it.
+
+* PHONE_NUMBER: 
+  - Please input a phone number that **start with 9/8/6** and is **exactly 8 digits** long.
+  - Please **do not use spaces** 
+  
+* EMAIL:
+  - Emails should be of the format **local-part@domain** and adhere to the following constraints:
+    1. local-part: 
+       - The local-part should only contain **[alphanumeric](#glossary) characters** and the special characters: **+_.-**
+       - The local-part **should not start or end with any special characters**.
+    2. domain:
+       - The domain name is made up of domain labels that may or may not be separated by periods. 
+       - The domain name must:
+           - end with a domain label **at least 2 characters** long, and
+           - have each domain label **start and end with [alphanumeric](#glossary) characters**, and
+           - have each domain label consist of [alphanumeric](#glossary) characters, separated only by hyphens, if any.
+
+* ADDRESS: 
+  - Addresses can take any values, and it should not be blank
+
+* ROLE: 
+  - Roles should only **contain [alphanumeric](#glossary) characters and spaces**, and it should not be blank. 
+
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br> 
+- Every applicant in HireHive should **contain a [unique](#glossary) name**!
+  - i.e. HireHive ensures that there are no applicants in HireHive that have the same name!
+  - More specifically, applicants can share the same phone number, email, address and role, but **not name**!
+    - Example: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Software Engineer` and 
+      `add n/John Wee p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Software Engineer` are treated as 2 different applicants and both applicants can be added!
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 There is no need to manually add a tag as the 'Applicant' tag is automatically assigned when you add a new applicant to HireHive.
 </div>
-
-- The parameter NAME is **[unique](#glossary)** and **[case-insensitive](#glossary)**, and is displayed as how you type it.
-- Applicants in HireHive can share the same phone number, email, address and role.
 
 Examples:
 * `add n/Betsy Crowe e/betsycrowe@example.com a/Ang Mo Kio Street 22 p/87654321 r/senior consulting analyst`: Adds an applicant with the name `Betsy Crowe`, who has `betsycrowe@example.com` as their email, `87654321` as their phone number, and is applying for the `senior consulting analyst` role.
@@ -177,6 +216,13 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/ROLE] [i
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * The provided values will replace the existing information in the respective fields.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+* All the fields provided should follow the same rules as the [Add command](#add-an-applicant-add)
+* Every applicant should have a **[unique](#glossary)** name
+</div>
 
 
 Examples:
@@ -200,7 +246,7 @@ Command | Description
 
 * Tagging by name will partially match to **exactly one person** in the list ([case-insensitive](#glossary)).
   * If multiple matches are found, a list of all matching names will be displayed. You can then enter the **full name**
-    of the person you want to delete.
+    of the person you want to tag.
 * Tagging by index must have a **positive** index number
 * Tags must be one of the following values:
   1. Rejected
@@ -212,8 +258,11 @@ Command | Description
 * To tag with offset, the offset takes in `+` or `-`, followed by a number for the offset amount, e.g. `+1`, `-2`
   * The tag, which represents the hiring stage the specific person is at, will progress/regress the hiring stage by
     the offset amount
+    * The offset amount must range from -4 to +4
   * The order for the hiring stages is Rejected > Applicant > Candidate > Interviewee > Offered
   * The tag will not regress pass Rejected and progress pass Offered
+    * For example, if you enter the command `tag -4 n/John` with an applicant named John tagged as "Applicant", 
+      John's tag is set to `Rejected`
 
 
 Examples:
@@ -239,7 +288,7 @@ You can view all your applicants in a list **except** for those with the specifi
 
 Format: `filterout t/TAG`
 
-*The search is [case-insensitive](#glossary). e.g `applicant` will match `Applicant`
+* The search is [case-insensitive](#glossary). e.g `applicant` will match `Applicant`
 
 Examples:
 * `filterout t/offered` will filter out all applicants that were already offered the job, the remaining list will display applicants without the "Offered" tag.
@@ -301,22 +350,29 @@ Command | Description
 * If date is left empty, the next day that does not have an interview after the current day will be used to schedule the meeting instead.
 * Scheduling interview date by index must have a **positive** index number
 
+### Show applicants with upcoming interviews: `remind`
+
+Easily remind yourself of your upcoming interviews by listing down all applicants with interviews in the given days' time.
+
+Format: `remind DAYS`
+
+* The number of days given must be non-negative, i.e. greater or equal to 0
+
+[Back to top](#welcome-to-hirehive)
+
 ### Find applicants by name: `find`
 You can search for persons whose names contain any of the given keywords!
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
+* The search follows partial name matching. e.g. `find Han` will return `Han` and `Hans`
 * The search is [case-insensitive](#glossary). e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The order of the keywords **matter**. e.g. `Hans Bo` will not match `Bo Hans`
+* Only keywords in name is searched.
+
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 [Back to top](#welcome-to-hirehive)
 
@@ -336,14 +392,6 @@ Format: `sort`
 
 [Back to top](#welcome-to-hirehive)
 
-### Show applicants with upcoming interviews: `remind`
-
-Easily remind yourself of your upcoming interviews by listing down all applicants with interviews in the given days' time.
-
-Format: `remind DAYS`
-
-* The number of days given must be non-negative, i.e. greater or equal to 0
-
 ### Delete an applicant: `delete`
 
 You can delete a specific person from HireHive if their contact is no longer required.
@@ -357,7 +405,9 @@ Command | Description
 
 
 * Deleting by name will partially match to **exactly one person** in the list ([case-insensitive](#glossary)). 
-  - If multiple matches are found, a list of all matching names will be displayed. You can then enter the **full name** of the person you want to delete.
+  - If multiple matches are found, a list of all matching names will be displayed:
+    - You can then enter the **full name** of the person you want to delete
+    - **Or** you can delete by index of the displayed list
 * Deleting by index must have a **positive** index number
 
 Examples:
@@ -374,8 +424,17 @@ Clears all entries from HireHive.
 
 Format: `clear`
 
-**:information_source: Note!**<br>
+<div markdown="span" class="alert alert-warning">
+
+:exclamation: **Caution:**
 This action is **irreversible**! Please use this command with caution!
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+If you `clear` the data in HireHive and exit the app immediately, when you re-run HireHive, you might initially see an error message on your screen. But not to worry! You may ignore this message and continue using HireHive as per normal.
+</div>
 
 [Back to top](#welcome-to-hirehive)
 
@@ -432,6 +491,7 @@ Term | Description
 **Applicant** | A person who makes a formal application for something, especially a job.
 **Unique** | Only 1 specific instance of it exists.
 **Case-insensitive** | Uppercase and lowercase letters are treated the same and hence equivalent.
+**Alphanumeric** | consisting of both letters (A to Z) and numbers (0 to 9).
 **Hard disk** | The storage device used by a computer. These can be used as primary or secondary storage.
 **JSON** | Acronym for _JavaScript Object Notation,_ an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of name–value pairs and arrays (or other serializable values).
 **Shortcut** | A key or combination of keys that you can press on a computer keyboard to quickly perform a specific action.

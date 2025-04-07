@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S2-CS2103T-F13-3/tp/blob/master/src/main/java/hirehive/address/Main.java) and [`MainApp`](https://github.com/AY2425S2-CS2103T-F13-3/tp/blob/master/src/main/java/hirehive/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -68,13 +68,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S2-CS2103T-F13-3/tp/blob/master/src/main/java/hirehive/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S2-CS2103T-F13-3/tp/blob/master/src/main/java/hirehive/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S2-CS2103T-F13-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -85,7 +85,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S2-CS2103T-F13-3/tp/blob/master/src/main/java/hirehive/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -115,7 +115,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S2-CS2103T-F13-3/tp/blob/master/src/main/java/hirehive/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -136,7 +136,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S2-CS2103T-F13-3/tp/blob/master/src/main/java/hirehive/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -304,29 +304,44 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to add a person
-2. HireHive displays the added person
-3. HireHive adds the person
+1. User chooses to add a person.
+2. User enters the details of the person.
+3. HireHive adds the person.
+4. HireHive saves the details of the added person.
+5. HireHive displays the added person.
 
     Use case ends.
 
 **Extensions**
-* 1a. The user input is invalid
-  * 1a1. HireHive shows an error message
-
-    Use case restarts from step 1.
-
+* 2a. HireHive detects an invalid input in the entered details.
+  * 2a1. HireHive shows an error message.
+  * 2a2. User enters new data.
+  * Steps 2a1-2a2 are repeated until the user adds a valid input for the parameters.
+  * Use case resumes from step 3.
+  
+* 2b. HireHive detects that the person already exists.
+  * 2b1. HireHive shows an error message.
+  * 2b2. User enters new data.
+  * Steps 2b1-2b2 are repeated until a person with a unique name is entered.
+  * Use case resumes from step 3.
+  
+* 2c. HireHive detects an empty input for one of the parameters.
+  * 2c1. HireHive shows an error message.
+  * 2c2. User enters new data.
+  * Steps 2c1-2c2 are repeated until the user adds a valid input for all the parameters.
+  * Use case resumes from step 3.
+  
 **Use case: UC02 - List all persons**
 
 **MSS**
-1. User requests to list persons
-2. HireHive shows a list of persons
+1. User requests to list persons.
+2. HireHive shows a list of persons.
 
     Use case ends.
 
 **Extensions**
-* 1a. The list is empty
-    * 1a1. HireHive shows an error message
+* 1a. The list is empty.
+    * 1a1. HireHive displays an empty list.
 
         Use case ends.
 
@@ -367,6 +382,72 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 1.
 
 *{More to be added}*
+
+
+**Use case: UC05 - Edit a person**
+
+Preconditions: The list is not empty 
+
+**MSS**
+
+1. User requests to edit a person.
+2. User enters the index and parameter of the person to be edited.
+3. HireHive edits the person at that index by replacing the old data at the specified parameter with what was input by the user.
+4. HireHive saves the details of the edited person. 
+5. HireHive displays the person with their new details.
+
+   Use case ends.
+
+**Extensions**
+  
+* 2a. HireHive detects an invalid index.
+   * 2a1. HireHive shows an error message.
+   * 2a2. User enters new data.
+   * Steps 2a1-2a2 are repeated until the user inputs a valid index.
+   * Use case resumes from step 3.
+
+* 2b. HireHive detects an invalid parameter.
+   * 2b1. HireHive shows an error message.
+   * 2b2. User enters new data.
+   * Steps 2b1-2b2 are repeated until the user inputs a valid parameter.
+   * Use case resumes from step 3.
+
+* 2c. HireHive detects an empty input. 
+  * 2c1. HireHive shows an error message. 
+  * 2c2. User enters new data. 
+  * Steps 2c1-2c2 are repeated until the user inputs valid inputs for both index and parameter.
+  * Use case resumes from step 3.
+
+* 2d. User tries to edit the name of a person at a valid index.
+  * 2d1. HireHive detects an existing person with the same name.
+  * 2d2. HireHive shows an error message. 
+  * 2d3. User enters new data
+  * Steps 2d1-2d3 are repeated until the user inputs a unique name.
+  * Use case resumes from step 2.
+
+**Use case: UC06 - Find a person**
+
+Preconditions: The list is not empty
+
+**MSS**
+
+1. User requests to find persons whose names contain certain keyword(s). 
+2. User enters the keyword(s).
+3. HireHive displays the persons whose names have those keyword(s).
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. HireHive detects an empty keyword.
+    * 2a1. HireHive shows an error message.
+    * 2a2. User enters new data.
+    * Steps 2a1-2a2 are repeated until the user inputs at least 1 keyword.
+    * Use case resumes from step 3.
+
+* 2b. Nobody's names have those keyword(s).
+  * 2b1. HireHive displays an empty list.
+  * Use case ends.
 
 ### Non-Functional Requirements
 

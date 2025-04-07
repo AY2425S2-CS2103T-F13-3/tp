@@ -10,7 +10,7 @@ import hirehive.address.logic.parser.exceptions.ParseException;
 import hirehive.address.model.person.NameContainsKeywordsPredicate;
 
 /**
- * Parses input argument and creates a new NoteCommand object.
+ * Parses input argument and creates a new DisplayNoteCommand object.
  */
 public class DisplayNoteCommandParser implements Parser<DisplayNoteCommand> {
 

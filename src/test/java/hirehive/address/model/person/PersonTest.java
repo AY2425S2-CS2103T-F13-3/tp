@@ -1,11 +1,16 @@
 package hirehive.address.model.person;
 
+import static hirehive.address.logic.commands.CommandTestUtil.DEFAULT_TAG_APPLICANT;
+import static hirehive.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_DATE_BOB;
+import static hirehive.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static hirehive.address.logic.commands.CommandTestUtil.VALID_NOTE_AMY;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_NOTE_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static hirehive.address.logic.commands.CommandTestUtil.VALID_ROLE_AMY;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
 import static hirehive.address.logic.commands.CommandTestUtil.VALID_TAG_CANDIDATE;
 import static hirehive.address.testutil.Assert.assertThrows;
@@ -30,9 +35,9 @@ public class PersonTest {
         Assertions.assertFalse(TypicalPersons.ALICE.isSamePerson(null));
 
         // same name, all other attributes different -> returns true
-        Person editedAlice = new PersonBuilder(TypicalPersons.ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withRole(VALID_ROLE_BOB).withTag(VALID_TAG_CANDIDATE).withNote(VALID_NOTE_BOB)
-                .withDate(VALID_DATE_BOB).build();
+        Person editedAlice = new PersonBuilder(TypicalPersons.ALICE).withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withRole(VALID_ROLE_BOB)
+                .withTag(VALID_TAG_CANDIDATE).withNote(VALID_NOTE_BOB).withDate(VALID_DATE_BOB).build();
         Assertions.assertTrue(TypicalPersons.ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -43,10 +48,16 @@ public class PersonTest {
         Person editedBob = new PersonBuilder(TypicalPersons.BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
         Assertions.assertTrue(TypicalPersons.BOB.isSamePerson(editedBob));
 
-        // name has trailing spaces, all other attributes same -> returns false
+        // name has trailing spaces, all other attributes same -> returns true
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(TypicalPersons.BOB).withName(nameWithTrailingSpaces).build();
-        Assertions.assertFalse(TypicalPersons.BOB.isSamePerson(editedBob));
+        Assertions.assertTrue(TypicalPersons.BOB.isSamePerson(editedBob));
+
+        //name same, only phone different, all other attributes same -> returns true
+        Person editedAmy = new PersonBuilder(TypicalPersons.AMY).withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withRole(VALID_ROLE_AMY)
+                .withTag(DEFAULT_TAG_APPLICANT).withNote(VALID_NOTE_AMY).build();
+        Assertions.assertTrue(TypicalPersons.AMY.isSamePerson(editedAmy));
     }
 
     @Test
