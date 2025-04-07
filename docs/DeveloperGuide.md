@@ -356,6 +356,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to <ins>list persons (UC02)</ins>.
 2. User specifies a person in HireHive to tag with a specific tag.
 3. HireHive tags the person with the specific tag.
+4. HireHive displays the details of the person tagged.
+5. HireHive saves the updated details of the person tagged.
 
     Use case ends.
 
