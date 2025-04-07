@@ -38,6 +38,8 @@ public class TagCommand extends Command {
             + " - " + COMMAND_WORD + " 1 " + PREFIX_TAG + "Applicant\n";
 
     public static final String MESSAGE_TAG_INVALID_PARAMS = "The given Tag parameters are invalid.";
+    public static final String MESSAGE_TAG_INVALID_OFFSET = "The given offset is invalid. It should range from -4 to "
+            + "+4.";
     public static final String MESSAGE_TAG_PERSON_SUCCESS = "Tagged Person: %1$s";
 
     private NameQuery query = null;
