@@ -449,7 +449,19 @@ Preconditions: The list is not empty
   * 2b1. HireHive displays an empty list.
   * Use case ends.
 
-**Use case: UC07 - Add notes to a person**
+**Use case: UC07 - Sorting persons**
+
+Preconditions: The list is not empty
+
+**MSS**
+
+1. User requests to sort the list.
+2. HireHive sorts the list 
+3. HireHive displays sorted list.
+
+   Use case ends.
+
+**Use case: UC08 - Add notes to a person**
 
 Preconditions: The list is not empty
 
@@ -494,7 +506,7 @@ Preconditions: The list is not empty
   * 2f1. HireHive accepts this as valid input and clears the note.
   * Use case resumes from step 3.
 
-**Use case: UC08 - Display notes of a person**
+**Use case: UC09 - Display notes of a person**
 
 Preconditions: The list is not empty
 
@@ -529,7 +541,7 @@ Preconditions: The list is not empty
     * Steps 2d1-2d2 are repeated until the user inputs the full name of the person.
     * Use case resumes from step 3.
 
-**Use case UC09 - Clear AddressBook**
+**Use case UC10 - Clear AddressBook**
 
 *MSS*
 
@@ -539,7 +551,7 @@ Preconditions: The list is not empty
 
     Use case ends.
 
-**Use case UC10 - Getting Help**
+**Use case UC11 - Getting Help**
 
 Preconditions: User device has a working Internet connection.
 
@@ -562,7 +574,7 @@ Preconditions: User device has a working Internet connection.
 * 2b. User uses the shortcut to access the `Help` window. On both Mac and Windows, press `fn` + `F1`.
   * Use case resumes from step 3.
 
-**Use case UC11 - Exiting HireHive**
+**Use case UC12 - Exiting HireHive**
 
 *MSS*
 
