@@ -45,4 +45,11 @@ public class DeleteCommandParserTest {
         CommandParserTestUtil.assertParseFailure(parser, "",
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_indexAndNamePresent_throwsParseException() {
+        String userInput = "1 n/Alice";
+        CommandParserTestUtil.assertParseFailure(parser, userInput,
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
 }
