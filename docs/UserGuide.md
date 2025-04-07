@@ -55,7 +55,7 @@ Ready to revolutionise your hiring? Let's begin!
 
 3. Copy the downloaded file to a folder where you would like to store HireHive (e.g. "Documents" or "Desktop" or a new folder "HireHive") .
 
-4. Run HireHive
+4. Run HireHive.
    - Find the folder that you stored HireHive previously (e.g. "Documents" or "Desktop" or "HireHive").
    - Right-click on the folder and choose:
      - For **Mac users**: "New terminal at Folder".
@@ -476,7 +476,7 @@ This action is **irreversible**! Please use this command with caution!
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:**<br>
-If you `clear` the data in HireHive and exit the app immediately, when you re-run HireHive, you might initially see an error message on your screen. But not to worry! You may ignore this message and continue using HireHive as per normal.
+If you `clear` the data in HireHive and exit the app immediately, when you re-run HireHive, you will see a message on your screen warning you that the data might be corrupted. But not to worry! You may ignore this message and continue using HireHive as per normal.
 </div>
 
 [Back to top](#welcome-to-hirehive)
@@ -500,8 +500,8 @@ HireHive data is saved in the [hard disk](#glossary) automatically after any com
 HireHive data are saved automatically as a [JSON](#glossary) file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, HireHive will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause HireHive to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format *invalid,* HireHive will start with an *empty* data file at the next run. It will *discard* the old invalid data after the first successful command during this run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause HireHive to behave in unexpected ways (e.g., if a value entered is outside the acceptable range, or it is not of the expected data type). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 [Back to top](#welcome-to-hirehive)
