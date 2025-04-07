@@ -721,8 +721,8 @@ HireHive currently does not allow duplicate names, which does not reflect real-w
 
 **Proposed implementation:**
   1. Modify the `add` command to support adding multiple applicants with the same name.
-     * Compare applicants' phone numbers instead of names to determine if they are the same applicant.
-        * In the real world, while 2 applicants may have the same name, no 2 applicants should have the same phone number. Thus, phone numbers are a better way to reflect real-world scenarios and check for duplicates.
+     * Compare applicants' phone numbers and emails instead of names to determine if they are the same applicant.
+        * In the real world, while 2 applicants may have the same name, no 2 applicants should have the same phone number or email. Thus, phone numbers and emails are a better way to reflect real-world scenarios and check for duplicates.
   2. Update `displaynote` and `newnote` command to also accept `INDEX`, instead of just a person's `NAME`. 
      * i.e. allow `displaynote INDEX` and `newnote INDEX i/NOTE`, on top of the current functionality, `displaynote n/NAME` and `newnote n/NAME i/NOTE`
      * If applicants have the same name, they can be identified by their index instead, which is unique for each applicant. 
