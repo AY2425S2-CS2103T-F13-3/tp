@@ -468,6 +468,150 @@ MSS
 
 Use case resumes at step 1.
 
+**Use case: UC07 - Sorting persons**
+
+Preconditions: The list is not empty
+
+**MSS**
+
+1. User requests to sort the list.
+2. HireHive sorts the list 
+3. HireHive displays sorted list.
+
+   Use case ends.
+
+**Use case: UC08 - Add notes to a person**
+
+Preconditions: The list is not empty
+
+*MSS*
+
+1. User requests to add notes to a person.
+2. User enters the name of the person and the contents of the note to be added.
+3. HireHive adds the contents of the note to the person.
+4. HireHive saves the note of the person.
+5. HireHive displays the contents of the note in a popup window.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. HireHive detects that name is missing.
+  * 2a1. HireHive shows an error message.
+  * 2a2. User enters new input.
+  * Steps 2a1-2a2 are repeated until the user inputs an existing name.
+  * Use case resumes from step 3.
+* 2b. HireHive detects that name is invalid.
+  * 2b2. HireHive shows an error message.
+  * 2a2. User enters new input.
+  * Steps 2b1-2b2 are repeated until the user inputs an existing name.
+  * Use case resumes from step 3.
+* 2c. The name input by the user does not match any existing name.
+  * 2c1. HireHive shows an error message.
+  * 2c2. User enters new input.
+  * Steps 2c1-2c2 are repeated until the user inputs an existing name.
+  * Use case resumes from step 3.
+* 2d. The name input by the user matches multiple names.
+  * 2d1. HireHive shows an error message.
+  * 2d2. User enters new input.
+  * Steps 2d1-2d2 are repeated until the user inputs the full name of the person.
+  * Use case resumes from step 3.
+* 2e. HireHive detects that the note is invalid.
+  * 2e1. HireHive shows an error message.
+  * 2e2. User enters new input.
+  * Steps 2e1-2e2 are repeated until the user inputs a valid note.
+  * Use case resumes from step 3.
+* 2f. The note input is empty.
+  * 2f1. HireHive accepts this as valid input and clears the note.
+  * Use case resumes from step 3.
+
+**Use case: UC09 - Display notes of a person**
+
+Preconditions: The list is not empty
+
+*MSS*
+
+1. User requests to display notes of a person.
+2. User enters the name of the person.
+3. HireHive displays the contents of the note in a popup window.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. HireHive detects that name is missing.
+    * 2a1. HireHive shows an error message.
+    * 2a2. User enters new input.
+    * Steps 2a1-2a2 are repeated until the user inputs an existing name.
+    * Use case resumes from step 3.
+* 2b. HireHive detects that name is invalid.
+    * 2b2. HireHive shows an error message.
+    * 2a2. User enters new input.
+    * Steps 2b1-2b2 are repeated until the user inputs an existing name.
+    * Use case resumes from step 3.
+* 2c. The name input by the user does not match any existing name.
+    * 2c1. HireHive shows an error message.
+    * 2c2. User enters new input.
+    * Steps 2c1-2c2 are repeated until the user inputs an existing name.
+    * Use case resumes from step 3.
+* 2d. The name input by the user matches multiple names.
+    * 2d1. HireHive shows an error message.
+    * 2d2. User enters new input.
+    * Steps 2d1-2d2 are repeated until the user inputs the full name of the person.
+    * Use case resumes from step 3.
+
+**Use case UC10 - Clear AddressBook**
+
+*MSS*
+
+1. User requests to clear the AddressBook.
+2. User enters `clear` in the command box.
+3. HireHive clears all existing data, and AddressBook is now empty.
+
+    Use case ends.
+
+**Use case UC11 - Getting Help**
+
+Preconditions: User device has a working Internet connection.
+
+*MSS*
+
+1. User requests help in using HireHive.
+2. User enters `help` in the command box.
+3. HireHive opens the help window with a URL to the User Guide.
+4. User copies the URL with the `Copy URL` button on the right side of the help window.
+5. User accesses the User Guide through a browser after pasting the URL in.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. User clicks on the `Help` button on the top left of the display window.
+  * 2a1. A dropdown display shows another `Help` button.
+  * 2a2. User clicks on the `Help` button.
+  * Use case resumes from step 3.
+* 2b. User uses the shortcut to access the `Help` window. On both Mac and Windows, press `fn` + `F1`.
+  * Use case resumes from step 3.
+
+**Use case UC12 - Exiting HireHive**
+
+*MSS*
+
+1. User requests to exit HireHive.
+2. User enters `exit` as input.
+3. HireHive saves the data in its current state and closes.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. User clicks on the `File` button on the top left of the display window.
+  * 2a1. A dropdown display shows the `Exit` button.
+  * 2a2. User clicks on the `Exit` button.
+  * Use case resumes from step 3.
+* 2b. User clicks on the close button of the display window. On Mac, it is in the top left corner. On Windows, it is in the top right corner.
+  * Use case resumes from step 3.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
@@ -740,16 +884,19 @@ Prerequisite: use the initial persons list loaded when first running HireHive.ja
    2. Test case: Delete `addressbook.json` under folder `data` if it exists, then launch `HireHive.jar`. <br> Expected output: same as test case i.
 
 2. Saved data is loaded
-   1. Test case: perform a command that modifies data e.g. `delete 1`, then `exit` the application. Relaunch `HireHive.jar`. <br> Expected output: "Success: Applicant data has been loaded successfully."
+   1. Test case: perform a command that modifies data except `clear` e.g. `delete 1`, then `exit` the application. Relaunch `HireHive.jar`. <br> Expected output: "Success: Applicant data has been loaded successfully."
 
-3. No data is loaded due to corruption of data
+3. Saved data is empty
+   1. Test case: perform `clear` command e.g. `clear`, then `exit` the application. Relaunch `HireHive.jar`. <br> Expected output: "Current address book is empty. This might be due to corrupted data. <br> WARNING: Please check if data/addressbook.json has old corrupted data and attempt to fix it, otherwise any new successful commands will overwrite those contents."
+
+4. No data is loaded due to corruption of data
    1. Prerequisite: Launch `HireHive.jar` at least once and exit.
-   2. Test case: Delete `addressbook.json` under folder `data` if it exists, then copy `config.json` into the same folder. Rename `config.json` to `addressbook.json`. <br> Expected output: "Error: Unable to load applicant data. Invalid data format in saved file."
+   2. Test case: Delete `addressbook.json` under folder `data` if it exists, then copy `config.json` into the same folder. Rename `config.json` to `addressbook.json`. <br> Expected output: "Current address book is empty. This might be due to corrupted data. <br> WARNING: Please check if data/addressbook.json has old corrupted data and attempt to fix it, otherwise any new successful commands will overwrite those contents."
 
 ## **Appendix: Planned Enhancements**
 **Team size - 5**
 
-### 1. Support Multiple Applicants with the Same Name
+### 1. Support multiple applicants with the same name
 
 **Current Feature Flaw:**
 
@@ -789,5 +936,13 @@ After a user sorts or filters the list, if the user enters another command like 
 **Proposed implementation:**
   1. Modify `filter` and `sort` such that the displayed list is always retained unless the command `list` is entered. 
 
+### 4. Make loading AddressBook message more specific
 
+**Current Feature Flaw:**
+
+The current message for loading an empty AddressBook and loading an invalid AddressBook is the same. A warning is given to users who simply have an empty AddressBook, even though this behaviour is completely valid.
+
+**Proposed implementation:**
+1. When an AddressBook with invalid data is loaded, show the error message "WARNING: Data in data/addressbook.json is corrupted. Please resolve it manually, otherwise any new successful commands will overwrite those contents."
+2. When an empty AddressBook is loaded, show the message: "Success: No applicant data currently."
 
