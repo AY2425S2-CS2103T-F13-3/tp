@@ -709,3 +709,49 @@ Prerequisite: use the initial persons list loaded when first running HireHive.ja
 3. No data is loaded due to corruption of data
    1. Prerequisite: Launch `HireHive.jar` at least once and exit.
    2. Test case: Delete `addressbook.json` under folder `data` if it exists, then copy `config.json` into the same folder. Rename `config.json` to `addressbook.json`. <br> Expected output: "Error: Unable to load applicant data. Invalid data format in saved file."
+
+## **Appendix: Planned Enhancements**
+**Team size - 5**
+
+### 1. Support Multiple Applicants with the Same Name
+
+**Current Feature Flaw:**
+
+HireHive currently does not allow duplicate names, which does not reflect real-world scenarios where different applicants may have identical names.
+
+**Proposed implementation:**
+  1. Modify the `add` command to support adding multiple applicants with the same name.
+     * Compare applicants' phone numbers and emails instead of names to determine if they are the same applicant.
+        * In the real world, while 2 applicants may have the same name, no 2 applicants should have the same phone number or email. Thus, phone numbers and emails are a better way to reflect real-world scenarios and check for duplicates.
+  2. Update `displaynote` and `newnote` command to also accept `INDEX`, instead of just a person's `NAME`. 
+     * i.e. allow `displaynote INDEX` and `newnote INDEX i/NOTE`, on top of the current functionality, `displaynote n/NAME` and `newnote n/NAME i/NOTE`
+     * If applicants have the same name, they can be identified by their index instead, which is unique for each applicant. 
+     * Index format: Each applicant is identified by their unique index
+     * Name format: 
+       * Single match: Commands executes as per normal
+       * Multiple match (i.e. Multiple applicants with the same name)
+         * A list of applicants with the same name is displayed.
+         * Users can identify the desired applicant by using the command with the unique index of the person. 
+
+### 2. Support phone numbers from different countries
+
+**Current Feature Flaw:**
+
+HireHive currently does not support international phone numbers. However, we understand that this may not be applicable in the real world as applicants may be on work permits that come to Singapore to work. 
+
+**Proposed implementation:**
+  1. Modify the `add` command to make it more flexible and allow international formats.
+     * Accept phone numbers with country codes.
+     * Allow for telephone numbers that start with numbers other than 9/8/6 and allow for longer telephone numbers.
+
+### 3. Prevent the app from refreshing when user types another command after sorting/filtering the list
+
+**Current Feature Flaw:**
+
+After a user sorts or filters the list, if the user enters another command like `delete`, HireHive currently resets the displayed list to its original state and the user loses the sorted or filtered list. This may be inconvenient for users as it would require them to filter or sort the list again.
+
+**Proposed implementation:**
+  1. Modify `filter` and `sort` such that the displayed list is always retained unless the command `list` is entered. 
+
+
+
