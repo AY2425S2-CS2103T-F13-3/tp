@@ -81,11 +81,11 @@ Ready to revolutionise your hiring? Let's begin!
 
    * `exit` : Exits the app.
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Note:**<br>
-Note that in HireHive, every applicant should **contain a [unique](#glossary) name**!
-</div>
+    <div markdown="block" class="alert alert-info">
+    
+    **:information_source: Note:**<br>
+    Note that in HireHive, every applicant should **contain a [unique](#glossary) name**!
+    </div>
 
 6. You can refer to the [Features](#features) section below for details of each command.
 
