@@ -19,22 +19,22 @@ Ready to revolutionise your hiring? Let's begin!
 - [Command Summary](#command-summary)
 - [Features](#features)
     - [View help: `help`](#view-help-help)
-    - [Adding and modifying applicants](#uadding-and-modifying-applicantsu)
+    - [Adding and modifying applicants](#adding-and-modifying-applicants)
       - [Add an applicant: `add`](#add-an-applicant-add)
       - [Edit an applicant: `edit`](#edit-an-applicant-edit)
       - [Tag an applicant: `tag`](#tag-an-applicant-tag)
-      - [Add note to applicant: `newnote`](#add-notes-to-person-newnote)
+      - [Add note to applicant: `newnote`](#add-note-to-applicant-newnote)
       - [Schedule interview dates: `schedule`](#schedule-interview-dates-for-applicants--schedule)
-    - [Listing applicant information](#ulisting-applicant-informationu)
-      - [Display note of applicant: `displaynote`](#display-note-of-person-displaynote)
+    - [Listing applicant information](#listing-applicant-information)
+      - [Display note of applicant: `displaynote`](#display-note-of-applicant-displaynote)
       - [Sort applicants `sort`](#sort-applicants-sort)
       - [List all applicants: `list`](#list-all-applicants-list)
-    - [Filtering applicant information](#ufiltering-applicant-informationu)
+    - [Filtering applicant information](#filtering-applicant-information)
       - [Filter applicants by tag: `filter`](#filter-applicants-by-tag-filter)
       - [Filtering out applicants with tag: `filterout`](#filtering-out-applicants-with-tag-filterout)
       - [Remind you of upcoming interviews: `remind`](#show-applicants-with-upcoming-interviews-remind)
       - [Find applicants by name `find`](#find-applicants-by-name-find)
-    - [Deletion of applicants](#udeletion-of-applicantsu)
+    - [Deletion of applicants](#deletion-of-applicants)
       - [Delete an applicant: `delete`](#delete-an-applicant-delete)
       - [Clear all entries: `clear`](#clear-all-entries--clear)
     - [Exit the program: `exit`](#exit-the-program--exit)
@@ -101,9 +101,9 @@ Ready to revolutionise your hiring? Let's begin!
 | **[Add](#add-an-applicant-add)**                                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE` <br> e.g., `add n/James Ho p/87654321 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/software engineer intern` |
 | **[Edit](#edit-an-applicant-edit)**                                | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [i/NOTE] [d/DATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                              |
 | **[Tag](#tag-an-applicant-tag)**                                   | `tag n/NAME t/TAG` <br> `tag INDEX t/TAG` <br> `tag OFFSET n/NAME`                                                                                                       |
-| **[NewNote](#add-notes-to-person-newnote)**                        | `newnote n/NAME i/NOTE` <br> e.g., `newnote n/John Doe i/25 years old`                                                                                                   |
+| **[NewNote](#add-notes-to-applicant-newnote)**                     | `newnote n/NAME i/NOTE` <br> e.g., `newnote n/John Doe i/25 years old`                                                                                                   |
 | **[Schedule](#schedule-interview-dates-for-applicants--schedule)** | 1. `schedule n/NAME [id/DATE]` <br> e.g. `schedule n/John Doe d/17/04/2025` <br> 2. `schedule INDEX [id/DATE]` <br> e.g. `schedule 2 d/17/04/2025` <br>                  |
-| **[DisplayNote](#display-note-of-person-displaynote)**             | `displaynote n/NAME` <br> e.g., `displaynote n/John Doe`                                                                                                                 |
+| **[DisplayNote](#display-note-of-applicant-displaynote)**          | `displaynote n/NAME` <br> e.g., `displaynote n/John Doe`                                                                                                                 |
 | **[Sort](#sort-applicants-sort)**                                  | `sort`                                                                                                                                                                   |
 | **[List](#list-all-applicants-list)**                              | `list`                                                                                                                                                                   |
 | **[Filter](#filter-applicants-by-tag-filter)**                     | `filter t/TAG` <br> e.g., `filter t/Applicant`                                                                                                                           |
@@ -138,8 +138,6 @@ Ready to revolutionise your hiring? Let's begin!
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `list` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
 [Back to top](#welcome-to-hirehive)
@@ -221,7 +219,7 @@ If you have accidentally mistyped some details, you can edit the information of 
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/ROLE] [i/NOTE] [id/DATE]`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * The provided values will replace the existing information in the respective fields.
 
@@ -234,14 +232,14 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/ROLE] [i
 
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st applicant to be `91234567` and `johndoe@example.com` respectively.
 
 [Back to top](#welcome-to-hirehive)
 
 
 ### Tag an applicant: `tag`
 
-You can change the tag to a specific person from HireHive to easily differentiate between all your applicants!
+You can change the tag to a specific applicant from HireHive to easily differentiate between all your applicants!
 
 Format:
 
@@ -249,12 +247,12 @@ Command | Description
 --------|------------------
 `tag n/NAME t/TAG` | Tags by name.
 `tag INDEX t/TAG` | Tags by index.
-`tag OFFSET n/NAME` | Offset tag of named person.
+`tag OFFSET n/NAME` | Offset tag of named applicant.
 
 
-* Tagging by name will partially match to **exactly one person** in the list ([case-insensitive](#glossary)).
+* Tagging by name will partially match to **exactly one applicant** in the list ([case-insensitive](#glossary)).
   * If multiple matches are found, a list of all matching names will be displayed. You can then enter the **full name**
-    of the person you want to tag.
+    of the applicant you want to tag.
 * Tagging by index must have a **positive** index number
 * Tags must be one of the following values:
   1. Rejected
@@ -264,7 +262,7 @@ Command | Description
   5. Offered
 * The tag written in the command must match one of the values above ([case-insensitive](#glossary)) e.g. `t/applicant`
 * To tag with offset, the offset takes in `+` or `-`, followed by a number for the offset amount, e.g. `+1`, `-2`
-  * The tag, which represents the hiring stage the specific person is at, will progress/regress the hiring stage by
+  * The tag, which represents the hiring stage the specific applicant is at, will progress/regress the hiring stage by
     the offset amount
     * The offset amount must range from -4 to +4
   * The order for the hiring stages is Rejected > Applicant > Candidate > Interviewee > Offered
@@ -275,19 +273,19 @@ Command | Description
 
 Examples:
 * `tag n/John Doe t/Applicant` will tag John Doe as "Applicant" in HireHive
-* `tag 1 t/Candidate` will tag the 1st person as "Candidate"
-* `tag +1 n/John Doe` for a John Doe person with tag "Applicant" will tag them as "Candidate"
+* `tag 1 t/Candidate` will tag the 1st applicant as "Candidate"
+* `tag +1 n/John Doe` for a John Doe applicant with tag "Applicant" will tag them as "Candidate"
 
 [Back to top](#welcome-to-hirehive)
 
-### Add notes to person: `newnote`
+### Add note to applicant: `newnote`
 
 You can add information about the applicant into a note with this command.
 
 Format: `newnote n/NAME i/NOTE`
 
-* Adds the note if the given name partially matches **exactly one** person in the list ([case-insensitive](#glossary))
-* If multiple matches are found, a list of all matching names will be displayed. You should then retry the command but using the **full name** of the desired person.
+* Adds the note if the given name partially matches **exactly one** applicant in the list ([case-insensitive](#glossary))
+* If multiple matches are found, a list of all matching names will be displayed. You should then retry the command but using the **full name** of the desired applicant.
 * NOTE has a limit of 500 characters.
 * After adding, a popup window will appear containing the given input.
 * If the input is empty or consists only of whitespace, then the popup window displays a default message "Currently empty..." in yellow.
@@ -335,15 +333,15 @@ Examples:
 
 ### <u>Listing applicant information</u>
 
-### Display note of person: `displaynote`
+### Display note of applicant: `displaynote`
 
-You can display the note of a person with this command.
+You can display the note of an applicant with this command.
 
 Format: `displaynote n/NAME`
 
-* Displays the note if the given name partially matches **exactly one** person in the list ([case-insensitive](#glossary))
-* If multiple matches are found, a list of all matching names will be displayed. You should then retry the command but using the **full name** of the desired person.
-* A popup window will appear containing the person's note.
+* Displays the note if the given name partially matches **exactly one** applicant in the list ([case-insensitive](#glossary))
+* If multiple matches are found, a list of all matching names will be displayed. You should then retry the command but using the **full name** of the desired applicant.
+* A popup window will appear containing the applicant's note.
 * If the input is empty or consists only of whitespace, then the popup window displays a default message "Currently empty..." in yellow.
 
 Examples:
@@ -427,7 +425,7 @@ Given that today is 01/01/2025, and you have the following interviews scheduled:
 [Back to top](#welcome-to-hirehive)
 
 ### Find applicants by name: `find`
-You can search for persons whose names contain any of the given keywords!
+You can search for applicants whose names contain any of the given keywords!
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -446,7 +444,7 @@ Examples:
 
 ### Delete an applicant: `delete`
 
-You can delete a specific person from HireHive if their contact is no longer required.
+You can delete a specific applicant from HireHive if their contact is no longer required.
 
 Format: 
 
@@ -456,9 +454,9 @@ Command | Description
 `delete INDEX` | Delete by index.
 
 
-* Deleting by name will partially match to **exactly one person** in the list ([case-insensitive](#glossary)). 
+* Deleting by name will partially match to **exactly one applicant** in the list ([case-insensitive](#glossary)). 
   - If multiple matches are found, a list of all matching names will be displayed:
-    - You can then enter the **full name** of the person you want to delete
+    - You can then enter the **full name** of the applicant you want to delete
     - **Or** you can delete by index of the displayed list
 * Deleting by index must have a **positive** index number
 
