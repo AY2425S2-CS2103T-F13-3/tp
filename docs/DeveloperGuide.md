@@ -848,7 +848,7 @@ Prerequisite: use the initial persons list loaded when first running HireHive.ja
 ## **Appendix: Planned Enhancements**
 **Team size - 5**
 
-### 1. Support Multiple Applicants with the Same Name
+### 1. Support multiple applicants with the same name
 
 **Current Feature Flaw:**
 
@@ -888,5 +888,13 @@ After a user sorts or filters the list, if the user enters another command like 
 **Proposed implementation:**
   1. Modify `filter` and `sort` such that the displayed list is always retained unless the command `list` is entered. 
 
+### 4. Make loading AddressBook message more specific
 
+**Current Feature Flaw:**
+
+The current message for loading an empty AddressBook and loading an invalid AddressBook is the same. A warning is given to users who simply have an empty AddressBook, even though this behaviour is completely valid.
+
+**Proposed implementation:**
+1. When an AddressBook with invalid data is loaded, show the error message "WARNING: Data in data/addressbook.json is corrupted. Please resolve it manually, otherwise any new successful commands will overwrite those contents."
+2. When an empty AddressBook is loaded, show the message: "Success: No applicant data currently."
 
