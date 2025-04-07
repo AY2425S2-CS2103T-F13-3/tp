@@ -559,7 +559,7 @@ Preconditions: User device has a working Internet connection.
   * 2a1. A dropdown display shows another `Help` button.
   * 2a2. User clicks on the `Help` button.
   * Use case resumes from step 3.
-* 2b. User uses the shortcut to access the `Help` window. On Mac, press `fn` + `F1`. On Windows, press
+* 2b. User uses the shortcut to access the `Help` window. On both Mac and Windows, press `fn` + `F1`.
   * Use case resumes from step 3.
 
 **Use case UC11 - Exiting HireHive**
@@ -844,11 +844,3 @@ Prerequisite: use the initial persons list loaded when first running HireHive.ja
 4. No data is loaded due to corruption of data
    1. Prerequisite: Launch `HireHive.jar` at least once and exit.
    2. Test case: Delete `addressbook.json` under folder `data` if it exists, then copy `config.json` into the same folder. Rename `config.json` to `addressbook.json`. <br> Expected output: "Current address book is empty. This might be due to corrupted data. <br> WARNING: Please check if data/addressbook.json has old corrupted data and attempt to fix it, otherwise any new successful commands will overwrite those contents."
-
---------------------------------------------------------------------------------------------------------------------
-
-## **Appendix: Planned Enhancements**
-
-**Team size: 5**
-
-1. **Allow contacts with duplicate names to be added.** Currently, we do not allow contacts with the same name to be added, which could be overly restrictive. We plan to allow contacts with the same names to be added in the future, provided they do not share the same phone number or email address.
