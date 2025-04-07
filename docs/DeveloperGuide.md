@@ -471,7 +471,19 @@ Preconditions: The list is not empty
   * 2b1. HireHive displays an empty list.
   * Use case ends.
 
-**Use case: UC07 - Filtering out applicants by tag**
+**Use case: UC07 - Sorting persons**
+
+Preconditions: The list is not empty
+
+**MSS**
+
+1. User requests to sort the list.
+2. HireHive sorts the list 
+3. HireHive displays sorted list.
+
+   Use case ends.
+
+**Use case: UC08 - Filtering out applicants by tag**
 
 Preconditions: The list is not empty
 
@@ -497,6 +509,7 @@ Preconditions: The list is not empty
   * Steps 2b1-2b2 are repeated till users input a valid tag
 
     Use case resumes at step 3.
+
 
 ### Non-Functional Requirements
 
