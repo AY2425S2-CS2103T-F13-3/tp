@@ -500,7 +500,7 @@ HireHive data is saved in the [hard disk](#glossary) automatically after any com
 HireHive data are saved automatically as a [JSON](#glossary) file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format *invalid,* HireHive will start with an *empty* data file at the next run. It will *discard* the old invalid data after the first successful command during this run. Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file makes its format **invalid,** HireHive will start with an **empty** data file at the next run. It will **discard** the old invalid data after the first successful command during this run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause HireHive to behave in unexpected ways (e.g., if a value entered is outside the acceptable range, or it is not of the expected data type). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
