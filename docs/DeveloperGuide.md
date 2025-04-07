@@ -449,6 +449,86 @@ Preconditions: The list is not empty
   * 2b1. HireHive displays an empty list.
   * Use case ends.
 
+**Use case: UC07 - Add notes to a person**
+
+Preconditions: The list is not empty
+
+*MSS*
+
+1. User requests to add notes to a person.
+2. User enters the name of the person and the contents of the note to be added.
+3. HireHive adds the contents of the note to the person.
+4. HireHive saves the note of the person.
+5. HireHive displays the contents of the note in a popup window.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. HireHive detects that name is missing.
+  * 2a1. HireHive shows an error message.
+  * 2a2. User enters new input.
+  * Steps 2a1-2a2 are repeated until the user inputs an existing name.
+  * Use case resumes from step 3.
+* 2b. HireHive detects that name is invalid.
+  * 2b2. HireHive shows an error message.
+  * 2a2. User enters new input.
+  * Steps 2b1-2b2 are repeated until the user inputs an existing name.
+  * Use case resumes from step 3.
+* 2c. The name input by the user does not match any existing name.
+  * 2c1. HireHive shows an error message.
+  * 2c2. User enters new input.
+  * Steps 2c1-2c2 are repeated until the user inputs an existing name.
+  * Use case resumes from step 3.
+* 2d. The name input by the user matches multiple names.
+  * 2d1. HireHive shows an error message.
+  * 2d2. User enters new input.
+  * Steps 2d1-2d2 are repeated until the user inputs the full name of the person.
+  * Use case resumes from step 3.
+* 2e. HireHive detects that the note is invalid.
+  * 2e1. HireHive shows an error message.
+  * 2e2. User enters new input.
+  * Steps 2e1-2e2 are repeated until the user inputs a valid note.
+  * Use case resumes from step 3.
+* 2f. The note input is empty.
+  * 2f1. HireHive accepts this as valid input and clears the note.
+  * Use case resumes from step 3.
+
+**Use case: UC08 - Display notes of a person**
+
+Preconditions: The list is not empty
+
+*MSS*
+
+1. User requests to display notes of a person.
+2. User enters the name of the person.
+3. HireHive displays the contents of the note in a popup window.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. HireHive detects that name is missing.
+    * 2a1. HireHive shows an error message.
+    * 2a2. User enters new input.
+    * Steps 2a1-2a2 are repeated until the user inputs an existing name.
+    * Use case resumes from step 3.
+* 2b. HireHive detects that name is invalid.
+    * 2b2. HireHive shows an error message.
+    * 2a2. User enters new input.
+    * Steps 2b1-2b2 are repeated until the user inputs an existing name.
+    * Use case resumes from step 3.
+* 2c. The name input by the user does not match any existing name.
+    * 2c1. HireHive shows an error message.
+    * 2c2. User enters new input.
+    * Steps 2c1-2c2 are repeated until the user inputs an existing name.
+    * Use case resumes from step 3.
+* 2d. The name input by the user matches multiple names.
+    * 2d1. HireHive shows an error message.
+    * 2d2. User enters new input.
+    * Steps 2d1-2d2 are repeated until the user inputs the full name of the person.
+    * Use case resumes from step 3.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
