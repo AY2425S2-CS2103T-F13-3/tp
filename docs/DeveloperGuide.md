@@ -322,7 +322,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2b. HireHive detects that the person already exists.
   * 2b1. HireHive shows an error message.
   * 2b2. User enters new data.
-  * Steps 2b1-2b2 are repeated until a person with a unique phone number is entered.
+  * Steps 2b1-2b2 are repeated until a person with a unique name is entered.
   * Use case resumes from step 3.
   
 * 2c. HireHive detects an empty input for one of the parameters.
@@ -390,7 +390,7 @@ Preconditions: The list is not empty
 
 **MSS**
 
-1. User requests to edit a person
+1. User requests to edit a person.
 2. User enters the index and parameter of the person to be edited.
 3. HireHive edits the person at that index by replacing the old data at the specified parameter with what was input by the user.
 4. HireHive saves the details of the edited person. 
@@ -418,11 +418,11 @@ Preconditions: The list is not empty
   * Steps 2c1-2c2 are repeated until the user inputs valid inputs for both index and parameter.
   * Use case resumes from step 3.
 
-* 2d. User tries to edit the phone number parameter of a person at a valid index.
-  * 2d1. HireHive detects an existing person with the same phone number
+* 2d. User tries to edit the name of a person at a valid index.
+  * 2d1. HireHive detects an existing person with the same name.
   * 2d2. HireHive shows an error message. 
   * 2d3. User enters new data
-  * Steps 2d1-2d3 are repeated until the user inputs a unique phone number.
+  * Steps 2d1-2d3 are repeated until the user inputs a unique name.
   * Use case resumes from step 2.
 
 **Use case: UC06 - Find a person**
