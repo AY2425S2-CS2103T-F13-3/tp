@@ -371,7 +371,7 @@ Preconditions: The list is not empty
 
       Use case resumes at step 1.
 
-* 3bc. Multiple persons match the given name
+* 3c. Multiple persons match the given name
     * 3c1. HireHive shows an error message, and requests for more specific data.
     * 3c2. User enters new data
     * 3c3. Steps 3c1-3c2 are repeated till the data entered is correct
@@ -386,8 +386,8 @@ Preconditions: The list is not empty
 1. User requests to <ins>list persons (UC02)</ins>.
 2. User specifies a person in HireHive to tag with a specific tag.
 3. HireHive tags the person with the specific tag.
-4. HireHive displays the details of the person tagged.
-5. HireHive saves the updated details of the person tagged.
+4. HireHive saves the details of the person tagged.
+5. HireHive displays the updated details of the person tagged.
 
     Use case ends.
 
@@ -400,7 +400,6 @@ Preconditions: The list is not empty
     * 3a3. HireHive shows a message to ask user to enter the full name of the person to tag.
 
       Use case ends.
-
 
 * 3b. User specifies a person by a name of a person that does not exist.
     * 3b1. HireHive shows an error message that no such person exists.
@@ -487,11 +486,13 @@ Preconditions: The list is not empty
 
 Use case: UC07 - Schedule an interview
 
-MSS
+**MSS**
 
 1. User requests to <ins>list persons (UC02)</ins>.
 2. User requests to schedule a meeting on a certain date.
 3. HireHive adds the date to the person's entry.
+4. HireHive saves the details of the person with the newly added date.
+5. HireHive displays the details of the person with the newly added date.
 
     Use case ends.
 
@@ -521,7 +522,7 @@ Preconditions: The list is not empty
 
 Preconditions: The list is not empty
 
-*MSS*
+**MSS**
 
 1. User requests to add notes to a person.
 2. User enters the name of the person and the contents of the note to be added.
@@ -566,7 +567,7 @@ Preconditions: The list is not empty
 
 Preconditions: The list is not empty
 
-*MSS*
+**MSS**
 
 1. User requests to display notes of a person.
 2. User enters the name of the person.
@@ -608,7 +609,7 @@ Preconditions: The list is not empty
 
 **Use case UC10 - Clear AddressBook**
 
-*MSS*
+**MSS**
 
 1. User requests to clear the AddressBook.
 2. User enters `clear` in the command box.
@@ -620,7 +621,7 @@ Preconditions: The list is not empty
 
 Preconditions: User device has a working Internet connection.
 
-*MSS*
+**MSS**
 
 1. User requests help in using HireHive.
 2. User enters `help` in the command box.
@@ -948,6 +949,26 @@ Prerequisite: use the initial persons list loaded when first running HireHive.ja
 2. Test case: `displaynote n/BeRnIcE yU` <br> Expected output: "Displaying note of: Bernice Yu; Phone: 99272758; Email: berniceyu@example.com; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Role: HR manager; Date: 01/03/2025; Tag: INTERVIEWEE" Additionally, popup window shows "Currently empty..." in yellow font.
 3. Test case: `displaynote n/Irfan` <br> Expected output: "Displaying note of: Irfan Ibrahim; Phone: 92492021; Email: irfan@example.com; Address: Blk 47 Tampines Street 20, #17-35; Role: Software Engineer; Date: 06/03/2025; Tag: REJECTED" Additionally, popup window shows "30 years old" in white font.
 4. Test case: `newnote n/raHIM i/` <br> Expected output: same as test case 3.
+
+### Editing the details of a person
+1. Editing the details of a person 
+   1. Prerequisites: List all persons using the `list` command. 
+   2. Test case: `edit 2 p/88888888` <br>
+      Expected: The phone number of the 2nd person in the list is changed to 88888888
+   3. Test case: `edit 2 p/88888888 e/g@gmail.com` <br>
+      Expected: The phone number and email of the 2nd person in the list is changed to 88888888 and g@gmail.com respectively. 
+   4. Test case: `edit 1 i/` <br>
+       Expected: The note of the 1st person in the list is cleared. 
+   5. Test case: `edit 0 p/88888888`
+      Expected: Nobody's details are edited. Error is displayed.
+
+
+### Finding a person
+1. Finding a person with some keywords
+   1. Prerequisites: List all persons using the `list` command. 
+   2. Test case: `find Alice`
+      Expected: Displays the applicant(s) whose name contains the keyword 'Alice'
+
 
 ### Loading data
 
