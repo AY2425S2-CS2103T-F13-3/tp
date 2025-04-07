@@ -100,7 +100,7 @@ Ready to revolutionise your hiring? Let's begin!
 | **[Find](#find-applicants-by-name-find)**                          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                               |
 | **[List](#list-all-applicants-list)**                              | `list`                                                                                                                                                                   |
  **[Sort](#sort-applicants-sort)**                                  | `sort`                                                                                                                                                                   |
-| **[Delete](#delete-an-applicant-delete)**                          | `delete n/NAME`<br> `delete INDEX`                                                                                                                                       |
+| **[Delete](#delete-an-applicant-delete)**                          | 1. `delete n/NAME`<br> e.g. delete n/John Doe <br> 2. `delete INDEX` <br> e.g. delete 2                                                                                  |
 | **[Clear](#clear-all-entries--clear)**                             | `clear`                                                                                                                                                                  |
 | **[Exit](#exit-the-program--exit)**                                | `exit`                                                                                                                                                                   |
 
@@ -217,6 +217,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/ROLE] [i
 
 **:information_source: Note:**<br>
 * All the fields provided should follow the same rules as the [Add command](#add-an-applicant-add)
+* Every applicant should have a **[unique](#glossary)** name
 </div>
 
 
