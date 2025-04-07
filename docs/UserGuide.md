@@ -147,7 +147,7 @@ Format: `help`
 
 ### Add an applicant: `add`
 
-You can add a new applicant to HireHive when someone new applies to you company!
+You can add a new applicant to HireHive when someone new applies to your company!
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE`
 
