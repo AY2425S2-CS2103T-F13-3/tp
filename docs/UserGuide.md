@@ -283,7 +283,7 @@ You can view all your applicants in a list **except** for those with the specifi
 
 Format: `filterout t/TAG`
 
-*The search is [case-insensitive](#glossary). e.g `applicant` will match `Applicant`
+* The search is [case-insensitive](#glossary). e.g `applicant` will match `Applicant`
 
 Examples:
 * `filterout t/offered` will filter out all applicants that were already offered the job, the remaining list will display applicants without the "Offered" tag.
@@ -402,7 +402,7 @@ Command | Description
 * Deleting by name will partially match to **exactly one person** in the list ([case-insensitive](#glossary)). 
   - If multiple matches are found, a list of all matching names will be displayed:
     - You can then enter the **full name** of the person you want to delete
-    - **Or** you can delete by index of the current list
+    - **Or** you can delete by index of the displayed list
 * Deleting by index must have a **positive** index number
 
 Examples:
