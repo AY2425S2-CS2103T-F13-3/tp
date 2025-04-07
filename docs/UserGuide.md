@@ -460,7 +460,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The search follows partial name matching. e.g. `find Han` will return `Han` and `Hans`
 * The search is [case-insensitive](#glossary). e.g `hans` will match `Hans`
 * The order of the keywords **matter**. e.g. `Hans Bo` will not match `Bo Hans`
-* Only keywords in name is searched.
+* Only keywords in name are searched.
 
 
 Examples:
