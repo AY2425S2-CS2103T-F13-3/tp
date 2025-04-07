@@ -79,12 +79,12 @@ Ready to revolutionise your hiring? Let's begin!
    
    * `delete n/John Doe` : Deletes the applicant `John Doe` from the current list.
 
-  * `exit` : Exits the app.
+   * `exit` : Exits the app.
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:**<br>
-- Note that in HireHive, every applicant should **contain a [unique](#glossary) name**!
+Note that in HireHive, every applicant should **contain a [unique](#glossary) name**!
 </div>
 
 6. You can refer to the [Features](#features) section below for details of each command.
@@ -95,24 +95,24 @@ Ready to revolutionise your hiring? Let's begin!
 
 ## Command summary
 
-| Action                                                            | Format, Examples                                                                                                                                                         |
-|-------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Help](#view-help-help)**                                       | `help`                                                                                                                                                                   |
-| **[Add](#add-an-applicant-add)**                                  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE` <br> e.g., `add n/James Ho p/87654321 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/software engineer intern` |
-| **[Edit](#edit-an-applicant-edit)**                               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [i/NOTE] [d/DATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                              |
-| **[Tag](#tag-an-applicant-tag)**                                  | `tag n/NAME t/TAG` <br> `tag INDEX t/TAG` <br> `tag OFFSET n/NAME`                                                                                                       |
-| **[NewNote](#add-notes-to-applicant-newnote)**                    | `newnote n/NAME i/NOTE` <br> e.g., `newnote n/John Doe i/25 years old`                                                                                                   |
-| **[Schedule](#schedule-interview-dates-for-applicants--schedule)** | 1. `schedule n/NAME [id/DATE]` <br> e.g. `schedule n/John Doe d/17/04/2025` <br> 2. `schedule INDEX [id/DATE]` <br> e.g. `schedule 2 d/17/04/2025` <br>                  |
-| **[DisplayNote](#display-note-of-applicant-displaynote)**         | `displaynote n/NAME` <br> e.g., `displaynote n/John Doe`                                                                                                                 |
-| **[Sort](#sort-applicants-sort)**                                 | `sort`                                                                                                                                                                   |
-| **[List](#list-all-applicants-list)**                             | `list`                                                                                                                                                                   |
-| **[Filter](#filter-applicants-by-tag-filter)**                    | `filter t/TAG` <br> e.g., `filter t/Applicant`                                                                                                                           |
-| **[FilterOut](#filtering-out-applicants-with-tag-filterout)**     | `filterout t/TAG` <br> e.g., `filterout t/Applicant`                                                                                                                     |
-| **[Reminder](#show-applicants-with-upcoming-interviews-remind)**  | `remind DAYS`  <br> e.g. `remind 3`                                                                                                                                      |
-| **[Find](#find-applicants-by-name-find)**                         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                               |
-| **[Delete](#delete-an-applicant-delete)**                         | 1. `delete n/NAME`<br> e.g. delete n/John Doe <br> 2. `delete INDEX` <br> e.g. delete 2                                                                                                                             |
-| **[Clear](#clear-all-entries--clear)**                            | `clear`                                                                                                                                                                  |
-| **[Exit](#exit-the-program--exit)**                               | `exit`                                                                                                                                                                   |
+| Action                                                            | Format, Examples                                                                                                                                                     |
+|-------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Help](#view-help-help)**                                       | `help`                                                                                                                                                               |
+| **[Add](#add-an-applicant-add)**                                  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE` <br> e.g. `add n/James Ho p/87654321 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/software engineer intern` |
+| **[Edit](#edit-an-applicant-edit)**                               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [i/NOTE] [d/DATE]`<br> e.g. `edit 2 n/James Lee e/jameslee@example.com`                          |
+| **[Tag](#tag-an-applicant-tag)**                                  | `tag n/NAME t/TAG` <br> `tag INDEX t/TAG` <br> `tag OFFSET n/NAME`                                                                                                   |
+| **[NewNote](#add-notes-to-applicant-newnote)**                    | `newnote n/NAME i/NOTE` <br> e.g. `newnote n/John Doe i/25 years old`                                                                                                |
+| **[Schedule](#schedule-interview-dates-for-applicants--schedule)** | 1. `schedule n/NAME [id/DATE]` <br> e.g. `schedule n/John Doe d/17/04/2025` <br> 2. `schedule INDEX [id/DATE]` <br> e.g. `schedule 2 d/17/04/2025` <br>              |
+| **[DisplayNote](#display-note-of-applicant-displaynote)**         | `displaynote n/NAME` <br> e.g. `displaynote n/John Doe`                                                                                                              |
+| **[Sort](#sort-applicants-sort)**                                 | `sort`                                                                                                                                                               |
+| **[List](#list-all-applicants-list)**                             | `list`                                                                                                                                                               |
+| **[Filter](#filter-applicants-by-tag-filter)**                    | `filter t/TAG` <br> e.g. `filter t/Applicant`                                                                                                                        |
+| **[FilterOut](#filtering-out-applicants-with-tag-filterout)**     | `filterout t/TAG` <br> e.g. `filterout t/Applicant`                                                                                                                  |
+| **[Reminder](#show-applicants-with-upcoming-interviews-remind)**  | `remind DAYS`  <br> e.g. `remind 3`                                                                                                                                  |
+| **[Find](#find-applicants-by-name-find)**                         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`                                                                                                            |
+| **[Delete](#delete-an-applicant-delete)**                         | 1. `delete n/NAME`<br> e.g. `delete n/John Doe` <br> 2. `delete INDEX` <br> e.g. `delete 2`                                                                              |
+| **[Clear](#clear-all-entries--clear)**                            | `clear`                                                                                                                                                              |
+| **[Exit](#exit-the-program--exit)**                               | `exit`                                                                                                                                                               |
 
 [Back to top](#welcome-to-hirehive)
 
@@ -195,7 +195,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE`
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:**<br> 
-- Every applicant in HireHive should **contain a [unique](#glossary) name**!
+Every applicant in HireHive should **contain a [unique](#glossary) name**!
   - i.e. HireHive ensures that there are no applicants in HireHive that have the same name!
   - More specifically, applicants can share the same phone number, email, address and role, but **not name**!
     - Example: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Software Engineer` and 
