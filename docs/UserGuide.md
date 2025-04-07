@@ -79,7 +79,7 @@ Ready to revolutionise your hiring? Let's begin!
    
    * `delete n/John Doe` : Deletes the applicant `John Doe` from the current list.
 
-  * `exit` : Exits the app.
+   * `exit` : Exits the app.
 
 <div markdown="block" class="alert alert-info">
 
@@ -209,7 +209,7 @@ There is no need to manually add a tag as the 'Applicant' tag is automatically a
 Examples:
 * `add n/Betsy Crowe e/betsycrowe@example.com a/Ang Mo Kio Street 22 p/87654321 r/senior consulting analyst`: Adds an applicant with the name `Betsy Crowe`, who has `betsycrowe@example.com` as their email, `87654321` as their phone number, and is applying for the `senior consulting analyst` role.
 
-![help message](images/Ui-AddCommand.png)
+![add message](images/Ui-AddCommand.png)
 
 [Back to top](#welcome-to-hirehive)
 
@@ -234,6 +234,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/ROLE] [i
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st applicant to be `91234567` and `johndoe@example.com` respectively.
 
+![edit message](images/Ui-EditCommand.png)
+
 [Back to top](#welcome-to-hirehive)
 
 
@@ -254,12 +256,12 @@ Command | Description
   * If multiple matches are found, a list of all matching names will be displayed. You can then enter the **full name**
     of the applicant you want to tag.
 * Tagging by index must have a **positive** index number
-* Tags must be one of the following values:
-  1. Rejected
-  2. Applicant
-  3. Candidate
-  4. Interviewee
-  5. Offered
+* Tags must be one of the following values, which are colour-coded as follows:
+  1. <p style="background-color: #913F51; display: inline; padding: 2px; border-radius:5px">Rejected</p>
+  2. <p style="background-color: #3e7b91; display: inline; padding: 2px; border-radius:5px">Applicant</p>
+  3. <p style="background-color: #3C8F76; display: inline; padding: 2px; border-radius:5px">Candidate</p>
+  4. <p style="background-color: #4B8F3A; display: inline; padding: 2px; border-radius:5px">Interviewee</p>
+  5. <p style="background-color: #918C3F; display: inline; padding: 2px; border-radius:5px">Offered</p>
 * The tag written in the command must match one of the values above ([case-insensitive](#glossary)) e.g. `t/applicant`
 * To tag with offset, the offset takes in `+` or `-`, followed by a number for the offset amount, e.g. `+1`, `-2`
   * The tag, which represents the hiring stage the specific applicant is at, will progress/regress the hiring stage by
@@ -273,10 +275,14 @@ Command | Description
 
 Examples:
 * `tag n/John Doe t/Applicant` will tag John Doe as "Applicant" in HireHive
+
+![tag message](images/Ui-TagCommand.png)
+
 * `tag 1 t/Candidate` will tag the 1st applicant as "Candidate"
 * `tag +1 n/John Doe` for a John Doe applicant with tag "Applicant" will tag them as "Candidate"
 
 [Back to top](#welcome-to-hirehive)
+
 
 ### Add note to applicant: `newnote`
 
@@ -292,6 +298,9 @@ Format: `newnote n/NAME i/NOTE`
 
 Examples:
 * `newnote n/John Doe i/25 years old` adds a note to John Doe that says "25 years old"
+
+![newnote message](images/Ui-NewNoteCommand.png)
+
 * `newnote n/John Doe i/` removes any existing content in John Doe's note
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -326,9 +335,14 @@ You will not be allowed to schedule interviews with candidates that are already 
 </div>
 
 Examples:
-* Running `schedule n/Bob id/01/01/2025` will schedule an interview with Bob on 01/01/2025
-* Running `schedule n/Bob` on 01/01/2025 when there are no interviews scheduled will schedule an interview with Bob on 02/01/2025
-* Running `schedule n/Bob` on 01/01/2025 when there is an interview on 02/01/2025 will instead schedule the interview with Bob on 03/01/2025
+* Running `schedule n/John Doe id/01/01/2026` will schedule an interview with John Doe on 01/01/2025
+
+![schedule message](images/Ui-ScheduleCommand.png)
+
+* Running `schedule n/John Doe` on 01/01/2026 when there are no interviews scheduled will schedule an interview with 
+  John Doe on 02/01/2026
+* Running `schedule n/John Doe` on 01/01/2026 when there is an interview on 02/01/2025 will instead schedule the 
+  interview with John Doe on 03/01/2026
 
 [Back to top](#welcome-to-hirehive)
 
@@ -348,6 +362,8 @@ Format: `displaynote n/NAME`
 Examples:
 * `displaynote n/John Doe` shows John Doe's note
 
+![displaynote message](images/Ui-DisplayNoteCommand.png)
+
 [Back to top](#welcome-to-hirehive)
 
 ### Sort applicants: `sort`
@@ -355,6 +371,8 @@ Examples:
 Sorts the applicants displayed on your screen by interview date, in chronological order so that you can conveniently view upcoming interviews.
 
 Format: `sort`
+
+![sort message](images/Ui-SortCommand.png)
 
 [Back to top](#welcome-to-hirehive)
 
@@ -367,6 +385,8 @@ This command also resets any filters applied by the commands below!
 </div>
 
 Format: `list`
+
+![list message](images/Ui-ListCommand.png)
 
 [Back to top](#welcome-to-hirehive)
 
@@ -388,6 +408,8 @@ Format: `filter t/TAG`
 Examples:
 * `filter t/Applicant` will filter and display everyone with the `Applicant` tag in the list
 
+![filter message](images/Ui-FilterCommand.png)
+
 [Back to top](#welcome-to-hirehive)
 
 ### Filtering out applicants with tag: `filterout`
@@ -399,6 +421,8 @@ Format: `filterout t/TAG`
 
 Examples:
 * `filterout t/offered` will filter out all applicants that were already offered the job, the remaining list will display applicants without the "Offered" tag.
+
+![filterout message](images/Ui-FilterOutCommand.png)
 
 [Back to top](#welcome-to-hirehive)
 
@@ -414,13 +438,16 @@ Format: `remind DAYS`
 
 Examples:
 
-Given that today is 01/01/2025, and you have the following interviews scheduled:
+Given that today is 08/04/2025, and you have the following interviews scheduled:
 
-- Alice: 01/01/2025
-- Bob: 03/01/2025
-- Charlie: 31/12/2025
+- Alice Yeoh: 08/04/2025
+- Bernice Yu: 10/04/2025
+- Charlotte Oliveiro: 31/12/2025
 
 * `remind 0` will display Alice's entry
+
+![remind message](images/Ui-RemindCommand.png)
+
 * `remind 2` will display Alice's and Bob's entry
 
 [Back to top](#welcome-to-hirehive)
@@ -437,7 +464,9 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 
 Examples:
-* `find John` returns `john` and `John Doe`
+* `find John` with an applicant John Doe in the list returns `John Doe`
+
+![find message](images/Ui-FindCommand.png)
 
 [Back to top](#welcome-to-hirehive)
 
@@ -463,9 +492,10 @@ Command | Description
 
 Examples:
 * `delete n/John Doe` deletes John Doe's contact from HireHive
-* `delete 2` deletes the second applicant in the list from HireHive
 
 ![delete message](images/Ui-DeleteCommand.png)
+
+* `delete 2` deletes the second applicant in the list from HireHive
 
 [Back to top](#welcome-to-hirehive)
 
@@ -486,6 +516,8 @@ This action is **irreversible**! Please use this command with caution!
 **:information_source: Note:**<br>
 If you `clear` the data in HireHive and exit the app immediately, when you re-run HireHive, you will see a message on your screen warning you that the data might be corrupted. But not to worry! You may ignore this message and continue using HireHive as per normal.
 </div>
+
+![clear message](images/Ui-ClearCommand.png)
 
 [Back to top](#welcome-to-hirehive)
 
