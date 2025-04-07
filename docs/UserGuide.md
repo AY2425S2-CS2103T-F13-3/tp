@@ -442,9 +442,9 @@ Examples:
 
 Given that today is 08/04/2025, and you have the following interviews scheduled:
 
-- Alice: 08/04/2025
-- Bob: 10/04/2025
-- Charlie: 31/12/2025
+- Alice Yeoh: 08/04/2025
+- Bernice Yu: 10/04/2025
+- Charlotte Oliveiro: 31/12/2025
 
 * `remind 0` will display Alice's entry
 
@@ -519,7 +519,7 @@ This action is **irreversible**! Please use this command with caution!
 If you `clear` the data in HireHive and exit the app immediately, when you re-run HireHive, you will see a message on your screen warning you that the data might be corrupted. But not to worry! You may ignore this message and continue using HireHive as per normal.
 </div>
 
-![clear message](images/Ui-ClearCommand.png)z
+![clear message](images/Ui-ClearCommand.png)
 
 [Back to top](#welcome-to-hirehive)
 
