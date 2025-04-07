@@ -35,6 +35,7 @@ public class ModelManager implements Model {
     private final SortedList<Person> sortedPersons;
     private boolean isSorted = false;
 
+    private Predicate<Person> currFilter = PREDICATE_SHOW_ALL_PERSONS;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -116,7 +117,7 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        unfilterPersonList();
     }
 
     @Override
@@ -140,7 +141,14 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        currFilter = currFilter.and(predicate);
+        filteredPersons.setPredicate(currFilter);
+        resetSorting();
+    }
+
+    @Override
+    public void unfilterPersonList() {
+        filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
         resetSorting();
     }
 

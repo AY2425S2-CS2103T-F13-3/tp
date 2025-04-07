@@ -97,8 +97,11 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name, regardless of whether it is in upper/lower case.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both persons have the same name, ignoring case differences
+     * and ignores number of spacing in name.
+     *
+     * @param otherPerson The other person to compare to.
+     * @return true if the names are equivalent after normalization; false otherwise.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
@@ -106,7 +109,18 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getPhone().equals(getPhone());
+                && normalizeName(otherPerson.getName()).equalsIgnoreCase(normalizeName(getName()));
+    }
+
+    /**
+     * Normalizes a name by trimming leading/trailing spaces and
+     * replacing multiple consecutive whitespace characters with a single space.
+     *
+     * @param name The name to normalize.
+     * @return The normalized name.
+     */
+    private String normalizeName(Name name) {
+        return name.toString().trim().replaceAll("\\s+", " ");
     }
 
     /**

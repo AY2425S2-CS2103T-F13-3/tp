@@ -31,7 +31,7 @@ public class DisplayNoteCommand extends Command {
     private final String name;
 
     /**
-     * Creates NoteCommand to show the note of a person.
+     * Creates DisplayNoteCommand to show the note of a person.
      * @param name the name of the person.
      */
     public DisplayNoteCommand(String name) {
@@ -40,7 +40,7 @@ public class DisplayNoteCommand extends Command {
     }
 
     /**
-     * Executes the note command to display the note of the queried person
+     * Executes the displaynote command to display the note of the queried person
      * @param model {@code Model} which the command should operate on.
      * @return A {@code CommandResult} containing success message.
      * @throws CommandException if person is not found.
