@@ -90,7 +90,7 @@ Ready to revolutionise your hiring? Let's begin!
 | **[Help](#view-help-help)**                                        | `help`                                                                                                                                                                   |
 | **[Add](#add-an-applicant-add)**                                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE` <br> e.g., `add n/James Ho p/87654321 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/software engineer intern` |
 | **[Edit](#edit-an-applicant-edit)**                                | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [i/NOTE] [d/DATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                              |
-| **[Tag](#tag-an-applicant-tag)**                                   | `tag n/NAME [t/TAG]...​`                                                                                                                                                 |
+| **[Tag](#tag-an-applicant-tag)**                                   | `tag n/NAME t/TAG` <br> `tag INDEX t/TAG` <br> `tag OFFSET n/NAME`                                                                                                                                                    |
 | **[Filter](#filter-applicants-by-tag-filter)**                     | `filter t/TAG` <br> e.g., `filter t/Applicant`                                                                                                                           |
  **[Filter out](#filtering-out-applicants-with-tag-filterout)**     | `filterout t/TAG` <br> e.g., `filterout t/Applicant`                                                                                                                     |
 | **[NewNote](#add-notes-to-person-newnote)**                        | `newnote n/NAME i/NOTE` <br> e.g., `newnote n/John Doe i/25 years old`                                                                                                   |
@@ -232,7 +232,7 @@ Command | Description
 
 * Tagging by name will partially match to **exactly one person** in the list ([case-insensitive](#glossary)).
   * If multiple matches are found, a list of all matching names will be displayed. You can then enter the **full name**
-    of the person you want to delete.
+    of the person you want to tag.
 * Tagging by index must have a **positive** index number
 * Tags must be one of the following values:
   1. Rejected
@@ -244,8 +244,11 @@ Command | Description
 * To tag with offset, the offset takes in `+` or `-`, followed by a number for the offset amount, e.g. `+1`, `-2`
   * The tag, which represents the hiring stage the specific person is at, will progress/regress the hiring stage by
     the offset amount
+    * The offset amount must range from -4 to +4
   * The order for the hiring stages is Rejected > Applicant > Candidate > Interviewee > Offered
   * The tag will not regress pass Rejected and progress pass Offered
+    * For example, if you enter the command `tag -4 n/John` with an applicant named John tagged as "Applicant", 
+      John's tag is set to `Rejected`
 
 
 Examples:
