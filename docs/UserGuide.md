@@ -316,6 +316,7 @@ In the event where you are unable to select a candidate due to duplicated names,
 </div>
 
 * The date format is DD/MM/YYYY (date/month/year) e.g. "04/04/2025"
+* The command will only accept dates starting from the current date.
 * If date is left empty, the next day that does not have an interview after the current day will be used to schedule the meeting instead.
 * You will have to provide a **positive [integer](#glossary)** to select a candidate by index.
 * Scheduling an interview with an applicant or candidate will automatically change their tag to an Interviewee.
@@ -377,7 +378,7 @@ For example, running `filter t/interviewee` and `remind 5` will filter out all i
 
 ### Filter applicants by tag: `filter`
 
-Lists down all your entries of a given tag.
+You can view all your applicants with a specific tag for better organization!
 
 Format: `filter t/TAG`
 
