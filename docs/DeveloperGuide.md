@@ -192,7 +192,7 @@ Step 4. The user now decides that adding the person was a mistake, and decides t
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
-</div>
+</div>z
 
 The following sequence diagram shows how an undo operation goes through the `Logic` component:
 
@@ -354,19 +354,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to <ins>list persons (UC02)</ins>.
-2. User requests to tag a person with a number of tags.
-3. HireHive tags the person with the tags
+2. User specifies a person in HireHive to tag with a specific tag.
+3. HireHive tags the person with the specific tag.
+
     Use case ends.
 
 **Extensions**
 
-* 3a. The given index is invalid.
+* 3a. User specifies a person by a valid name, but HireHive has multiple people containing the same name.
 
     * 3a1. HireHive shows an error message.
+    * 3a2. HireHive shows a list of persons containing the name.
+    * 3a3. HireHive shows a message to ask user to enter the full name of the person to tag.
 
-      Use case resumes at step 1.
+      Use case ends.
 
-*{More to be added}*
+
+* 3b. User specifies a person by a name of a person that does not exist.
+    * 3b1. HireHive shows an error message that no such person exists.
+    * 3b2. HireHive shows an empty list of persons.
+
+      Use case ends.
+
+* 3c. User specifies a person by invalid index.
+    * 3c1. HireHive shows an error message that index is invalid.
+
+      Use case ends.
+
+* 3d. User enters an invalid offset.
+    * 3d1. HireHive shows an error message that offset is invalid.
+
+      Use case ends.
+
+
 
 ### Non-Functional Requirements
 
