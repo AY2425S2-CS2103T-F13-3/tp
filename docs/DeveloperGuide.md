@@ -538,6 +538,16 @@ Preconditions: The list is not empty
 2. User enters the name of the person.
 3. HireHive displays the contents of the note in a popup window.
 
+**Use case: UC08 - Filtering out applicants by tag**
+
+Preconditions: The list is not empty
+
+**MSS**
+
+1. User requests to filter out the list with a tag
+2. User enters the specific tag to filter out the list
+3. HireHive displays all persons without the specified tag
+
    Use case ends.
 
 **Extensions**
@@ -622,7 +632,7 @@ Preconditions: The list is not empty
 
 **Use case UC13 - Exiting HireHive**
 
-*MSS*
+**MSS**
 
 1. User requests to exit HireHive.
 2. User enters `exit` as input.
@@ -638,6 +648,7 @@ Preconditions: The list is not empty
   * Use case resumes from step 3.
 * 2b. User clicks on the close button of the display window. On Mac, it is in the top left corner. On Windows, it is in the top right corner.
   * Use case resumes from step 3.
+
 
 ### Non-Functional Requirements
 
