@@ -24,6 +24,14 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     public DeleteCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
+
+        boolean hasIndex = !argMultimap.getPreamble().isBlank();
+        boolean hasName = argMultimap.getValue(PREFIX_NAME).isPresent();
+
+        if (hasIndex && hasName) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             String nameKeywords = argMultimap.getValue(PREFIX_NAME).get().trim();
