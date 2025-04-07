@@ -93,7 +93,7 @@ Ready to revolutionise your hiring? Let's begin!
 | **[Help](#view-help-help)**                                        | `help`                                                                                                                                                                   |
 | **[Add](#add-an-applicant-add)**                                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE` <br> e.g., `add n/James Ho p/87654321 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/software engineer intern` |
 | **[Edit](#edit-an-applicant-edit)**                                | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [i/NOTE] [d/DATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                              |
-| **[Tag](#tag-an-applicant-tag)**                                   | `tag n/NAME t/TAG` <br> `tag INDEX t/TAG` <br> `tag OFFSET n/NAME`                                                                                                                                                    |
+| **[Tag](#tag-an-applicant-tag)**                                   | `tag n/NAME t/TAG` <br> `tag INDEX t/TAG` <br> `tag OFFSET n/NAME`                                                                                                       |
 | **[Filter](#filter-applicants-by-tag-filter)**                     | `filter t/TAG` <br> e.g., `filter t/Applicant`                                                                                                                           |
  **[Filter out](#filtering-out-applicants-with-tag-filterout)**     | `filterout t/TAG` <br> e.g., `filterout t/Applicant`                                                                                                                     |
 | **[NewNote](#add-notes-to-person-newnote)**                        | `newnote n/NAME i/NOTE` <br> e.g., `newnote n/John Doe i/25 years old`                                                                                                   |
@@ -103,7 +103,7 @@ Ready to revolutionise your hiring? Let's begin!
 | **[Find](#find-applicants-by-name-find)**                          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                               |
 | **[List](#list-all-applicants-list)**                              | `list`                                                                                                                                                                   |
  **[Sort](#sort-applicants-sort)**                                  | `sort`                                                                                                                                                                   |
-| **[Delete](#delete-an-applicant-delete)**                          | `delete n/NAME`<br> e.g., `delete n/John Doe`                                                                                                                            |
+| **[Delete](#delete-an-applicant-delete)**                          | 1. `delete n/NAME`<br> e.g. delete n/John Doe <br> 2. `delete INDEX` <br> e.g. delete 2                                                                                  |
 | **[Clear](#clear-all-entries--clear)**                             | `clear`                                                                                                                                                                  |
 | **[Exit](#exit-the-program--exit)**                                | `exit`                                                                                                                                                                   |
 
@@ -185,12 +185,16 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE`
 * ROLE: 
   - Roles should only **contain [alphanumeric](#glossary) characters and spaces**, and it should not be blank. 
 
-**:information_source: Note!**<br> 
-- Every applicant in HireHive should **contain a **[unique](#glossary)** name**!
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br> 
+- Every applicant in HireHive should **contain a [unique](#glossary) name**!
   - i.e. HireHive ensures that there are no applicants in HireHive that have the same name!
   - More specifically, applicants can share the same phone number, email, address and role, but **not name**!
     - Example: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Software Engineer` and 
       `add n/John Wee p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Software Engineer` are treated as 2 different applicants and both applicants can be added!
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 There is no need to manually add a tag as the 'Applicant' tag is automatically assigned when you add a new applicant to HireHive.
@@ -212,6 +216,13 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/ROLE] [i
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * The provided values will replace the existing information in the respective fields.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+* All the fields provided should follow the same rules as the [Add command](#add-an-applicant-add)
+* Every applicant should have a **[unique](#glossary)** name
+</div>
 
 
 Examples:
@@ -277,7 +288,7 @@ You can view all your applicants in a list **except** for those with the specifi
 
 Format: `filterout t/TAG`
 
-*The search is [case-insensitive](#glossary). e.g `applicant` will match `Applicant`
+* The search is [case-insensitive](#glossary). e.g `applicant` will match `Applicant`
 
 Examples:
 * `filterout t/offered` will filter out all applicants that were already offered the job, the remaining list will display applicants without the "Offered" tag.
@@ -354,17 +365,14 @@ You can search for persons whose names contain any of the given keywords!
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
+* The search follows partial name matching. e.g. `find Han` will return `Han` and `Hans`
 * The search is [case-insensitive](#glossary). e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The order of the keywords **matter**. e.g. `Hans Bo` will not match `Bo Hans`
+* Only keywords in name is searched.
+
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 [Back to top](#welcome-to-hirehive)
 
@@ -397,7 +405,9 @@ Command | Description
 
 
 * Deleting by name will partially match to **exactly one person** in the list ([case-insensitive](#glossary)). 
-  - If multiple matches are found, a list of all matching names will be displayed. You can then enter the **full name** of the person you want to delete.
+  - If multiple matches are found, a list of all matching names will be displayed:
+    - You can then enter the **full name** of the person you want to delete
+    - **Or** you can delete by index of the displayed list
 * Deleting by index must have a **positive** index number
 
 Examples:
@@ -414,11 +424,17 @@ Clears all entries from HireHive.
 
 Format: `clear`
 
-**:information_source: Note!**<br>
-This action is **irreversible**! Please use this command with caution!
+<div markdown="span" class="alert alert-warning">
 
-**:information_source: Note!**<br>
+:exclamation: **Caution:**
+This action is **irreversible**! Please use this command with caution!
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
 If you `clear` the data in HireHive and exit the app immediately, when you re-run HireHive, you might initially see an error message on your screen. But not to worry! You may ignore this message and continue using HireHive as per normal.
+</div>
 
 [Back to top](#welcome-to-hirehive)
 
