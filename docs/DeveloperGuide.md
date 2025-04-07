@@ -469,29 +469,48 @@ Preconditions: The list is not empty
   * Steps 2d1-2d3 are repeated until the user inputs a unique name.
   * Use case resumes from step 2.
 
-**Use case: UC06 - Find a person**
+**Use case: UC06 - Filter the list**
 
 Preconditions: The list is not empty
 
 **MSS**
 
-1. User requests to find persons whose names contain certain keyword(s). 
-2. User enters the keyword(s).
-3. HireHive displays the persons whose names have those keyword(s).
+1. User requests to filter persons based on a certain condition (name, tag, interview date).
+2. User enters the search criteria.
+3. HireHive displays the persons who fit the criteria.
 
-   Use case ends.
+    Use case ends.
+
+**Extensions**
+* 2a. HireHive detects a empty or invalid search condition.
+    * 2a1. HireHive shows an error message.
+    * 2a2. User enters new data.
+    * Steps 2a1-2a2 are repeated until the user inputs a valid condition.
+    * Use case resumes from step 3.
+
+* 2b. No entry fits the criteria.
+    * 2b1. HireHive displays an empty list.
+    * Use case ends.
+
+Use case: UC07 - Schedule an interview
+
+MSS
+
+1. User requests to <ins>list persons (UC02)</ins>.
+2. User requests to schedule a meeting on a certain date.
+3. HireHive adds the date to the person's entry.
+
+    Use case ends.
 
 **Extensions**
 
-* 2a. HireHive detects an empty keyword.
-    * 2a1. HireHive shows an error message.
-    * 2a2. User enters new data.
-    * Steps 2a1-2a2 are repeated until the user inputs at least 1 keyword.
+* 2a. User does not provide a date.
+    * 2a1. HireHive automatically schedules the interview date on the next free day.
     * Use case resumes from step 3.
+* 3a. The given index or name is invalid.
+    * 3a1. HireHive shows an error message.
 
-* 2b. Nobody's names have those keyword(s).
-  * 2b1. HireHive displays an empty list.
-  * Use case ends.
+Use case resumes at step 1.
 
 **Use case: UC07 - Sorting persons**
 
@@ -764,10 +783,10 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Multiple persons in the list, with some persons having interview dates
    
    2. Test case: `sort` <br>
-      Expected: All the persons in the list are sorted.Those with interview dates are sorted in chronological order, while those without interview dates are pushed to the back of the list, in the original order they were in previously. New index given based on the newly sorted order of the list.
+      Expected: All the persons in the list are sorted. Those with interview dates are sorted in chronological order, while those without interview dates are pushed to the back of the list, in the original order they were in previously. New index given based on the newly sorted order of the list.
 
    3. Test case: `list help` <br>
-      Expected: All the persons in the list are sorted.Those with interview dates are sorted in chronological order, while those without interview dates are pushed to the back of the list, in the original order they were in previously. New index given based on the newly sorted order of the list.
+      Expected: All the persons in the list are sorted. Those with interview dates are sorted in chronological order, while those without interview dates are pushed to the back of the list, in the original order they were in previously. New index given based on the newly sorted order of the list.
 
 ### Deleting a person
 
@@ -837,17 +856,7 @@ testers are expected to do more *exploratory* testing.
       in the status message (if tag was "Interviewee"). 
    3. Test case `tag -2 n/charlotte` <br>
       Expected: Contact with name "Charlotte Oliveiro" is tagged as "Rejected". Details of the tagged contact shown
-      in the status message (if tag was "Candidate"). 
-
-### Show persons with upcoming interviews
-
-1. Show persons with upcoming interviews
-   1. Prerequisites: Use the same persons list as when you first ran HireHive.jar
-   2. Test case: `remind 100` <br>
-      Expected: Only the contact with name "David Li" and interview date "06/07/2025" is shown in the list. Success 
-      message shown in the status message.
-   3. Test case: `remind -1` <br>
-      Expected: Error message for invalid command format shown in status message with command format and example.
+      in the status message (if tag was "Candidate").
 
 ### Scheduling interview date
 
@@ -858,13 +867,16 @@ testers are expected to do more *exploratory* testing.
       contact shown in the status message.
    3. Test case: `schedule n/alice d/test` <br>
       Expected: Error message for invalid command format shown in status message with command format and example.
+   4. Test case: `schedule n/alice 04/05/2025`<br>
+      Expected: Error message for no persons found as there is no person with the name "alice 04/05/2025"
 2. Scheduling an interview date for a person by index
    1. Prerequisites: Use the same persons list as when you first ran HireHive.jar
    2. Test case: `schedule 1 d/04/05/2025` <br>
-      Expected: First contact has interview date scheduled as "04/05/2025". Details of the scheduled
-      contact shown in the status message.
+      Expected: First contact has interview date scheduled as "04/05/2025". Details of the scheduled contact shown in the status message.
    3. Test case: `schedule 1 d/test` <br>
-      Expected: Expected: Error message for invalid command format shown in status message with command format and example.
+      Expected: Error message for invalid command format shown in status message with command format and example.
+   4. Test case: `schedule 1 01/02/2025` <br>
+      Expected: Error message for invalid integer as "1 01/02/2025" is not a non-zero unsigned integer.
 3. Automatically scheduling the next interview date
    1. Prerequisites: Use the same persons list as when you first ran HireHive.jar
    2. Test case: `schedule 1`<br>
@@ -872,15 +884,39 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `schedule n/alice` <br>
       Expected: Alice's contact will be updated to tomorrow's date
 
+### Show persons with upcoming interviews
+
+1. Show persons with upcoming interviews
+   1. Prerequisites: Use the same persons list as when you first ran HireHive.jar. `list` command is run before the execution of the below commands.
+   2. Test case: `remind 100` <br>
+     Expected: Only the contact with name "David Li" and interview date "06/07/2025" is shown in the list. Success
+     message shown in the status message.
+   3. Test case: `remind -1` <br>
+     Expected: Error message for invalid command format shown in status message with command format and example.
+   4. Test case: `remind 1000000000000000000000000000000` <br>
+     Expected: Error message for invalid integer is shown.
+
+### Filtering for applicants with tag
+1. Filtering for applicants with specified tag
+   1. Prerequisites: Use the same persons list as when you first ran HireHive.jar. `list` command is run before the execution of the below commands.
+   2. Test case: `filter t/interviewee` <br>
+      Expected: All contacts with the interviewee tag will be displayed on the list.
+   3. Test case: `filter t/iNtErViEweE` <br>
+      Expected: All contacts with the interviewee tag will be displayed on the list.
+   4. Test case: `filter t/abc` <br>
+      Expected: Error message showing the valid tags will be displayed.
+   5. Test case `filter candidate` <br>
+      Expected: Error message for invalid command format shown in status message with command format and example.
+
 ### Filtering out applicants with tag
 1. Filtering out all applicants with specified tag, and the remaining list contains applicants without that tag
-   1. Prerequisities: Use the same persons list as when you first ran HireHive.jar
+   1. Prerequisites: Use the same persons list as when you first ran HireHive.jar. `list` command is run before the execution of the below commands.
    2. Test case: `filterout t/interviewee` <br>
       Expected: All contacts without the interviewee tag will be displayed on the list
    3. Test case: `filterout t/Applicant` <br>
-      Expected: All contacts without the Applicant tag will be displayed on the list
+      Expected: All contacts without the applicant tag will be displayed on the list
    4. Test case: `filterout t/testing` <br>
-      Expected: Error message for invalid command format shown in status message with command format and example.
+      Expected: Error message showing the valid tags will be displayed.
    5. Test case `filterout candidate` <br>
       Expected: Error message for invalid command format shown in status message with command format and example.
 
