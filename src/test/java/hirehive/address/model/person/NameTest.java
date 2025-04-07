@@ -31,13 +31,22 @@ public class NameTest {
         assertFalse(Name.isValidName(" ")); // spaces only
         assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
         assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidName("peter the 2nd")); // alphanumeric characters
+        assertFalse(Name.isValidName("12345")); // numbers only
+        assertFalse(Name.isValidName("/rachel.")); // Symbol at the start
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only
-        assertTrue(Name.isValidName("12345")); // numbers only
-        assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
-        assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(Name.isValidName("David Roger Jackson Ray Jr Second")); // long names
+        assertTrue(Name.isValidName("Rachel O'Connor")); //apostrophe
+        assertTrue(Name.isValidName("R@chel")); // commercial at
+        assertTrue(Name.isValidName("Rachel s/o Connor")); // slash
+        assertTrue(Name.isValidName("Rachel (XinYing)")); // brackets
+        assertTrue(Name.isValidName("Lee, Rachel")); // comma
+        assertTrue(Name.isValidName("Rachel-Natalie")); // hyphen
+        assertTrue(Name.isValidName("Lee. Rachel.")); // full stop
+        assertTrue(Name.isValidName("R@c/hel, Wa()l-ker."));
     }
 
     @Test
