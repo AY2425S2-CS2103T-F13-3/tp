@@ -337,10 +337,11 @@ In the event where you are unable to select a candidate due to duplicated names,
   * If multiple matches are found, a list of all matching names will be displayed
       * You can then enter the **full name** of the applicant you want to schedule
 * You will have to provide a **positive [integer](#glossary)** to select a candidate by index.
-* Scheduling an interview with an applicant or candidate will automatically change their tag to an `Interviewee`.
+* Scheduling an interview with an `Applicant` or `Candidate` will automatically change their tag to an `Interviewee`.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-You will not be allowed to schedule interviews with candidates that are already offered/rejected. Please change their tags if you wish to schedule a second interview.
+You will not be allowed to schedule interviews with candidates that are already `Offered`/`Rejected`. Please change 
+their tags if you wish to schedule a second interview.
 </div>
 
 Examples:
