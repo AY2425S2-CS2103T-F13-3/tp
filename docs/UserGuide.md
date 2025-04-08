@@ -263,11 +263,11 @@ In the event where you are unable to select a candidate due to duplicated names,
     - You can then enter the **full name** of the applicant you want to tag
 * Tagging by index must have a **positive** index number
 * Tags must be one of the following values, which are colour-coded as follows:
-  1. <p style="background-color: #913F51; display: inline; padding: 2px; border-radius:5px">Rejected</p>
-  2. <p style="background-color: #3e7b91; display: inline; padding: 2px; border-radius:5px">Applicant</p>
-  3. <p style="background-color: #3C8F76; display: inline; padding: 2px; border-radius:5px">Candidate</p>
-  4. <p style="background-color: #4B8F3A; display: inline; padding: 2px; border-radius:5px">Interviewee</p>
-  5. <p style="background-color: #918C3F; display: inline; padding: 2px; border-radius:5px">Offered</p>
+  1. <p style="background-color: #913F51; display: inline; padding: 2px; border-radius:5px; color: white;">Rejected</p>
+  2. <p style="background-color: #3e7b91; display: inline; padding: 2px; border-radius:5px; color: white;">Applicant</p>
+  3. <p style="background-color: #3C8F76; display: inline; padding: 2px; border-radius:5px; color: white;">Candidate</p>
+  4. <p style="background-color: #4B8F3A; display: inline; padding: 2px; border-radius:5px; color: white;">Interviewee</p>
+  5. <p style="background-color: #918C3F; display: inline; padding: 2px; border-radius:5px; color: white;">Offered</p>
 * The tag written in the command must match one of the values above ([case-insensitive](#glossary)) e.g. `t/applicant`
 * To tag with offset, the offset takes in `+` or `-`, followed by a number for the offset amount, e.g. `+1`, `-2`
   * The tag, which represents the hiring stage the specific applicant is at, will progress/regress the hiring stage by
@@ -280,12 +280,12 @@ In the event where you are unable to select a candidate due to duplicated names,
 
 
 Examples:
-* `tag n/John Doe t/Applicant` will tag John Doe as "Applicant" in HireHive
+* `tag n/John Doe t/Applicant` will tag `John Doe` as `Applicant` in HireHive
 
 ![tag message](images/Ui-TagCommand.png)
 
-* `tag 1 t/Candidate` will tag the 1st applicant as "Candidate"
-* `tag +1 n/John Doe` for a John Doe applicant with tag "Applicant" will tag them as "Candidate"
+* `tag 1 t/Candidate` will tag the 1st applicant as `Candidate`
+* `tag +1 n/John Doe` for a `John Doe` applicant with tag `Applicant` will tag them as `Candidate`
 
 [Back to top](#welcome-to-hirehive)
 
