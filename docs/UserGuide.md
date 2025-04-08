@@ -204,7 +204,7 @@ Every applicant in HireHive should **contain a [unique](#glossary) name**!
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-There is no need to manually add a tag as the 'Applicant' tag is automatically assigned when you add a new applicant to HireHive.
+There is no need to manually add a tag as the `Applicant` tag is automatically assigned when you add a new applicant to HireHive.
 </div>
 
 Examples:
@@ -263,29 +263,29 @@ In the event where you are unable to select a candidate due to duplicated names,
     - You can then enter the **full name** of the applicant you want to tag
 * Tagging by index must have a **positive** index number
 * Tags must be one of the following values, which are colour-coded as follows:
-  1. <p style="background-color: #913F51; display: inline; padding: 2px; border-radius:5px">Rejected</p>
-  2. <p style="background-color: #3e7b91; display: inline; padding: 2px; border-radius:5px">Applicant</p>
-  3. <p style="background-color: #3C8F76; display: inline; padding: 2px; border-radius:5px">Candidate</p>
-  4. <p style="background-color: #4B8F3A; display: inline; padding: 2px; border-radius:5px">Interviewee</p>
-  5. <p style="background-color: #918C3F; display: inline; padding: 2px; border-radius:5px">Offered</p>
+  1. <p style="background-color: #913F51; display: inline; padding: 2px; border-radius:5px; color: white;">Rejected</p>
+  2. <p style="background-color: #3e7b91; display: inline; padding: 2px; border-radius:5px; color: white;">Applicant</p>
+  3. <p style="background-color: #3C8F76; display: inline; padding: 2px; border-radius:5px; color: white;">Candidate</p>
+  4. <p style="background-color: #4B8F3A; display: inline; padding: 2px; border-radius:5px; color: white;">Interviewee</p>
+  5. <p style="background-color: #918C3F; display: inline; padding: 2px; border-radius:5px; color: white;">Offered</p>
 * The tag written in the command must match one of the values above ([case-insensitive](#glossary)) e.g. `t/applicant`
 * To tag with offset, the offset takes in `+` or `-`, followed by a number for the offset amount, e.g. `+1`, `-2`
   * The tag, which represents the hiring stage the specific applicant is at, will progress/regress the hiring stage by
     the offset amount
     * The offset amount must range from -4 to +4
-  * The order for the hiring stages is Rejected > Applicant > Candidate > Interviewee > Offered
-  * The tag will not regress past Rejected and progress past Offered
-    * For example, if you enter the command `tag -4 n/John` with an applicant named John tagged as "Applicant", 
+  * The order for the hiring stages is `Rejected` > `Applicant` > `Candidate` > `Interviewee` > `Offered`
+  * The tag will not regress past `Rejected` and progress past `Offered`
+    * For example, if you enter the command `tag -4 n/John` with an applicant named John tagged as `Applicant`, 
       John's tag is set to `Rejected`
 
 
 Examples:
-* `tag n/John Doe t/Applicant` will tag John Doe as "Applicant" in HireHive
+* `tag n/John Doe t/Applicant` will tag `John Doe` as `Applicant` in HireHive
 
 ![tag message](images/Ui-TagCommand.png)
 
-* `tag 1 t/Candidate` will tag the 1st applicant as "Candidate"
-* `tag +1 n/John Doe` for a John Doe applicant with tag "Applicant" will tag them as "Candidate"
+* `tag 1 t/Candidate` will tag the 1st applicant as `Candidate`
+* `tag +1 n/John Doe` for a `John Doe` applicant with tag `Applicant` will tag them as `Candidate`
 
 [Back to top](#welcome-to-hirehive)
 
@@ -337,10 +337,11 @@ In the event where you are unable to select a candidate due to duplicated names,
   * If multiple matches are found, a list of all matching names will be displayed
       * You can then enter the **full name** of the applicant you want to schedule
 * You will have to provide a **positive [integer](#glossary)** to select a candidate by index.
-* Scheduling an interview with an applicant or candidate will automatically change their tag to an Interviewee.
+* Scheduling an interview with an `Applicant` or `Candidate` will automatically change their tag to an `Interviewee`.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-You will not be allowed to schedule interviews with candidates that are already offered/rejected. Please change their tags if you wish to schedule a second interview.
+You will not be allowed to schedule interviews with candidates that are already `Offered`/`Rejected`. Please change 
+their tags if you wish to schedule a second interview.
 </div>
 
 Examples:
@@ -429,7 +430,8 @@ Format: `filterout t/TAG`
 * The search is [case-insensitive](#glossary). e.g `applicant` will match `Applicant`
 
 Examples:
-* `filterout t/offered` will filter out all applicants that were already offered the job, the remaining list will display applicants without the "Offered" tag.
+* `filterout t/offered` will filter out all applicants that were already offered the job, the remaining list will 
+  display applicants without the `Offered` tag.
 
 ![filterout message](images/Ui-FilterOutCommand.png)
 
