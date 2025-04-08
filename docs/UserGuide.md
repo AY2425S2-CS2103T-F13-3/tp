@@ -204,7 +204,7 @@ Every applicant in HireHive should **contain a [unique](#glossary) name**!
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-There is no need to manually add a tag as the 'Applicant' tag is automatically assigned when you add a new applicant to HireHive.
+There is no need to manually add a tag as the `Applicant` tag is automatically assigned when you add a new applicant to HireHive.
 </div>
 
 Examples:
@@ -273,9 +273,9 @@ In the event where you are unable to select a candidate due to duplicated names,
   * The tag, which represents the hiring stage the specific applicant is at, will progress/regress the hiring stage by
     the offset amount
     * The offset amount must range from -4 to +4
-  * The order for the hiring stages is Rejected > Applicant > Candidate > Interviewee > Offered
-  * The tag will not regress past Rejected and progress past Offered
-    * For example, if you enter the command `tag -4 n/John` with an applicant named John tagged as "Applicant", 
+  * The order for the hiring stages is `Rejected` > `Applicant` > `Candidate` > `Interviewee` > `Offered`
+  * The tag will not regress past `Rejected` and progress past `Offered`
+    * For example, if you enter the command `tag -4 n/John` with an applicant named John tagged as `Applicant`, 
       John's tag is set to `Rejected`
 
 
@@ -337,7 +337,7 @@ In the event where you are unable to select a candidate due to duplicated names,
   * If multiple matches are found, a list of all matching names will be displayed
       * You can then enter the **full name** of the applicant you want to schedule
 * You will have to provide a **positive [integer](#glossary)** to select a candidate by index.
-* Scheduling an interview with an applicant or candidate will automatically change their tag to an Interviewee.
+* Scheduling an interview with an applicant or candidate will automatically change their tag to an `Interviewee`.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 You will not be allowed to schedule interviews with candidates that are already offered/rejected. Please change their tags if you wish to schedule a second interview.
@@ -429,7 +429,8 @@ Format: `filterout t/TAG`
 * The search is [case-insensitive](#glossary). e.g `applicant` will match `Applicant`
 
 Examples:
-* `filterout t/offered` will filter out all applicants that were already offered the job, the remaining list will display applicants without the "Offered" tag.
+* `filterout t/offered` will filter out all applicants that were already offered the job, the remaining list will 
+  display applicants without the `Offered` tag.
 
 ![filterout message](images/Ui-FilterOutCommand.png)
 
